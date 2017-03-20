@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<link href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/self-writing/css/GiamDocChiNhanh.css" rel="stylesheet" />
+
+<div style="width: 60%;margin: 0 auto 20px auto;text-align: center;border: 1px solid #ddd;border-radius: 10px;"><h1>Bạn đang xem mục Giám Đốc Công Ty và Các Chi Nhánh</h1></div>
+<div class="content" ng-app="myApp" ng-controller="giamdocCtrl">
+
+    <div class="modal fade" id="myChiTiet" role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-lg" style="width:50%">
+            <div class="modal-content" style="border-radius: 15px">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title" id="myModalLabel">Leader Details</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row" ng-repeat="nv in listgiamdoc">
+                        <div class="col-md-4">
+                            <img ng-src="~/Content/Images/Avatar/{{nv.AVATAR}}" name="aboutme" style="width: 100%" height="250" border="0" class="img-circle">
+                        </div>
+                        <div class="col-md-8">
+                            <h1 style="color: #097be0">{{nv.HO_VA_TEN}}</h1>
+                            <div class="col-md-12" style="margin-bottom: 20px;">
+                                <p class="col-md-5" style="color: #097be0"><i class="fa fa-home" aria-hidden="true" style="margin-right: 5px;color: #097be0"></i>{{nv.TEN_PHONG_BAN}}</p>
+                                <p class="col-md-5" style="color: #097be0"><i class="fa fa-hand-o-right" aria-hidden="true" style="margin-right: 5px;color: #097be0"></i>{{nv.CHUC_VU}}</p>
+                            </div>
+                            <div class="col-md-12 thongtin">
+                                <p class="col-md-6"><b>Họ và tên:</b> {{nv.HO_VA_TEN}}</p>
+                                <p class="col-md-6"><b>Quê quán:</b> {{nv.QUE_QUAN}}</p>
+                            </div>
+                            <div class="col-md-12 thongtin">
+                                <p class="col-md-6"><b>Giới tính:</b> {{nv.GIOI_TINH}}</p>
+                                <p class="col-md-6"><b>Học vấn:</b> {{nv.TRINH_DO_HOC_VAN}}</p>
+                            </div>
+                            <div class="col-md-12 thongtin">
+                                <p class="col-md-6"><b>Ngày sinh:</b> {{nv.NGAY_SINH |stringToDate:"shortDate" }}</p>
+                            </div>
+                            <div class="col-md-12 thongtin">
+                                <p class="col-md-6"><b>Số điện thoại:</b> {{nv.SDT}}</p>
+                            </div>
+                            <div class="col-md-12 thongtin">
+                                <p class="col-md-6"><b>Email:</b> {{nv.EMAIL}}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <h1 style="color: #097be0">Thành tích công tác</h1>
+                            <p class="col-md-12 {{nv.USERNAME}}-1" ng-bind-html="nv.THANH_TICH_CONG_TAC | unsafe" style="word-break: break-word"></p>
+                        </div>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" style="float: left">I've seen enough about {{nv.HO_VA_TEN}}</button>
+                    </div> 
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="col-md-12">
+        <div class="col-md-3 col-md-offset-2">
+            <img src="~/Content/Images/Avatar/avatar1.png" data-toggle="modal" data-target="#myChiTiet" ng-click="push('SALE001')" />
+        </div>
+        <div class="col-md-3">
+            <img src="~/Content/Images/Avatar/avatar1.png" data-toggle="modal" data-target="#myChiTiet" ng-click="push('TECH001')" />
+        </div>
+        <div class="col-md-3">
+            <img src="~/Content/Images/Avatar/avatar2.png" data-toggle="modal" data-target="#myChiTiet" ng-click="push('SALE003')" />
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-3 col-md-offset-2">
+            <img src="~/Content/Images/Avatar/avatar3.png" data-toggle="modal" data-target="#myChiTiet" ng-click="push('TECH005')" />
+        </div>
+        <div class="col-md-3">
+            <img src="~/Content/Images/Avatar/avatar5.png" data-toggle="modal" data-target="#myChiTiet" ng-click="push('SALE033')" />
+        </div>
+        <div class="col-md-3">
+            <img src="~/Content/Images/Avatar/avatar2.png" data-toggle="modal" data-target="#myChiTiet" ng-click="push('SALE021')" />
+        </div>
+    </div>
+</div>
+

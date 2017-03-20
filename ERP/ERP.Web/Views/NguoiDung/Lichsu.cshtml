@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Lichsu";
+}
+
+<style>
+    .hienthi{
+        display: block !important;
+    }
+    .nothienthi{
+        display: none !important;
+    }
+</style>
+
+<div ng-app="myApp" ng-controller="lichsuCtrl">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>USERNAME</th>
+                <th>Thời gian đăng nhập</th>
+                <th>Thời gian đăng xuất</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="lichsu in list_lichsu">
+                <td>{{lichsu.USERNAME}}</td>
+                <td>{{lichsu.THOI_GIAN_DANG_NHAP | date : 'dd/MM/yyyy:hh:mm:ss'}}</td>
+                <td>
+                    <p>{{lichsu.THOI_GIAN_DANG_XUAT | date : 'dd/MM/yyyy:hh:mm:ss'}}</p>
+                    <p ng-class="show(lichsu.THOI_GIAN_DANG_XUAT)" style="display:none">Chưa đăng xuất</p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
