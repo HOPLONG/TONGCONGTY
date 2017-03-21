@@ -32,5 +32,19 @@ namespace ERP.Web.Controllers.ChucNang
             }
             return View(cN_NHOM_NGHIEP_VU);
         }
+
+        public ActionResult Create(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            CN_NHOM_NGHIEP_VU cN_NHOM_NGHIEP_VU = db.CN_NHOM_NGHIEP_VU.Find(id);
+            if (cN_NHOM_NGHIEP_VU == null)
+            {
+                return HttpNotFound();
+            }
+            return View(cN_NHOM_NGHIEP_VU);
+        }
     }
 }
