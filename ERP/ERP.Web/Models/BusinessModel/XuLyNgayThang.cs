@@ -17,6 +17,10 @@ namespace ERP.Web.Models.BusinessModel
             return dt;
         }
 
+        internal DateTime? Xulydatetime(DateTime? nGAY_THANH_LAP)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 

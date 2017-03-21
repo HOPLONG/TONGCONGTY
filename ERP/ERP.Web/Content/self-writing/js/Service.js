@@ -350,6 +350,27 @@ app.service('nhomnghiepvuService', function ($http) {
     this.delete_nhomnghiepvu = function (tennhom, data_delete) {
         return $http.delete('/api/Api_NhomNghiepVu/' + tennhom, data_delete);
     }
+
+    this.get_details = function (manhomnghiepvu) {
+        return $http.get('/api/NghiepVuDetails/' + manhomnghiepvu).then(function (response) {
+            return response.data;
+        });
+    };
+    this.get_mota = function (manhomnghiepvu) {
+        return $http.get('/api/MoTaDetails/' + manhomnghiepvu).then(function (response) {
+            return response.data;
+        });
+    };
+
+    this.get_trangthai = function (username) {
+        return $http.get('/api/Api_CheckNghiepVu/' + username).then(function (response) {
+            return response.data;
+        });
+    };
+
+    this.insert = function (nhomnghiepvu,username) {
+        return $http.post('/api/NghiepVuDetails/' + nhomnghiepvu + '/' + username);
+    };
 });
 
 
@@ -392,5 +413,213 @@ app.service('DangkypheduyetService', function ($http) {
     this.delete = function (id, data_delete) {
         return $http.delete("/api/Api_Dangkypheduyet/" + id, data_delete);
     }
+
+});
+
+
+// Định khoản tự động
+app.service('DinhkhoantudongService', function ($http) {
+    this.get_dinhkhoantudong = function () {
+        return $http.get("/api/Api_Dinhkhoantudong").then(function (response) {
+            return response.data;
+        });
+    }
+    this.add = function (data_add) {
+        return $http.post("/api/Api_Dinhkhoantudong", data_add);
+    };
+
+    this.save = function (id, data_update) {
+        return $http.put("/api/Api_Dinhkhoantudong/" + id, data_update);
+    }
+
+    this.delete = function (id, data_delete) {
+        return $http.delete("/api/Api_Dinhkhoantudong/" + id, data_delete);
+    }
+
+});
+
+// Loại chứng từ
+app.service('LoaichungtuService', function ($http) {
+    this.get_loaichungtu = function () {
+        return $http.get("/api/Api_Loaichungtu").then(function (response) {
+            return response.data;
+        });
+    }
+    this.add = function (data_add) {
+        return $http.post("/api/Api_Loaichungtu", data_add);
+    };
+
+    this.save = function (id, data_update) {
+        return $http.put("/api/Api_Loaichungtu/" + id, data_update);
+    }
+
+    this.delete = function (id, data_delete) {
+        return $http.delete("/api/Api_Loaichungtu/" + id, data_delete);
+    }
+
+});
+// Loại đối tượng
+app.service('LoaidoituongService', function ($http) {
+    this.get_loaidoituong = function () {
+        return $http.get("/api/Api_Loaidoituong").then(function (response) {
+            return response.data;
+        });
+    }
+    this.add = function (data_add) {
+        return $http.post("/api/Api_Loaidoituong", data_add);
+    };
+
+    this.save = function (id, data_update) {
+        return $http.put("/api/Api_Loaidoituong/" + id, data_update);
+    }
+
+    this.delete = function (id, data_delete) {
+        return $http.delete("/api/Api_Loaidoituong/" + id, data_delete);
+    }
+
+});
+// Loại tài khoản ngân hàng
+app.service('LoaitknganhangService', function ($http) {
+    this.get_loaitknganhang = function () {
+        return $http.get("/api/Api_Loaitaikhoannganhang").then(function (response) {
+            return response.data;
+        });
+    }
+    this.add = function (data_add) {
+        return $http.post("/api/Api_Loaitaikhoannganhang", data_add);
+    };
+
+    this.save = function (id, data_update) {
+        return $http.put("/api/Api_Loaitaikhoannganhang/" + id, data_update);
+    }
+
+    this.delete = function (id, data_delete) {
+        return $http.delete("/api/Api_Loaitaikhoannganhang/" + id, data_delete);
+    }
+
+});
+// Loại tài khoản ngân hàng nội bộ
+app.service('LoaitknganhangnoiboService', function ($http) {
+    this.get_loaitknganhangnoibo = function () {
+        return $http.get("/api/Api_LoaiTKnganhangnoibo").then(function (response) {
+            return response.data;
+        });
+    }
+    this.add = function (data_add) {
+        return $http.post("/api/Api_LoaiTKnganhangnoibo", data_add);
+    };
+
+    this.save = function (id, data_update) {
+        return $http.put("/api/Api_LoaiTKnganhangnoibo/" + id, data_update);
+    }
+
+    this.delete = function (id, data_delete) {
+        return $http.delete("/api/Api_LoaiTKnganhangnoibo/" + id, data_delete);
+    }
+
+});
+
+// Mẫu số hóa đơn
+app.service('MausohoadonService', function ($http) {
+    this.get_mausohoadon = function () {
+        return $http.get("/api/Api_Mausohoadon").then(function (response) {
+            return response.data;
+        });
+    }
+    this.add = function (data_add) {
+        return $http.post("/api/Api_Mausohoadon", data_add);
+    };
+
+    this.save = function (id, data_update) {
+        return $http.put("/api/Api_Mausohoadon/" + id, data_update);
+    }
+
+    this.delete = function (id, data_delete) {
+        return $http.delete("/api/Api_Mausohoadon/" + id, data_delete);
+    }
+
+
+
+app.service('themnghiepvuService', function ($http) {
+    this.get_user = function () {
+        return $http.get("/api/Api_NguoidungHL").then(function (response) {
+            return response.data;
+        });
+    };
+    this.get_trangthai = function (nhomnghiepvu, username) {
+        return $http.get('/api/Api_NhomNguoiDungNghiepVu/' + nhomnghiepvu + '/' + username).then(function (response) {
+            return response.data;
+        });
+    };
+    this.delete_nghiepvunguoidung = function (nhomnghiepvu, username) {
+        return $http.delete('/api/Api_NhomNguoiDungNghiepVu/' + nhomnghiepvu + '/' + username);
+    }
+
+    this.add_nghiepvunguoidung = function (data_add) {
+        return $http.post('/api/Api_NhomNguoiDungNghiepVu', data_add);
+    };
+});
+
+
+app.service('congtyService', function ($http) {
+    this.get_congty = function () {
+        return $http.get('/api/Api_CCTC_CongTy').then(function (response) {
+            return response.data;
+        });
+    };
+    this.add_congty = function (data_add) {
+        return $http.post('/api/Api_CCTC_CongTy', data_add);
+    };
+
+    this.save_congty = function (macongty, data_save) {
+        return $http.put('/api/Api_CCTC_CongTy/' + macongty, data_save);
+    };
+    this.delete_congty = function (macongty, data_delete) {
+        return $http.delete('/api/Api_CCTC_CongTy/' + macongty, data_delete);
+    };
+});
+
+app.service('mohinhcongtyService', function ($http) {
+    this.get_mohinhcongty = function () {
+        return $http.get('/api/Api_MoHinhCongTy').then(function (response) {
+            return response.data;
+        });
+    };
+    this.add_mohinhcongty = function (data_add) {
+        return $http.post('/api/Api_MoHinhCongTy', data_add);
+    };
+
+    this.save_mohinhcongty = function (mamohinh, data_save) {
+        return $http.put('/api/Api_MoHinhCongTy/' + mamohinh, data_save);
+    };
+    this.delete_mohinhcongty = function (mamohinh, data_delete) {
+        return $http.delete('/api/Api_MoHinhCongTy/' + mamohinh, data_delete);
+    };
+});
+
+app.service('dichvuService', function ($http) {
+    this.get_dichvu = function () {
+        return $http.get('/api/Api_DichVu').then(function (response) {
+            return response.data;
+        });
+    };
+    this.add_dichvu = function (data_add) {
+        return $http.post('/api/Api_DichVu', data_add);
+    };
+
+    this.save_dichvu = function (madichvu, data_save) {
+        return $http.put('/api/Api_DichVu/' + madichvu, data_save);
+    };
+    this.delete_dichvu = function (madichvu, data_delete) {
+        return $http.delete('/api/Api_DichVu/' + madichvu, data_delete);
+    };
+});
+
+app.service('hangduocquantamService', function ($http) {
+    this.get_hangduocquantam = function () {
+        return $http.get('/api/Api_HangDuocQuanTam').then(function (response) {
+            return response.data;
+        });
+    };
 
 });
