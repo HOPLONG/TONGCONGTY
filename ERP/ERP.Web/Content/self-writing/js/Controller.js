@@ -1155,3 +1155,317 @@ app.controller('DangkypheduyetCtrl', function (DangkypheduyetService, $scope) {
     };
 
 });
+
+//Định khoản tự động
+app.controller('DinhkhoantudongCtrl', function (DinhkhoantudongService, $scope) {
+    $scope.Dinhkhoantudong = function () {
+        DinhkhoantudongService.get_dinhkhoantudong().then(function (a) {
+            $scope.dinhkhoantudong = a;
+        });
+    };
+    $scope.Dinhkhoantudong();
+    $scope.add = function () {
+        var data_add = {
+            ID: $scope.id,
+            MA_LOAI_CHUNG_TU: $scope.maloaichungtu,
+            MA_LY_DO: $scope.malydo,
+            TEN_LY_DO: $scope.tenlydo,
+            TK_NO: $scope.tkno,
+            TK_CO: $scope.tkco
+
+        }
+
+
+        DinhkhoantudongService.add(data_add).then(function (response) {
+            $scope.Dinhkhoantudong();
+        });
+    }
+
+    $scope.edit = function (item) {
+        $scope.item = item;
+
+    }
+    $scope.passing = function (item) {
+        $scope.item = item;
+    }
+
+    $scope.save = function (id) {
+        var data_update = {
+            ID: $scope.item.ID,
+            MA_LOAI_CHUNG_TU: $scope.item.MA_LOAI_CHUNG_TU,
+            MA_LY_DO: $scope.item.MA_LY_DO,
+            TEN_LY_DO: $scope.item.TEN_LY_DO,
+            TK_NO: $scope.item.TK_NO,
+            TK_CO: $scope.item.TK_CO
+
+        }
+        DinhkhoantudongService.save(id, data_update).then(function (response) {
+            $scope.Dinhkhoantudong();
+        });
+    }
+
+    $scope.delete = function (id) {
+        var data_delete = {
+            ID: id
+        }
+        DinhkhoantudongService.delete(id, data_delete).then(function (response) {
+            $scope.Dinhkhoantudong();
+        });
+    };
+
+});
+// Loại chứng từ
+app.controller('LoaichungtuCtrl', function (LoaichungtuService, $scope) {
+    $scope.Loaichungtu = function () {
+        LoaichungtuService.get_loaichungtu().then(function (a) {
+            $scope.loaichungtu = a;
+        });
+    };
+    $scope.Loaichungtu();
+    $scope.add = function () {
+        var data_add = {
+            MA_LOAI_CHUNG_TU: $scope.maloaichungtu,
+            TEN_LOAI_CHUNG_TU: $scope.tenloaichungtu
+        }
+
+
+        LoaichungtuService.add(data_add).then(function (response) {
+            $scope.Loaichungtu();
+        });
+    }
+
+    $scope.edit = function (item) {
+        $scope.item = item;
+
+    }
+    $scope.passing = function (item) {
+        $scope.item = item;
+    }
+
+    $scope.save = function (id) {
+        var data_update = {
+            MA_LOAI_CHUNG_TU: $scope.item.MA_LOAI_CHUNG_TU,
+            TEN_LOAI_CHUNG_TU: $scope.item.TEN_LOAI_CHUNG_TU
+        }
+        LoaichungtuService.save(id, data_update).then(function (response) {
+            $scope.Loaichungtu();
+        });
+    }
+
+    $scope.delete = function (id) {
+        var data_delete = {
+            MA_LOAI_CHUNG_TU: id
+        }
+        LoaichungtuService.delete(id, data_delete).then(function (response) {
+            $scope.Loaichungtu();
+        });
+    };
+
+});
+
+// Loại đối tượng
+app.controller('LoaidoituongCtrl', function (LoaidoituongService, $scope) {
+    $scope.Loaidoituong = function () {
+        LoaidoituongService.get_loaidoituong().then(function (a) {
+            $scope.loaidoituong = a;
+        });
+    };
+    $scope.Loaidoituong();
+    $scope.add = function () {
+        var data_add = {
+            MA_LOAI_DOI_TUONG: $scope.maloaidoituong,
+            TEN_LOAI_DOI_TUONG: $scope.tenloaidoituong
+        }
+
+
+        LoaidoituongService.add(data_add).then(function (response) {
+            $scope.Loaidoituong();
+        });
+    }
+
+    $scope.edit = function (item) {
+        $scope.item = item;
+
+    }
+    $scope.passing = function (item) {
+        $scope.item = item;
+    }
+
+    $scope.save = function (id) {
+        var data_update = {
+            MA_LOAI_DOI_TUONG: $scope.item.MA_LOAI_DOI_TUONG,
+            TEN_LOAI_DOI_TUONG: $scope.item.TEN_LOAI_DOI_TUONG
+        }
+        LoaidoituongService.save(id, data_update).then(function (response) {
+            $scope.Loaidoituong();
+        });
+    }
+
+    $scope.delete = function (id) {
+        var data_delete = {
+            MA_LOAI_DOI_TUONG: id
+        }
+        LoaidoituongService.delete(id, data_delete).then(function (response) {
+            $scope.Loaidoituong();
+        });
+    };
+
+});
+
+// Loại tài khoản ngân hàng
+app.controller('LoaitknganhangCtrl', function (LoaitknganhangService, $scope) {
+    $scope.Loaitknganhang = function () {
+        LoaitknganhangService.get_loaitknganhang().then(function (a) {
+            $scope.loaitknganhang = a;
+        });
+    };
+    $scope.Loaitknganhang();
+    $scope.add = function () {
+        var data_add = {
+            MA_LOAI: $scope.maloai,
+            TEN_LOAI: $scope.tenloai
+        }
+
+
+        LoaitknganhangService.add(data_add).then(function (response) {
+            $scope.Loaitknganhang();
+        });
+    }
+
+    $scope.edit = function (item) {
+        $scope.item = item;
+
+    }
+    $scope.passing = function (item) {
+        $scope.item = item;
+    }
+
+    $scope.save = function (id) {
+        var data_update = {
+            MA_LOAI: $scope.item.MA_LOAI,
+            TEN_LOAI: $scope.item.TEN_LOAI
+        }
+        LoaitknganhangService.save(id, data_update).then(function (response) {
+            $scope.Loaitknganhang();
+        });
+    }
+
+    $scope.delete = function (id) {
+        var data_delete = {
+            MA_LOAI: id
+        }
+        LoaitknganhangService.delete(id, data_delete).then(function (response) {
+            $scope.Loaitknganhang();
+        });
+    };
+
+});
+
+// Loại tài khoản ngân hàng nội bộ
+app.controller('LoaitknganhangnoiboCtrl', function (LoaitknganhangnoiboService, $scope) {
+    $scope.Loaitknganhangnoibo = function () {
+        LoaitknganhangnoiboService.get_loaitknganhangnoibo().then(function (a) {
+            $scope.loaitknganhangnoibo = a;
+        });
+    };
+    $scope.Loaitknganhangnoibo();
+    $scope.add = function () {
+        var data_add = {
+            SO_TAI_KHOAN: $scope.sotaikhoan,
+            MA_CONG_TY: 'HOPLONG',
+            TEN_TAI_KHOAN: $scope.tentaikhoan,
+            LOAI_TAI_KHOAN: $scope.loaitaikhoan,
+            TEN_NGAN_HANG: $scope.tennganhang,
+            CHI_NHANH: $scope.chinhanh,
+            TINH_TP: $scope.tinhtp,
+            GHI_CHU: $scope.ghichu
+        }
+
+        LoaitknganhangnoiboService.add(data_add).then(function (response) {
+            $scope.Loaitknganhangnoibo();
+        });
+    }
+
+    $scope.edit = function (item) {
+        $scope.item = item;
+
+    }
+    $scope.passing = function (item) {
+        $scope.item = item;
+    }
+
+    $scope.save = function (id) {
+        var data_update = {
+            SO_TAI_KHOAN: $scope.item.SO_TAI_KHOAN,
+            MA_CONG_TY: $scope.item.MA_CONG_TY,
+            TEN_TAI_KHOAN: $scope.item.TEN_TAI_KHOAN,
+            LOAI_TAI_KHOAN: $scope.item.LOAI_TAI_KHOAN,
+            TEN_NGAN_HANG: $scope.item.TEN_NGAN_HANG,
+            CHI_NHANH: $scope.item.CHI_NHANH,
+            TINH_TP: $scope.item.TINH_TP,
+            GHI_CHU: $scope.item.GHI_CHU
+        }
+        LoaitknganhangnoiboService.save(id, data_update).then(function (response) {
+            $scope.Loaitknganhangnoibo();
+        });
+    }
+
+    $scope.delete = function (id) {
+        var data_delete = {
+            MA_LOAI: id
+        }
+        LoaitknganhangnoiboService.delete(id, data_delete).then(function (response) {
+            $scope.Loaitknganhangnoibo();
+        });
+    };
+
+});
+
+// Mẫu số hóa đơn
+app.controller('MausohoadonCtrl', function (MausohoadonService, $scope) {
+    $scope.Mausohoadon = function () {
+        MausohoadonService.get_mausohoadon().then(function (a) {
+            $scope.mausohoadon = a;
+        });
+    };
+    $scope.Mausohoadon();
+    $scope.add = function () {
+        var data_add = {
+            MAU_SO: $scope.mauso,
+            TEN_MAU: $scope.tenmau
+        }
+
+
+        MausohoadonService.add(data_add).then(function (response) {
+            $scope.Mausohoadon();
+        });
+    }
+
+    $scope.edit = function (item) {
+        $scope.item = item;
+
+    }
+    $scope.passing = function (item) {
+        $scope.item = item;
+    }
+
+    $scope.save = function (id) {
+        var data_update = {
+            MAU_SO: $scope.item.MAU_SO,
+            TEN_MAU: $scope.item.TEN_MAU
+        }
+        MausohoadonService.save(id, data_update).then(function (response) {
+            $scope.Mausohoadon();
+        });
+    }
+
+    $scope.delete = function (id) {
+        var data_delete = {
+            MAU_SO: id
+        }
+        MausohoadonService.delete(id, data_delete).then(function (response) {
+            $scope.Mausohoadon();
+        });
+    };
+
+});
