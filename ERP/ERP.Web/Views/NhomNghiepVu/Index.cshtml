@@ -2,7 +2,20 @@
 @{
     ViewBag.Title = "Index";
 }
-
+<style>
+    li{
+        list-style-type: none;
+    }
+    #myDetails ul{
+        overflow: auto;
+    }
+    .hienthi{
+        display: block !important
+    }
+    .nothienthi{
+        display: none !important;
+    }
+</style>
 <div ng-app="myApp" ng-controller="nhomnghiepvuCtrl" class="container" style="padding-top: 30px;">
     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" style="margin-bottom: 30px;">Thêm nhóm nghiệp vụ</button>
 
@@ -111,6 +124,28 @@
         </div>
     </div>
 
+    <div class="modal fade" id="myDetails" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <select size="10" name="decision2" style="height: 300px;width: 400px;" class="col-md-6">
+                        <option ng-repeat="hovaten in list_hovaten" style="height:30px;margin-left: 15px;margin-bottom: 15px;vertical-align:middle;padding-top: 5px;" ng-click="transfer(hovaten)">{{hovaten.HO_VA_TEN}}</option>
+                    </select>
+                    <ul class="col-md-6">
+                        <li style="height: 300px;overflow: auto">
+                            <div ng-repeat="tenchitiet in list_mota" style="margin-bottom: 5px;">
+                                {{tenchitiet.MO_TA}}
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn col-md-2" ng-class="checkthis()" ng-click="insert()" style="display:none">Thêm mới</button>
+                    <button class="btn" data-dismiss="modal">Exit</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <table class="table"  >
         <thead>
@@ -120,12 +155,12 @@
                 <th>EDIT</th>
                 <th>DELETE</th>
                 <th>ACTION</th>
-            </tr>            
+            </tr>                       
         </thead>
         <tbody>
-            <tr ng-repeat="item in list_nhomnghiepvu">
-                <td>{{item.TEN_NHOM}}</td>
-                <td>{{item.DIEN_GIAI}}</td>
+            <tr ng-repeat="item in list_nhomnghiepvu"  >
+                <td  data-target="#myDetails" class="dbclick" ng-dblclick="open(item.TEN_NHOM)">{{item.TEN_NHOM}}</td>
+                <td  data-target="#myDetails" ng-dblclick="open(item.TEN_NHOM)">{{item.DIEN_GIAI}}</td>
 
                 <td>
                     <button class="btn btn-success btn-circle" ng-click="edit(item)" type="button" data-toggle="modal" data-target="#myEdit"><i class="glyphicon glyphicon-edit"></i></button>
@@ -134,6 +169,7 @@
                     <button class="btn btn-warning btn-circle" ng-click="edit(item)" type="button" data-toggle="modal" data-target="#delete_item"><i class="glyphicon glyphicon-remove"></i></button>
                 </td>
                 <td><a href="/NhomNghiepVu/Details/{{item.TEN_NHOM}}">Chi tiết nhóm nghiệp vụ</a></td>
+                <td><a href="/NhomNghiepVu/Create/{{item.TEN_NHOM}}">Thêm người dùng nhóm nghiệp vụ</a></td>
             </tr>
         </tbody>
     </table>
