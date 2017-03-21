@@ -28,7 +28,6 @@ namespace ERP.Web.Models.Database
             this.HT_NGUOI_DUNG = new HashSet<HT_NGUOI_DUNG>();
             this.KHO_DNXH = new HashSet<KHO_DNXH>();
             this.KHO_NHAP_KHO = new HashSet<KHO_NHAP_KHO>();
-            this.KHO_PHIEU_GIU_HANG = new HashSet<KHO_PHIEU_GIU_HANG>();
             this.KHO_XUAT_KHO = new HashSet<KHO_XUAT_KHO>();
             this.CCTC_CONG_TY1 = new HashSet<CCTC_CONG_TY>();
             this.CCTC_PHONG_BAN = new HashSet<CCTC_PHONG_BAN>();
@@ -76,8 +75,6 @@ namespace ERP.Web.Models.Database
         public virtual ICollection<KHO_DNXH> KHO_DNXH { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KHO_NHAP_KHO> KHO_NHAP_KHO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<KHO_PHIEU_GIU_HANG> KHO_PHIEU_GIU_HANG { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KHO_XUAT_KHO> KHO_XUAT_KHO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

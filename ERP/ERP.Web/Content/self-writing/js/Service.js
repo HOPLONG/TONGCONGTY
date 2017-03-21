@@ -537,6 +537,7 @@ app.service('MausohoadonService', function ($http) {
     this.delete = function (id, data_delete) {
         return $http.delete("/api/Api_Mausohoadon/" + id, data_delete);
     }
+});
 
 
 

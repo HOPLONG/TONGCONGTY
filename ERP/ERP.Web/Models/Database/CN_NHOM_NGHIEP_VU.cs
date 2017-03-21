@@ -18,7 +18,7 @@ namespace ERP.Web.Models.Database
         public CN_NHOM_NGHIEP_VU()
         {
             this.CN_CHI_TIET_NHOM_NGHIEP_VU = new HashSet<CN_CHI_TIET_NHOM_NGHIEP_VU>();
-            this.HT_NGUOI_DUNG = new HashSet<HT_NGUOI_DUNG>();
+            this.CN_NHOM_NGUOI_DUNG_NGHIEP_VU = new HashSet<CN_NHOM_NGUOI_DUNG_NGHIEP_VU>();
         }
     
         public string TEN_NHOM { get; set; }
@@ -29,6 +29,6 @@ namespace ERP.Web.Models.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CN_CHI_TIET_NHOM_NGHIEP_VU> CN_CHI_TIET_NHOM_NGHIEP_VU { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HT_NGUOI_DUNG> HT_NGUOI_DUNG { get; set; }
+        public virtual ICollection<CN_NHOM_NGUOI_DUNG_NGHIEP_VU> CN_NHOM_NGUOI_DUNG_NGHIEP_VU { get; set; }
     }
 }
