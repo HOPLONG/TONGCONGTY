@@ -12,18 +12,13 @@ namespace ERP.Web.Models.Database
     using System;
     using System.Collections.Generic;
     
-    public partial class KHO_CT_PHIEU_GIU_HANG
+    public partial class CN_NHOM_NGUOI_DUNG_NGHIEP_VU
     {
-        public int ID { get; set; }
-        public string SO_PHIEU { get; set; }
-        public string MA_HANG { get; set; }
-        public int SL { get; set; }
-        public decimal DON_GIA { get; set; }
-        public decimal THANH_TIEN { get; set; }
-        public string DIA_CHI_XUAT_HANG { get; set; }
-        public string GHI_CHU { get; set; }
+        public string USERNAME { get; set; }
+        public string ID_NHOM_NGHIEP_VU { get; set; }
+        public Nullable<bool> TRANG_THAI { get; set; }
     
-        public virtual HH HH { get; set; }
-        public virtual KHO_PHIEU_GIU_HANG KHO_PHIEU_GIU_HANG { get; set; }
+        public virtual CN_NHOM_NGHIEP_VU CN_NHOM_NGHIEP_VU { get; set; }
+        public virtual HT_NGUOI_DUNG HT_NGUOI_DUNG { get; set; }
     }
 }

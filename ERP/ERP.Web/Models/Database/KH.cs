@@ -18,12 +18,13 @@ namespace ERP.Web.Models.Database
         public KH()
         {
             this.BH_BAO_GIA = new HashSet<BH_BAO_GIA>();
+            this.BH_DE_NGHI_GIU_HANG = new HashSet<BH_DE_NGHI_GIU_HANG>();
             this.BH_DON_HANG_DU_KIEN = new HashSet<BH_DON_HANG_DU_KIEN>();
             this.KH_LIEN_HE = new HashSet<KH_LIEN_HE>();
             this.KH_TK_NGAN_HANG = new HashSet<KH_TK_NGAN_HANG>();
             this.KH_DC_XUAT_HANG = new HashSet<KH_DC_XUAT_HANG>();
             this.KHO_DNXH = new HashSet<KHO_DNXH>();
-            this.KHO_PHIEU_GIU_HANG = new HashSet<KHO_PHIEU_GIU_HANG>();
+            this.KHO_GIU_HANG = new HashSet<KHO_GIU_HANG>();
             this.KH_PHAN_LOAI_KHACH = new HashSet<KH_PHAN_LOAI_KHACH>();
         }
     
@@ -48,6 +49,8 @@ namespace ERP.Web.Models.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BH_BAO_GIA> BH_BAO_GIA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BH_DE_NGHI_GIU_HANG> BH_DE_NGHI_GIU_HANG { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BH_DON_HANG_DU_KIEN> BH_DON_HANG_DU_KIEN { get; set; }
         public virtual CCTC_CONG_TY CCTC_CONG_TY { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -59,7 +62,7 @@ namespace ERP.Web.Models.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KHO_DNXH> KHO_DNXH { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<KHO_PHIEU_GIU_HANG> KHO_PHIEU_GIU_HANG { get; set; }
+        public virtual ICollection<KHO_GIU_HANG> KHO_GIU_HANG { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KH_PHAN_LOAI_KHACH> KH_PHAN_LOAI_KHACH { get; set; }
     }

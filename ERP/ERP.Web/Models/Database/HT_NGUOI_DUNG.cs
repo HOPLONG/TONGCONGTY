@@ -44,6 +44,7 @@ namespace ERP.Web.Models.Database
         public virtual CCTC_NHAN_VIEN CCTC_NHAN_VIEN { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CN_NGHIEP_VU_NHAN_VIEN> CN_NGHIEP_VU_NHAN_VIEN { get; set; }
+        public virtual CN_NHOM_NGUOI_DUNG_NGHIEP_VU CN_NHOM_NGUOI_DUNG_NGHIEP_VU { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HH_HANG_DUOC_QUAN_TAM> HH_HANG_DUOC_QUAN_TAM { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -64,6 +65,5 @@ namespace ERP.Web.Models.Database
         public virtual ICollection<QUY_PHIEU_CHI> QUY_PHIEU_CHI1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<QUY_PHIEU_THU> QUY_PHIEU_THU1 { get; set; }
-        public virtual CN_NHOM_NGHIEP_VU CN_NHOM_NGHIEP_VU { get; set; }
     }
 }

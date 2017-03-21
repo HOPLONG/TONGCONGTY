@@ -27,6 +27,7 @@ namespace ERP.Web.Models.Database
     
         public virtual DbSet<BH_BAO_GIA> BH_BAO_GIA { get; set; }
         public virtual DbSet<BH_CT_BAO_GIA> BH_CT_BAO_GIA { get; set; }
+        public virtual DbSet<BH_DE_NGHI_GIU_HANG> BH_DE_NGHI_GIU_HANG { get; set; }
         public virtual DbSet<BH_DON_HANG_DU_KIEN> BH_DON_HANG_DU_KIEN { get; set; }
         public virtual DbSet<CATEGORy> CATEGORIES { get; set; }
         public virtual DbSet<CCTC_BANG_CHAM_CONG> CCTC_BANG_CHAM_CONG { get; set; }
@@ -40,6 +41,7 @@ namespace ERP.Web.Models.Database
         public virtual DbSet<CN_NGHIEP_VU> CN_NGHIEP_VU { get; set; }
         public virtual DbSet<CN_NGHIEP_VU_NHAN_VIEN> CN_NGHIEP_VU_NHAN_VIEN { get; set; }
         public virtual DbSet<CN_NHOM_NGHIEP_VU> CN_NHOM_NGHIEP_VU { get; set; }
+        public virtual DbSet<CN_NHOM_NGUOI_DUNG_NGHIEP_VU> CN_NHOM_NGUOI_DUNG_NGHIEP_VU { get; set; }
         public virtual DbSet<DM_CHUNG_TU> DM_CHUNG_TU { get; set; }
         public virtual DbSet<DM_DINH_KHOAN_TU_DONG> DM_DINH_KHOAN_TU_DONG { get; set; }
         public virtual DbSet<DM_DOI_TUONG> DM_DOI_TUONG { get; set; }
@@ -68,11 +70,10 @@ namespace ERP.Web.Models.Database
         public virtual DbSet<KHO_CT_CHUYEN_KHO> KHO_CT_CHUYEN_KHO { get; set; }
         public virtual DbSet<KHO_CT_DNXH> KHO_CT_DNXH { get; set; }
         public virtual DbSet<KHO_CT_NHAP_KHO> KHO_CT_NHAP_KHO { get; set; }
-        public virtual DbSet<KHO_CT_PHIEU_GIU_HANG> KHO_CT_PHIEU_GIU_HANG { get; set; }
         public virtual DbSet<KHO_CT_XUAT_KHO> KHO_CT_XUAT_KHO { get; set; }
         public virtual DbSet<KHO_DNXH> KHO_DNXH { get; set; }
+        public virtual DbSet<KHO_GIU_HANG> KHO_GIU_HANG { get; set; }
         public virtual DbSet<KHO_NHAP_KHO> KHO_NHAP_KHO { get; set; }
-        public virtual DbSet<KHO_PHIEU_GIU_HANG> KHO_PHIEU_GIU_HANG { get; set; }
         public virtual DbSet<KHO_XUAT_KHO> KHO_XUAT_KHO { get; set; }
         public virtual DbSet<MAU_SO_HOA_DON> MAU_SO_HOA_DON { get; set; }
         public virtual DbSet<MENU> MENUs { get; set; }
@@ -96,6 +97,7 @@ namespace ERP.Web.Models.Database
         public virtual DbSet<QUY_CT_PHIEU_THU> QUY_CT_PHIEU_THU { get; set; }
         public virtual DbSet<QUY_PHIEU_CHI> QUY_PHIEU_CHI { get; set; }
         public virtual DbSet<QUY_PHIEU_THU> QUY_PHIEU_THU { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<XL_DANG_KY_PHE_DUYET> XL_DANG_KY_PHE_DUYET { get; set; }
         public virtual DbSet<XL_THAM_CHIEU_CHUNG_TU> XL_THAM_CHIEU_CHUNG_TU { get; set; }
     }
