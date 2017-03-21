@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using ERP.Web.Models.Database;
+using ERP.Web.Models;
 
 namespace ERP.Web.Api.HeThong
 {
@@ -17,13 +18,15 @@ namespace ERP.Web.Api.HeThong
         private ERP_DATABASEEntities db = new ERP_DATABASEEntities();
 
         // GET: api/Api_HangDuocQuanTam
-        public List<HH_HANG_DUOC_QUAN_TAM> GetHH_HANG_DUOC_QUAN_TAM()
+        public List<HangDuocQuanTam> GetHH_HANG_DUOC_QUAN_TAM()
         {
-            var vData = db.HH_HANG_DUOC_QUAN_TAM;
-            var result = vData.ToList().Select(x => new HH_HANG_DUOC_QUAN_TAM()
+            var vData = (from t1 in db.HT_NGUOI_DUNG
+                         join t2 in db.HH_HANG_DUOC_QUAN_TAM on t1.USERNAME equals t2.USERNAME
+                         select new { t1.HO_VA_TEN, t2.MA_HANG});
+            var result = vData.ToList().Select(x => new HangDuocQuanTam()
             {
+                HO_VA_TEN = x.HO_VA_TEN,
                 MA_HANG = x.MA_HANG,
-                USERNAME = x.USERNAME
             }).ToList();
             return result;
         }

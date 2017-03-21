@@ -350,6 +350,27 @@ app.service('nhomnghiepvuService', function ($http) {
     this.delete_nhomnghiepvu = function (tennhom, data_delete) {
         return $http.delete('/api/Api_NhomNghiepVu/' + tennhom, data_delete);
     }
+
+    this.get_details = function (manhomnghiepvu) {
+        return $http.get('/api/NghiepVuDetails/' + manhomnghiepvu).then(function (response) {
+            return response.data;
+        });
+    };
+    this.get_mota = function (manhomnghiepvu) {
+        return $http.get('/api/MoTaDetails/' + manhomnghiepvu).then(function (response) {
+            return response.data;
+        });
+    };
+
+    this.get_trangthai = function (username) {
+        return $http.get('/api/Api_CheckNghiepVu/' + username).then(function (response) {
+            return response.data;
+        });
+    };
+
+    this.insert = function (nhomnghiepvu,username) {
+        return $http.post('/api/NghiepVuDetails/' + nhomnghiepvu + '/' + username);
+    };
 });
 
 
@@ -394,6 +415,7 @@ app.service('DangkypheduyetService', function ($http) {
     }
 
 });
+
 
 // Định khoản tự động
 app.service('DinhkhoantudongService', function ($http) {
@@ -515,5 +537,89 @@ app.service('MausohoadonService', function ($http) {
     this.delete = function (id, data_delete) {
         return $http.delete("/api/Api_Mausohoadon/" + id, data_delete);
     }
+
+
+
+app.service('themnghiepvuService', function ($http) {
+    this.get_user = function () {
+        return $http.get("/api/Api_NguoidungHL").then(function (response) {
+            return response.data;
+        });
+    };
+    this.get_trangthai = function (nhomnghiepvu, username) {
+        return $http.get('/api/Api_NhomNguoiDungNghiepVu/' + nhomnghiepvu + '/' + username).then(function (response) {
+            return response.data;
+        });
+    };
+    this.delete_nghiepvunguoidung = function (nhomnghiepvu, username) {
+        return $http.delete('/api/Api_NhomNguoiDungNghiepVu/' + nhomnghiepvu + '/' + username);
+    }
+
+    this.add_nghiepvunguoidung = function (data_add) {
+        return $http.post('/api/Api_NhomNguoiDungNghiepVu', data_add);
+    };
+});
+
+
+app.service('congtyService', function ($http) {
+    this.get_congty = function () {
+        return $http.get('/api/Api_CCTC_CongTy').then(function (response) {
+            return response.data;
+        });
+    };
+    this.add_congty = function (data_add) {
+        return $http.post('/api/Api_CCTC_CongTy', data_add);
+    };
+
+    this.save_congty = function (macongty, data_save) {
+        return $http.put('/api/Api_CCTC_CongTy/' + macongty, data_save);
+    };
+    this.delete_congty = function (macongty, data_delete) {
+        return $http.delete('/api/Api_CCTC_CongTy/' + macongty, data_delete);
+    };
+});
+
+app.service('mohinhcongtyService', function ($http) {
+    this.get_mohinhcongty = function () {
+        return $http.get('/api/Api_MoHinhCongTy').then(function (response) {
+            return response.data;
+        });
+    };
+    this.add_mohinhcongty = function (data_add) {
+        return $http.post('/api/Api_MoHinhCongTy', data_add);
+    };
+
+    this.save_mohinhcongty = function (mamohinh, data_save) {
+        return $http.put('/api/Api_MoHinhCongTy/' + mamohinh, data_save);
+    };
+    this.delete_mohinhcongty = function (mamohinh, data_delete) {
+        return $http.delete('/api/Api_MoHinhCongTy/' + mamohinh, data_delete);
+    };
+});
+
+app.service('dichvuService', function ($http) {
+    this.get_dichvu = function () {
+        return $http.get('/api/Api_DichVu').then(function (response) {
+            return response.data;
+        });
+    };
+    this.add_dichvu = function (data_add) {
+        return $http.post('/api/Api_DichVu', data_add);
+    };
+
+    this.save_dichvu = function (madichvu, data_save) {
+        return $http.put('/api/Api_DichVu/' + madichvu, data_save);
+    };
+    this.delete_dichvu = function (madichvu, data_delete) {
+        return $http.delete('/api/Api_DichVu/' + madichvu, data_delete);
+    };
+});
+
+app.service('hangduocquantamService', function ($http) {
+    this.get_hangduocquantam = function () {
+        return $http.get('/api/Api_HangDuocQuanTam').then(function (response) {
+            return response.data;
+        });
+    };
 
 });
