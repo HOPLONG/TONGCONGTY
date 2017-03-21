@@ -511,22 +511,6 @@ app.controller('menuCtrl', function (menuService,$scope) {
         });
     };
 
-    $scope.treeview = function () {
-        return ('treeview');
-    }
-
-    $scope.fa = function () {
-        return ('fa mini-icon fa-pie-chart')
-    };
-
-    $scope.pullright = function(){
-        return ('pull-right-container');
-    }
-
-    $scope.fapullright = function () {
-        return ('fa fa-angle-left pull-right');
-    };
-
     var maphongban = $('#maphongban').val();
     var username = $('#username').val();
 
