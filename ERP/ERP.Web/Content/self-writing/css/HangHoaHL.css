@@ -269,7 +269,6 @@ legend{
 
 body {
   font-family: sans-serif;
-  padding: 5%;
 }
 
 p:first-child {
@@ -282,9 +281,6 @@ p:first-child {
   list-style-type: none;
 }
 
-li + li {
-  margin-left: 3.3333%;
-}
 
 /* BASE STYLES FOR EACH */
 .callouts li {

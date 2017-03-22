@@ -131,24 +131,57 @@
                 </form>
                 <!-- /.search form -->
                 <!-- DANH SÁCH MENU TRÁI -->
-                <ul class="sidebar-menu" >
+                <ul class="sidebar-menu">
 
-                    <li ng-class="treeview()" ng-repeat="item in danhsachmenucha" ng-mouseenter="push(item.MA_MENU)" style="border-bottom: 1px solid white;" >
-
-                        <a href="#" style="font-size:14px;">
-                            <i ng-class="fa()"></i>
-                            <span>{{item.TEN_MENU}}</span>
-                            <span ng-class="pullright()">
-                                <i ng-class="fapullright()"></i>
-                            </span>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-laptop"></i>
+                            <span>PHÊ DUYỆT ĐIỆN TỬ</span>
+                            <i class="fa fa-angle-left pull-right"></i>
                         </a>
-
-                        <ul class="treeview-menu" ng-repeat="abc in listmenu">
-                            <li style="padding-left: 20px;"><a href="{{abc.LINK}}"><i class="fa fa-circle-o"></i>{{abc.TEN_MENU}}</a></li> 
-
+                        <ul class="treeview-menu">
+                            <li><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i> Đã phê duyệt</a></li>
+                            <li><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i> Đang chờ phê duyệt</a></li>
+                            <li><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i> Đã từ chối</a></li>
                         </ul>
                     </li>
-                    
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-laptop"></i>
+                            <span>YÊU CẦU PHÊ DUYỆT</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i> Danh sách yêu cầu</a></li>
+                            <li><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i> Tạo yêu cầu mới</a></li>
+                            <li><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i> Yêu cầu đã được duyệt</a></li>
+                            <li><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i> Yêu cầu đang chờ duyệt</a></li>
+                            <li><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i> Yêu cầu bị từ chối</a></li>
+                        </ul>
+                    </li>
+                    <li class="active treeview">
+                        <a href="#">
+                            <i class="fa fa-laptop"></i>
+                            <span>CÔNG TY</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu ">
+                            <li><a href="/Home/Index"><i class="fa fa-angle-double-right"></i> Chia sẻ</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-laptop"></i>
+                            <span>LƯƠNG</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i> Bảng chấm công</a></li>
+                            <li><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i> Bảng lương</a></li>
+                        </ul>
+                    </li>
+
                 </ul>
             </section>
             <!-- /.sidebar -->

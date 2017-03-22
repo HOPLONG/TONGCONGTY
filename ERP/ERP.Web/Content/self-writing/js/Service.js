@@ -417,6 +417,130 @@ app.service('DangkypheduyetService', function ($http) {
 });
 
 
+// Định khoản tự động
+app.service('DinhkhoantudongService', function ($http) {
+    this.get_dinhkhoantudong = function () {
+        return $http.get("/api/Api_Dinhkhoantudong").then(function (response) {
+            return response.data;
+        });
+    }
+    this.add = function (data_add) {
+        return $http.post("/api/Api_Dinhkhoantudong", data_add);
+    };
+
+    this.save = function (id, data_update) {
+        return $http.put("/api/Api_Dinhkhoantudong/" + id, data_update);
+    }
+
+    this.delete = function (id, data_delete) {
+        return $http.delete("/api/Api_Dinhkhoantudong/" + id, data_delete);
+    }
+
+});
+
+// Loại chứng từ
+app.service('LoaichungtuService', function ($http) {
+    this.get_loaichungtu = function () {
+        return $http.get("/api/Api_Loaichungtu").then(function (response) {
+            return response.data;
+        });
+    }
+    this.add = function (data_add) {
+        return $http.post("/api/Api_Loaichungtu", data_add);
+    };
+
+    this.save = function (id, data_update) {
+        return $http.put("/api/Api_Loaichungtu/" + id, data_update);
+    }
+
+    this.delete = function (id, data_delete) {
+        return $http.delete("/api/Api_Loaichungtu/" + id, data_delete);
+    }
+
+});
+// Loại đối tượng
+app.service('LoaidoituongService', function ($http) {
+    this.get_loaidoituong = function () {
+        return $http.get("/api/Api_Loaidoituong").then(function (response) {
+            return response.data;
+        });
+    }
+    this.add = function (data_add) {
+        return $http.post("/api/Api_Loaidoituong", data_add);
+    };
+
+    this.save = function (id, data_update) {
+        return $http.put("/api/Api_Loaidoituong/" + id, data_update);
+    }
+
+    this.delete = function (id, data_delete) {
+        return $http.delete("/api/Api_Loaidoituong/" + id, data_delete);
+    }
+
+});
+// Loại tài khoản ngân hàng
+app.service('LoaitknganhangService', function ($http) {
+    this.get_loaitknganhang = function () {
+        return $http.get("/api/Api_Loaitaikhoannganhang").then(function (response) {
+            return response.data;
+        });
+    }
+    this.add = function (data_add) {
+        return $http.post("/api/Api_Loaitaikhoannganhang", data_add);
+    };
+
+    this.save = function (id, data_update) {
+        return $http.put("/api/Api_Loaitaikhoannganhang/" + id, data_update);
+    }
+
+    this.delete = function (id, data_delete) {
+        return $http.delete("/api/Api_Loaitaikhoannganhang/" + id, data_delete);
+    }
+
+});
+// Loại tài khoản ngân hàng nội bộ
+app.service('LoaitknganhangnoiboService', function ($http) {
+    this.get_loaitknganhangnoibo = function () {
+        return $http.get("/api/Api_LoaiTKnganhangnoibo").then(function (response) {
+            return response.data;
+        });
+    }
+    this.add = function (data_add) {
+        return $http.post("/api/Api_LoaiTKnganhangnoibo", data_add);
+    };
+
+    this.save = function (id, data_update) {
+        return $http.put("/api/Api_LoaiTKnganhangnoibo/" + id, data_update);
+    }
+
+    this.delete = function (id, data_delete) {
+        return $http.delete("/api/Api_LoaiTKnganhangnoibo/" + id, data_delete);
+    }
+
+});
+
+// Mẫu số hóa đơn
+app.service('MausohoadonService', function ($http) {
+    this.get_mausohoadon = function () {
+        return $http.get("/api/Api_Mausohoadon").then(function (response) {
+            return response.data;
+        });
+    }
+    this.add = function (data_add) {
+        return $http.post("/api/Api_Mausohoadon", data_add);
+    };
+
+    this.save = function (id, data_update) {
+        return $http.put("/api/Api_Mausohoadon/" + id, data_update);
+    }
+
+    this.delete = function (id, data_delete) {
+        return $http.delete("/api/Api_Mausohoadon/" + id, data_delete);
+    }
+});
+
+
+
 app.service('themnghiepvuService', function ($http) {
     this.get_user = function () {
         return $http.get("/api/Api_NguoidungHL").then(function (response) {
@@ -498,4 +622,5 @@ app.service('hangduocquantamService', function ($http) {
             return response.data;
         });
     };
+
 });
