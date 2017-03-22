@@ -624,3 +624,85 @@ app.service('hangduocquantamService', function ($http) {
     };
 
 });
+
+app.service('thamchieuchungtuService', function ($http) {
+    this.get_thamchieu = function () {
+        return $http.get('/api/Api_ThamChieuChungTu').then(function (response) {
+            return response.data;
+        });
+    };
+
+    this.get_chungtu = function () {
+        return $http.get('/api/Api_ChungTu').then(function (response) {
+            return response.data;
+        });
+    };
+    this.add_thamchieu = function (data_add) {
+        return $http.post('/api/Api_ThamChieuChungTu', data_add);
+    };
+
+    this.save_thamchieu = function (id, data_save) {
+        return $http.put('/api/Api_ThamChieuChungTu/' + id, data_save);
+    };
+    this.delete_thamchieu = function (id, data_delete) {
+        return $http.delete('/api/Api_ThamChieuChungTu/' + id, data_delete);
+    };
+});
+
+app.service('salephutrachService', function ($http) {
+    this.get_salephutrach = function () {
+        return $http.get('/api/Api_SalePhuTrach').then(function (response) {
+            return response.data;
+        });
+    };
+
+    this.get_nhanvienphutrach = function () {
+        return $http.get('/api/NhanVienPhuTrach').then(function (response) {
+            return response.data;
+        });
+    };
+    this.get_idlienhe = function () {
+        return $http.get('/api/Api_LienHe').then(function (response) {
+            return response.data;
+        });
+    };
+    this.add_salephutrach = function (data_add) {
+        return $http.post('/api/Api_SalePhuTrach', data_add);
+    };
+
+    this.save_salephutrach = function (id, data_save) {
+        return $http.put('/api/Api_SalePhuTrach/' + id, data_save);
+    };
+    this.delete_salephutrach = function (id, data_delete) {
+        return $http.delete('/api/Api_SalePhuTrach/' + id, data_delete);
+    };
+});
+
+app.service('purphutrachService', function ($http) {
+    this.get_purphutrach = function () {
+        return $http.get('/api/Api_PurPhuTrach').then(function (response) {
+            return response.data;
+        });
+    };
+
+    this.get_nhanvienpurphutrach = function () {
+        return $http.get('/api/NhanVienPurPhuTrach').then(function (response) {
+            return response.data;
+        });
+    };
+    this.get_idlienhe = function () {
+        return $http.get('/api/Api_NCC_LienHe').then(function (response) {
+            return response.data;
+        });
+    };
+    this.add_purphutrach = function (data_add) {
+        return $http.post('/api/Api_PurPhuTrach', data_add);
+    };
+
+    this.save_purphutrach = function (id, data_save) {
+        return $http.put('/api/Api_PurPhuTrach/' + id, data_save);
+    };
+    this.delete_purphutrach = function (id, data_delete) {
+        return $http.delete('/api/Api_PurPhuTrach/' + id, data_delete);
+    };
+});

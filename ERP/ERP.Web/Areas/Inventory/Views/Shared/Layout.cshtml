@@ -1,12 +1,4 @@
-﻿@{
-    ViewBag.Title = "layout";
-    if (Session["USERNAME"] == null)
-    {
-        Response.Redirect("~/Home/Login");
-    }
-   
-
-}
+﻿
 
 <!DOCTYPE html>
 <html>
@@ -46,18 +38,18 @@
         });
     </script>
 </head>
-<body class="hold-transition skin-blue sidebar-mini" ng-app="myApp"  ng-controller="menuCtrl">
+<body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper" style="padding-bottom: 50px;">
         <header class="main-header">
             <!-- Logo -->
             <a href="/Home/Index" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini" style="color: white">
-                    <img src="~/Content/Images/Logos/logo_hoplong.png" height="30" width="40"/>
-               </span>
+                    <img src="~/Content/Images/Logos/logo_hoplong.png" height="30" width="40" />
+                </span>
                 <!-- logo for regular state and mobile devices -->
                 <span class="logo-lg"><img src="~/Content/Images/Logos/logo_hoplong.png" height="60" width="100" /></span>
-                
+
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" style="background: deepskyblue">
@@ -67,11 +59,11 @@
                 </a>
                 <!-- DANH SÁCH MENU TRÊN-->
                 <div class="navbar-custom-menu pull-left">
-                        <input type="hidden" value="@Session["MA_PHONG_BAN"]" id="maphongban" />
-                        <input type="hidden" value="@Session["USERNAME"]" id="username" />
-                    <ul class="nav navbar-nav" ng-repeat="menu in danhsachmenu" ng-class="get(menu.USERNAME)">                       
-                        <li  ng-class="check(menu.TRANG_THAI)">
-                            <a href="{{menu.LINK}}" class="dropdown-toggle"  ng-mouseup="edit(menu.MA_MENU)">{{menu.TEN_MENU}}</a>                          
+                    <input type="hidden" value="@Session["MA_PHONG_BAN"]" id="maphongban" />
+                    <input type="hidden" value="@Session["USERNAME"]" id="username" />
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a class="dropdown-toggle" ></a>
                         </li>
                     </ul>
                 </div><!-- /end menu bar -->
@@ -106,8 +98,8 @@
                         </li>
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
-                                <a href="/UserDetails/Index"><img src="~/Content/Images/Avatar/@Session["AVATAR"]" class="user-image" alt="User Image"></a>
-                                <a href="/UserDetails/Index"><span class="hidden-xs">@Session["HO_VA_TEN"]</span></a>
+                            <a href="/UserDetails/Index"><img src="~/Content/Images/Avatar/@Session["AVATAR"]" class="user-image" alt="User Image"></a>
+                            <a href="/UserDetails/Index"><span class="hidden-xs">@Session["HO_VA_TEN"]</span></a>
                         </li>
                         <!-- Control Sidebar Toggle Button -->
                         <li><a href="/Home/Logout"><i class="fa fa-sign-out pull-right"></i> Đăng xuất</a></li>
@@ -136,52 +128,81 @@
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-laptop"></i>
-                            <span>PHÊ DUYỆT ĐIỆN TỬ</span>
+                            <span>Hàng hóa</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i> Đã phê duyệt</a></li>
-                            <li><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i> Đang chờ phê duyệt</a></li>
-                            <li><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i> Đã từ chối</a></li>
+                            <li><a href="/Inventory/HangHoa/Index"><i class="fa fa-angle-double-right"></i>Danh sách hàng hóa</a></li>
+                            <li><a href="/Inventory/HangSp/Index"><i class="fa fa-angle-double-right"></i>Nhóm vật tư hàng hóa</a></li>
+                            <li><a href="/Inventory/Kho/Index"><i class="fa fa-angle-double-right"></i>Kho</a></li>
                         </ul>
                     </li>
 
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-laptop"></i>
-                            <span>YÊU CẦU PHÊ DUYỆT</span>
+                            <span>Giữ hàng</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i> Danh sách yêu cầu</a></li>
-                            <li><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i> Tạo yêu cầu mới</a></li>
-                            <li><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i> Yêu cầu đã được duyệt</a></li>
-                            <li><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i> Yêu cầu đang chờ duyệt</a></li>
-                            <li><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i> Yêu cầu bị từ chối</a></li>
+                            <li><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i>Danh sách đề nghị giữ</a></li>
+                            <li><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i>Đã giữ</a></li>
+                            <li><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i>Chưa giữ</a></li>
+                            <li><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i>Đang giữ</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-laptop"></i>
+                            <span>Đề nghị xuất hàng</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i> Danh sách đề nghị</a></li>
+                            <li><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i>Đề nghị đã xuất</a></li>
+                            <li><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i>Đang xuất</a></li>
+                            <li><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i>Chưa xuất</a></li>
+                            <li><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i>Đã giữ</a></li>
+                            <li><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i>Chưa giữ</a></li>
+                            <li><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i>Đang giữ</a></li>
                         </ul>
                     </li>
                     <li class="active treeview">
                         <a href="#">
                             <i class="fa fa-laptop"></i>
-                            <span>CÔNG TY</span>
+                            <span>Xuất hàng</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu ">
-                            <li><a href="/Home/Index"><i class="fa fa-angle-double-right"></i> Chia sẻ</a></li>
+                            <li><a href="/Home/Index"><i class="fa fa-angle-double-right"></i>Danh sách xuất kho</a></li>
+                            <li><a href="/Home/Index"><i class="fa fa-angle-double-right"></i>Phiếu xuất kho mới</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-laptop"></i>
-                            <span>LƯƠNG</span>
+                            <span>Nhập kho</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="/ChamCong/Index"><i class="fa fa-angle-double-right"></i> Bảng chấm công</a></li>
-                            <li><a href="/BangLuong/Index"><i class="fa fa-angle-double-right"></i> Bảng lương</a></li>
+                            <li><a href="/ChamCong/Index"><i class="fa fa-angle-double-right"></i>Danh sách nhập kho</a></li>
+                            <li><a href="/BangLuong/Index"><i class="fa fa-angle-double-right"></i>Phiếu nhập kho mới</a></li>
                         </ul>
                     </li>
-
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-laptop"></i>
+                            <span>Giao hàng</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="/ChamCong/Index"><i class="fa fa-angle-double-right"></i>Danh sách đơn hàng</a></li>
+                            <li><a href="/BangLuong/Index"><i class="fa fa-angle-double-right"></i>Đơn hàng đang giao</a></li>
+                            <li><a href="/ChamCong/Index"><i class="fa fa-angle-double-right"></i>Đơn hàng đã hoàn thành</a></li>
+                            <li><a href="/BangLuong/Index"><i class="fa fa-angle-double-right"></i>Đơn chưa giao</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </section>
             <!-- /.sidebar -->
@@ -210,9 +231,9 @@
     <script src="~/Content/download/plugins/fastclick/fastclick.js"></script>
 
     <script src="~/Content/self-writing/js/nav_hoplong_multilevel.js"></script>
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ngMask/3.1.1/ngMask.min.js"></script>
-    
+
     <style>
         body input {
             border: 1px solid #00BFFF !important;
@@ -238,13 +259,14 @@
         body {
             font-family: 'Times New Roman';
         }
-        .hienthi{
-        display: block !important;
-    }
 
-    .bienmat{
-        display: none !important;
-    }
+        .hienthi {
+            display: block !important;
+        }
+
+        .bienmat {
+            display: none !important;
+        }
     </style>
 
 </body>

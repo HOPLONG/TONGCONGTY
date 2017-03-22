@@ -1,12 +1,4 @@
-﻿@{
-    ViewBag.Title = "layout";
-    if (Session["USERNAME"] == null)
-    {
-        Response.Redirect("~/Home/Login");
-    }
-   
-
-}
+﻿
 
 <!DOCTYPE html>
 <html>
@@ -46,18 +38,18 @@
         });
     </script>
 </head>
-<body class="hold-transition skin-blue sidebar-mini" ng-app="myApp"  ng-controller="menuCtrl">
+<body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper" style="padding-bottom: 50px;">
         <header class="main-header">
             <!-- Logo -->
             <a href="/Home/Index" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini" style="color: white">
-                    <img src="~/Content/Images/Logos/logo_hoplong.png" height="30" width="40"/>
-               </span>
+                    <img src="~/Content/Images/Logos/logo_hoplong.png" height="30" width="40" />
+                </span>
                 <!-- logo for regular state and mobile devices -->
                 <span class="logo-lg"><img src="~/Content/Images/Logos/logo_hoplong.png" height="60" width="100" /></span>
-                
+
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" style="background: deepskyblue">
@@ -67,11 +59,9 @@
                 </a>
                 <!-- DANH SÁCH MENU TRÊN-->
                 <div class="navbar-custom-menu pull-left">
-                        <input type="hidden" value="@Session["MA_PHONG_BAN"]" id="maphongban" />
-                        <input type="hidden" value="@Session["USERNAME"]" id="username" />
-                    <ul class="nav navbar-nav" ng-repeat="menu in danhsachmenu" ng-class="get(menu.USERNAME)">                       
-                        <li  ng-class="check(menu.TRANG_THAI)">
-                            <a href="{{menu.LINK}}" class="dropdown-toggle"  ng-mouseup="edit(menu.MA_MENU)">{{menu.TEN_MENU}}</a>                          
+                    <ul class="nav navbar-nav">
+                        <li>
+                            
                         </li>
                     </ul>
                 </div><!-- /end menu bar -->
@@ -106,8 +96,8 @@
                         </li>
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
-                                <a href="/UserDetails/Index"><img src="~/Content/Images/Avatar/@Session["AVATAR"]" class="user-image" alt="User Image"></a>
-                                <a href="/UserDetails/Index"><span class="hidden-xs">@Session["HO_VA_TEN"]</span></a>
+                            <a href="/UserDetails/Index"><img src="~/Content/Images/Avatar/@Session["AVATAR"]" class="user-image" alt="User Image"></a>
+                            <a href="/UserDetails/Index"><span class="hidden-xs">@Session["HO_VA_TEN"]</span></a>
                         </li>
                         <!-- Control Sidebar Toggle Button -->
                         <li><a href="/Home/Logout"><i class="fa fa-sign-out pull-right"></i> Đăng xuất</a></li>
@@ -136,52 +126,60 @@
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-laptop"></i>
-                            <span>PHÊ DUYỆT ĐIỆN TỬ</span>
+                            <span>Thông tin</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i> Đã phê duyệt</a></li>
-                            <li><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i> Đang chờ phê duyệt</a></li>
-                            <li><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i> Đã từ chối</a></li>
+                            <li><a href="/Settings/MoHinhCongTy/Index"><i class="fa fa-angle-double-right"></i>Mô hình công ty</a></li>
+                            <li><a href="/Settings/CongTy/Index"><i class="fa fa-angle-double-right"></i>Danh sách công ty</a></li>
+                            <li><a href="/Settings/PhongBan/Index"><i class="fa fa-angle-double-right"></i>Phòng ban</a></li>
+                            <li><a href="/Settings/TongHopNhanVien/Index"><i class="fa fa-angle-double-right"></i>Nhân viên</a></li>
+                            <li><a href="/Settings/Dangkypheduyet/Index"><i class="fa fa-angle-double-right"></i>Đăng ký phê duyệt</a></li>
                         </ul>
                     </li>
 
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-laptop"></i>
-                            <span>YÊU CẦU PHÊ DUYỆT</span>
+                            <span>Người dùng</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i> Danh sách yêu cầu</a></li>
-                            <li><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i> Tạo yêu cầu mới</a></li>
-                            <li><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i> Yêu cầu đã được duyệt</a></li>
-                            <li><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i> Yêu cầu đang chờ duyệt</a></li>
-                            <li><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i> Yêu cầu bị từ chối</a></li>
+                            <li><a href="/Settings/MoHinhCongTy/Index"><i class="fa fa-angle-double-right"></i>Đăng ký người dùng</a></li>
+                            <li><a href="/Settings/NhomNghiepVu/Index"><i class="fa fa-angle-double-right"></i>Phân quyền nhóm</a></li>
+                            <li><a href="/Settings/NguoiDung/Index"><i class="fa fa-angle-double-right"></i>Danh sách người dùng</a></li>
+                            <li><a href="/Settings/Danhsachnghiepvu/Index"><i class="fa fa-angle-double-right"></i>Danh sách nghiệp vụ</a></li>
                         </ul>
                     </li>
                     <li class="active treeview">
                         <a href="#">
                             <i class="fa fa-laptop"></i>
-                            <span>CÔNG TY</span>
+                            <span>Danh mục</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu ">
-                            <li><a href="/Home/Index"><i class="fa fa-angle-double-right"></i> Chia sẻ</a></li>
+                            <li><a href="/Settings/MoHinhCongTy/"><i class="fa fa-angle-double-right"></i>Khách hàng</a></li>
+                            <li><a href="/Settings/MoHinhCongTy/"><i class="fa fa-angle-double-right"></i>Nhà cung cấp</a></li>
+                            <li><a href="/Settings/LoaiTKnganhangnoibo/Index"><i class="fa fa-angle-double-right"></i>Tài khoản ngân hàng nội bộ</a></li>
+                            <li><a href="/Settings/Dinhkhoantudong/Index"><i class="fa fa-angle-double-right"></i>Định khoản tự động</a></li>
+                            <li><a href="/Settings/Loaichungtu/Index"><i class="fa fa-angle-double-right"></i>Loại chứng từ</a></li>
+                            <li><a href="/Settings/Loaidoituong/Index"><i class="fa fa-angle-double-right"></i>Loại đối tượng</a></li>
+                            <li><a href="/Settings/LoaiTKnganhang/Index"><i class="fa fa-angle-double-right"></i>Loại tài khoản ngân hàng</a></li>
+                            <li><a href="/Settings/DichVu/Index"><i class="fa fa-angle-double-right"></i>Dịch vụ</a></li>
+                            <li><a href="/Settings/HangDuocQuanTam/Index"><i class="fa fa-angle-double-right"></i>Hàng hóa được quan tâm</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-laptop"></i>
-                            <span>LƯƠNG</span>
+                            <span>Chức năng</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="/ChamCong/Index"><i class="fa fa-angle-double-right"></i> Bảng chấm công</a></li>
-                            <li><a href="/BangLuong/Index"><i class="fa fa-angle-double-right"></i> Bảng lương</a></li>
+                            <li><a href="/Settings/ImportBangchamcong/Import_Bangchamcong"><i class="fa fa-angle-double-right"></i>Import bảng chấm công</a></li>
+                            <li><a href="/Settings/ImportExcel/Import_Hanghoa"><i class="fa fa-angle-double-right"></i>Import Excel</a></li>
                         </ul>
                     </li>
-
                 </ul>
             </section>
             <!-- /.sidebar -->
@@ -210,9 +208,9 @@
     <script src="~/Content/download/plugins/fastclick/fastclick.js"></script>
 
     <script src="~/Content/self-writing/js/nav_hoplong_multilevel.js"></script>
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ngMask/3.1.1/ngMask.min.js"></script>
-    
+
     <style>
         body input {
             border: 1px solid #00BFFF !important;
@@ -238,13 +236,14 @@
         body {
             font-family: 'Times New Roman';
         }
-        .hienthi{
-        display: block !important;
-    }
 
-    .bienmat{
-        display: none !important;
-    }
+        .hienthi {
+            display: block !important;
+        }
+
+        .bienmat {
+            display: none !important;
+        }
     </style>
 
 </body>
