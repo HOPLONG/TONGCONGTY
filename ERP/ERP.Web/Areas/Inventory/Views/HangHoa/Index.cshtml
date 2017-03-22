@@ -1,18 +1,15 @@
 ﻿
-
-@model IEnumerable<ERP.Web.Models.Database.HH>
-
-
-
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Areas/Inventory/Views/Shared/Layout.cshtml";
 }
+
+
+
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-<link href="https://cdn.datatables.net/1.9.13/css/dataTables.bootstrap.min.css" rel="stylesheet" />
 <link href="~/Content/self-writing/css/HangHoaHL.css" rel="stylesheet" />
-<script src="~/Content/download/plugins/jQuery/jquery-2.2.3.min.js"></script>
-<script src="~/Content/download/plugins/ckeditor/ckeditor.js"></script>
+
 
 <div class="panel-heading">Bạn đang xem danh mục hàng hóa</div>
 <br />
@@ -31,11 +28,11 @@
         <!-- Modal Thêm mới -->
         <div class="modal fade" id="myModal" role="dialog" tabindex="-1">
             <div class="modal-dialog modal-lg" style="width: 90%">
-                <div class="modal-content" style="height: 1350px">
+                <div class="modal-content" style="height: 100%">
 
                     <div class="modal-body">
                         <form class="form-horizontal" name="myForm" novalidate>
-                            <fieldset style="height: 1250px">
+                            <fieldset style="height: 100%">
                                 <!-- Form Name -->
                                 <legend>Add New Product</legend>
                                 <!-- Text input-->
@@ -246,11 +243,11 @@
         <!-- Modal Update -->
         <div class="modal fade" id="myEdit" role="dialog" tabindex="-1">
             <div class="modal-dialog modal-lg" style="width: 90%">
-                <div class="modal-content" style="height: 1350px">
+                <div class="modal-content" style="height: 100%">
 
                     <div class="modal-body">
                         <form class="form-horizontal" name="myForm" novalidate>
-                            <fieldset style="height: 1250px">
+                            <fieldset style="height: 100%">
                                 <!-- Form Name -->
                                 <legend>Update Product</legend>
                                 <!-- Text input-->
@@ -1080,5 +1077,3 @@
 </div>
 
 <script src="~/Content/download/angularjs/angular-ui-router.js"></script>
-
-

@@ -1259,67 +1259,6 @@ app.controller('hangduocquantamCtrl', function (hangduocquantamService, $scope) 
 });
 
 
-function reload() {
-    location.reload();
-}
-
-function change() {
-    $('.listmenu').toggle();
-}
-
-function accept() {
-    $('.listmenu').css('display', 'none');
-    reload();
-}
-app.directive('checkList', function () {
-    return {
-        scope: {
-            list: '=checkList',
-            value: '@'
-        },
-        link: function (scope, elem, attrs) {
-            var handler = function (setup) {
-                var checked = elem.prop('checked');
-                var index = scope.list.indexOf(scope.value);
-
-                if (checked && index == -1) {
-                    if (setup) elem.prop('checked', false);
-                    else scope.list.push(scope.value);
-                } else if (!checked && index != -1) {
-                    if (setup) elem.prop('checked', true);
-                    else scope.list.splice(index, 1);
-                }
-            };
-
-            var setupHandler = handler.bind(null, true);
-            var changeHandler = handler.bind(null, false);
-
-            elem.on('change', function () {
-                scope.$apply(changeHandler);
-            });
-            scope.$watch('list', setupHandler, true);
-        }
-    };
-});
-
-app.filter('unsafe', function ($sce) { return $sce.trustAsHtml; });
-
-app.filter('stringToDate', function ($filter) {
-    return function (ele, dateFormat) {
-        return $filter('date')(new Date(ele), dateFormat);
-    }
-})
-
-function help(){
-    $('.help').show();
-    $('.nohelp').hide();
-}
-function nohelp() {
-    $('.help').hide();
-    $('.nohelp').show();
-}
-
-
 app.controller('DangkypheduyetCtrl', function (DangkypheduyetService, $scope) {
     $scope.Dangkypheduyet = function () {
         DangkypheduyetService.get_dangkypheduyet().then(function (a) {
@@ -1689,6 +1628,254 @@ app.controller('MausohoadonCtrl', function (MausohoadonService, $scope) {
 
 });
 
+
+app.controller('thamchieuchungtuCtrl', function (thamchieuchungtuService, $scope) {
+    $scope.load_thamchieu = function () {
+        thamchieuchungtuService.get_thamchieu().then(function (a) {
+            $scope.listthamchieu = a;
+        });
+    };
+
+    $scope.load_chungtu = function () {
+        thamchieuchungtuService.get_chungtu().then(function (a) {
+            $scope.listchungtu = a;
+        });
+    };
+
+    $scope.load_chungtu();
+    $scope.load_thamchieu();
+
+    $scope.edit = function (item) {
+        $scope.item = item;
+    };
+
+    $scope.add = function () {
+        var data_add = {
+            SO_CHUNG_TU_GOC: $scope.so_chung_tu_goc,
+            SO_CHUNG_TU_THAM_CHIEU: $scope.so_chung_tu_tham_chieu,
+        }
+        thamchieuchungtuService.add_thamchieu(data_add).then(function (response) {
+            $scope.load_thamchieu();
+        });
+    };
+
+    $scope.save = function (id) {
+        console.log(id)
+        var data_save = {
+            ID: id,
+            SO_CHUNG_TU_GOC: $scope.item.SO_CHUNG_TU_GOC,
+            SO_CHUNG_TU_THAM_CHIEU: $scope.item.SO_CHUNG_TU_THAM_CHIEU,
+        }
+        thamchieuchungtuService.save_thamchieu(id, data_save).then(function (response) {
+            $scope.load_thamchieu();
+        });
+    };
+
+    $scope.delete = function (id) {
+        var data_delete = {
+
+        }
+        thamchieuchungtuService.delete_thamchieu(id, data_delete).then(function (response) {
+            $scope.load_thamchieu();
+        });
+    };
+});
+
+app.controller('salephutrachCtrl', function (salephutrachService,$scope) {
+    $scope.load_salephutrach = function () {
+        salephutrachService.get_salephutrach().then(function (a) {
+            $scope.listsalephutrach = a;
+        });
+    };
+
+    $scope.load_nhanvienphutrach = function () {
+        salephutrachService.get_nhanvienphutrach().then(function (a) {
+            $scope.listnhanvienphutrach = a;
+        });
+    };
+
+    $scope.load_lienhe = function () {
+        salephutrachService.get_idlienhe().then(function (a) {
+            $scope.listlienhe = a;
+        });
+    };
+
+
+    $scope.load_salephutrach();
+    $scope.load_nhanvienphutrach();
+    $scope.load_lienhe();
+
+    $scope.edit = function (item) {
+        $scope.item = item;
+    };
+
+    $scope.add = function () {
+        var data_add = {
+            ID_LIEN_HE: $scope.id_lien_he,
+            SALES_PHU_TRACH: $scope.sales_phu_trach,
+            NGAY_BAT_DAU_PHU_TRACH: $scope.ngay_bat_dau_phu_trach,
+            NGAY_KET_THUC_PHU_TRACH: $scope.ngay_ket_thuc_phu_trach,
+            TRANG_THAI : $scope.trangthai,
+        }
+        salephutrachService.add_salephutrach(data_add).then(function (response) {
+            $scope.load_salephutrach();
+        });
+    };
+
+    $scope.save = function (id) {
+        var data_save = {
+            ID: id,
+            ID_LIEN_HE: $scope.item.ID_LIEN_HE,
+            SALES_PHU_TRACH: $scope.item.SALES_PHU_TRACH,
+            NGAY_BAT_DAU_PHU_TRACH: $scope.item.NGAY_BAT_DAU_PHU_TRACH,
+            NGAY_KET_THUC_PHU_TRACH: $scope.item.NGAY_KET_THUC_PHU_TRACH,
+            TRANG_THAI: $scope.item.TRANG_THAI,
+        }
+        salephutrachService.save_salephutrach(id, data_save).then(function (response) {
+            $scope.load_salephutrach();
+        });
+    };
+
+    $scope.delete = function (id) {
+        var data_delete = {
+
+        }
+        salephutrachService.delete_salephutrach(id, data_delete).then(function (response) {
+            $scope.load_salephutrach();
+        });
+    };
+});
+
+
+app.controller('purphutrachCtrl', function (purphutrachService, $scope) {
+    $scope.load_purphutrach = function () {
+        purphutrachService.get_purphutrach().then(function (a) {
+            $scope.listpurphutrach = a;
+        });
+    };
+
+    $scope.load_nhanvienpurphutrach = function () {
+        purphutrachService.get_nhanvienpurphutrach().then(function (a) {
+            $scope.listnhanvienpurphutrach = a;
+        });
+    };
+
+    $scope.load_lienhe = function () {
+        purphutrachService.get_idlienhe().then(function (a) {
+            $scope.listlienhe = a;
+        });
+    };
+
+
+    $scope.load_purphutrach();
+    $scope.load_nhanvienpurphutrach();
+    $scope.load_lienhe();
+
+    $scope.edit = function (item) {
+        $scope.item = item;
+    };
+
+    $scope.add = function () {
+        var data_add = {
+            ID_LIEN_HE: $scope.id_lien_he,
+            PUR_PHU_TRACH: $scope.pur_phu_trach,
+            NGAY_BAT_DAU_PHU_TRACH: $scope.ngay_bat_dau_phu_trach,
+            NGAY_KET_THUC_PHU_TRACH: $scope.ngay_ket_thuc_phu_trach,
+            TRANG_THAI: $scope.trangthai,
+        }
+        purphutrachService.add_purphutrach(data_add).then(function (response) {
+            $scope.load_purphutrach();
+        });
+    };
+
+    $scope.save = function (id) {
+        var data_save = {
+            ID: id,
+            ID_LIEN_HE: $scope.item.ID_LIEN_HE,
+            PUR_PHU_TRACH: $scope.item.PUR_PHU_TRACH,
+            NGAY_BAT_DAU_PHU_TRACH: $scope.item.NGAY_BAT_DAU_PHU_TRACH,
+            NGAY_KET_THUC_PHU_TRACH: $scope.item.NGAY_KET_THUC_PHU_TRACH,
+            TRANG_THAI: $scope.item.TRANG_THAI,
+        }
+        purphutrachService.save_purphutrach(id, data_save).then(function (response) {
+            $scope.load_purphutrach();
+        });
+    };
+
+    $scope.delete = function (id) {
+        var data_delete = {
+
+        }
+        purphutrachService.delete_purphutrach(id, data_delete).then(function (response) {
+            $scope.load_purphutrach();
+        });
+    };
+});
+
+
+// Các phần bổ trợ,không sửa xóa,viết code js ở trên đoạn này
+function reload() {
+    location.reload();
+}
+
+function change() {
+    $('.listmenu').toggle();
+}
+
+function accept() {
+    $('.listmenu').css('display', 'none');
+    reload();
+}
+app.directive('checkList', function () {
+    return {
+        scope: {
+            list: '=checkList',
+            value: '@'
+        },
+        link: function (scope, elem, attrs) {
+            var handler = function (setup) {
+                var checked = elem.prop('checked');
+                var index = scope.list.indexOf(scope.value);
+
+                if (checked && index == -1) {
+                    if (setup) elem.prop('checked', false);
+                    else scope.list.push(scope.value);
+                } else if (!checked && index != -1) {
+                    if (setup) elem.prop('checked', true);
+                    else scope.list.splice(index, 1);
+                }
+            };
+
+            var setupHandler = handler.bind(null, true);
+            var changeHandler = handler.bind(null, false);
+
+            elem.on('change', function () {
+                scope.$apply(changeHandler);
+            });
+            scope.$watch('list', setupHandler, true);
+        }
+    };
+});
+
+app.filter('unsafe', function ($sce) { return $sce.trustAsHtml; });
+
+app.filter('stringToDate', function ($filter) {
+    return function (ele, dateFormat) {
+        return $filter('date')(new Date(ele), dateFormat);
+    }
+})
+
+function help() {
+    $('.help').show();
+    $('.nohelp').hide();
+}
+function nohelp() {
+    $('.help').hide();
+    $('.nohelp').show();
+}
+
+// End bổ trợ
+
 // Đơn hàng dự kiến
 app.controller('DonhangdukienCtrl', function (DonhangdukienService, $scope) {
     $scope.Donhangdukien = function () {
@@ -1750,5 +1937,6 @@ app.controller('DonhangdukienCtrl', function (DonhangdukienService, $scope) {
     };
 
 });
+
 
 
