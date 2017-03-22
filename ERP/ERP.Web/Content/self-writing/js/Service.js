@@ -539,31 +539,6 @@ app.service('MausohoadonService', function ($http) {
     }
 });
 
-// Đơn hàng dự kiến
-app.service('DonhangdukienService', function ($http) {
-    this.get_donhangdukien = function () {
-        return $http.get("/api/Api_Donhangdukien").then(function (response) {
-            return response.data;
-        });
-    }
-    this.get_khachhang = function () {
-        return $http.get("/api/Api_KH").then(function (response) {
-            return response.data;
-        });
-    }
-    this.add = function (data_add) {
-        return $http.post("/api/Api_Donhangdukien", data_add);
-    };
-
-    this.save = function (id, data_update) {
-        return $http.put("/api/Api_Donhangdukien/" + id, data_update);
-    }
-
-    this.delete = function (id, data_delete) {
-        return $http.delete("/api/Api_Donhangdukien/" + id, data_delete);
-    }
-});
-
 
 
 app.service('themnghiepvuService', function ($http) {
