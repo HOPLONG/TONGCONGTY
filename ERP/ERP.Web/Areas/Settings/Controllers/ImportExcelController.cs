@@ -261,12 +261,12 @@ namespace ERP.Web.Areas.Settings.Controllers
                                         user.SDT = workSheet.Cells[rowIterator, 6].Value.ToString();
                                     if (workSheet.Cells[rowIterator, 7].Value != null)
                                         user.EMAIL = workSheet.Cells[rowIterator, 7].Value.ToString();
-                                    if (workSheet.Cells[rowIterator, 10].Value != null)
-                                        user.AVATAR = workSheet.Cells[rowIterator, 10].Value.ToString();
-                                    if (workSheet.Cells[rowIterator, 13].Value != null)
-                                        user.IS_ADMIN = Convert.ToBoolean(workSheet.Cells[rowIterator, 13].Value);
-                                    user.ALLOWED = Convert.ToBoolean(workSheet.Cells[rowIterator, 14].Value);
-                                    user.MA_CONG_TY = workSheet.Cells[rowIterator, 12].Value.ToString();
+                                    if (workSheet.Cells[rowIterator, 11].Value != null)
+                                        user.AVATAR = workSheet.Cells[rowIterator, 11].Value.ToString();
+                                    if (workSheet.Cells[rowIterator, 15].Value != null)
+                                        user.IS_ADMIN = Convert.ToBoolean(workSheet.Cells[rowIterator, 15].Value);
+                                    user.ALLOWED = Convert.ToBoolean(workSheet.Cells[rowIterator, 16].Value);
+                                    user.MA_CONG_TY = workSheet.Cells[rowIterator, 14].Value.ToString();
 
                                     db.HT_NGUOI_DUNG.Add(user);
 
@@ -281,9 +281,12 @@ namespace ERP.Web.Areas.Settings.Controllers
                                         nhanvien.QUE_QUAN = workSheet.Cells[rowIterator, 8].Value.ToString();
                                     if (workSheet.Cells[rowIterator, 9].Value != null)
                                         nhanvien.TRINH_DO_HOC_VAN = workSheet.Cells[rowIterator, 9].Value.ToString();
-                                    if (workSheet.Cells[rowIterator, 11].Value != null)
-                                        nhanvien.MA_PHONG_BAN = workSheet.Cells[rowIterator, 11].Value.ToString();
-
+                                    if (workSheet.Cells[rowIterator, 10].Value != null)
+                                        nhanvien.THANH_TICH_CONG_TAC = workSheet.Cells[rowIterator, 10].Value.ToString();
+                                    if (workSheet.Cells[rowIterator, 12].Value != null)
+                                            nhanvien.MA_PHONG_BAN = workSheet.Cells[rowIterator, 12].Value.ToString();
+                                    if (workSheet.Cells[rowIterator, 13].Value != null)
+                                            nhanvien.CHUC_VU = workSheet.Cells[rowIterator,13].Value.ToString();
                                     db.CCTC_NHAN_VIEN.Add(nhanvien);
 
                                     db.SaveChanges();
@@ -298,7 +301,7 @@ namespace ERP.Web.Areas.Settings.Controllers
                 catch (Exception Ex)
                 {
                     ViewBag.Error = " Đã xảy ra lỗi, Liên hệ ngay với admin. " + Environment.NewLine + " Thông tin chi tiết về lỗi:" + Environment.NewLine + Ex;
-                    ViewBag.Information = "Lỗi tại dòng thứ: " + dong;
+                    ViewBag.Information = "Lỗi tại dòng thứ: " + (dong+1);
 
                 }
                 finally

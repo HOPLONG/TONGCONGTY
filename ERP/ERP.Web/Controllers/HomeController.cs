@@ -38,6 +38,47 @@ namespace ERP.Web.Controllers
             return View(pOST);
         }
 
+
+        public ActionResult Register()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Register(String username, String password)
+        {
+            var user = db.HT_NGUOI_DUNG.SingleOrDefault(x => x.USERNAME == username && x.PASSWORD == password && x.ALLOWED == true);
+            if (user != null)
+            {
+
+
+
+                Session["USERNAME"] = user.USERNAME;
+                Session["PASSWORD"] = user.PASSWORD;
+                Session["MA_PHONG_BAN"] = user.CCTC_NHAN_VIEN.MA_PHONG_BAN;
+                Session["HO_VA_TEN"] = user.HO_VA_TEN;
+                Session["ALLOWED"] = user.ALLOWED;
+                Session["IS_AMIN"] = user.IS_ADMIN;
+                Session["AVATAR"] = user.AVATAR;
+                Session["MA_CONG_TY"] = user.MA_CONG_TY;
+                Session["LOAI_USER"] = user.CCTC_CONG_TY.CAP_TO_CHUC;
+                HT_LICH_SU_DANG_NHAP lsdn = new HT_LICH_SU_DANG_NHAP();
+                lsdn.USERNAME = user.USERNAME;
+                lsdn.THOI_GIAN_DANG_NHAP = DateTime.Now.ToString("dd/MM/yyyy:hh:mm:ss");
+                lsdn.THOI_GIAN_DANG_XUAT = "";
+                db.HT_LICH_SU_DANG_NHAP.Add(lsdn);
+                db.SaveChanges();
+                return RedirectToAction("Index", "Home");
+
+
+
+
+            }
+            ViewBag.error = "Wrong username or password";
+            return View();
+        }
+
+
+
         public ActionResult Login()
         {
             return View();
