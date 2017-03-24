@@ -7,6 +7,7 @@ using ERP.Web.Models;
 using ERP.Web.Models.Database;
 using System.Net;
 using System.IO;
+using ERP.Web.Models.BusinessModel;
 
 namespace ERP.Web.Controllers
 {
@@ -16,6 +17,8 @@ namespace ERP.Web.Controllers
 
     {
         ERP_DATABASEEntities db = new ERP_DATABASEEntities();
+        RandomTextAndString rd = new RandomTextAndString();
+        
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
@@ -39,44 +42,29 @@ namespace ERP.Web.Controllers
         }
 
 
+
         public ActionResult Register()
         {
             return View();
         }
+       
         [HttpPost]
-        public ActionResult Register(String username, String password)
+        public ActionResult ConfirmCode(string username1, String codeconfirm)
         {
-            var user = db.HT_NGUOI_DUNG.SingleOrDefault(x => x.USERNAME == username && x.PASSWORD == password && x.ALLOWED == true);
-            if (user != null)
+            var query = db.HT_NGUOI_DUNG.Where(x => x.USERNAME == username1 && x.MA_XAC_NHAN == codeconfirm).FirstOrDefault();
+            if (query != null)
             {
-
-
-
-                Session["USERNAME"] = user.USERNAME;
-                Session["PASSWORD"] = user.PASSWORD;
-                Session["MA_PHONG_BAN"] = user.CCTC_NHAN_VIEN.MA_PHONG_BAN;
-                Session["HO_VA_TEN"] = user.HO_VA_TEN;
-                Session["ALLOWED"] = user.ALLOWED;
-                Session["IS_AMIN"] = user.IS_ADMIN;
-                Session["AVATAR"] = user.AVATAR;
-                Session["MA_CONG_TY"] = user.MA_CONG_TY;
-                Session["LOAI_USER"] = user.CCTC_CONG_TY.CAP_TO_CHUC;
-                HT_LICH_SU_DANG_NHAP lsdn = new HT_LICH_SU_DANG_NHAP();
-                lsdn.USERNAME = user.USERNAME;
-                lsdn.THOI_GIAN_DANG_NHAP = DateTime.Now.ToString("dd/MM/yyyy:hh:mm:ss");
-                lsdn.THOI_GIAN_DANG_XUAT = "";
-                db.HT_LICH_SU_DANG_NHAP.Add(lsdn);
+                query.ALLOWED = true;
                 db.SaveChanges();
-                return RedirectToAction("Index", "Home");
-
-
-
-
+                return RedirectToAction("Login");
             }
-            ViewBag.error = "Wrong username or password";
-            return View();
-        }
+            else
+                ViewBag.error = "Mã code hoặc số điện thoại không đúng";
 
+
+
+            return View("Register");
+        }
 
 
         public ActionResult Login()
@@ -166,5 +154,11 @@ namespace ERP.Web.Controllers
         {
             return View();
         }
+
+        public EmptyResult Alive()
+        {
+            return new EmptyResult();
+        }
+
     }
 }

@@ -4,11 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace ERP.Web.Areas.Settings.Controllers
+namespace ERP.Web.Areas.Accounting.Controllers
 {
-    public class TongHopNhanVienController : Controller
+    public class HomeAccountingController : Controller
     {
-        // GET: Settings/TongHopNhanVien
+        // GET: Accounting/HomeAccounting
         public ActionResult Index()
         {
             return View();

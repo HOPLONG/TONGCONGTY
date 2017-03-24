@@ -135,8 +135,8 @@
 
                     <li class="treeview">
                         <a href="#">
-                            <i class="fa fa-laptop"></i>
-                            <span>PHÊ DUYỆT ĐIỆN TỬ</span>
+                            <i class="fa fa-pencil"></i>
+                            <span style="font-size:16px; font-weight: bold">Phê Duyệt Điện Tử</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
@@ -149,7 +149,7 @@
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-laptop"></i>
-                            <span>YÊU CẦU PHÊ DUYỆT</span>
+                            <span style="font-size:16px; font-weight: bold">Yêu Cầu Phê Duyệt</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
@@ -163,17 +163,19 @@
                     <li class="active treeview">
                         <a href="#">
                             <i class="fa fa-laptop"></i>
-                            <span>CÔNG TY</span>
+                            <span style="font-size:16px; font-weight: bold">Công Ty</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu ">
                             <li><a href="/Home/Index"><i class="fa fa-angle-double-right"></i> Chia sẻ</a></li>
+                            <li><a href="/GiamDocChiNhanh/Index"><i class="fa fa-angle-double-right"></i> Giám đốc các chi nhánh</a></li>
+                            <li><a href="/TongHopNhanVien/Index"><i class="fa fa-angle-double-right"></i> Danh sách nhân viên</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
                         <a href="#">
-                            <i class="fa fa-laptop"></i>
-                            <span>LƯƠNG</span>
+                            <i class="fa fa-credit-card"></i>
+                            <span style="font-size:16px; font-weight: bold">LƯƠNG</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
@@ -246,6 +248,14 @@
         display: none !important;
     }
     </style>
+    <script>
+        window.setInterval(function () {
+            $.get("/Home/Alive", function (data) {
+                //alert("still alive")
+            }, 180000);
+        });
+
+    </script>
 
 </body>
 </html>

@@ -26,6 +26,7 @@ namespace ERP.Web.Models.Database
             this.KHO_DNXH = new HashSet<KHO_DNXH>();
             this.KHO_GIU_HANG = new HashSet<KHO_GIU_HANG>();
             this.KH_PHAN_LOAI_KHACH = new HashSet<KH_PHAN_LOAI_KHACH>();
+            this.KHO_XUAT_KHO = new HashSet<KHO_XUAT_KHO>();
         }
     
         public string MA_KHACH_HANG { get; set; }
@@ -65,5 +66,7 @@ namespace ERP.Web.Models.Database
         public virtual ICollection<KHO_GIU_HANG> KHO_GIU_HANG { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KH_PHAN_LOAI_KHACH> KH_PHAN_LOAI_KHACH { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<KHO_XUAT_KHO> KHO_XUAT_KHO { get; set; }
     }
 }

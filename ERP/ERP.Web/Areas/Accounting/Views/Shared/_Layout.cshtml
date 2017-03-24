@@ -4,7 +4,7 @@
     {
         Response.Redirect("~/Home/Login");
     }
-   
+
 
 }
 
@@ -46,18 +46,18 @@
         });
     </script>
 </head>
-<body class="hold-transition skin-blue sidebar-mini" ng-app="myApp"  ng-controller="menuCtrl">
+<body class="hold-transition skin-blue sidebar-mini" ng-app="myApp" ng-controller="menuCtrl">
     <div class="wrapper" style="padding-bottom: 50px;">
         <header class="main-header">
             <!-- Logo -->
             <a href="/Home/Index" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini" style="color: white">
-                    <img src="~/Content/Images/Logos/logo_hoplong.png" height="30" width="40"/>
-               </span>
+                    <img src="~/Content/Images/Logos/logo_hoplong.png" height="30" width="40" />
+                </span>
                 <!-- logo for regular state and mobile devices -->
                 <span class="logo-lg"><img src="~/Content/Images/Logos/logo_hoplong.png" height="60" width="100" /></span>
-                
+
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" style="background: deepskyblue">
@@ -65,7 +65,19 @@
                 <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button" style="color: white;">
                     <span class="sr-only">Toggle navigation</span>
                 </a>
- 
+                <!-- DANH SÁCH MENU TRÊN-->
+                <div class="navbar-custom-menu pull-left">
+                    <input type="hidden" value="@Session["MA_PHONG_BAN"]" id="maphongban" />
+                    <input type="hidden" value="@Session["USERNAME"]" id="username" />
+                    <ul class="nav navbar-nav" ng-repeat="menu in danhsachmenu" ng-class="get(menu.USERNAME)">
+                        <li ng-class="check(menu.TRANG_THAI)">
+                            <a href="{{menu.LINK}}" class="dropdown-toggle" ng-mouseup="edit(menu.MA_MENU)">{{menu.TEN_MENU}}</a>
+                        </li>
+                    </ul>
+                </div><!-- /end menu bar -->
+
+
+
                 <div class="navbar-custom-menu pull-right">
                     <ul class="nav navbar-nav ">
                         <!-- Messages: style can be found in dropdown.less-->
@@ -94,8 +106,8 @@
                         </li>
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
-                                <a href="/UserDetails/Index"><img src="~/Content/Images/Avatar/@Session["AVATAR"]" class="user-image" alt="User Image"></a>
-                                <a href="/UserDetails/Index"><span class="hidden-xs">@Session["HO_VA_TEN"]</span></a>
+                            <a href="/UserDetails/Index"><img src="~/Content/Images/Avatar/@Session["AVATAR"]" class="user-image" alt="User Image"></a>
+                            <a href="/UserDetails/Index"><span class="hidden-xs">@Session["HO_VA_TEN"]</span></a>
                         </li>
                         <!-- Control Sidebar Toggle Button -->
                         <li><a href="/Home/Logout"><i class="fa fa-sign-out pull-right"></i> Đăng xuất</a></li>
@@ -119,96 +131,151 @@
                 </form>
                 <!-- /.search form -->
                 <!-- DANH SÁCH MENU TRÁI -->
-                <ul class="sidebar-menu" >
+                <ul class="sidebar-menu">
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-pencil"></i>
+                            <span style="font-size:16px; font-weight: bold">Quỹ</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+
+                            <li style="font-weight: bold"><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i> Danh sách chứng từ thu chi</a></li>
+                            
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-pencil"></i>
+                                    <span style="font-weight: bold">Thu tiền</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </a>
+                                <ul  class="treeview-menu">
+                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Thu tiền khách hàng</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Rút tiền gửi về nộp quỹ</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Thu khác</a></li>
+                                </ul>
+                            
+                            </li>
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-pencil"></i>
+                                    <span style="font-weight: bold">Chi tiền</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </a>
+                                <ul  class="treeview-menu">
+                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Trả tiền nhà cung cấp</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Tạm ứng nhân viên</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Gửi tiền ngân hàng</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Chi khác</a></li>
+                                </ul>
+
+                            </li>
+                        </ul>
+                    </li>
 
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-laptop"></i>
-                            <span>ĐƠN HÀNG DỰ KIẾN</span>
+                            <span style="font-size:16px; font-weight: bold">Ngân hàng</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i> Danh sách đơn hàng</a></li>
-                            <li><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i> Tạo mới đơn dự kiến</a></li>
-                            <li><a href="pages/UI/buttons.html"><i class="fa fa-angle-double-right"></i> Đơn thành công</a></li>
-                            <li><a href="pages/UI/sliders.html"><i class="fa fa-angle-double-right"></i> Đơn thất bại</a></li>
-                            <li><a href="pages/UI/timeline.html"><i class="fa fa-angle-double-right"></i> Lịch trình đơn hàng</a></li>
+                            <li style="font-weight: bold"><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i> Danh sách chứng từ thu chi</a></li>
+
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-pencil"></i>
+                                    <span style="font-weight: bold">Thu tiền</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Thu tiền khách hàng</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Thu vay nợ</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Thu khác</a></li>
+                                </ul>
+
+                            </li>
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-pencil"></i>
+                                    <span style="font-weight: bold">Chi tiền</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Trả tiền nhà cung cấp</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Tạm ứng nhân viên</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Trả các khoản vay</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Chi khác</a></li>
+                                </ul>
+
+                            </li>
+                            <li style="font-weight: bold"><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i> Chuyển tiền nội bộ</a></li>
                         </ul>
                     </li>
 
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-laptop"></i>
-                            <span>BÁO GIÁ</span>
+                            <span style="font-size:16px; font-weight: bold">Mua hàng</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i> Danh sách báo giá</a></li>
-                            <li><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i> Báo giá mới</a></li>
-                            <li><a href="pages/UI/buttons.html"><i class="fa fa-angle-double-right"></i> Đơn báo giá đã trúng</a></li>
-                            <li><a href="pages/UI/sliders.html"><i class="fa fa-angle-double-right"></i> Đơn báo giá chưa được quyết</a></li>
-                            <li><a href="pages/UI/timeline.html"><i class="fa fa-angle-double-right"></i> Đơn chưa làm đề nghị xuất</a></li>
+                            <li style="font-weight: bold"><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i> Danh sách chứng từ mua</a></li>
+
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-pencil"></i>
+                                    <span style="font-weight: bold">Mua hàng</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Mua hàng có hóa đơn</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Mua hàng không hóa đơn</a></li>
+                                </ul>
+
+                            </li>
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-pencil"></i>
+                                    <span style="font-weight: bold">Mua dịch vụ</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Mua dịch vụ có hóa đơn</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Mua dịch vụ không hóa đơn</a></li>
+                                </ul>
+
+                            </li>
+                            
                         </ul>
                     </li>
+
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-laptop"></i>
-                            <span>GIỮ HÀNG</span>
+                            <span style="font-size:16px; font-weight: bold">Bán hàng</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i> Danh sách đề nghị giữ hàng</a></li>
-                            <li><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i> Đề nghị giữ hàng mới</a></li>
-                            <li><a href="pages/UI/buttons.html"><i class="fa fa-angle-double-right"></i> Đề nghị đã giữ</a></li>
-                            <li><a href="pages/UI/sliders.html"><i class="fa fa-angle-double-right"></i> Đề nghị chưa giữ</a></li>
+                            <li style="font-weight: bold"><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i> Danh sách bán hàng</a></li>
+
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-pencil"></i>
+                                    <span style="font-weight: bold">Bán HH, DV trong nước</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Kèm hóa đơn</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Không có hóa đơn</a></li>
+                                </ul>
+
+                            </li>
+                            
+                            <li style="font-weight: bold"><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i> Hóa đơn</a></li>
                         </ul>
                     </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-laptop"></i>
-                            <span>ĐỀ NGHỊ XUẤT HÀNG</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i> Danh sách đề nghị xuất hàng</a></li>
-                            <li><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i> Đề nghị xuất hàng mới</a></li>
-                            <li><a href="pages/UI/buttons.html"><i class="fa fa-angle-double-right"></i> Đề nghị đã xuất</a></li>
-                            <li><a href="pages/UI/sliders.html"><i class="fa fa-angle-double-right"></i> Đề nghị đang xuất</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-laptop"></i>
-                            <span>XUẤT HÀNG</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i> Danh sách xuất hàng</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-laptop"></i>
-                            <span>BÁN HÀNG</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i> Danh sách hóa đơn bán hàng</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-laptop"></i>
-                            <span>GIAO HÀNG</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i> Danh sách đơn giao hàng</a></li>
-                            <li><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i> Đơn hàng đang giao</a></li>
-                            <li><a href="pages/UI/buttons.html"><i class="fa fa-angle-double-right"></i> Đơn đã hoàn thành</a></li>
-                        </ul>
-                    </li>
-                    
+
                 </ul>
             </section>
             <!-- /.sidebar -->
@@ -237,9 +304,9 @@
     <script src="~/Content/download/plugins/fastclick/fastclick.js"></script>
 
     <script src="~/Content/self-writing/js/nav_hoplong_multilevel.js"></script>
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ngMask/3.1.1/ngMask.min.js"></script>
-    
+
     <style>
         body input {
             border: 1px solid #00BFFF !important;
@@ -265,15 +332,15 @@
         body {
             font-family: 'Times New Roman';
         }
-        .hienthi{
-        display: block !important;
-    }
 
-    .bienmat{
-        display: none !important;
-    }
+        .hienthi {
+            display: block !important;
+        }
+
+        .bienmat {
+            display: none !important;
+        }
     </style>
-
     <script>
         window.setInterval(function () {
             $.get("/Home/Alive", function (data) {
@@ -282,7 +349,6 @@
         });
 
     </script>
-
 
 </body>
 </html>

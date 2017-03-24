@@ -58,7 +58,6 @@ namespace ERP.Web.Models.Database
         public virtual DbSet<HH_TON_KHO> HH_TON_KHO { get; set; }
         public virtual DbSet<HH_TONKHO_HANG> HH_TONKHO_HANG { get; set; }
         public virtual DbSet<HT_LICH_SU_DANG_NHAP> HT_LICH_SU_DANG_NHAP { get; set; }
-        public virtual DbSet<HT_NGUOI_DUNG> HT_NGUOI_DUNG { get; set; }
         public virtual DbSet<KH> KHs { get; set; }
         public virtual DbSet<KH_DC_XUAT_HANG> KH_DC_XUAT_HANG { get; set; }
         public virtual DbSet<KH_LIEN_HE> KH_LIEN_HE { get; set; }
@@ -97,8 +96,8 @@ namespace ERP.Web.Models.Database
         public virtual DbSet<QUY_CT_PHIEU_THU> QUY_CT_PHIEU_THU { get; set; }
         public virtual DbSet<QUY_PHIEU_CHI> QUY_PHIEU_CHI { get; set; }
         public virtual DbSet<QUY_PHIEU_THU> QUY_PHIEU_THU { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<XL_DANG_KY_PHE_DUYET> XL_DANG_KY_PHE_DUYET { get; set; }
         public virtual DbSet<XL_THAM_CHIEU_CHUNG_TU> XL_THAM_CHIEU_CHUNG_TU { get; set; }
+        public virtual DbSet<HT_NGUOI_DUNG> HT_NGUOI_DUNG { get; set; }
     }
 }
