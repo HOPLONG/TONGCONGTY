@@ -11,6 +11,7 @@ using System.Web.Http.Description;
 using ERP.Web.Models.Database;
 using ERP.Web.Models.NewModels;
 using ERP.Web.Models.BusinessModel;
+using System.Net.Mail;
 
 namespace ERP.Web.Api.NguoiDung
 {
@@ -73,29 +74,6 @@ namespace ERP.Web.Api.NguoiDung
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Api_Register
-        [ResponseType(typeof(HT_NGUOI_DUNG))]
-        public void PostHT_NGUOI_DUNG(HT_NGUOI_DUNG nd)
-        {
-            
-                HT_NGUOI_DUNG user = new HT_NGUOI_DUNG();
-
-                user.USERNAME = nd.USERNAME;
-                user.HO_VA_TEN = nd.HO_VA_TEN;
-                user.EMAIL = nd.EMAIL;
-                user.PASSWORD = nd.PASSWORD;
-                user.SDT = nd.USERNAME;
-                user.IS_ADMIN = false;
-                user.ALLOWED = false;
-                user.MA_CONG_TY = "KHACH_VANG_LAI";
-                user.MA_XAC_NHAN = rd.RandomString(10);
-
-                db.HT_NGUOI_DUNG.Add(user);
-                db.SaveChanges();
-
-            
-           
-        }
 
         // DELETE: api/Api_Register/5
         [ResponseType(typeof(HT_NGUOI_DUNG))]
