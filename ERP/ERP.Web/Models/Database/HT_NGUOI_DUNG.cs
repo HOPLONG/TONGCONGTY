@@ -39,6 +39,7 @@ namespace ERP.Web.Models.Database
         public Nullable<bool> IS_ADMIN { get; set; }
         public bool ALLOWED { get; set; }
         public string MA_CONG_TY { get; set; }
+        public string MA_XAC_NHAN { get; set; }
     
         public virtual CCTC_CONG_TY CCTC_CONG_TY { get; set; }
         public virtual CCTC_NHAN_VIEN CCTC_NHAN_VIEN { get; set; }

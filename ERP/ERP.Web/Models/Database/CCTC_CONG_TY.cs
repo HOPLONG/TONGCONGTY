@@ -25,7 +25,6 @@ namespace ERP.Web.Models.Database
             this.KHs = new HashSet<KH>();
             this.DM_KHO = new HashSet<DM_KHO>();
             this.DM_TK_NGAN_HANG_NOI_BO = new HashSet<DM_TK_NGAN_HANG_NOI_BO>();
-            this.HT_NGUOI_DUNG = new HashSet<HT_NGUOI_DUNG>();
             this.KHO_DNXH = new HashSet<KHO_DNXH>();
             this.KHO_NHAP_KHO = new HashSet<KHO_NHAP_KHO>();
             this.KHO_XUAT_KHO = new HashSet<KHO_XUAT_KHO>();
@@ -37,6 +36,7 @@ namespace ERP.Web.Models.Database
             this.QUY_PHIEU_CHI = new HashSet<QUY_PHIEU_CHI>();
             this.QUY_PHIEU_THU = new HashSet<QUY_PHIEU_THU>();
             this.CN_NGHIEP_VU = new HashSet<CN_NGHIEP_VU>();
+            this.HT_NGUOI_DUNG = new HashSet<HT_NGUOI_DUNG>();
         }
     
         public string MA_CONG_TY { get; set; }
@@ -70,8 +70,6 @@ namespace ERP.Web.Models.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DM_TK_NGAN_HANG_NOI_BO> DM_TK_NGAN_HANG_NOI_BO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HT_NGUOI_DUNG> HT_NGUOI_DUNG { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KHO_DNXH> KHO_DNXH { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KHO_NHAP_KHO> KHO_NHAP_KHO { get; set; }
@@ -95,5 +93,7 @@ namespace ERP.Web.Models.Database
         public virtual ICollection<QUY_PHIEU_THU> QUY_PHIEU_THU { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CN_NGHIEP_VU> CN_NGHIEP_VU { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HT_NGUOI_DUNG> HT_NGUOI_DUNG { get; set; }
     }
 }

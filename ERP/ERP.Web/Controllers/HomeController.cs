@@ -7,6 +7,7 @@ using ERP.Web.Models;
 using ERP.Web.Models.Database;
 using System.Net;
 using System.IO;
+using ERP.Web.Models.BusinessModel;
 
 namespace ERP.Web.Controllers
 {
@@ -16,6 +17,8 @@ namespace ERP.Web.Controllers
 
     {
         ERP_DATABASEEntities db = new ERP_DATABASEEntities();
+        RandomTextAndString rd = new RandomTextAndString();
+        
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
@@ -37,6 +40,32 @@ namespace ERP.Web.Controllers
             }
             return View(pOST);
         }
+
+
+
+        public ActionResult Register()
+        {
+            return View();
+        }
+       
+        [HttpPost]
+        public ActionResult ConfirmCode(string username1, String codeconfirm)
+        {
+            var query = db.HT_NGUOI_DUNG.Where(x => x.USERNAME == username1 && x.MA_XAC_NHAN == codeconfirm).FirstOrDefault();
+            if (query != null)
+            {
+                query.ALLOWED = true;
+                db.SaveChanges();
+                return RedirectToAction("Login");
+            }
+            else
+                ViewBag.error = "Mã code hoặc số điện thoại không đúng";
+
+
+
+            return View("Register");
+        }
+
 
         public ActionResult Login()
         {
@@ -125,5 +154,11 @@ namespace ERP.Web.Controllers
         {
             return View();
         }
+
+        public EmptyResult Alive()
+        {
+            return new EmptyResult();
+        }
+
     }
 }

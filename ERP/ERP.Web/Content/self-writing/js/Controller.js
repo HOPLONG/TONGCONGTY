@@ -1628,6 +1628,7 @@ app.controller('MausohoadonCtrl', function (MausohoadonService, $scope) {
 
 });
 
+
 app.controller('thamchieuchungtuCtrl', function (thamchieuchungtuService, $scope) {
     $scope.load_thamchieu = function () {
         thamchieuchungtuService.get_thamchieu().then(function (a) {
@@ -1811,6 +1812,69 @@ app.controller('purphutrachCtrl', function (purphutrachService, $scope) {
     };
 });
 
+// Đơn hàng dự kiến
+app.controller('DonhangdukienCtrl', function (DonhangdukienService, $scope) {
+    $scope.Donhangdukien = function () {
+        DonhangdukienService.get_donhangdukien().then(function (a) {
+            $scope.donhangdukien = a;
+        });
+        DonhangdukienService.get_khachhang().then(function (b) {
+            $scope.danhsachkhachhang = b;
+        });
+    };
+    $scope.Donhangdukien();
+    $scope.add = function () {
+
+        var data_add = {
+            MA_DU_KIEN: $scope.madukien,
+            MA_KHACH_HANG: $scope.makhachhang,
+            THANH_CONG: $scope.thanhcong,
+            THAT_BAI: $scope.thatbai,
+            LY_DO_THAT_BAI: $scope.lydothatbai,
+            TRUC_THUOC: 'HOPLONG'
+        }
+
+
+        DonhangdukienService.add(data_add).then(function (response) {
+            $scope.Donhangdukien();
+        });
+    }
+
+    $scope.edit = function (item) {
+        $scope.item = item;
+
+    }
+    $scope.passing = function (item) {
+        $scope.item = item;
+    }
+
+    $scope.save = function (id) {
+
+        var data_update = {
+            MAU_DU_KIEN: $scope.item.MAU_DU_KIEN,
+            MA_KHACH_HANG: $scope.item.MA_KHACH_HANG,
+            THANH_CONG: $scope.item.THANH_CONG,
+            THAT_BAI: $scope.item.THAT_BAI,
+            LY_DO_THAT_BAI: $scope.item.LY_DO_THAT_BAI,
+            TRUC_THUOC: $scope.item.TRUC_THUOC
+        }
+        DonhangdukienService.save(id, thanhcong, thatbai, data_update).then(function (response) {
+            $scope.Donhangdukien();
+        });
+    }
+
+    $scope.delete = function (id) {
+        var data_delete = {
+            MAU_DU_KIEN: id
+        }
+        DonhangdukienService.delete(id, data_delete).then(function (response) {
+            $scope.Donhangdukien();
+        });
+    };
+
+});
+
+
 
 // Các phần bổ trợ,không sửa xóa,viết code js ở trên đoạn này
 function reload() {
@@ -1874,3 +1938,7 @@ function nohelp() {
 }
 
 // End bổ trợ
+
+
+
+
