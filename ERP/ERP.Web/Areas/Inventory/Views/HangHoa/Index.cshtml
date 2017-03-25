@@ -9,7 +9,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <link href="~/Content/self-writing/css/HangHoaHL.css" rel="stylesheet" />
-
+<script src="http://malsup.github.com/jquery.form.js"></script>
 
 <div class="panel-heading">Bạn đang xem danh mục hàng hóa</div>
 <br />
@@ -31,115 +31,100 @@
                 <div class="modal-content" style="height: 100%">
 
                     <div class="modal-body">
-                        <form class="form-horizontal" name="myForm" novalidate>
                             <fieldset style="height: 100%">
                                 <!-- Form Name -->
                                 <legend>Add New Product</legend>
                                 <!-- Text input-->
-                                <div class="col-md-8">
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label" for="name">Product Code: </label>
-                                        <div class="col-md-9">
-                                            <input type="text" placeholder="Product Code" class="form-control input-md" ng-model="mahang">
+                                <div class="col-md-6 container_left">
+                                    <div class="col-md-11 content_left">
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <input type="text" placeholder="Mã hàng" class="form-control input-md" ng-model="mahang">
+                                            </div>                                           
                                         </div>
-                                        <div style="padding-top:8px;" class="col-md-1">
-                                            <i style="font-size:24px;" class="fa fa-question-circle nohelp" aria-hidden="true" onclick="help()"></i>
-                                            <i style="font-size:24px;" class="fa fa-ban help" aria-hidden="true" onclick="nohelp()"></i>
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <input type="text" placeholder="Tên hàng" class="form-control input-md" ng-model="tenhang">
+                                            </div>
+
                                         </div>
-                                    </div>
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label" for="name">Product Name:</label>
-                                        <div class="col-md-9">
-                                            <input type="text" placeholder="Product Name" class="form-control input-md" ng-model="tenhang">
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <select ng-model="manhomhang" class="form-control input-md">
+                                                    <option ng-selected="selectedValue == abc.MA_NHOM_HANG_CHI_TIET" ng-repeat="abc in danhsachnhomhang" value="{{abc.MA_NHOM_HANG_CHI_TIET}}">{{abc.CHUNG_LOAI_HANG}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <input type="text" placeholder="Khối lượng" class="form-control input-md" ng-model="khoiluong">
+                                            </div>
+                                        </div>
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <input type="text" placeholder="Đơn vị tính" class="form-control input-md" ng-model="donvitinh">
+                                            </div>
+                                        </div>
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <input type="text" placeholder="Bảo hành" class="form-control input-md" ng-model="baohanh">
+                                            </div>
+                                        </div>
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <input type="text" placeholder="Xuất xứ" class="form-control input-md" ng-model="xuatxu">
+                                            </div>
+                                        </div>
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <input type="text" placeholder="Tài khoản hạch toán kho" class="form-control input-md" ng-model="tkhachtoankho">
+                                            </div>
+                                        </div>
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <input type="text" placeholder="Tài khoản doanh thu" class="form-control input-md" ng-model="tkdoanhthu">
+                                            </div>
+                                        </div>
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <input type="text" placeholder="Tài khoản chi phí" class="form-control input-md" ng-model="tkchiphi">
+                                            </div>
                                         </div>
 
-                                    </div>
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label" for="name">Maker Code: </label>
-                                        <div class="col-md-9">
-                                            <select ng-model="manhomhang" class="form-control input-md">
-                                                <option ng-repeat="abc in danhsachnhomhang" value="{{abc.MA_NHOM_HANG_CHI_TIET}}">{{abc.CHUNG_LOAI_HANG}}</option>
-                                            </select>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <textarea id="ghichu" name="ghichu" placeholder="Ghi chú" class="form-control input-md" ng-model="ghichu"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-top: 10%">
+                                            <form action="/Inventory/HangHoa" ng-controller="imgCtrl" method="post">
+                                                <div class="col-md-3">
+                                                    @Html.AntiForgeryToken()
+                                                    <input type='file' name="files" id="imgInp" style="width: 100%" />
+                                                    <input type="submit" value="Upload Ảnh hàng hóa" style="margin-top: 30px;" />
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <img id="blah" src="#" height="250" width="250" />
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label" for="name">Weight: </label>
-                                        <div class="col-md-9">
-                                            <input type="text" placeholder="Weight" class="form-control input-md" ng-model="khoiluong">
-                                        </div>
-                                    </div>
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label" for="name">Unit: </label>
-                                        <div class="col-md-9">
-                                            <input type="text" placeholder="Unit" class="form-control input-md" ng-model="donvitinh">
-                                        </div>
-                                    </div>
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label" for="name">Warranty: </label>
-                                        <div class="col-md-9">
-                                            <input type="text" placeholder="Warranty" class="form-control input-md" ng-model="baohanh">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label" for="name">Image: </label>
-                                        <div class="col-md-9">
-                                            <input type="text" placeholder="Picture" class="form-control input-md" ng-model="hinhanh">
-                                        </div>
-                                    </div>
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label" for="name">Original: </label>
-                                        <div class="col-md-9">
-                                            <input type="text" placeholder="Original" class="form-control input-md" ng-model="xuatxu">
-                                        </div>
-                                    </div>
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label no-pad-top" for="name">Inventory Account </label>
-                                        <div class="col-md-9">
-                                            <input type="text" placeholder="Inventory Account" class="form-control input-md" ng-model="tkhachtoankho">
-                                        </div>
-                                    </div>
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label" for="name">Sale Account: </label>
-                                        <div class="col-md-9">
-                                            <input type="text" placeholder="Sale Account" class="form-control input-md" ng-model="tkdoanhthu">
-                                        </div>
-                                    </div>
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label" for="name">COGS Account </label>
-                                        <div class="col-md-9">
-                                            <input type="text" placeholder="COGS Account" class="form-control input-md" ng-model="tkchiphi">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label" for="name">Note: </label>
-                                        <div class="col-md-9">
-                                            <textarea id="ghichu" name="ghichu" placeholder="Note" class="form-control input-md" ng-model="ghichu"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label ckeditor" for="name">Packing: </label>
-                                        <div class="col-md-9 ckeditor">
-                                            <textarea id="donggoi" name="donggoi" placeholder="Packing" class="form-control input-md" ng-model="quycachdonggoi"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label ckeditor" for="name"> Specification: </label>
-                                        <div class="col-md-9 ckeditor">
-                                            <textarea id="thongso" name="thongso" placeholder="Specification" class="form-control input-md" ng-model="thongso"></textarea>
-                                        </div>
+                                    <div style="padding-top:8px;" class="col-md-1">
+                                        <i style="font-size:24px;" class="fa fa-question-circle nohelp_left" aria-hidden="true" onclick="help_left()"></i>
+                                        <i style="font-size:24px;display: none" class="fa fa-ban help_left" aria-hidden="true" onclick="nohelp_left()"></i>
                                     </div>
                                 </div>
 
-                                <div class="col-md-4 help">
+                                <div class="col-md-4 help_left">
                                     <div class="form-group">
                                         <ul class="callouts">
                                             <li style="width:500px;height:50px;" class="callouts--left">Mã số hàng hóa là mã tiêu chuẩn thống nhất của mỗi hàng hóa trên toàn cầu </li>
@@ -170,11 +155,7 @@
                                             <li style="width:500px;height:50px;" callouts--left">Thời gian bảo hành của hàng hóa đó </li>
                                         </ul>
                                     </div>
-                                    <div class="form-group">
-                                        <ul class="callouts">
-                                            <li style="width:500px;height:50px;" callouts--left">Hình ảnh của hàng hóa đó </li>
-                                        </ul>
-                                    </div>
+
 
                                     <div class="form-group">
                                         <ul class="callouts">
@@ -201,31 +182,39 @@
                                             <li style="width:500px;height:90px;" callouts--left">Ghi chú cho hàng hóa đó </li>
                                         </ul>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" style="margin-top :15%">
                                         <ul class="callouts">
-                                            <li style="width:500px;height:194px;margin-top:56px" callouts--left">Quy cách đóng gói cho hàng hóa đó </li>
-                                        </ul>
-                                    </div>
-                                    <div class="form-group">
-                                        <ul class="callouts">
-                                            <li style="width:500px;height:193px; margin-top:215px;" callouts--left">Thông số cho hàng hóa đó </li>
+                                            <li style="width:500px;height:90px;" callouts--left">Hình ảnh của hàng hóa đó </li>
                                         </ul>
                                     </div>
                                 </div>
-
-
+                                <div class="col-md-6 container_right">
+                                    <div class="col-md-12 content_right">                                        
+                                        <div class="form-group" >
+                                            <label class="col-md-2 control-label ckeditor" for="name">Đóng gói: </label>
+                                            <div class="col-md-10 ckeditor">
+                                                <textarea id="donggoi" name="donggoi" placeholder="Packing" class="form-control input-md" ng-model="quycachdonggoi"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label ckeditor" for="name"> Thông số kỹ thuật: </label>
+                                            <div class="col-md-10 ckeditor">
+                                                <textarea id="thongso" name="thongso" placeholder="Specification" class="form-control input-md" ng-model="thongso"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                                                                                                                            
                                 <script>
                                     CKEDITOR.replace('donggoi', {
-                                        height: 90
+                                        height: 150
                                     });
                                     CKEDITOR.replace('thongso', {
-                                        height: 90
+                                        height: 150
                                     });
 
                                 </script>
 
                             </fieldset>
-                        </form>
                     </div>
                     <div class="modal-footer">
                         <div class="form-group">
@@ -246,195 +235,197 @@
                 <div class="modal-content" style="height: 100%">
 
                     <div class="modal-body">
-                        <form class="form-horizontal" name="myForm" novalidate>
                             <fieldset style="height: 100%">
                                 <!-- Form Name -->
                                 <legend>Update Product</legend>
                                 <!-- Text input-->
-                                <div class="col-md-8">
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label" for="name">Product Code: </label>
-                                        <div class="col-md-9">
-                                            <input type="text" placeholder="Product Code" class="form-control input-md" ng-model="item.MA_HANG">
+                                <div class="col-md-6" container_left>
+                                    <div class="col-md-11">
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label" for="name">Product Code: </label>
+                                            <div class="col-md-9">
+                                                <input type="text" placeholder="Product Code" class="form-control input-md" ng-model="item.MA_HANG">
+                                            </div>
                                         </div>
-                                        <div style="padding-top:8px;" class="col-md-1">
-                                            <i style="font-size:24px;" class="fa fa-question-circle nohelp" aria-hidden="true" onclick="help()"></i>
-                                            <i style="font-size:24px;" class="fa fa-ban help" aria-hidden="true" onclick="nohelp()"></i>
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label" for="name">Product Name:</label>
+                                            <div class="col-md-9">
+                                                <input type="text" placeholder="Product Name" class="form-control input-md" ng-model="item.TEN_HANG">
+                                            </div>
+                                        </div>
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label" for="name">Maker Code: </label>
+                                            <div class="col-md-9">
+                                                <select ng-model="item.MA_NHOM_HANG" class="form-control input-md">
+                                                    <option ng-repeat="abc in danhsachnhomhang" value="{{abc.MA_NHOM_HANG_CHI_TIET}}">{{abc.CHUNG_LOAI_HANG}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label" for="name">Weight: </label>
+                                            <div class="col-md-9">
+                                                <input type="text" placeholder="Weight" class="form-control input-md" ng-model="item.KHOI_LUONG">
+                                            </div>
+                                        </div>
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label" for="name">Unit: </label>
+                                            <div class="col-md-9">
+                                                <input type="text" placeholder="Unit" class="form-control input-md" ng-model="item.DON_VI_TINH">
+                                            </div>
+                                        </div>
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label" for="name">Warranty: </label>
+                                            <div class="col-md-9">
+                                                <input type="text" placeholder="Warranty" class="form-control input-md" ng-model="item.BAO_HANH">
+                                            </div>
+                                        </div>
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label" for="name">Xuất xứ: </label>
+                                            <div class="col-md-9">
+                                                <input type="text" placeholder="Native Place" class="form-control input-md" ng-model="item.XUAT_XU">
+                                            </div>
+                                        </div>
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label no-pad-top" for="name">Inventory Account </label>
+                                            <div class="col-md-9">
+                                                <input type="text" placeholder="Inventory Account" class="form-control input-md" ng-model="item.TK_HACH_TOAN_KHO">
+                                            </div>
+                                        </div>
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label" for="name">Sale Account: </label>
+                                            <div class="col-md-9">
+                                                <input type="text" placeholder="Sale Account" class="form-control input-md" ng-model="item.TK_DOANH_THU">
+                                            </div>
+                                        </div>
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label" for="name">COGS Account </label>
+                                            <div class="col-md-9">
+                                                <input type="text" placeholder="COGS Account" class="form-control input-md" ng-model="item.TK_CHI_PHI">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label" for="name">Ghi chú: </label>
+                                            <div class="col-md-9">
+                                                <textarea id="ghichu" name="ghichu" placeholder="Note" class="form-control input-md" ng-model="item.GHI_CHU"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-top: 10%">
+                                            <form action="/Inventory/HangHoa" ng-controller="imgCtrl" method="post">
+                                                <div class="col-md-2">
+                                                    @Html.AntiForgeryToken()
+                                                    <input type='file' name="files" id="imgEdit" style="width: 100%" />
+                                                    <input type="submit" value="Upload File/Image" style="margin-top: 30px;" />
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <img id="edit_img" src="#" height="250" width="250" />
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label" for="name">Product Name:</label>
-                                        <div class="col-md-9">
-                                            <input type="text" placeholder="Product Name" class="form-control input-md" ng-model="item.TEN_HANG">
+                                    <div style="padding-top:8px;" class="col-md-1">
+                                        <i style="font-size:24px;" class="fa fa-question-circle nohelp_left" aria-hidden="true" onclick="help_left()"></i>
+                                        <i style="font-size:24px;" class="fa fa-ban help_left" aria-hidden="true" onclick="nohelp_left()"></i>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 help_left">
+                                    <div class="col-md-4 help_left">
+                                        <div class="form-group">
+                                            <ul class="callouts">
+                                                <li style="width:500px;height:50px;" class="callouts--left">Mã số hàng hóa là mã tiêu chuẩn thống nhất của mỗi hàng hóa trên toàn cầu </li>
+                                            </ul>
+                                        </div>
+                                        <div class="form-group">
+                                            <ul class="callouts">
+                                                <li style="width:500px;height:50px;" callouts--left">Tên hàng hóa là tên tiêu chuẩn thống nhất của mỗi hàng hóa trên toàn cầu </li>
+                                            </ul>
+                                        </div>
+                                        <div class="form-group">
+                                            <ul class="callouts">
+                                                <li style="width:500px;height:50px;" callouts--left">Mã nhóm hàng xác định hàng đó thuộc nhóm nào </li>
+                                            </ul>
+                                        </div>
+                                        <div class="form-group">
+                                            <ul class="callouts">
+                                                <li style="width:500px;height:50px;" callouts--left">Khối lượng của hàng hóa đó </li>
+                                            </ul>
+                                        </div>
+                                        <div class="form-group">
+                                            <ul class="callouts">
+                                                <li style="width:500px;height:50px;" callouts--left">Đơn vị mà người mua sẽ mua mặt hàng đó theo </li>
+                                            </ul>
+                                        </div>
+                                        <div class="form-group">
+                                            <ul class="callouts">
+                                                <li style="width:500px;height:50px;" callouts--left">Thời gian bảo hành của hàng hóa đó </li>
+                                            </ul>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <ul class="callouts">
+                                                <li style="width:500px;height:50px;" callouts--left">Xuất xứ của hàng hóa đó </li>
+                                            </ul>
+                                        </div>
+                                        <div class="form-group">
+                                            <ul class="callouts">
+                                                <li style="width:500px;height:50px;" callouts--left">Tài khoản hạch toán kho của hàng hóa đó </li>
+                                            </ul>
+                                        </div>
+                                        <div class="form-group">
+                                            <ul class="callouts">
+                                                <li style="width:500px;height:50px;" callouts--left">Tài khoản doanh thu của hàng hóa đó </li>
+                                            </ul>
+                                        </div>
+                                        <div class="form-group">
+                                            <ul class="callouts">
+                                                <li style="width:500px;height:50px;" callouts--left">Tài khoản chi phí của hàng hóa đó </li>
+                                            </ul>
+                                        </div>
+                                        <div class="form-group">
+                                            <ul class="callouts">
+                                                <li style="width:500px;height:90px;" callouts--left">Ghi chú cho hàng hóa đó </li>
+                                            </ul>
+                                        </div>
+                                        <div class="form-group" style="margin-top :15%">
+                                            <ul class="callouts">
+                                                <li style="width:500px;height:90px;" callouts--left">Hình ảnh của hàng hóa đó </li>
+                                            </ul>
                                         </div>
                                     </div>
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label" for="name">Maker Code: </label>
-                                        <div class="col-md-9">
-                                            <select ng-model="item.MA_NHOM_HANG" class="form-control input-md">
-                                                <option ng-repeat="abc in danhsachnhomhang" value="{{abc.MA_NHOM_HANG_CHI_TIET}}">{{abc.CHUNG_LOAI_HANG}}</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label" for="name">Weight: </label>
-                                        <div class="col-md-9">
-                                            <input type="text" placeholder="Weight" class="form-control input-md" ng-model="item.KHOI_LUONG">
-                                        </div>
-                                    </div>
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label" for="name">Unit: </label>
-                                        <div class="col-md-9">
-                                            <input type="text" placeholder="Unit" class="form-control input-md" ng-model="item.DON_VI_TINH">
-                                        </div>
-                                    </div>
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label" for="name">Warranty: </label>
-                                        <div class="col-md-9">
-                                            <input type="text" placeholder="Warranty" class="form-control input-md" ng-model="item.BAO_HANH">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label" for="name">Picture: </label>
-                                        <div class="col-md-9">
-                                            <input type="text" placeholder="Picture" class="form-control input-md" ng-model="item.HINH_ANH">
-                                        </div>
-                                    </div>
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label" for="name">Xuất xứ: </label>
-                                        <div class="col-md-9">
-                                            <input type="text" placeholder="Native Place" class="form-control input-md" ng-model="item.XUAT_XU">
-                                        </div>
-                                    </div>
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label no-pad-top" for="name">Inventory Account </label>
-                                        <div class="col-md-9">
-                                            <input type="text" placeholder="Inventory Account" class="form-control input-md" ng-model="item.TK_HACH_TOAN_KHO">
-                                        </div>
-                                    </div>
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label" for="name">Sale Account: </label>
-                                        <div class="col-md-9">
-                                            <input type="text" placeholder="Sale Account" class="form-control input-md" ng-model="item.TK_DOANH_THU">
-                                        </div>
-                                    </div>
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label" for="name">COGS Account </label>
-                                        <div class="col-md-9">
-                                            <input type="text" placeholder="COGS Account" class="form-control input-md" ng-model="item.TK_CHI_PHI">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label" for="name">Ghi chú: </label>
-                                        <div class="col-md-9">
-                                            <textarea id="ghichu" name="ghichu" placeholder="Note" class="form-control input-md" ng-model="item.GHI_CHU"></textarea>
-                                        </div>
-                                    </div>
+                                </div>
+                                <div class="col-md-6 container_right">
                                     <div class="form-group">
                                         <label class="col-md-2 control-label ckeditor" for="name">Đóng gói: </label>
-                                        <div class="col-md-9 ckeditor">
+                                        <div class="col-md-10 ckeditor">
                                             <textarea id="editdonggoi" name="editdonggoi" placeholder="Đóng gói" class="form-control input-md" ng-model="item.QUY_CACH_DONG_GOI"></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-2 control-label ckeditor" for="name">Thông số: </label>
-                                        <div class="col-md-9 ckeditor">
+                                        <div class="col-md-10 ckeditor">
                                             <textarea id="editthongso" name="editthongso" placeholder="Details" class="form-control input-md" ng-model="item.THONG_SO_KY_THUAT"></textarea>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4 help">
-                                    <div class="form-group">
-                                        <ul class="callouts">
-                                            <li style="width:500px;height:50px;" class="callouts--left">Mã số hàng hóa là mã tiêu chuẩn thống nhất của mỗi hàng hóa trên toàn cầu </li>
-                                        </ul>
-                                    </div>
-                                    <div class="form-group">
-                                        <ul class="callouts">
-                                            <li style="width:500px;height:50px;" callouts--left">Tên hàng hóa là tên tiêu chuẩn thống nhất của mỗi hàng hóa trên toàn cầu </li>
-                                        </ul>
-                                    </div>
-                                    <div class="form-group">
-                                        <ul class="callouts">
-                                            <li style="width:500px;height:50px;" callouts--left">Mã nhóm hàng xác định hàng đó thuộc nhóm nào </li>
-                                        </ul>
-                                    </div>
-                                    <div class="form-group">
-                                        <ul class="callouts">
-                                            <li style="width:500px;height:50px;" callouts--left">Khối lượng của hàng hóa đó </li>
-                                        </ul>
-                                    </div>
-                                    <div class="form-group">
-                                        <ul class="callouts">
-                                            <li style="width:500px;height:50px;" callouts--left">Đơn vị mà người mua sẽ mua mặt hàng đó theo </li>
-                                        </ul>
-                                    </div>
-                                    <div class="form-group">
-                                        <ul class="callouts">
-                                            <li style="width:500px;height:50px;" callouts--left">Thời gian bảo hành của hàng hóa đó </li>
-                                        </ul>
-                                    </div>
-                                    <div class="form-group">
-                                        <ul class="callouts">
-                                            <li style="width:500px;height:50px;" callouts--left">Hình ảnh của hàng hóa đó </li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <ul class="callouts">
-                                            <li style="width:500px;height:50px;" callouts--left">Xuất xứ của hàng hóa đó </li>
-                                        </ul>
-                                    </div>
-                                    <div class="form-group">
-                                        <ul class="callouts">
-                                            <li style="width:500px;height:50px;" callouts--left">Tài khoản hạch toán kho của hàng hóa đó </li>
-                                        </ul>
-                                    </div>
-                                    <div class="form-group">
-                                        <ul class="callouts">
-                                            <li style="width:500px;height:50px;" callouts--left">Tài khoản doanh thu của hàng hóa đó </li>
-                                        </ul>
-                                    </div>
-                                    <div class="form-group">
-                                        <ul class="callouts">
-                                            <li style="width:500px;height:50px;" callouts--left">Tài khoản chi phí của hàng hóa đó </li>
-                                        </ul>
-                                    </div>
-                                    <div class="form-group">
-                                        <ul class="callouts">
-                                            <li style="width:500px;height:90px;" callouts--left">Ghi chú cho hàng hóa đó </li>
-                                        </ul>
-                                    </div>
-                                    <div class="form-group">
-                                        <ul class="callouts">
-                                            <li style="width:500px;height:194px;margin-top:56px" callouts--left">Quy cách đóng gói cho hàng hóa đó </li>
-                                        </ul>
-                                    </div>
-                                    <div class="form-group">
-                                        <ul class="callouts">
-                                            <li style="width:500px;height:193px; margin-top:215px;" callouts--left">Thông số cho hàng hóa đó </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                
                                 <script>
                                     CKEDITOR.replace('editdonggoi', {
-                                        height: 90
+                                        height: 150
                                     });
                                     CKEDITOR.replace('editthongso', {
-                                        height: 90
+                                        height: 150
                                     });
                                 </script>
                             </fieldset>
-                        </form>
                     </div>
                     <div class="modal-footer">
                         <div class="form-group">
@@ -629,7 +620,7 @@
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.DON_VI_TINH}}</td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.KHOI_LUONG}}</td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.XUAT_XU}}</td>
-                                <td class="text-left" style="width: 8%" data-toggle="modal" data-target="#chitiethanghoa"><img ng-src="~/Content/Images/HangHoa/{{item.HINH_ANH}}" style="width: 90%;height: 20%;" /></td>
+                                <td class="text-left" style="width: 8%" data-toggle="modal" data-target="#chitiethanghoa"><img ng-src="~/Content/Images/HangHoa/{{item.HINH_ANH}}" style="width: 90%" /></td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.GHI_CHU}}</td>
                                 <td ng-bind-html="item.QUY_CACH_DONG_GOI | unsafe" class="{{item.MA_HANG}}-1 hidden"></td>
                                 <td ng-bind-html="item.THONG_SO_KY_THUAT | unsafe" class="{{item.MA_HANG}}-2 hidden"></td>
@@ -682,7 +673,7 @@
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.DON_VI_TINH}}</td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.KHOI_LUONG}}</td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.XUAT_XU}}</td>
-                                <td class="text-left" style="width: 8%" data-toggle="modal" data-target="#chitiethanghoa"><img ng-src="~/Content/Images/HangHoa/{{item.HINH_ANH}}" style="width: 90%;height: 20%;" /></td>
+                                <td class="text-left" style="width: 8%" data-toggle="modal" data-target="#chitiethanghoa"><img ng-src="~/Content/Images/HangHoa/{{item.HINH_ANH}}" style="width: 90%" /></td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.GHI_CHU}}</td>
                                 <td ng-bind-html="item.QUY_CACH_DONG_GOI | unsafe" class="{{item.MA_HANG}}-1 hidden"></td>
                                 <td ng-bind-html="item.THONG_SO_KY_THUAT | unsafe" class="{{item.MA_HANG}}-2 hidden"></td>
@@ -734,7 +725,7 @@
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.DON_VI_TINH}}</td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.KHOI_LUONG}}</td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.XUAT_XU}}</td>
-                                <td class="text-left" style="width: 8%" data-toggle="modal" data-target="#chitiethanghoa"><img ng-src="~/Content/Images/HangHoa/{{item.HINH_ANH}}" style="width: 90%;height: 20%;" /></td>
+                                <td class="text-left" style="width: 8%" data-toggle="modal" data-target="#chitiethanghoa"><img ng-src="~/Content/Images/HangHoa/{{item.HINH_ANH}}" style="width: 90%" /></td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.GHI_CHU}}</td>
                                 <td ng-bind-html="item.QUY_CACH_DONG_GOI | unsafe" class="{{item.MA_HANG}}-1 hidden"></td>
                                 <td ng-bind-html="item.THONG_SO_KY_THUAT | unsafe" class="{{item.MA_HANG}}-2 hidden"></td>
@@ -786,7 +777,7 @@
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.DON_VI_TINH}}</td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.KHOI_LUONG}}</td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.XUAT_XU}}</td>
-                                <td class="text-left" style="width: 8%" data-toggle="modal" data-target="#chitiethanghoa"><img ng-src="~/Content/Images/HangHoa/{{item.HINH_ANH}}" style="width: 90%;height: 20%;" /></td>
+                                <td class="text-left" style="width: 8%" data-toggle="modal" data-target="#chitiethanghoa"><img ng-src="~/Content/Images/HangHoa/{{item.HINH_ANH}}" style="width: 90%;" /></td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.GHI_CHU}}</td>
                                 <td ng-bind-html="item.QUY_CACH_DONG_GOI | unsafe" class="{{item.MA_HANG}}-1 hidden"></td>
                                 <td ng-bind-html="item.THONG_SO_KY_THUAT | unsafe" class="{{item.MA_HANG}}-2 hidden"></td>
@@ -838,7 +829,7 @@
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.DON_VI_TINH}}</td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.KHOI_LUONG}}</td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.XUAT_XU}}</td>
-                                <td class="text-left" style="width: 8%" data-toggle="modal" data-target="#chitiethanghoa"><img ng-src="~/Content/Images/HangHoa/{{item.HINH_ANH}}" style="width: 90%;height: 20%;" /></td>
+                                <td class="text-left" style="width: 8%" data-toggle="modal" data-target="#chitiethanghoa"><img ng-src="~/Content/Images/HangHoa/{{item.HINH_ANH}}" style="width: 90%;" /></td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.GHI_CHU}}</td>
                                 <td ng-bind-html="item.QUY_CACH_DONG_GOI | unsafe" class="{{item.MA_HANG}}-1 hidden"></td>
                                 <td ng-bind-html="item.THONG_SO_KY_THUAT | unsafe" class="{{item.MA_HANG}}-2 hidden"></td>
@@ -890,7 +881,7 @@
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.DON_VI_TINH}}</td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.KHOI_LUONG}}</td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.XUAT_XU}}</td>
-                                <td class="text-left" style="width: 8%" data-toggle="modal" data-target="#chitiethanghoa"><img ng-src="~/Content/Images/HangHoa/{{item.HINH_ANH}}" style="width: 90%;height: 20%;" /></td>
+                                <td class="text-left" style="width: 8%" data-toggle="modal" data-target="#chitiethanghoa"><img ng-src="~/Content/Images/HangHoa/{{item.HINH_ANH}}" style="width: 90%;" /></td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.GHI_CHU}}</td>
                                 <td ng-bind-html="item.QUY_CACH_DONG_GOI | unsafe" class="{{item.MA_HANG}}-1 hidden"></td>
                                 <td ng-bind-html="item.THONG_SO_KY_THUAT | unsafe" class="{{item.MA_HANG}}-2 hidden"></td>
@@ -942,7 +933,7 @@
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.DON_VI_TINH}}</td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.KHOI_LUONG}}</td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.XUAT_XU}}</td>
-                                <td class="text-left" style="width: 8%" data-toggle="modal" data-target="#chitiethanghoa"><img ng-src="~/Content/Images/HangHoa/{{item.HINH_ANH}}" style="width: 90%;height: 20%;" /></td>
+                                <td class="text-left" style="width: 8%" data-toggle="modal" data-target="#chitiethanghoa"><img ng-src="~/Content/Images/HangHoa/{{item.HINH_ANH}}" style="width: 90%;" /></td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.GHI_CHU}}</td>
                                 <td ng-bind-html="item.QUY_CACH_DONG_GOI | unsafe" class="{{item.MA_HANG}}-1 hidden"></td>
                                 <td ng-bind-html="item.THONG_SO_KY_THUAT | unsafe" class="{{item.MA_HANG}}-2 hidden"></td>
@@ -1071,9 +1062,40 @@
 
                 </div>
             </div>
-        </div>
-    </div>
+        </div>        
 
+    </div>   
+    <script>
+    (function () {
+
+        var bar = $('.progress-bar');
+        var percent = $('.progress-bar');
+        var status = $('#status');
+
+        $('form').ajaxForm({
+            beforeSend: function () {
+                status.empty();
+                var percentVal = '0%';
+                bar.width(percentVal)
+                percent.html(percentVal);
+            },
+            uploadProgress: function (event, position, total, percentComplete) {
+                var percentVal = percentComplete + '%';
+                bar.width(percentVal)
+                percent.html(percentVal);
+            },
+            success: function () {
+                var percentVal = '100%';
+                bar.width(percentVal)
+                percent.html(percentVal);
+            },
+            complete: function (xhr) {
+                status.html(xhr.responseText);
+            }
+        });
+
+    })();
+    </script>
 </div>
 
 <script src="~/Content/download/angularjs/angular-ui-router.js"></script>
