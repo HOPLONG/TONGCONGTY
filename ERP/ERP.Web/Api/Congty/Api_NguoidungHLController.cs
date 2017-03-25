@@ -69,6 +69,7 @@ namespace ERP.Web.Areas.HopLong.Api.HeThong
                 query.EMAIL = hT_NGUOI_DUNG.EMAIL;
                 query.IS_ADMIN = hT_NGUOI_DUNG.IS_ADMIN;
                 query.ALLOWED = hT_NGUOI_DUNG.ALLOWED;
+                query.AVATAR = hT_NGUOI_DUNG.AVATAR;
 
             try
             {

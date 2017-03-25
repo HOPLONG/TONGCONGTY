@@ -27,5 +27,7 @@ namespace ERP.Web.Models.NewModels
         public string MA_PHONG_BAN { set; get; }
 
         public string MA_CONG_TY { set; get; }
+       public bool? IS_ADMIN { set; get; }
+        public bool ALLOWED { set; get; }
     }
 }

@@ -261,10 +261,12 @@ legend{
 .ckeditor{
     margin-top: 20px;
 }
-.help{
+.help_right{
     display: none;
 }
-
+.help_left{
+    display: none;
+}
 *, *:before, *:after { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; margin: 0; padding: 0;}
 
 body {
