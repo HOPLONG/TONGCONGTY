@@ -8,6 +8,7 @@ using ERP.Web.Models.Database;
 using System.Net;
 using System.IO;
 using ERP.Web.Models.BusinessModel;
+using System.Net.Mail;
 
 namespace ERP.Web.Controllers
 {
@@ -18,14 +19,18 @@ namespace ERP.Web.Controllers
     {
         ERP_DATABASEEntities db = new ERP_DATABASEEntities();
         RandomTextAndString rd = new RandomTextAndString();
-        
+
+        #region "INDEX"
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
 
             return View();
         }
+        #endregion
 
+
+        #region "DETAIL POST"
 
         public ActionResult Details(int? id)
         {
@@ -40,14 +45,60 @@ namespace ERP.Web.Controllers
             }
             return View(pOST);
         }
+        #endregion
 
 
-
+        #region "REGISTER"
         public ActionResult Register()
         {
             return View();
         }
-       
+        [HttpPost]
+        public ActionResult Register(String fullname, string email, string phone, string password, string confirmpassword)
+        {
+
+            HT_NGUOI_DUNG user = new HT_NGUOI_DUNG();
+                user.USERNAME = phone;
+                user.HO_VA_TEN = fullname;
+                user.EMAIL = email;
+                user.PASSWORD = password;
+                user.SDT = phone;
+                user.IS_ADMIN = false;
+                user.ALLOWED = false;
+                user.MA_CONG_TY = "KHACH_VANG_LAI";
+                user.MA_XAC_NHAN = rd.RandomString(10);
+
+            db.HT_NGUOI_DUNG.Add(user);
+            db.SaveChanges();
+            ViewBag.info = "Cảm ơn bạn đã đăng ký tài khoản check giá tại Hoplongtech.com <br> Bạn vui lòng kiểm tra email để kích hoạt tài khoản";
+
+            MailMessage mm = new MailMessage();
+            mm.To.Add(new MailAddress(user.EMAIL, "Xác nhận tài khoản check giá tại Hoplongtech.com"));
+            mm.From = new MailAddress("lamhien2901@gmail.com");
+            mm.Body = "Dear "+user.HO_VA_TEN+ ",<br /> <br /><br />Cảm ơn bạn đã đăng ký tài khoản check giá tại Hoplongtech.com <br /> Để hoàn tất việc đăng ký, bạn vui lòng nhấn vào liên kết bên dưới hoặc copy và dán vào trình duyệt để truy cập trang kích hoạt tài khoản: <br /> <a href='http://localhost:55247/Home/ConfirmCode/'> http://localhost:55247/Activate </a> <br /> <br />User kích hoạt của bạn là: " + user.USERNAME +"<br /> Mã kích hoạt của bạn là: "+ user.MA_XAC_NHAN+ "<br /><br />Lưu ý: Liên kết này chỉ sử dụng được 1 lần. <br /><br />Best Regard!";
+            mm.IsBodyHtml = true;
+            mm.Subject = "KÍCH HOẠT TÀI KHOẢN TẠI HOPLONGTECH.COM";
+            SmtpClient smcl = new SmtpClient();
+            smcl.Host = "smtp.gmail.com";
+            smcl.Port = 587;
+            smcl.Credentials = new NetworkCredential("lamhien2901@gmail.com", "135495706");
+            smcl.EnableSsl = true;
+            smcl.Send(mm);
+
+
+            return View();
+        }
+
+        #endregion
+
+
+        #region "CONFIRM CODE"
+
+        public ActionResult ConfirmCode()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult ConfirmCode(string username1, String codeconfirm)
         {
@@ -63,9 +114,12 @@ namespace ERP.Web.Controllers
 
 
 
-            return View("Register");
+            return View();
         }
+        #endregion
 
+
+        #region "LOGIN"
 
         public ActionResult Login()
         {
@@ -104,7 +158,12 @@ namespace ERP.Web.Controllers
             ViewBag.error = "Wrong username or password";
             return View();
         }
-        
+
+        #endregion
+
+
+        #region "LOGOUT"
+
         public ActionResult Logout()
         {
             string a = Session["USERNAME"].ToString();
@@ -123,12 +182,20 @@ namespace ERP.Web.Controllers
             Session["LOAI_USER"] = null;
             return RedirectToAction("Login");
         }
+        #endregion
+
+
+        #region "NotificationAuthorize"
+
         public ActionResult NotificationAuthorize()
         {
             return View();
         }
 
+        #endregion
 
+
+        #region "FileUpload"
         [HttpPost]
         [ValidateAntiForgeryToken]
         public void FileUpload(IEnumerable<HttpPostedFileBase> files)
@@ -155,10 +222,17 @@ namespace ERP.Web.Controllers
             return View();
         }
 
+        #endregion
+
+
+        #region "ALIVE"
+
         public EmptyResult Alive()
         {
             return new EmptyResult();
         }
+
+        #endregion
 
     }
 }

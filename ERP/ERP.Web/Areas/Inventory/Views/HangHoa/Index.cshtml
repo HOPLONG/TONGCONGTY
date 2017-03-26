@@ -562,7 +562,7 @@
             </div>
         </div>
         <input type="hidden" ng-model="userquantam" id="userquantam" value="@Session["USERNAME"]" />
-        <div class="col-md-9" style="margin-top: -2.4%">
+        <div class="col-md-12" style="margin-top: -2.4%">
             <ul class="nav nav-tabs list_tab">
                 <li class="active"><a data-toggle="tab" href="#AUTONICS"><img src="~/Content/Images/HangHoa/AUTONICS.png" height="20" /></a></li>
                 <li>
@@ -572,7 +572,7 @@
                 </li>
                 <li>
                     <a data-toggle="tab" href="#OMRON">
-                        <img src="~/Content/HangHoa/OMRON.png" height="20" />
+                        <img src="~/Content/Images/HangHoa/OMRON.png" height="20" />
                     </a>
                 </li>
                 <li>
@@ -597,16 +597,17 @@
                 </li>
             </ul>
             <div class="tab-content">
+
+                <!----------------------------------------AUTONICS------------------------------------------------------>
                 <div id="AUTONICS" class="tab-pane fade in active">
                     <table id="example" class="table " cellspacing="0" name="tblhanghoa">
                         <thead>
                             <tr>
-                                <th ng-mouseover="ma_hang_nhap=true;" ng-mouseleave="ma_hang_nhap=false;">Product Code<span ng-show="ma_hang_nhap">{{ showmahangnhap.title }}</span></th>
-                                <th ng-mouseover="ten_hang=true;" ng-mouseleave="ten_hang=false;">Product Name<span ng-show="ten_hang">{{ showtenhang.title }}</span></th>
-                                <th ng-mouseover="don_vi_tinh=true;" ng-mouseleave="don_vi_tinh=false;">Unit<span ng-show="don_vi_tinh">{{ showdonvitinh.title }}</span></th>
+                                <th>Product Code</th>
+                                <th>Product Name</th>
+                                <th>Unit</th>
                                 <th>Weight</th>
                                 <th>Original</th>
-                                <th>Image</th>
                                 <th>Note</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
@@ -620,7 +621,6 @@
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.DON_VI_TINH}}</td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.KHOI_LUONG}}</td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.XUAT_XU}}</td>
-                                <td class="text-left" style="width: 8%" data-toggle="modal" data-target="#chitiethanghoa"><img ng-src="~/Content/Images/HangHoa/{{item.HINH_ANH}}" style="width: 90%" /></td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.GHI_CHU}}</td>
                                 <td ng-bind-html="item.QUY_CACH_DONG_GOI | unsafe" class="{{item.MA_HANG}}-1 hidden"></td>
                                 <td ng-bind-html="item.THONG_SO_KY_THUAT | unsafe" class="{{item.MA_HANG}}-2 hidden"></td>
@@ -650,16 +650,18 @@
                         </tfoot>
                     </table>
                 </div>
+                <!----------------------------------------END AUTONICS------------------------------------------------------>
+
+                <!----------------------------------------LS------------------------------------------------------>
                 <div id="LS" class="tab-pane fade">
                     <table id="example" class="table " cellspacing="0" name="tblhanghoa">
                         <thead>
                             <tr>
-                                <th ng-mouseover="ma_hang_nhap=true;" ng-mouseleave="ma_hang_nhap=false;">Product Code<span ng-show="ma_hang_nhap">{{ showmahangnhap.title }}</span></th>
-                                <th ng-mouseover="ten_hang=true;" ng-mouseleave="ten_hang=false;">Product Name<span ng-show="ten_hang">{{ showtenhang.title }}</span></th>
-                                <th ng-mouseover="don_vi_tinh=true;" ng-mouseleave="don_vi_tinh=false;">Unit<span ng-show="don_vi_tinh">{{ showdonvitinh.title }}</span></th>
+                                <th>Product Code</th>
+                                <th>Product Name</th>
+                                <th>Unit</th>
                                 <th>Weight</th>
                                 <th>Original</th>
-                                <th>Image</th>
                                 <th>Note</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
@@ -673,7 +675,6 @@
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.DON_VI_TINH}}</td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.KHOI_LUONG}}</td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.XUAT_XU}}</td>
-                                <td class="text-left" style="width: 8%" data-toggle="modal" data-target="#chitiethanghoa"><img ng-src="~/Content/Images/HangHoa/{{item.HINH_ANH}}" style="width: 90%" /></td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.GHI_CHU}}</td>
                                 <td ng-bind-html="item.QUY_CACH_DONG_GOI | unsafe" class="{{item.MA_HANG}}-1 hidden"></td>
                                 <td ng-bind-html="item.THONG_SO_KY_THUAT | unsafe" class="{{item.MA_HANG}}-2 hidden"></td>
@@ -702,16 +703,18 @@
                         </tfoot>
                     </table>
                 </div>
+                <!----------------------------------------END LS------------------------------------------------------>
+
+                <!----------------------------------------OMRON------------------------------------------------------>
                 <div id="OMRON" class="tab-pane fade">
                     <table id="example" class="table " cellspacing="0" name="tblhanghoa">
                         <thead>
                             <tr>
                                 <th>Product Code</th>
-                                <th>{{ showtenhang.title }}></th>
-                                <th>{{ showdonvitinh.title }}</th>
+                                <th>Product Name</th>
+                                <th>Unit</th>
                                 <th>Weight</th>
                                 <th>Original</th>
-                                <th>Image</th>
                                 <th>Note</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
@@ -725,7 +728,6 @@
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.DON_VI_TINH}}</td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.KHOI_LUONG}}</td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.XUAT_XU}}</td>
-                                <td class="text-left" style="width: 8%" data-toggle="modal" data-target="#chitiethanghoa"><img ng-src="~/Content/Images/HangHoa/{{item.HINH_ANH}}" style="width: 90%" /></td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.GHI_CHU}}</td>
                                 <td ng-bind-html="item.QUY_CACH_DONG_GOI | unsafe" class="{{item.MA_HANG}}-1 hidden"></td>
                                 <td ng-bind-html="item.THONG_SO_KY_THUAT | unsafe" class="{{item.MA_HANG}}-2 hidden"></td>
@@ -754,16 +756,18 @@
                         </tfoot>
                     </table>
                 </div>
+                <!----------------------------------------END OMRON------------------------------------------------------>
+
+                <!----------------------------------------IDEC------------------------------------------------------>
                 <div id="IDEC" class="tab-pane fade">
                     <table id="example" class="table " cellspacing="0" name="tblhanghoa">
                         <thead>
                             <tr>
-                                <th ng-mouseover="ma_hang_nhap=true;" ng-mouseleave="ma_hang_nhap=false;">Product Code<span ng-show="ma_hang_nhap">{{ showmahangnhap.title }}</span></th>
-                                <th ng-mouseover="ten_hang=true;" ng-mouseleave="ten_hang=false;">Product Name<span ng-show="ten_hang">{{ showtenhang.title }}</span></th>
-                                <th ng-mouseover="don_vi_tinh=true;" ng-mouseleave="don_vi_tinh=false;">Unit<span ng-show="don_vi_tinh">{{ showdonvitinh.title }}</span></th>
+                                <th>Product Code</th>
+                                <th>Product Name</th>
+                                <th>Unit</th>
                                 <th>Weight</th>
                                 <th>Original</th>
-                                <th>Image</th>
                                 <th>Note</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
@@ -777,7 +781,6 @@
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.DON_VI_TINH}}</td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.KHOI_LUONG}}</td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.XUAT_XU}}</td>
-                                <td class="text-left" style="width: 8%" data-toggle="modal" data-target="#chitiethanghoa"><img ng-src="~/Content/Images/HangHoa/{{item.HINH_ANH}}" style="width: 90%;" /></td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.GHI_CHU}}</td>
                                 <td ng-bind-html="item.QUY_CACH_DONG_GOI | unsafe" class="{{item.MA_HANG}}-1 hidden"></td>
                                 <td ng-bind-html="item.THONG_SO_KY_THUAT | unsafe" class="{{item.MA_HANG}}-2 hidden"></td>
@@ -806,16 +809,19 @@
                         </tfoot>
                     </table>
                 </div>
+                <!----------------------------------------END FUJI------------------------------------------------------>
+
+
+                <!----------------------------------------FUJI------------------------------------------------------>
                 <div id="FUJI" class="tab-pane fade">
                     <table id="example" class="table " cellspacing="0" name="tblhanghoa">
                         <thead>
                             <tr>
-                                <th ng-mouseover="ma_hang_nhap=true;" ng-mouseleave="ma_hang_nhap=false;">Product Code<span ng-show="ma_hang_nhap">{{ showmahangnhap.title }}</span></th>
-                                <th ng-mouseover="ten_hang=true;" ng-mouseleave="ten_hang=false;">Product Name<span ng-show="ten_hang">{{ showtenhang.title }}</span></th>
-                                <th ng-mouseover="don_vi_tinh=true;" ng-mouseleave="don_vi_tinh=false;">Unit<span ng-show="don_vi_tinh">{{ showdonvitinh.title }}</span></th>
+                                <th>Product Code</th>
+                                <th>Product Name</th>
+                                <th>Unit</th>
                                 <th>Weight</th>
                                 <th>Original</th>
-                                <th>Image</th>
                                 <th>Note</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
@@ -829,7 +835,6 @@
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.DON_VI_TINH}}</td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.KHOI_LUONG}}</td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.XUAT_XU}}</td>
-                                <td class="text-left" style="width: 8%" data-toggle="modal" data-target="#chitiethanghoa"><img ng-src="~/Content/Images/HangHoa/{{item.HINH_ANH}}" style="width: 90%;" /></td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.GHI_CHU}}</td>
                                 <td ng-bind-html="item.QUY_CACH_DONG_GOI | unsafe" class="{{item.MA_HANG}}-1 hidden"></td>
                                 <td ng-bind-html="item.THONG_SO_KY_THUAT | unsafe" class="{{item.MA_HANG}}-2 hidden"></td>
@@ -858,16 +863,18 @@
                         </tfoot>
                     </table>
                 </div>
+                <!----------------------------------------END FUJI------------------------------------------------------>
+
+                <!----------------------------------------SCHNEIDER------------------------------------------------------>
                 <div id="SCHNEIDER" class="tab-pane fade">
                     <table id="example" class="table " cellspacing="0" name="tblhanghoa">
                         <thead>
                             <tr>
-                                <th ng-mouseover="ma_hang_nhap=true;" ng-mouseleave="ma_hang_nhap=false;">Product Code<span ng-show="ma_hang_nhap">{{ showmahangnhap.title }}</span></th>
-                                <th ng-mouseover="ten_hang=true;" ng-mouseleave="ten_hang=false;">Product Name<span ng-show="ten_hang">{{ showtenhang.title }}</span></th>
-                                <th ng-mouseover="don_vi_tinh=true;" ng-mouseleave="don_vi_tinh=false;">Unit<span ng-show="don_vi_tinh">{{ showdonvitinh.title }}</span></th>
+                                <th>Product Code</th>
+                                <th>Product Name</th>
+                                <th>Unit</th>
                                 <th>Weight</th>
                                 <th>Original</th>
-                                <th>Image</th>
                                 <th>Note</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
@@ -881,7 +888,6 @@
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.DON_VI_TINH}}</td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.KHOI_LUONG}}</td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.XUAT_XU}}</td>
-                                <td class="text-left" style="width: 8%" data-toggle="modal" data-target="#chitiethanghoa"><img ng-src="~/Content/Images/HangHoa/{{item.HINH_ANH}}" style="width: 90%;" /></td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.GHI_CHU}}</td>
                                 <td ng-bind-html="item.QUY_CACH_DONG_GOI | unsafe" class="{{item.MA_HANG}}-1 hidden"></td>
                                 <td ng-bind-html="item.THONG_SO_KY_THUAT | unsafe" class="{{item.MA_HANG}}-2 hidden"></td>
@@ -910,16 +916,18 @@
                         </tfoot>
                     </table>
                 </div>
+                <!----------------------------------------END SCHNEIDER------------------------------------------------------>
+
+                <!----------------------------------------MITSUBISHI------------------------------------------------------>
                 <div id="MITSUBISHI" class="tab-pane fade">
                     <table id="example" class="table " cellspacing="0" name="tblhanghoa">
                         <thead>
                             <tr>
-                                <th ng-mouseover="ma_hang_nhap=true;" ng-mouseleave="ma_hang_nhap=false;">Product Code<span ng-show="ma_hang_nhap">{{ showmahangnhap.title }}</span></th>
-                                <th ng-mouseover="ten_hang=true;" ng-mouseleave="ten_hang=false;">Product Name<span ng-show="ten_hang">{{ showtenhang.title }}</span></th>
-                                <th ng-mouseover="don_vi_tinh=true;" ng-mouseleave="don_vi_tinh=false;">Unit<span ng-show="don_vi_tinh">{{ showdonvitinh.title }}</span></th>
+                                <th>Product Code</th>
+                                <th>Product Name</th>
+                                <th>Unit</th>
                                 <th>Weight</th>
                                 <th>Original</th>
-                                <th>Image</th>
                                 <th>Note</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
@@ -933,7 +941,6 @@
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.DON_VI_TINH}}</td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.KHOI_LUONG}}</td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.XUAT_XU}}</td>
-                                <td class="text-left" style="width: 8%" data-toggle="modal" data-target="#chitiethanghoa"><img ng-src="~/Content/Images/HangHoa/{{item.HINH_ANH}}" style="width: 90%;" /></td>
                                 <td class="text-left" data-toggle="modal" data-target="#chitiethanghoa">{{item.GHI_CHU}}</td>
                                 <td ng-bind-html="item.QUY_CACH_DONG_GOI | unsafe" class="{{item.MA_HANG}}-1 hidden"></td>
                                 <td ng-bind-html="item.THONG_SO_KY_THUAT | unsafe" class="{{item.MA_HANG}}-2 hidden"></td>
@@ -962,8 +969,11 @@
                         </tfoot>
                     </table>
                 </div>
+                <!----------------------------------------END MITSUBISHI------------------------------------------------------>
             </div>
         </div>
+        <!-- khuyến mãi-->
+   <!--
         <div class="col-md-3">
             <div class="panel panel-default">
                 <div class="panel-heading title">Thông tin khuyến mãi</div>
@@ -1062,6 +1072,11 @@
 
                 </div>
             </div>
+
+        </div>
+            -->
+    </div>
+
         </div>        
 
     </div>   
@@ -1093,6 +1108,7 @@
                 status.html(xhr.responseText);
             }
         });
+
 
     })();
     </script>
