@@ -24,8 +24,13 @@ app.controller('hanghoaCtrl', function (hanghoaService, $scope) {
     $scope.loadQuanTam();
     $scope.loadHangHoa();
     
+    $scope.manhomhang = "AUTONICS";
 
     $scope.add = function () {
+
+        var a = $('#imgInp').val();
+        var name_without_ext = (a.split('\\').pop().split('/').pop().split())[0];
+
         $("textarea[name=thongso]").val(CKEDITOR.instances.thongso.getData());
         $("textarea[name=donggoi]").val(CKEDITOR.instances.donggoi.getData());
         var thongso = $("[name=thongso]").val();
@@ -40,7 +45,7 @@ app.controller('hanghoaCtrl', function (hanghoaService, $scope) {
             QUY_CACH_DONG_GOI: donggoi,
             BAO_HANH : $scope.baohanh,
             DON_VI_TINH: $scope.donvitinh,
-            HINH_ANH: $scope.hinhanh,
+            HINH_ANH: name_without_ext,
             GHI_CHU: $scope.ghichu,
             TK_HACH_TOAN_KHO: $scope.tkhachtoankho,
             TK_DOANH_THU: $scope.tkdoanhthu,
@@ -48,6 +53,7 @@ app.controller('hanghoaCtrl', function (hanghoaService, $scope) {
         }
         hanghoaService.add(data_add).then(function (response) {
             $scope.loadHangHoa();
+            $('#imgInp').val() = '';
         });
     }
 
@@ -64,6 +70,8 @@ app.controller('hanghoaCtrl', function (hanghoaService, $scope) {
         $("textarea[name=editdonggoi]").val(CKEDITOR.instances.editdonggoi.getData());
         var thongso = $("[name=editthongso]").val();
         var donggoi = $("[name=editdonggoi]").val();
+        var a = $('#imgEdit').val();
+        var name_without_ext = (a.split('\\').pop().split('/').pop().split())[0];
         var data_update = {
             MA_HANG: $scope.item.MA_HANG,
             TEN_HANG: $scope.item.TEN_HANG,
@@ -74,7 +82,7 @@ app.controller('hanghoaCtrl', function (hanghoaService, $scope) {
             QUY_CACH_DONG_GOI: donggoi,
             BAO_HANH: $scope.item.BAO_HANH,
             DON_VI_TINH: $scope.item.DON_VI_TINH,
-            HINH_ANH: $scope.item.HINH_ANH,
+            HINH_ANH: name_without_ext,
             GHI_CHU: $scope.item.GHI_CHU,
             TK_HACH_TOAN_KHO: $scope.item.TK_HACH_TOAN_KHO,
             TK_DOANH_THU: $scope.item.TK_DOANH_THU,
@@ -226,16 +234,20 @@ app.controller('userCtrl', function (userService, $scope) {
 
     $scope.loadUser();
 
+    
 
     $scope.add = function () {
         $("textarea[name=thanhtich]").val(CKEDITOR.instances.thanhtich.getData());
         var thanhtich = $("[name=thanhtich]").val();
+        var a = $('#imgInp').val();
+        var name_without_ext = (a.split('\\').pop().split('/').pop().split())[0];
         var data_add = {
             USERNAME: $scope.username,
             PASSWORD: $scope.password,
             HO_VA_TEN: $scope.hovaten,
             SDT: $scope.sdt,
             EMAIL: $scope.email,
+            AVATAR : name_without_ext,
             IS_ADMIN: $scope.admin,
             ALLOWED: $scope.allowed,
             MA_CONG_TY: "HOPLONG",
@@ -274,12 +286,15 @@ app.controller('userCtrl', function (userService, $scope) {
     $scope.save = function (username) {
         $("textarea[name=editthanhtich]").val(CKEDITOR.instances.editthanhtich.getData());
         var editthanhtich = $("[name=editthanhtich]").val();
+        var a = $('#imgEdit').val();
+        var name_without_ext = (a.split('\\').pop().split('/').pop().split())[0];
         var data_update = {
             ID: username,
             USERNAME: $scope.nv.USERNAME,
             PASSWORD: $scope.nv.PASSWORD,
             HO_VA_TEN: $scope.nv.HO_VA_TEN,
             SDT: $scope.nv.SDT,
+            AVATAR : name_without_ext,
             EMAIL: $scope.nv.EMAIL,
             IS_ADMIN: $scope.nv.IS_ADMIN,
             ALLOWED: $scope.nv.ALLOWED,
@@ -434,7 +449,6 @@ app.controller('danhmucCtrl', function (danhmucService, $scope) {
     };
 
     $scope.loadDanhMuc();
-    $scope.transfer('01');
     $scope.checked_fruits = [];
     
     $scope.save = function () {
@@ -458,7 +472,7 @@ app.controller('danhmucCtrl', function (danhmucService, $scope) {
             }
             danhmucService.add_postcategories(postcate).then(function (response) {
                 $scope.loadDanhMuc();
-                reload();
+                
             });
         });
     };
@@ -478,12 +492,24 @@ app.controller('imgCtrl', function ($scope) {
         }
     }
 
-    
+    function read_editURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#edit_img').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 
     $("#imgInp").change(function () {
         readURL(this);
     });
-    
+    $("#imgEdit").change(function () {
+        read_editURL(this);
+    });
 });
 
 app.controller('menuCtrl', function (menuService,$scope) {
@@ -1928,13 +1954,28 @@ app.filter('stringToDate', function ($filter) {
     }
 })
 
-function help() {
-    $('.help').show();
-    $('.nohelp').hide();
+function help_left() {
+    $('.help_left').show();
+    $('.nohelp_left').hide();
+    $('.container_right').hide();
 }
-function nohelp() {
-    $('.help').hide();
-    $('.nohelp').show();
+
+function nohelp_left() {
+    $('.help_left').hide();
+    $('.nohelp_left').show();
+    $('.container_right').show();
+}
+
+function help_right() {
+    $('.help_right').show();
+    $('.nohelp_right').hide();
+    $('.container_left').hide();
+}
+
+function nohelp_right() {
+    $('.help_right').hide();
+    $('.nohelp_right').show();
+    $('.container_left').show();
 }
 
 // End bổ trợ

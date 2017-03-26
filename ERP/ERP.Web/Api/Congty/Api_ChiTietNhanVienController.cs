@@ -23,7 +23,7 @@ namespace ERP.Web.Api.HeThong
                          join t3 in db.CCTC_PHONG_BAN on t1.MA_PHONG_BAN equals t3.MA_PHONG_BAN
                          where t1.USERNAME == id
 
-                         select new { t1.GIOI_TINH,t1.USERNAME,t2.PASSWORD,t2.MA_CONG_TY, t1.NGAY_SINH,t1.MA_PHONG_BAN, t1.CHUC_VU, t1.QUE_QUAN, t1.THANH_TICH_CONG_TAC, t1.TRINH_DO_HOC_VAN, t2.HO_VA_TEN, t2.EMAIL, t2.SDT, t2.AVATAR,t3.TEN_PHONG_BAN });
+                         select new {t2.ALLOWED,t2.IS_ADMIN, t1.GIOI_TINH,t1.USERNAME,t2.PASSWORD,t2.MA_CONG_TY, t1.NGAY_SINH,t1.MA_PHONG_BAN, t1.CHUC_VU, t1.QUE_QUAN, t1.THANH_TICH_CONG_TAC, t1.TRINH_DO_HOC_VAN, t2.HO_VA_TEN, t2.EMAIL, t2.SDT, t2.AVATAR,t3.TEN_PHONG_BAN });
 
 
             var result = vData.ToList().Select(x => new nhanvien()
@@ -42,7 +42,9 @@ namespace ERP.Web.Api.HeThong
                 THANH_TICH_CONG_TAC = x.THANH_TICH_CONG_TAC,
                 TRINH_DO_HOC_VAN = x.TRINH_DO_HOC_VAN,
                 AVATAR = x.AVATAR,
-                MA_CONG_TY = x.MA_CONG_TY
+                MA_CONG_TY = x.MA_CONG_TY,
+                ALLOWED = x.ALLOWED,
+                IS_ADMIN = x.IS_ADMIN
             }).ToList();
             return result;
         }

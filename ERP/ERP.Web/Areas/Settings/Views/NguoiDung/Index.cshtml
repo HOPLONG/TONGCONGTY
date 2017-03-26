@@ -11,10 +11,135 @@
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <link href="~/Content/self-writing/css/phanquyenHL.css" rel="stylesheet" />
 <link href="~/Content/self-writing/css/NguoiDungHL.css" rel="stylesheet" />
+<script src="http://malsup.github.com/jquery.form.js"></script>
 
 <div class="panel-heading">Bạn đang xem danh mục người dùng</div>
 <br />
 <div ng-app="myApp" ng-controller="userCtrl">
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-lg" style="width: 80%">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <fieldset id="addnewform">
+                        <!-- Form Name -->
+                        <legend>Add New User</legend>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="name">Username </label>
+                                <div class="col-md-10">
+                                    <input type="text" placeholder="Username" class="form-control input-md" ng-model="username">
+                                </div>
+                            </div>
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="name">Password: </label>
+                                <div class="col-md-10">
+                                    <input type="text" placeholder="Password" class="form-control input-md" ng-model="password">
+                                </div>
+                            </div>
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="name">Fullname: </label>
+                                <div class="col-md-10">
+                                    <input type="text" placeholder="Fullname" class="form-control input-md" ng-model="hovaten">
+                                </div>
+                            </div>
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="name">Phone Number: </label>
+                                <div class="col-md-10">
+                                    <input type="text" placeholder="Phone Number" class="form-control input-md" ng-model="sdt">
+                                </div>
+                            </div>
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="name">Email </label>
+                                <div class="col-md-10">
+                                    <input type="text" placeholder="Email" class="form-control input-md" ng-model="email">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label ckeditor" for="name">Thành tích: </label>
+                                <div class="col-md-10 ckeditor">
+                                    <textarea id="thanhtich" name="thanhtich" placeholder="Achievements" class="form-control input-md" ng-model="thanhtich"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="name">Gender: </label>
+                                <div class="col-md-10">
+                                    <input type="text" placeholder="Username" class="form-control input-md" ng-model="gioitinh">
+                                </div>
+                            </div>
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="name">Birthday </label>
+                                <div class="col-md-10">
+                                    <input type="text" mask="39/19/9999" placeholder="dd/MM/yyyy" class="form-control input-md" ng-model="ngaysinh">
+                                </div>
+                            </div>
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="name">Native Place: </label>
+                                <div class="col-md-10">
+                                    <input type="text" placeholder="Native Place" class="form-control input-md" ng-model="quequan">
+                                </div>
+                            </div>
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="name">Education: </label>
+                                <div class="col-md-10">
+                                    <input type="text" placeholder="Education" class="form-control input-md" ng-model="trinhdohocvan">
+                                </div>
+                            </div>
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="name">Department ID </label>
+                                <div class="col-md-10">
+                                    <input type="text" placeholder="Department ID" class="form-control input-md" ng-model="maphongban">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label" style="padding-top: 0px !important" for="name">Admin </label>
+                                <div class="col-md-3">
+                                    <input type="checkbox" ng-model="admin">
+                                </div>
+                                <label class="col-md-3 control-label" style="padding-top: 0px !important" for="name">Allowed </label>
+                                <div class="col-md-3">
+                                    <input type="checkbox" ng-model="allowed">
+                                </div>
+                            </div>
+                            <form action="/Settings/NguoiDung" ng-controller="imgCtrl" method="post">
+                                <div class="col-md-3">
+                                    @Html.AntiForgeryToken()
+                                    <input type='file' name="files" id="imgInp" style="width: 100%" />
+                                    <input type="submit" value="Upload Ảnh cá nhân" style="margin-top: 30px;" />
+                                </div>
+                                <div class="col-md-9">
+                                    <img id="blah" src="#" height="250" width="250" />
+                                </div>
+                            </form>
+                            <script>
+                                        CKEDITOR.replace('thanhtich', {
+                                            height: 100
+                                        });
+                            </script>
+                        </div>
+                        <!-- Button (Double) -->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="anmelden"></label>
+                            <div class="col-md-12 addnew">
+                                <button id="addnew" name="addnew" class="btn btn-success" ng-click="add()" data-dismiss="modal">Add New</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button id="exit" name="exit" class="btn btn-danger" data-dismiss="modal">Exit</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="content" ng-controller="nhanvienCtrl">
 
         <div id="quick-access">
@@ -27,122 +152,7 @@
         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Add New User</button>
 
         <!-- Modal Thêm mới -->
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog modal-lg" style="width: 80%">
-                <div class="modal-content">
-
-                    <div class="modal-body">
-                        <form class="form-horizontal" name="myForm" novalidate>
-                            <fieldset id="addnewform">
-                                <!-- Form Name -->
-                                <legend>Add New User</legend>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label" for="name">Username </label>
-                                        <div class="col-md-10">
-                                            <input type="text" placeholder="Username" class="form-control input-md" ng-model="username">
-                                        </div>
-                                    </div>
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label" for="name">Password: </label>
-                                        <div class="col-md-10">
-                                            <input type="text" placeholder="Password" class="form-control input-md" ng-model="password">
-                                        </div>
-                                    </div>
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label" for="name">Fullname: </label>
-                                        <div class="col-md-10">
-                                            <input type="text" placeholder="Fullname" class="form-control input-md" ng-model="hovaten">
-                                        </div>
-                                    </div>
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label" for="name">Phone Number: </label>
-                                        <div class="col-md-10">
-                                            <input type="text" placeholder="Phone Number" class="form-control input-md" ng-model="sdt">
-                                        </div>
-                                    </div>
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label" for="name">Email </label>
-                                        <div class="col-md-10">
-                                            <input type="text" placeholder="Email" class="form-control input-md" ng-model="email">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label ckeditor" for="name">Thành tích: </label>
-                                        <div class="col-md-10 ckeditor">
-                                            <textarea id="thanhtich" name="thanhtich" placeholder="Achievements" class="form-control input-md" ng-model="thanhtich"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label" for="name">Gender: </label>
-                                        <div class="col-md-10">
-                                            <input type="text" placeholder="Username" class="form-control input-md" ng-model="gioitinh">
-                                        </div>
-                                    </div>
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label" for="name">Birthday </label>
-                                        <div class="col-md-10">
-                                            <input type="text" mask="39/19/9999" placeholder="dd/MM/yyyy" class="form-control input-md" ng-model="ngaysinh">
-                                        </div>
-                                    </div>
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label" for="name">Native Place: </label>
-                                        <div class="col-md-10">
-                                            <input type="text" placeholder="Native Place" class="form-control input-md" ng-model="quequan">
-                                        </div>
-                                    </div>
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label" for="name">Education: </label>
-                                        <div class="col-md-10">
-                                            <input type="text" placeholder="Education" class="form-control input-md" ng-model="trinhdohocvan">
-                                        </div>
-                                    </div>
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label" for="name">Department ID </label>
-                                        <div class="col-md-10">
-                                            <input type="text" placeholder="Department ID" class="form-control input-md" ng-model="maphongban">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label" style="padding-top: 0px !important" for="name">Admin </label>
-                                        <div class="col-md-3">
-                                            <input type="checkbox" ng-model="admin">
-                                        </div>
-                                        <label class="col-md-3 control-label" style="padding-top: 0px !important" for="name">Allowed </label>
-                                        <div class="col-md-3">
-                                            <input type="checkbox" ng-model="allowed">
-                                        </div>
-                                    </div>
-                                    <script>
-                                        CKEDITOR.replace('thanhtich', {
-                                            height: 100
-                                        });
-                                    </script>
-                                </div>
-                                <!-- Button (Double) -->
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label" for="anmelden"></label>
-                                    <div class="col-md-12 addnew">
-                                        <button id="addnew" name="addnew" class="btn btn-success" ng-click="add()" data-dismiss="modal">Add New</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <button id="exit" name="exit" class="btn btn-danger" data-dismiss="modal">Exit</button>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
         <!--end modal-->
         <!-- Modal Update -->
         <div class="modal fade" id="myEdit" role="dialog">
@@ -150,7 +160,6 @@
                 <div class="modal-content">
 
                     <div class="modal-body">
-                        <form class="form-horizontal" name="myForm" novalidate>
                             <fieldset>
                                 <!-- Form Name -->
                                 <legend>Sửa người dùng</legend>
@@ -253,6 +262,16 @@
                                             <input type="checkbox" ng-model="nv.ALLOWED">
                                         </div>
                                     </div>
+                                    <form action="/Settings/NguoiDung" ng-controller="imgCtrl" method="post">
+                                        <div class="col-md-3">
+                                            @Html.AntiForgeryToken()
+                                            <input type='file' name="files" id="imgEdit" style="width: 100%" />
+                                            <input type="submit" value="Upload Ảnh cá nhân" style="margin-top: 30px;" />
+                                        </div>
+                                        <div class="col-md-9">
+                                            <img id="edit_img" src="#" height="250" width="250" />
+                                        </div>
+                                    </form>
                                 </div>
                                 <!-- Button (Double) -->
                                 <div class="form-group">
@@ -263,7 +282,7 @@
                                     </div>
                                 </div>
                             </fieldset>
-                        </form>
+                        
                     </div>
                 </div>
             </div>
@@ -388,6 +407,37 @@
         </table>
     </div>
 </div>
+<script>
+    (function () {
+
+        var bar = $('.progress-bar');
+        var percent = $('.progress-bar');
+        var status = $('#status');
+
+        $('form').ajaxForm({
+            beforeSend: function () {
+                status.empty();
+                var percentVal = '0%';
+                bar.width(percentVal)
+                percent.html(percentVal);
+            },
+            uploadProgress: function (event, position, total, percentComplete) {
+                var percentVal = percentComplete + '%';
+                bar.width(percentVal)
+                percent.html(percentVal);
+            },
+            success: function () {
+                var percentVal = '100%';
+                bar.width(percentVal)
+                percent.html(percentVal);
+            },
+            complete: function (xhr) {
+                status.html(xhr.responseText);
+            }
+        });
+
+    })();
+</script>
 <script src="~/Content/download/angularjs/angular-ui-router.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ngMask/3.1.1/ngMask.min.js"></script>
 
