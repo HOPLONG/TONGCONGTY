@@ -14,6 +14,12 @@ namespace ERP.Web.Models.Database
     
     public partial class KHO_CHUYEN_KHO
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public KHO_CHUYEN_KHO()
+        {
+            this.KHO_CT_CHUYEN_KHO = new HashSet<KHO_CT_CHUYEN_KHO>();
+        }
+    
         public string SO_CHUNG_TU { get; set; }
         public System.DateTime NGAY_CHUNG_TU { get; set; }
         public System.DateTime NGAY_HACH_TOAN { get; set; }
@@ -21,5 +27,7 @@ namespace ERP.Web.Models.Database
         public string NGUOI_LAP_PHIEU { get; set; }
     
         public virtual CCTC_NHAN_VIEN CCTC_NHAN_VIEN { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<KHO_CT_CHUYEN_KHO> KHO_CT_CHUYEN_KHO { get; set; }
     }
 }

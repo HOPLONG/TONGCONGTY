@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using ERP.Web.Models.Database;
 using ERP.Web.Models.NewModels;
+using ERP.Web.Models;
 
 namespace ERP.Web.Api.HeThong
 {

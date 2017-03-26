@@ -16,7 +16,7 @@ namespace ERP.Web.Models.Database
     {
         public string MA_HANG { get; set; }
         public string MA_NHOM_HANG { get; set; }
-        public int SL_TON { get; set; }
+        public int SL { get; set; }
     
         public virtual HH HH { get; set; }
         public virtual HH_NHOM_VTHH HH_NHOM_VTHH { get; set; }

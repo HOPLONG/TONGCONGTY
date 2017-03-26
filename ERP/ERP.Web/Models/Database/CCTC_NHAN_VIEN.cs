@@ -55,6 +55,7 @@ namespace ERP.Web.Models.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CCTC_BANG_LUONG> CCTC_BANG_LUONG { get; set; }
         public virtual CCTC_PHONG_BAN CCTC_PHONG_BAN { get; set; }
+        public virtual HT_NGUOI_DUNG HT_NGUOI_DUNG { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<XL_DANG_KY_PHE_DUYET> XL_DANG_KY_PHE_DUYET { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -83,6 +84,5 @@ namespace ERP.Web.Models.Database
         public virtual ICollection<NCC_PUR_PHU_TRACH> NCC_PUR_PHU_TRACH { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NH_CHUYEN_TIEN_NOI_BO> NH_CHUYEN_TIEN_NOI_BO { get; set; }
-        public virtual HT_NGUOI_DUNG HT_NGUOI_DUNG { get; set; }
     }
 }
