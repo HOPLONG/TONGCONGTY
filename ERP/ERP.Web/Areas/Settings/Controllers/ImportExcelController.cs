@@ -54,7 +54,7 @@ namespace ERP.Web.Areas.Settings.Controllers
                                     HH_TONKHO_HANG HH = new HH_TONKHO_HANG();
                                     HH.MA_HANG = workSheet.Cells[rowIterator, 1].Value.ToString();
                                     HH.MA_NHOM_HANG = workSheet.Cells[rowIterator, 2].Value.ToString();
-                                    HH.SL = Convert.ToInt32(workSheet.Cells[rowIterator, 3].Value.ToString());
+                                    HH.SL_TON = Convert.ToInt32(workSheet.Cells[rowIterator, 3].Value.ToString());
 
                                     db.HH_TONKHO_HANG.Add(HH);
 

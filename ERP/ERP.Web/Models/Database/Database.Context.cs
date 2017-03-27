@@ -55,9 +55,10 @@ namespace ERP.Web.Models.Database
         public virtual DbSet<HH> HHs { get; set; }
         public virtual DbSet<HH_HANG_DUOC_QUAN_TAM> HH_HANG_DUOC_QUAN_TAM { get; set; }
         public virtual DbSet<HH_NHOM_VTHH> HH_NHOM_VTHH { get; set; }
-        public virtual DbSet<HH_TON_KHO> HH_TON_KHO { get; set; }
+        public virtual DbSet<HH_TON_KHO_GIU> HH_TON_KHO_GIU { get; set; }
         public virtual DbSet<HH_TONKHO_HANG> HH_TONKHO_HANG { get; set; }
         public virtual DbSet<HT_LICH_SU_DANG_NHAP> HT_LICH_SU_DANG_NHAP { get; set; }
+        public virtual DbSet<HT_NGUOI_DUNG> HT_NGUOI_DUNG { get; set; }
         public virtual DbSet<KH> KHs { get; set; }
         public virtual DbSet<KH_DC_XUAT_HANG> KH_DC_XUAT_HANG { get; set; }
         public virtual DbSet<KH_LIEN_HE> KH_LIEN_HE { get; set; }
@@ -73,6 +74,10 @@ namespace ERP.Web.Models.Database
         public virtual DbSet<KHO_DNXH> KHO_DNXH { get; set; }
         public virtual DbSet<KHO_GIU_HANG> KHO_GIU_HANG { get; set; }
         public virtual DbSet<KHO_NHAP_KHO> KHO_NHAP_KHO { get; set; }
+        public virtual DbSet<KHO_TON_HOPLONG> KHO_TON_HOPLONG { get; set; }
+        public virtual DbSet<KHO_TON_TADN> KHO_TON_TADN { get; set; }
+        public virtual DbSet<KHO_TON_TAHCM> KHO_TON_TAHCM { get; set; }
+        public virtual DbSet<KHO_TON_TAHP> KHO_TON_TAHP { get; set; }
         public virtual DbSet<KHO_XUAT_KHO> KHO_XUAT_KHO { get; set; }
         public virtual DbSet<MAU_SO_HOA_DON> MAU_SO_HOA_DON { get; set; }
         public virtual DbSet<MENU> MENUs { get; set; }
@@ -98,6 +103,5 @@ namespace ERP.Web.Models.Database
         public virtual DbSet<QUY_PHIEU_THU> QUY_PHIEU_THU { get; set; }
         public virtual DbSet<XL_DANG_KY_PHE_DUYET> XL_DANG_KY_PHE_DUYET { get; set; }
         public virtual DbSet<XL_THAM_CHIEU_CHUNG_TU> XL_THAM_CHIEU_CHUNG_TU { get; set; }
-        public virtual DbSet<HT_NGUOI_DUNG> HT_NGUOI_DUNG { get; set; }
     }
 }

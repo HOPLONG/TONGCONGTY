@@ -126,12 +126,12 @@ namespace ERP.Web.Areas.Inventory.Controllers
                             var noOfRow = workSheet.Dimension.End.Row;
                             for (int rowIterator = 2; rowIterator <= noOfRow; rowIterator++)
                             {
-                                HH_TON_KHO tonkho = new HH_TON_KHO();
+                                KHO_TON_HOPLONG tonkho = new KHO_TON_HOPLONG();
                                 tonkho.MA_HANG = workSheet.Cells[rowIterator, 1].Value.ToString();
                                 tonkho.MA_KHO = workSheet.Cells[rowIterator, 2].Value.ToString();
-                                tonkho.SL_TON = Convert.ToInt32(workSheet.Cells[rowIterator, 3].Value.ToString());
+                                tonkho.TON_KHO_HL = Convert.ToInt32(workSheet.Cells[rowIterator, 3].Value.ToString());
 
-                                db.HH_TON_KHO.Add(tonkho);
+                                db.KHO_TON_HOPLONG.Add(tonkho);
 
                                 db.SaveChanges();
                                 so_dong_thanh_cong++;
@@ -185,8 +185,8 @@ namespace ERP.Web.Areas.Inventory.Controllers
                             {
                                 var mahang = workSheet.Cells[rowIterator, 1].Value.ToString();
                                 var makho = workSheet.Cells[rowIterator, 2].Value.ToString();
-                                var tonkho = db.HH_TON_KHO.Where(x => x.MA_HANG == mahang && x.MA_KHO == makho).FirstOrDefault();
-                                tonkho.SL_TON = Convert.ToInt32(workSheet.Cells[rowIterator, 3].Value.ToString());
+                                var tonkho = db.KHO_TON_HOPLONG.Where(x => x.MA_HANG == mahang && x.MA_KHO == makho).FirstOrDefault();
+                                tonkho.TON_KHO_HL = Convert.ToInt32(workSheet.Cells[rowIterator, 3].Value.ToString());
                                 //db.DM_HANG_TON_KHO.Add(tonkho);
 
                                 db.SaveChanges();
