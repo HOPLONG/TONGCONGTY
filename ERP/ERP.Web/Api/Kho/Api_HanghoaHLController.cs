@@ -25,6 +25,7 @@ namespace ERP.Web.Areas.HopLong.Api.Kho
                 MA_HANG = x.MA_HANG,
                 TEN_HANG = x.TEN_HANG,
                 MA_NHOM_HANG = x.MA_NHOM_HANG,
+                GIA_LIST = x.GIA_LIST,
                 DON_VI_TINH = x.DON_VI_TINH,
                 KHOI_LUONG = x.KHOI_LUONG,
                 XUAT_XU = x.XUAT_XU,

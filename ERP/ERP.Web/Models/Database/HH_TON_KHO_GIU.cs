@@ -12,11 +12,11 @@ namespace ERP.Web.Models.Database
     using System;
     using System.Collections.Generic;
     
-    public partial class HH_TON_KHO
+    public partial class HH_TON_KHO_GIU
     {
         public string MA_HANG { get; set; }
-        public string MA_KHO { get; set; }
-        public int SL_TON { get; set; }
+        public string MA_KHO_GIU { get; set; }
+        public int SL { get; set; }
     
         public virtual DM_KHO DM_KHO { get; set; }
         public virtual HH HH { get; set; }
