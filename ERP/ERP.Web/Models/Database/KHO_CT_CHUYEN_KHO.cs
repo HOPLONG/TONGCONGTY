@@ -25,6 +25,6 @@ namespace ERP.Web.Models.Database
         public virtual DM_KHO DM_KHO { get; set; }
         public virtual DM_KHO DM_KHO1 { get; set; }
         public virtual HH HH { get; set; }
-        public virtual KHO_XUAT_KHO KHO_XUAT_KHO { get; set; }
+        public virtual KHO_CHUYEN_KHO KHO_CHUYEN_KHO { get; set; }
     }
 }

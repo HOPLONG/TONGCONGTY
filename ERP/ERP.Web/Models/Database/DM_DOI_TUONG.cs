@@ -17,6 +17,7 @@ namespace ERP.Web.Models.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public DM_DOI_TUONG()
         {
+            this.DM_CHUNG_TU = new HashSet<DM_CHUNG_TU>();
             this.MH_CT_MDV = new HashSet<MH_CT_MDV>();
             this.NH_CT_NTTK = new HashSet<NH_CT_NTTK>();
             this.NH_NTTK = new HashSet<NH_NTTK>();
@@ -34,6 +35,8 @@ namespace ERP.Web.Models.Database
         public string MA_CONG_TY { get; set; }
     
         public virtual CCTC_CONG_TY CCTC_CONG_TY { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DM_CHUNG_TU> DM_CHUNG_TU { get; set; }
         public virtual DM_LOAI_DOI_TUONG DM_LOAI_DOI_TUONG { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MH_CT_MDV> MH_CT_MDV { get; set; }

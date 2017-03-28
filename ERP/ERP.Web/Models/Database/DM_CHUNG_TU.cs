@@ -25,8 +25,11 @@ namespace ERP.Web.Models.Database
         public string TEN_CHUNG_TU { get; set; }
         public string MA_LOAI_CHUNG_TU { get; set; }
         public string MA_CONG_TY { get; set; }
+        public Nullable<System.DateTime> NGAY_CHUNG_TU { get; set; }
+        public string DOI_TUONG { get; set; }
     
         public virtual CCTC_CONG_TY CCTC_CONG_TY { get; set; }
+        public virtual DM_DOI_TUONG DM_DOI_TUONG { get; set; }
         public virtual DM_LOAI_CHUNG_TU DM_LOAI_CHUNG_TU { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<XL_THAM_CHIEU_CHUNG_TU> XL_THAM_CHIEU_CHUNG_TU { get; set; }

@@ -1,11 +1,20 @@
-﻿
+﻿@{
+    ViewBag.Title = "layout";
+    if (Session["USERNAME"] == null)
+    {
+        Response.Redirect("~/Home/Login");
+    }
+
+
+}
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>HOPLONG | Trang chủ</title>
+    <title>KHO | HOPLONG</title>
+    <link rel="shortcut icon" type="image/ico" href="~/logo_hoplong.png">
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -168,6 +177,7 @@
                             <li><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i>Đang giữ</a></li>
                         </ul>
                     </li>
+
                     <li class="active treeview">
                         <a href="#">
                             <i class="fa fa-laptop"></i>
@@ -179,6 +189,7 @@
                             <li><a href="/Home/Index"><i class="fa fa-angle-double-right"></i>Phiếu xuất kho mới</a></li>
                         </ul>
                     </li>
+
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-laptop"></i>
@@ -190,6 +201,7 @@
                             <li><a href="/BangLuong/Index"><i class="fa fa-angle-double-right"></i>Phiếu nhập kho mới</a></li>
                         </ul>
                     </li>
+
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-laptop"></i>
@@ -203,6 +215,18 @@
                             <li><a href="/BangLuong/Index"><i class="fa fa-angle-double-right"></i>Đơn chưa giao</a></li>
                         </ul>
                     </li>
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-laptop"></i>
+                            <span>Import file</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="/Inventory/ImportHangHoa/Import_HangHoa"><i class="fa fa-angle-double-right"></i>Import hàng hóa</a></li>
+                        </ul>
+                    </li>
+
                 </ul>
             </section>
             <!-- /.sidebar -->
@@ -268,6 +292,15 @@
             display: none !important;
         }
     </style>
+
+    <script>
+        window.setInterval(function () {
+            $.get("/Home/Alive", function (data) {
+                //alert("still alive")
+            }, 180000);
+        });
+
+    </script>
 
 </body>
 </html>

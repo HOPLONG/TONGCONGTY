@@ -1,4 +1,12 @@
-﻿
+﻿@{
+    ViewBag.Title = "layout";
+    if (Session["USERNAME"] == null)
+    {
+        Response.Redirect("~/Home/Login");
+    }
+
+
+}
 
 <!DOCTYPE html>
 <html>

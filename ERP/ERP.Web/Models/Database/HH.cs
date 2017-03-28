@@ -35,6 +35,7 @@ namespace ERP.Web.Models.Database
         public string DON_VI_TINH { get; set; }
         public Nullable<int> KHOI_LUONG { get; set; }
         public string XUAT_XU { get; set; }
+        public Nullable<decimal> GIA_LIST { get; set; }
         public Nullable<int> BAO_HANH { get; set; }
         public string THONG_SO_KY_THUAT { get; set; }
         public string QUY_CACH_DONG_GOI { get; set; }

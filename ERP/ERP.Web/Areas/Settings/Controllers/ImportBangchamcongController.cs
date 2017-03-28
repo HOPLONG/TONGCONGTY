@@ -47,24 +47,24 @@ namespace ERP.Web.Areas.Settings.Controllers
                             for (int rowIterator = 2; rowIterator <= noOfRow; rowIterator++)
                             {
                                 CCTC_BANG_CHAM_CONG bcc = new CCTC_BANG_CHAM_CONG();
-                                bcc.THANG_CHAM_CONG = workSheet.Cells[rowIterator, 1].Value.ToString();
-                                bcc.USERNAME = workSheet.Cells[rowIterator, 2].Value.ToString();
-                                bcc.NGAY_CHUAN = Convert.ToInt32(workSheet.Cells[rowIterator, 3].Value);
-                                bcc.GIO_DI_MUON = Convert.ToDouble(workSheet.Cells[rowIterator, 4].Value);
-                                bcc.GIO_VE_SOM = Convert.ToDouble(workSheet.Cells[rowIterator, 5].Value);
-                                bcc.TANG_CA_NGAY_THUONG = Convert.ToDouble(workSheet.Cells[rowIterator, 6].Value);
-                                bcc.TANG_CA_NGAY_LE = Convert.ToDouble(workSheet.Cells[rowIterator, 7].Value);
-                                bcc.SO_LAN_QUEN_CHAM = Convert.ToDouble(workSheet.Cells[rowIterator, 8].Value);
-                                bcc.SO_NGAY_NGHI = Convert.ToDouble(workSheet.Cells[rowIterator, 9].Value);
-                                bcc.CONG_THUC_TE = Convert.ToDouble(workSheet.Cells[rowIterator, 10].Value);
-                                bcc.VAY_TIN_DUNG = Convert.ToDecimal(workSheet.Cells[rowIterator, 11].Value);
-                                bcc.UNG_LUONG = Convert.ToDecimal(workSheet.Cells[rowIterator, 12].Value);
-                                if (workSheet.Cells[rowIterator, 13].Value != null)
-                                    bcc.GHI_CHU = workSheet.Cells[rowIterator, 13].Value.ToString();
+                                bcc.THANG_CHAM_CONG = workSheet.Cells[rowIterator, 15].Value.ToString();
+                                bcc.USERNAME = workSheet.Cells[rowIterator, 3].Value.ToString();
+                                bcc.NGAY_CHUAN = Convert.ToInt32(workSheet.Cells[rowIterator, 4].Value);
+                                bcc.GIO_DI_MUON = Convert.ToDouble(workSheet.Cells[rowIterator, 5].Value);
+                                bcc.GIO_VE_SOM = Convert.ToDouble(workSheet.Cells[rowIterator, 6].Value);
+                                bcc.TANG_CA_NGAY_THUONG = Convert.ToDouble(workSheet.Cells[rowIterator, 7].Value);
+                                bcc.TANG_CA_NGAY_LE = Convert.ToDouble(workSheet.Cells[rowIterator, 8].Value);
+                                bcc.SO_LAN_QUEN_CHAM = Convert.ToDouble(workSheet.Cells[rowIterator, 9].Value);
+                                bcc.SO_NGAY_NGHI = Convert.ToDouble(workSheet.Cells[rowIterator, 10].Value);
+                                bcc.CONG_THUC_TE = Convert.ToDouble(workSheet.Cells[rowIterator, 11].Value);
+                                bcc.VAY_TIN_DUNG = Convert.ToDecimal(workSheet.Cells[rowIterator, 12].Value);
+                                bcc.UNG_LUONG = Convert.ToDecimal(workSheet.Cells[rowIterator, 13].Value);
+                                if (workSheet.Cells[rowIterator, 14].Value != null)
+                                    bcc.GHI_CHU = workSheet.Cells[rowIterator, 14].Value.ToString();
                                 db.CCTC_BANG_CHAM_CONG.Add(bcc);
                                 db.SaveChanges();
                                 so_dong_thanh_cong++;
-                                dong = rowIterator - 1;
+                                dong = rowIterator;
                             }
                         }
                     }

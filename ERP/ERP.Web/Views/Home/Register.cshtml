@@ -33,20 +33,20 @@
         
         <title>Admin</title>
     </head>
-    <body ng-app="myApp1" ng-controller="RegisterCtrl">
+    <body>
         <div class="container">
             <div class="row main">
                 <div class="main-login main-center">
                     <center ><h4 style="line-height: 30px; font-family:'Times New Roman'">ĐĂNG KÝ TÀI KHOẢN CHECK GIÁ TẠI HOPLONGTECH</h4></center>
-                    <div> <label>@ViewBag.error</label></div>
-                    <form class="" method="post">
+                    <div> <label style="color:">@ViewBag.error</label></div>
+                    <form action="/Home/Register" method="post">
 
                         <div class="form-group">
                             <label for="name" class="cols-sm-2 control-label">Họ và tên(*)</label>
                             <div class="cols-sm-10">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                                    <input type="text" class="form-control" name="fullname" id="fullname" placeholder="Nhập họ tên đầy đủ" ng-model="fullname" />
+                                    <input type="text" class="form-control" name="fullname" id="fullname" placeholder="Nhập họ tên đầy đủ" required />
                                 </div>
                             </div>
                         </div>
@@ -55,7 +55,7 @@
                             <div class="cols-sm-10">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                                    <input type="text" class="form-control" name="email" id="email" placeholder="Nhập email của bạn"   ng-model="email"/>
+                                    <input type="text" class="form-control" name="email" id="email" placeholder="Nhập email của bạn" required/>
                                 </div>
                             </div>
                         </div>
@@ -64,7 +64,7 @@
                             <div class="cols-sm-10">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-phone fa" aria-hidden="true"></i></span>
-                                    <input type="text" class="form-control" name="phone" id="phone" placeholder="Nhập số điện thoại của bạn"  ng-model="phone" />
+                                    <input type="text" class="form-control" name="phone" id="phone" placeholder="Nhập số điện thoại của bạn" required/>
                                 </div>
                             </div>
                         </div>
@@ -73,7 +73,7 @@
                             <div class="cols-sm-10">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                                    <input type="password" class="form-control" name="password" id="password" placeholder="Nhập mật khẩu"  ng-model="password" />
+                                    <input type="password" class="form-control" name="password" id="password" placeholder="Nhập mật khẩu" required/>
                                 </div>
                             </div>
                         </div>
@@ -82,12 +82,12 @@
                             <div class="cols-sm-10">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                                    <input type="password" class="form-control" name="confirmpassword" id="confirmpassword" placeholder="Nhập lại mật khẩu vừa nhập"  ng-model="passwordconfirm" />
+                                    <input type="password" class="form-control" name="confirmpassword" id="confirmpassword" placeholder="Nhập lại mật khẩu vừa nhập" required/>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group ">
-                            <input type="button" id="button" class="btn btn-primary btn-lg btn-block login-button" value="Register" data-toggle="modal" data-target="#myModal" onclick="getPhone()" ng-click="add()"/>
+                            <input type="submit" id="button" class="btn btn-primary btn-lg btn-block login-button" value="Register"/>
                         </div>
                         <div class="form-group" style="padding-bottom:5px;">
                             <a href="/Home/Login"><label style="color:white" class="cols-sm-2 control-label">Go to Login</label></a>
@@ -99,55 +99,19 @@
         </div>
 
 
-
-
-        <!--Modal submit-->
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        Xác thực tài khoản!
-                    </div>
-                    <div class="modal-body ">
-                        <center>
-                            <form class="" method="post" action="/Home/ConfirmCode">
-
-                                <div class="form-group">
-                                    <label for="name" class="cols-sm-2 control-label">Số điện thoại: </label>
-                                    <div class="cols-sm-10">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-lock fa" aria-hidden="true"></i></span>
-                                            <input type="text" class="form-control" name="username1" id="username1" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="name" class="cols-sm-2 control-label">Mã xác thực</label>
-                                    <div class="cols-sm-10">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-lock fa" aria-hidden="true"></i></span>
-                                            <input type="text" class="form-control" name="codeconfirm" id="codeconfirm" placeholder="Nhập mã xác nhận" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group ">
-                                    <input type="submit" id="button" class="btn btn-primary btn-lg btn-block login-button" value="Submit" />
-                                </div>
-
-                            </form>
-                        </center>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <script>
-            function getPhone() {
+            var password = document.getElementById("password"), confirm_password = document.getElementById("confirmpassword");
 
-                var s = $("#phone").val();
-                $("#username1").val(s);
+            function validatePassword() {
+                if (password.value != confirm_password.value) {
+                    confirm_password.setCustomValidity("Passwords Don't Match");
+                } else {
+                    confirm_password.setCustomValidity('');
+                }
             }
+
+            password.onchange = validatePassword;
+            confirm_password.onkeyup = validatePassword;
         </script>
 
     </body>

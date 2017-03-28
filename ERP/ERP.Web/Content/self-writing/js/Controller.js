@@ -447,7 +447,7 @@ app.controller('danhmucCtrl', function (danhmucService, $scope) {
             $scope.listpost = z;
         });
     };
-
+    $scope.transfer('04');
     $scope.loadDanhMuc();
     $scope.checked_fruits = [];
     

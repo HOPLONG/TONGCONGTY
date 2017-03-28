@@ -246,6 +246,8 @@
           <Property Name="TEN_CHUNG_TU" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="MA_LOAI_CHUNG_TU" Type="varchar" MaxLength="64" />
           <Property Name="MA_CONG_TY" Type="varchar" MaxLength="64" />
+          <Property Name="NGAY_CHUNG_TU" Type="date" />
+          <Property Name="DOI_TUONG" Type="varchar" MaxLength="64" />
         </EntityType>
         <EntityType Name="DM_DINH_KHOAN_TU_DONG">
           <Key>
@@ -342,6 +344,7 @@
           <Property Name="DON_VI_TINH" Type="nvarchar" MaxLength="10" />
           <Property Name="KHOI_LUONG" Type="int" />
           <Property Name="XUAT_XU" Type="nvarchar" MaxLength="64" />
+          <Property Name="GIA_LIST" Type="decimal" Precision="28" Scale="2" />
           <Property Name="BAO_HANH" Type="int" />
           <Property Name="THONG_SO_KY_THUAT" Type="nvarchar(max)" />
           <Property Name="QUY_CACH_DONG_GOI" Type="nvarchar(max)" />
@@ -371,11 +374,11 @@
         <EntityType Name="HH_TON_KHO">
           <Key>
             <PropertyRef Name="MA_HANG" />
-            <PropertyRef Name="MA_KHO" />
+            <PropertyRef Name="MA_KHO_GIU" />
           </Key>
           <Property Name="MA_HANG" Type="varchar" MaxLength="128" Nullable="false" />
-          <Property Name="MA_KHO" Type="varchar" MaxLength="64" Nullable="false" />
-          <Property Name="SL_TON" Type="int" Nullable="false" />
+          <Property Name="MA_KHO_GIU" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="SL" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="HH_TONKHO_HANG">
           <Key>
@@ -1292,6 +1295,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__DM_CHUNG___DOI_T__4EC8A2F6">
+          <End Role="DM_DOI_TUONG" Type="Self.DM_DOI_TUONG" Multiplicity="0..1" />
+          <End Role="DM_CHUNG_TU" Type="Self.DM_CHUNG_TU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_DOI_TUONG">
+              <PropertyRef Name="MA_DOI_TUONG" />
+            </Principal>
+            <Dependent Role="DM_CHUNG_TU">
+              <PropertyRef Name="DOI_TUONG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__DM_CHUNG___MA_CO__7849DB76">
           <End Role="CCTC_CONG_TY" Type="Self.CCTC_CONG_TY" Multiplicity="0..1" />
           <End Role="DM_CHUNG_TU" Type="Self.DM_CHUNG_TU" Multiplicity="*" />
@@ -1420,7 +1435,7 @@
               <PropertyRef Name="MA_KHO" />
             </Principal>
             <Dependent Role="HH_TON_KHO">
-              <PropertyRef Name="MA_KHO" />
+              <PropertyRef Name="MA_KHO_GIU" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1749,10 +1764,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__KHO_CT_CH__SO_CH__2F9A1060">
-          <End Role="KHO_XUAT_KHO" Type="Self.KHO_XUAT_KHO" Multiplicity="1" />
+          <End Role="KHO_CHUYEN_KHO" Type="Self.KHO_CHUYEN_KHO" Multiplicity="1" />
           <End Role="KHO_CT_CHUYEN_KHO" Type="Self.KHO_CT_CHUYEN_KHO" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="KHO_XUAT_KHO">
+            <Principal Role="KHO_CHUYEN_KHO">
               <PropertyRef Name="SO_CHUNG_TU" />
             </Principal>
             <Dependent Role="KHO_CT_CHUYEN_KHO">
@@ -2996,6 +3011,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="PROD_HANGHOA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="ERP_DATABASEModelStoreContainer">
           <EntitySet Name="BH_BAO_GIA" EntityType="Self.BH_BAO_GIA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BH_CT_BAO_GIA" EntityType="Self.BH_CT_BAO_GIA" Schema="dbo" store:Type="Tables" />
@@ -3167,6 +3183,10 @@
             <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
             <End Role="CN_NHOM_NGUOI_DUNG_NGHIEP_VU" EntitySet="CN_NHOM_NGUOI_DUNG_NGHIEP_VU" />
           </AssociationSet>
+          <AssociationSet Name="FK__DM_CHUNG___DOI_T__4EC8A2F6" Association="Self.FK__DM_CHUNG___DOI_T__4EC8A2F6">
+            <End Role="DM_DOI_TUONG" EntitySet="DM_DOI_TUONG" />
+            <End Role="DM_CHUNG_TU" EntitySet="DM_CHUNG_TU" />
+          </AssociationSet>
           <AssociationSet Name="FK__DM_CHUNG___MA_CO__7849DB76" Association="Self.FK__DM_CHUNG___MA_CO__7849DB76">
             <End Role="CCTC_CONG_TY" EntitySet="CCTC_CONG_TY" />
             <End Role="DM_CHUNG_TU" EntitySet="DM_CHUNG_TU" />
@@ -3320,7 +3340,7 @@
             <End Role="KHO_CT_CHUYEN_KHO" EntitySet="KHO_CT_CHUYEN_KHO" />
           </AssociationSet>
           <AssociationSet Name="FK__KHO_CT_CH__SO_CH__2F9A1060" Association="Self.FK__KHO_CT_CH__SO_CH__2F9A1060">
-            <End Role="KHO_XUAT_KHO" EntitySet="KHO_XUAT_KHO" />
+            <End Role="KHO_CHUYEN_KHO" EntitySet="KHO_CHUYEN_KHO" />
             <End Role="KHO_CT_CHUYEN_KHO" EntitySet="KHO_CT_CHUYEN_KHO" />
           </AssociationSet>
           <AssociationSet Name="FK__KHO_CT_CH__XUAT___318258D2" Association="Self.FK__KHO_CT_CH__XUAT___318258D2">
@@ -3774,6 +3794,7 @@
           <EntitySet Name="HH_TON_KHO" EntityType="ERP_DATABASEModel.HH_TON_KHO" />
           <EntitySet Name="HH_TONKHO_HANG" EntityType="ERP_DATABASEModel.HH_TONKHO_HANG" />
           <EntitySet Name="HT_LICH_SU_DANG_NHAP" EntityType="ERP_DATABASEModel.HT_LICH_SU_DANG_NHAP" />
+          <EntitySet Name="HT_NGUOI_DUNG" EntityType="ERP_DATABASEModel.HT_NGUOI_DUNG" />
           <EntitySet Name="KHs" EntityType="ERP_DATABASEModel.KH" />
           <EntitySet Name="KH_DC_XUAT_HANG" EntityType="ERP_DATABASEModel.KH_DC_XUAT_HANG" />
           <EntitySet Name="KH_LIEN_HE" EntityType="ERP_DATABASEModel.KH_LIEN_HE" />
@@ -3906,6 +3927,10 @@
             <End Role="CCTC_CONG_TY" EntitySet="CCTC_CONG_TY" />
             <End Role="DM_TK_NGAN_HANG_NOI_BO" EntitySet="DM_TK_NGAN_HANG_NOI_BO" />
           </AssociationSet>
+          <AssociationSet Name="FK__HT_NGUOI___MA_CO__09A971A2" Association="ERP_DATABASEModel.FK__HT_NGUOI___MA_CO__09A971A2">
+            <End Role="CCTC_CONG_TY" EntitySet="CCTC_CONG_TY" />
+            <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
+          </AssociationSet>
           <AssociationSet Name="FK__KHO_DNXH__TRUC_T__7A1D154F" Association="ERP_DATABASEModel.FK__KHO_DNXH__TRUC_T__7A1D154F">
             <End Role="CCTC_CONG_TY" EntitySet="CCTC_CONG_TY" />
             <End Role="KHO_DNXH" EntitySet="KHO_DNXH" />
@@ -3960,6 +3985,10 @@
           </AssociationSet>
           <AssociationSet Name="FK__CCTC_NHAN__MA_PH__08B54D69" Association="ERP_DATABASEModel.FK__CCTC_NHAN__MA_PH__08B54D69">
             <End Role="CCTC_PHONG_BAN" EntitySet="CCTC_PHONG_BAN" />
+            <End Role="CCTC_NHAN_VIEN" EntitySet="CCTC_NHAN_VIEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CCTC_NHAN__USERN__5224328E" Association="ERP_DATABASEModel.FK__CCTC_NHAN__USERN__5224328E">
+            <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
             <End Role="CCTC_NHAN_VIEN" EntitySet="CCTC_NHAN_VIEN" />
           </AssociationSet>
           <AssociationSet Name="FK__CN_DANG_K__NGUOI__5F3414E9" Association="ERP_DATABASEModel.FK__CN_DANG_K__NGUOI__5F3414E9">
@@ -4046,9 +4075,21 @@
             <End Role="CN_NHOM_NGHIEP_VU" EntitySet="CN_NHOM_NGHIEP_VU" />
             <End Role="CN_CHI_TIET_NHOM_NGHIEP_VU" EntitySet="CN_CHI_TIET_NHOM_NGHIEP_VU" />
           </AssociationSet>
+          <AssociationSet Name="FK_CN_NGHIEP_VU_NHAN_VIEN_HT_NGUOI_DUNG" Association="ERP_DATABASEModel.FK_CN_NGHIEP_VU_NHAN_VIEN_HT_NGUOI_DUNG">
+            <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
+            <End Role="CN_NGHIEP_VU_NHAN_VIEN" EntitySet="CN_NGHIEP_VU_NHAN_VIEN" />
+          </AssociationSet>
           <AssociationSet Name="FK_CN_NHOM_NGUOI_DUNG_NGHIEP_VU_CN_NHOM_NGHIEP_VU" Association="ERP_DATABASEModel.FK_CN_NHOM_NGUOI_DUNG_NGHIEP_VU_CN_NHOM_NGHIEP_VU">
             <End Role="CN_NHOM_NGHIEP_VU" EntitySet="CN_NHOM_NGHIEP_VU" />
             <End Role="CN_NHOM_NGUOI_DUNG_NGHIEP_VU" EntitySet="CN_NHOM_NGUOI_DUNG_NGHIEP_VU" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CN_NHOM_N__USERN__34E8D562" Association="ERP_DATABASEModel.FK__CN_NHOM_N__USERN__34E8D562">
+            <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
+            <End Role="CN_NHOM_NGUOI_DUNG_NGHIEP_VU" EntitySet="CN_NHOM_NGUOI_DUNG_NGHIEP_VU" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DM_CHUNG___DOI_T__4EC8A2F6" Association="ERP_DATABASEModel.FK__DM_CHUNG___DOI_T__4EC8A2F6">
+            <End Role="DM_DOI_TUONG" EntitySet="DM_DOI_TUONG" />
+            <End Role="DM_CHUNG_TU" EntitySet="DM_CHUNG_TU" />
           </AssociationSet>
           <AssociationSet Name="FK__DM_CHUNG___MA_LO__7755B73D" Association="ERP_DATABASEModel.FK__DM_CHUNG___MA_LO__7755B73D">
             <End Role="DM_LOAI_CHUNG_TU" EntitySet="DM_LOAI_CHUNG_TU" />
@@ -4298,6 +4339,10 @@
             <End Role="HH" EntitySet="HHs" />
             <End Role="KHO_GIU_HANG" EntitySet="KHO_GIU_HANG" />
           </AssociationSet>
+          <AssociationSet Name="FK_HH_HANG_DUOC_QUAN_TAM_HT_NGUOI_DUNG" Association="ERP_DATABASEModel.FK_HH_HANG_DUOC_QUAN_TAM_HT_NGUOI_DUNG">
+            <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
+            <End Role="HH_HANG_DUOC_QUAN_TAM" EntitySet="HH_HANG_DUOC_QUAN_TAM" />
+          </AssociationSet>
           <AssociationSet Name="FK__DM_HANG_S__MA_NH__59FA5E80" Association="ERP_DATABASEModel.FK__DM_HANG_S__MA_NH__59FA5E80">
             <End Role="HH_NHOM_VTHH" EntitySet="HH_NHOM_VTHH" />
             <End Role="HH_NHOM_VTHH1" EntitySet="HH_NHOM_VTHH" />
@@ -4309,6 +4354,42 @@
           <AssociationSet Name="FK__DM_TONKHO__MA_NH__6E01572D" Association="ERP_DATABASEModel.FK__DM_TONKHO__MA_NH__6E01572D">
             <End Role="HH_NHOM_VTHH" EntitySet="HH_NHOM_VTHH" />
             <End Role="HH_TONKHO_HANG" EntitySet="HH_TONKHO_HANG" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HT_LICH_S__USERN__1A89E4E1" Association="ERP_DATABASEModel.FK__HT_LICH_S__USERN__1A89E4E1">
+            <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
+            <End Role="HT_LICH_SU_DANG_NHAP" EntitySet="HT_LICH_SU_DANG_NHAP" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NGAN_HANG__NGUOI__2CF2ADDF" Association="ERP_DATABASEModel.FK__NGAN_HANG__NGUOI__2CF2ADDF">
+            <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
+            <End Role="NH_NTTK" EntitySet="NH_NTTK" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NGAN_HANG__NGUOI__5D95E53A" Association="ERP_DATABASEModel.FK__NGAN_HANG__NGUOI__5D95E53A">
+            <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
+            <End Role="NH_UNC" EntitySet="NH_UNC" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NGAN_HANG__NHAN___22751F6C" Association="ERP_DATABASEModel.FK__NGAN_HANG__NHAN___22751F6C">
+            <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
+            <End Role="NH_NTTK" EntitySet="NH_NTTK" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NGAN_HANG__NHAN___5CA1C101" Association="ERP_DATABASEModel.FK__NGAN_HANG__NHAN___5CA1C101">
+            <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
+            <End Role="NH_UNC" EntitySet="NH_UNC" />
+          </AssociationSet>
+          <AssociationSet Name="FK__QUY_PHIEU__NGUOI__2FCF1A8A" Association="ERP_DATABASEModel.FK__QUY_PHIEU__NGUOI__2FCF1A8A">
+            <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
+            <End Role="QUY_PHIEU_CHI" EntitySet="QUY_PHIEU_CHI" />
+          </AssociationSet>
+          <AssociationSet Name="FK__QUY_PHIEU__NGUOI__30C33EC3" Association="ERP_DATABASEModel.FK__QUY_PHIEU__NGUOI__30C33EC3">
+            <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
+            <End Role="QUY_PHIEU_THU" EntitySet="QUY_PHIEU_THU" />
+          </AssociationSet>
+          <AssociationSet Name="FK__QUY_PHIEU__NHAN___778AC167" Association="ERP_DATABASEModel.FK__QUY_PHIEU__NHAN___778AC167">
+            <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
+            <End Role="QUY_PHIEU_CHI" EntitySet="QUY_PHIEU_CHI" />
+          </AssociationSet>
+          <AssociationSet Name="FK__QUY_PHIEU__NHAN___787EE5A0" Association="ERP_DATABASEModel.FK__QUY_PHIEU__NHAN___787EE5A0">
+            <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
+            <End Role="QUY_PHIEU_THU" EntitySet="QUY_PHIEU_THU" />
           </AssociationSet>
           <AssociationSet Name="FK__DM_LIEN_H__MA_KH__7B264821" Association="ERP_DATABASEModel.FK__DM_LIEN_H__MA_KH__7B264821">
             <End Role="KH" EntitySet="KHs" />
@@ -4330,6 +4411,10 @@
             <End Role="KH" EntitySet="KHs" />
             <End Role="KHO_GIU_HANG" EntitySet="KHO_GIU_HANG" />
           </AssociationSet>
+          <AssociationSet Name="FK__KHO_XUAT___KHACH__4DD47EBD" Association="ERP_DATABASEModel.FK__KHO_XUAT___KHACH__4DD47EBD">
+            <End Role="KH" EntitySet="KHs" />
+            <End Role="KHO_XUAT_KHO" EntitySet="KHO_XUAT_KHO" />
+          </AssociationSet>
           <AssociationSet Name="FK__XULY_PHAN__MA_KH__5B438874" Association="ERP_DATABASEModel.FK__XULY_PHAN__MA_KH__5B438874">
             <End Role="KH" EntitySet="KHs" />
             <End Role="KH_PHAN_LOAI_KHACH" EntitySet="KH_PHAN_LOAI_KHACH" />
@@ -4347,7 +4432,7 @@
             <End Role="KH_PHAN_LOAI_KHACH" EntitySet="KH_PHAN_LOAI_KHACH" />
           </AssociationSet>
           <AssociationSet Name="FK__KHO_CT_CH__SO_CH__2F9A1060" Association="ERP_DATABASEModel.FK__KHO_CT_CH__SO_CH__2F9A1060">
-            <End Role="KHO_XUAT_KHO" EntitySet="KHO_XUAT_KHO" />
+            <End Role="KHO_CHUYEN_KHO" EntitySet="KHO_CHUYEN_KHO" />
             <End Role="KHO_CT_CHUYEN_KHO" EntitySet="KHO_CT_CHUYEN_KHO" />
           </AssociationSet>
           <AssociationSet Name="FK__KHO_CT_DN__SO_DN__7FD5EEA5" Association="ERP_DATABASEModel.FK__KHO_CT_DN__SO_DN__7FD5EEA5">
@@ -4418,67 +4503,7 @@
             <End Role="QUY_PHIEU_THU" EntitySet="QUY_PHIEU_THU" />
             <End Role="QUY_CT_PHIEU_THU" EntitySet="QUY_CT_PHIEU_THU" />
           </AssociationSet>
-          <EntitySet Name="HT_NGUOI_DUNG" EntityType="ERP_DATABASEModel.HT_NGUOI_DUNG" />
-          <AssociationSet Name="FK__HT_NGUOI___MA_CO__09A971A2" Association="ERP_DATABASEModel.FK__HT_NGUOI___MA_CO__09A971A2">
-            <End Role="CCTC_CONG_TY" EntitySet="CCTC_CONG_TY" />
-            <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
-          </AssociationSet>
-          <AssociationSet Name="FK__CCTC_NHAN__USERN__5224328E" Association="ERP_DATABASEModel.FK__CCTC_NHAN__USERN__5224328E">
-            <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
-            <End Role="CCTC_NHAN_VIEN" EntitySet="CCTC_NHAN_VIEN" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CN_NGHIEP_VU_NHAN_VIEN_HT_NGUOI_DUNG" Association="ERP_DATABASEModel.FK_CN_NGHIEP_VU_NHAN_VIEN_HT_NGUOI_DUNG">
-            <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
-            <End Role="CN_NGHIEP_VU_NHAN_VIEN" EntitySet="CN_NGHIEP_VU_NHAN_VIEN" />
-          </AssociationSet>
-          <AssociationSet Name="FK__CN_NHOM_N__USERN__34E8D562" Association="ERP_DATABASEModel.FK__CN_NHOM_N__USERN__34E8D562">
-            <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
-            <End Role="CN_NHOM_NGUOI_DUNG_NGHIEP_VU" EntitySet="CN_NHOM_NGUOI_DUNG_NGHIEP_VU" />
-          </AssociationSet>
-          <AssociationSet Name="FK_HH_HANG_DUOC_QUAN_TAM_HT_NGUOI_DUNG" Association="ERP_DATABASEModel.FK_HH_HANG_DUOC_QUAN_TAM_HT_NGUOI_DUNG">
-            <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
-            <End Role="HH_HANG_DUOC_QUAN_TAM" EntitySet="HH_HANG_DUOC_QUAN_TAM" />
-          </AssociationSet>
-          <AssociationSet Name="FK__HT_LICH_S__USERN__1A89E4E1" Association="ERP_DATABASEModel.FK__HT_LICH_S__USERN__1A89E4E1">
-            <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
-            <End Role="HT_LICH_SU_DANG_NHAP" EntitySet="HT_LICH_SU_DANG_NHAP" />
-          </AssociationSet>
-          <AssociationSet Name="FK__NGAN_HANG__NGUOI__2CF2ADDF" Association="ERP_DATABASEModel.FK__NGAN_HANG__NGUOI__2CF2ADDF">
-            <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
-            <End Role="NH_NTTK" EntitySet="NH_NTTK" />
-          </AssociationSet>
-          <AssociationSet Name="FK__NGAN_HANG__NGUOI__5D95E53A" Association="ERP_DATABASEModel.FK__NGAN_HANG__NGUOI__5D95E53A">
-            <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
-            <End Role="NH_UNC" EntitySet="NH_UNC" />
-          </AssociationSet>
-          <AssociationSet Name="FK__NGAN_HANG__NHAN___22751F6C" Association="ERP_DATABASEModel.FK__NGAN_HANG__NHAN___22751F6C">
-            <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
-            <End Role="NH_NTTK" EntitySet="NH_NTTK" />
-          </AssociationSet>
-          <AssociationSet Name="FK__NGAN_HANG__NHAN___5CA1C101" Association="ERP_DATABASEModel.FK__NGAN_HANG__NHAN___5CA1C101">
-            <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
-            <End Role="NH_UNC" EntitySet="NH_UNC" />
-          </AssociationSet>
-          <AssociationSet Name="FK__QUY_PHIEU__NGUOI__2FCF1A8A" Association="ERP_DATABASEModel.FK__QUY_PHIEU__NGUOI__2FCF1A8A">
-            <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
-            <End Role="QUY_PHIEU_CHI" EntitySet="QUY_PHIEU_CHI" />
-          </AssociationSet>
-          <AssociationSet Name="FK__QUY_PHIEU__NGUOI__30C33EC3" Association="ERP_DATABASEModel.FK__QUY_PHIEU__NGUOI__30C33EC3">
-            <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
-            <End Role="QUY_PHIEU_THU" EntitySet="QUY_PHIEU_THU" />
-          </AssociationSet>
-          <AssociationSet Name="FK__QUY_PHIEU__NHAN___778AC167" Association="ERP_DATABASEModel.FK__QUY_PHIEU__NHAN___778AC167">
-            <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
-            <End Role="QUY_PHIEU_CHI" EntitySet="QUY_PHIEU_CHI" />
-          </AssociationSet>
-          <AssociationSet Name="FK__QUY_PHIEU__NHAN___787EE5A0" Association="ERP_DATABASEModel.FK__QUY_PHIEU__NHAN___787EE5A0">
-            <End Role="HT_NGUOI_DUNG" EntitySet="HT_NGUOI_DUNG" />
-            <End Role="QUY_PHIEU_THU" EntitySet="QUY_PHIEU_THU" />
-          </AssociationSet>
-          <AssociationSet Name="FK__KHO_XUAT___KHACH__4DD47EBD" Association="ERP_DATABASEModel.FK__KHO_XUAT___KHACH__4DD47EBD">
-            <End Role="KH" EntitySet="KHs" />
-            <End Role="KHO_XUAT_KHO" EntitySet="KHO_XUAT_KHO" />
-          </AssociationSet>
+          <FunctionImport Name="PROD_HANGHOA" />
         </EntityContainer>
         <EntityType Name="BH_BAO_GIA">
           <Key>
@@ -4657,6 +4682,7 @@
           <NavigationProperty Name="KHs" Relationship="ERP_DATABASEModel.FK__DM_KHACH___TRUC___1A69E950" FromRole="CCTC_CONG_TY" ToRole="KH" />
           <NavigationProperty Name="DM_KHO" Relationship="ERP_DATABASEModel.FK__DM_KHO__TRUC_THU__6D0D32F4" FromRole="CCTC_CONG_TY" ToRole="DM_KHO" />
           <NavigationProperty Name="DM_TK_NGAN_HANG_NOI_BO" Relationship="ERP_DATABASEModel.FK__DM_TK_NGA__MA_CO__1BC821DD" FromRole="CCTC_CONG_TY" ToRole="DM_TK_NGAN_HANG_NOI_BO" />
+          <NavigationProperty Name="HT_NGUOI_DUNG" Relationship="ERP_DATABASEModel.FK__HT_NGUOI___MA_CO__09A971A2" FromRole="CCTC_CONG_TY" ToRole="HT_NGUOI_DUNG" />
           <NavigationProperty Name="KHO_DNXH" Relationship="ERP_DATABASEModel.FK__KHO_DNXH__TRUC_T__7A1D154F" FromRole="CCTC_CONG_TY" ToRole="KHO_DNXH" />
           <NavigationProperty Name="KHO_NHAP_KHO" Relationship="ERP_DATABASEModel.FK__KHO_NHAP___TRUC___25A691D2" FromRole="CCTC_CONG_TY" ToRole="KHO_NHAP_KHO" />
           <NavigationProperty Name="KHO_XUAT_KHO" Relationship="ERP_DATABASEModel.FK__KHO_XUAT___TRUC___269AB60B" FromRole="CCTC_CONG_TY" ToRole="KHO_XUAT_KHO" />
@@ -4670,7 +4696,6 @@
           <NavigationProperty Name="QUY_PHIEU_CHI" Relationship="ERP_DATABASEModel.FK__QUY_PHIEU__TRUC___2E3BD7D3" FromRole="CCTC_CONG_TY" ToRole="QUY_PHIEU_CHI" />
           <NavigationProperty Name="QUY_PHIEU_THU" Relationship="ERP_DATABASEModel.FK__QUY_PHIEU__TRUC___2F2FFC0C" FromRole="CCTC_CONG_TY" ToRole="QUY_PHIEU_THU" />
           <NavigationProperty Name="CN_NGHIEP_VU" Relationship="ERP_DATABASEModel.FK_CN_NGHIEP_VU_CCTC_CONG_TY" FromRole="CCTC_CONG_TY" ToRole="CN_NGHIEP_VU" />
-          <NavigationProperty Name="HT_NGUOI_DUNG" Relationship="ERP_DATABASEModel.FK__HT_NGUOI___MA_CO__09A971A2" FromRole="CCTC_CONG_TY" ToRole="HT_NGUOI_DUNG" />
         </EntityType>
         <EntityType Name="CCTC_MO_HINH_CONG_TY">
           <Key>
@@ -4699,6 +4724,7 @@
           <NavigationProperty Name="CCTC_BANG_CHAM_CONG" Relationship="ERP_DATABASEModel.FK__CCTC_BANG__USERN__7D2E8C24" FromRole="CCTC_NHAN_VIEN" ToRole="CCTC_BANG_CHAM_CONG" />
           <NavigationProperty Name="CCTC_BANG_LUONG" Relationship="ERP_DATABASEModel.FK__CCTC_BANG__USERN__09946309" FromRole="CCTC_NHAN_VIEN" ToRole="CCTC_BANG_LUONG" />
           <NavigationProperty Name="CCTC_PHONG_BAN" Relationship="ERP_DATABASEModel.FK__CCTC_NHAN__MA_PH__08B54D69" FromRole="CCTC_NHAN_VIEN" ToRole="CCTC_PHONG_BAN" />
+          <NavigationProperty Name="HT_NGUOI_DUNG" Relationship="ERP_DATABASEModel.FK__CCTC_NHAN__USERN__5224328E" FromRole="CCTC_NHAN_VIEN" ToRole="HT_NGUOI_DUNG" />
           <NavigationProperty Name="XL_DANG_KY_PHE_DUYET" Relationship="ERP_DATABASEModel.FK__CN_DANG_K__NGUOI__5F3414E9" FromRole="CCTC_NHAN_VIEN" ToRole="XL_DANG_KY_PHE_DUYET" />
           <NavigationProperty Name="KH_SALES_PHU_TRACH" Relationship="ERP_DATABASEModel.FK__DM_PHU_TR__SALES__473C8FC7" FromRole="CCTC_NHAN_VIEN" ToRole="KH_SALES_PHU_TRACH" />
           <NavigationProperty Name="KHO_CHUYEN_KHO" Relationship="ERP_DATABASEModel.FK__KHO_CHUYE__NGUOI__2CBDA3B5" FromRole="CCTC_NHAN_VIEN" ToRole="KHO_CHUYEN_KHO" />
@@ -4713,7 +4739,6 @@
           <NavigationProperty Name="MH_MDV" Relationship="ERP_DATABASEModel.FK__MH_MDV__NV_MUA_H__72E607DB" FromRole="CCTC_NHAN_VIEN" ToRole="MH_MDV" />
           <NavigationProperty Name="NCC_PUR_PHU_TRACH" Relationship="ERP_DATABASEModel.FK__NCC_PUR_P__PUR_P__3F6663D5" FromRole="CCTC_NHAN_VIEN" ToRole="NCC_PUR_PHU_TRACH" />
           <NavigationProperty Name="NH_CHUYEN_TIEN_NOI_BO" Relationship="ERP_DATABASEModel.FK__NH_CHUYEN__NGUOI__2B5F6B28" FromRole="CCTC_NHAN_VIEN" ToRole="NH_CHUYEN_TIEN_NOI_BO" />
-          <NavigationProperty Name="HT_NGUOI_DUNG" Relationship="ERP_DATABASEModel.FK__CCTC_NHAN__USERN__5224328E" FromRole="CCTC_NHAN_VIEN" ToRole="HT_NGUOI_DUNG" />
         </EntityType>
         <EntityType Name="CCTC_PHONG_BAN">
           <Key>
@@ -4803,7 +4828,10 @@
           <Property Name="TEN_CHUNG_TU" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="MA_LOAI_CHUNG_TU" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="MA_CONG_TY" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="NGAY_CHUNG_TU" Type="DateTime" Precision="0" />
+          <Property Name="DOI_TUONG" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CCTC_CONG_TY" Relationship="ERP_DATABASEModel.FK__DM_CHUNG___MA_CO__7849DB76" FromRole="DM_CHUNG_TU" ToRole="CCTC_CONG_TY" />
+          <NavigationProperty Name="DM_DOI_TUONG" Relationship="ERP_DATABASEModel.FK__DM_CHUNG___DOI_T__4EC8A2F6" FromRole="DM_CHUNG_TU" ToRole="DM_DOI_TUONG" />
           <NavigationProperty Name="DM_LOAI_CHUNG_TU" Relationship="ERP_DATABASEModel.FK__DM_CHUNG___MA_LO__7755B73D" FromRole="DM_CHUNG_TU" ToRole="DM_LOAI_CHUNG_TU" />
           <NavigationProperty Name="XL_THAM_CHIEU_CHUNG_TU" Relationship="ERP_DATABASEModel.FK__XL_THAM_C__SO_CH__0FB750B3" FromRole="DM_CHUNG_TU" ToRole="XL_THAM_CHIEU_CHUNG_TU" />
           <NavigationProperty Name="XL_THAM_CHIEU_CHUNG_TU1" Relationship="ERP_DATABASEModel.FK__XL_THAM_C__SO_CH__10AB74EC" FromRole="DM_CHUNG_TU" ToRole="XL_THAM_CHIEU_CHUNG_TU" />
@@ -4832,6 +4860,7 @@
           <Property Name="MA_LOAI_DOI_TUONG" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="MA_CONG_TY" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CCTC_CONG_TY" Relationship="ERP_DATABASEModel.FK__DM_DOI_TU__MA_CO__7E02B4CC" FromRole="DM_DOI_TUONG" ToRole="CCTC_CONG_TY" />
+          <NavigationProperty Name="DM_CHUNG_TU" Relationship="ERP_DATABASEModel.FK__DM_CHUNG___DOI_T__4EC8A2F6" FromRole="DM_DOI_TUONG" ToRole="DM_CHUNG_TU" />
           <NavigationProperty Name="DM_LOAI_DOI_TUONG" Relationship="ERP_DATABASEModel.FK__DM_DOI_TU__MA_LO__7D0E9093" FromRole="DM_DOI_TUONG" ToRole="DM_LOAI_DOI_TUONG" />
           <NavigationProperty Name="MH_CT_MDV" Relationship="ERP_DATABASEModel.FK__MH_CT_MDV__MA_DO__7A8729A3" FromRole="DM_DOI_TUONG" ToRole="MH_CT_MDV" />
           <NavigationProperty Name="NH_CT_NTTK" Relationship="ERP_DATABASEModel.FK__NGAN_HANG__MA_DO__50FB042B" FromRole="DM_DOI_TUONG" ToRole="NH_CT_NTTK" />
@@ -4964,6 +4993,7 @@
           <Property Name="DON_VI_TINH" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="KHOI_LUONG" Type="Int32" />
           <Property Name="XUAT_XU" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="GIA_LIST" Type="Decimal" Precision="28" Scale="2" />
           <Property Name="BAO_HANH" Type="Int32" />
           <Property Name="THONG_SO_KY_THUAT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="QUY_CACH_DONG_GOI" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -5014,11 +5044,11 @@
         <EntityType Name="HH_TON_KHO">
           <Key>
             <PropertyRef Name="MA_HANG" />
-            <PropertyRef Name="MA_KHO" />
+            <PropertyRef Name="MA_KHO_GIU" />
           </Key>
           <Property Name="MA_HANG" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
-          <Property Name="MA_KHO" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="SL_TON" Type="Int32" Nullable="false" />
+          <Property Name="MA_KHO_GIU" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="SL" Type="Int32" Nullable="false" />
           <NavigationProperty Name="DM_KHO" Relationship="ERP_DATABASEModel.FK__DM_HANG_T__MA_KH__5EBF139D" FromRole="HH_TON_KHO" ToRole="DM_KHO" />
           <NavigationProperty Name="HH" Relationship="ERP_DATABASEModel.FK__DM_HANG_T__MA_HA__5DCAEF64" FromRole="HH_TON_KHO" ToRole="HH" />
         </EntityType>
@@ -5042,6 +5072,35 @@
           <Property Name="THOI_GIAN_DANG_NHAP" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="THOI_GIAN_DANG_XUAT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="HT_NGUOI_DUNG" Relationship="ERP_DATABASEModel.FK__HT_LICH_S__USERN__1A89E4E1" FromRole="HT_LICH_SU_DANG_NHAP" ToRole="HT_NGUOI_DUNG" />
+        </EntityType>
+        <EntityType Name="HT_NGUOI_DUNG">
+          <Key>
+            <PropertyRef Name="USERNAME" />
+          </Key>
+          <Property Name="USERNAME" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="PASSWORD" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="HO_VA_TEN" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="SDT" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="AVATAR" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="IS_ADMIN" Type="Boolean" />
+          <Property Name="ALLOWED" Type="Boolean" Nullable="false" />
+          <Property Name="MA_CONG_TY" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="MA_XAC_NHAN" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CCTC_CONG_TY" Relationship="ERP_DATABASEModel.FK__HT_NGUOI___MA_CO__09A971A2" FromRole="HT_NGUOI_DUNG" ToRole="CCTC_CONG_TY" />
+          <NavigationProperty Name="CCTC_NHAN_VIEN" Relationship="ERP_DATABASEModel.FK__CCTC_NHAN__USERN__5224328E" FromRole="HT_NGUOI_DUNG" ToRole="CCTC_NHAN_VIEN" />
+          <NavigationProperty Name="CN_NGHIEP_VU_NHAN_VIEN" Relationship="ERP_DATABASEModel.FK_CN_NGHIEP_VU_NHAN_VIEN_HT_NGUOI_DUNG" FromRole="HT_NGUOI_DUNG" ToRole="CN_NGHIEP_VU_NHAN_VIEN" />
+          <NavigationProperty Name="CN_NHOM_NGUOI_DUNG_NGHIEP_VU" Relationship="ERP_DATABASEModel.FK__CN_NHOM_N__USERN__34E8D562" FromRole="HT_NGUOI_DUNG" ToRole="CN_NHOM_NGUOI_DUNG_NGHIEP_VU" />
+          <NavigationProperty Name="HH_HANG_DUOC_QUAN_TAM" Relationship="ERP_DATABASEModel.FK_HH_HANG_DUOC_QUAN_TAM_HT_NGUOI_DUNG" FromRole="HT_NGUOI_DUNG" ToRole="HH_HANG_DUOC_QUAN_TAM" />
+          <NavigationProperty Name="HT_LICH_SU_DANG_NHAP" Relationship="ERP_DATABASEModel.FK__HT_LICH_S__USERN__1A89E4E1" FromRole="HT_NGUOI_DUNG" ToRole="HT_LICH_SU_DANG_NHAP" />
+          <NavigationProperty Name="NH_NTTK" Relationship="ERP_DATABASEModel.FK__NGAN_HANG__NGUOI__2CF2ADDF" FromRole="HT_NGUOI_DUNG" ToRole="NH_NTTK" />
+          <NavigationProperty Name="NH_UNC" Relationship="ERP_DATABASEModel.FK__NGAN_HANG__NGUOI__5D95E53A" FromRole="HT_NGUOI_DUNG" ToRole="NH_UNC" />
+          <NavigationProperty Name="NH_NTTK1" Relationship="ERP_DATABASEModel.FK__NGAN_HANG__NHAN___22751F6C" FromRole="HT_NGUOI_DUNG" ToRole="NH_NTTK" />
+          <NavigationProperty Name="NH_UNC1" Relationship="ERP_DATABASEModel.FK__NGAN_HANG__NHAN___5CA1C101" FromRole="HT_NGUOI_DUNG" ToRole="NH_UNC" />
+          <NavigationProperty Name="QUY_PHIEU_CHI" Relationship="ERP_DATABASEModel.FK__QUY_PHIEU__NGUOI__2FCF1A8A" FromRole="HT_NGUOI_DUNG" ToRole="QUY_PHIEU_CHI" />
+          <NavigationProperty Name="QUY_PHIEU_THU" Relationship="ERP_DATABASEModel.FK__QUY_PHIEU__NGUOI__30C33EC3" FromRole="HT_NGUOI_DUNG" ToRole="QUY_PHIEU_THU" />
+          <NavigationProperty Name="QUY_PHIEU_CHI1" Relationship="ERP_DATABASEModel.FK__QUY_PHIEU__NHAN___778AC167" FromRole="HT_NGUOI_DUNG" ToRole="QUY_PHIEU_CHI" />
+          <NavigationProperty Name="QUY_PHIEU_THU1" Relationship="ERP_DATABASEModel.FK__QUY_PHIEU__NHAN___787EE5A0" FromRole="HT_NGUOI_DUNG" ToRole="QUY_PHIEU_THU" />
         </EntityType>
         <EntityType Name="KH">
           <Key>
@@ -5073,8 +5132,8 @@
           <NavigationProperty Name="KH_DC_XUAT_HANG" Relationship="ERP_DATABASEModel.FK__KH_DC_XUA__MA_KH__5F141958" FromRole="KH" ToRole="KH_DC_XUAT_HANG" />
           <NavigationProperty Name="KHO_DNXH" Relationship="ERP_DATABASEModel.FK__KHO_DNXH__MA_KHA__7928F116" FromRole="KH" ToRole="KHO_DNXH" />
           <NavigationProperty Name="KHO_GIU_HANG" Relationship="ERP_DATABASEModel.FK__KHO_GIU_H__KHACH__2A8B4280" FromRole="KH" ToRole="KHO_GIU_HANG" />
-          <NavigationProperty Name="KH_PHAN_LOAI_KHACH" Relationship="ERP_DATABASEModel.FK__XULY_PHAN__MA_KH__5B438874" FromRole="KH" ToRole="KH_PHAN_LOAI_KHACH" />
           <NavigationProperty Name="KHO_XUAT_KHO" Relationship="ERP_DATABASEModel.FK__KHO_XUAT___KHACH__4DD47EBD" FromRole="KH" ToRole="KHO_XUAT_KHO" />
+          <NavigationProperty Name="KH_PHAN_LOAI_KHACH" Relationship="ERP_DATABASEModel.FK__XULY_PHAN__MA_KH__5B438874" FromRole="KH" ToRole="KH_PHAN_LOAI_KHACH" />
         </EntityType>
         <EntityType Name="KH_DC_XUAT_HANG">
           <Key>
@@ -5168,6 +5227,7 @@
           <Property Name="DIEN_GIAI" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="NGUOI_LAP_PHIEU" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CCTC_NHAN_VIEN" Relationship="ERP_DATABASEModel.FK__KHO_CHUYE__NGUOI__2CBDA3B5" FromRole="KHO_CHUYEN_KHO" ToRole="CCTC_NHAN_VIEN" />
+          <NavigationProperty Name="KHO_CT_CHUYEN_KHO" Relationship="ERP_DATABASEModel.FK__KHO_CT_CH__SO_CH__2F9A1060" FromRole="KHO_CHUYEN_KHO" ToRole="KHO_CT_CHUYEN_KHO" />
         </EntityType>
         <EntityType Name="KHO_CT_CHUYEN_KHO">
           <Key>
@@ -5183,7 +5243,7 @@
           <NavigationProperty Name="DM_KHO" Relationship="ERP_DATABASEModel.FK__KHO_CT_CH__NHAP___32767D0B" FromRole="KHO_CT_CHUYEN_KHO" ToRole="DM_KHO" />
           <NavigationProperty Name="DM_KHO1" Relationship="ERP_DATABASEModel.FK__KHO_CT_CH__XUAT___318258D2" FromRole="KHO_CT_CHUYEN_KHO" ToRole="DM_KHO" />
           <NavigationProperty Name="HH" Relationship="ERP_DATABASEModel.FK__KHO_CT_CH__MA_HA__308E3499" FromRole="KHO_CT_CHUYEN_KHO" ToRole="HH" />
-          <NavigationProperty Name="KHO_XUAT_KHO" Relationship="ERP_DATABASEModel.FK__KHO_CT_CH__SO_CH__2F9A1060" FromRole="KHO_CT_CHUYEN_KHO" ToRole="KHO_XUAT_KHO" />
+          <NavigationProperty Name="KHO_CHUYEN_KHO" Relationship="ERP_DATABASEModel.FK__KHO_CT_CH__SO_CH__2F9A1060" FromRole="KHO_CT_CHUYEN_KHO" ToRole="KHO_CHUYEN_KHO" />
         </EntityType>
         <EntityType Name="KHO_CT_DNXH">
           <Key>
@@ -5344,13 +5404,12 @@
           <Property Name="TONG_TIEN" Type="Decimal" Nullable="false" Precision="28" Scale="2" />
           <Property Name="NGUOI_LAP_PHIEU" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="TRUC_THUOC" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="KHACH_HANG" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CCTC_CONG_TY" Relationship="ERP_DATABASEModel.FK__KHO_XUAT___TRUC___269AB60B" FromRole="KHO_XUAT_KHO" ToRole="CCTC_CONG_TY" />
           <NavigationProperty Name="CCTC_NHAN_VIEN" Relationship="ERP_DATABASEModel.FK__KHO_XUAT___NGUOI__13F1F5EB" FromRole="KHO_XUAT_KHO" ToRole="CCTC_NHAN_VIEN" />
           <NavigationProperty Name="CCTC_NHAN_VIEN1" Relationship="ERP_DATABASEModel.FK__KHO_XUAT___NHAN___11158940" FromRole="KHO_XUAT_KHO" ToRole="CCTC_NHAN_VIEN" />
-          <NavigationProperty Name="KHO_CT_CHUYEN_KHO" Relationship="ERP_DATABASEModel.FK__KHO_CT_CH__SO_CH__2F9A1060" FromRole="KHO_XUAT_KHO" ToRole="KHO_CT_CHUYEN_KHO" />
-          <NavigationProperty Name="KHO_CT_XUAT_KHO" Relationship="ERP_DATABASEModel.FK__KHO_CT_XU__SO_CH__16CE6296" FromRole="KHO_XUAT_KHO" ToRole="KHO_CT_XUAT_KHO" />
-          <Property Name="KHACH_HANG" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="KH" Relationship="ERP_DATABASEModel.FK__KHO_XUAT___KHACH__4DD47EBD" FromRole="KHO_XUAT_KHO" ToRole="KH" />
+          <NavigationProperty Name="KHO_CT_XUAT_KHO" Relationship="ERP_DATABASEModel.FK__KHO_CT_XU__SO_CH__16CE6296" FromRole="KHO_XUAT_KHO" ToRole="KHO_CT_XUAT_KHO" />
         </EntityType>
         <EntityType Name="MAU_SO_HOA_DON">
           <Key>
@@ -5618,10 +5677,10 @@
           <NavigationProperty Name="CCTC_CONG_TY" Relationship="ERP_DATABASEModel.FK__NH_NTTK__TRUC_TH__2C538F61" FromRole="NH_NTTK" ToRole="CCTC_CONG_TY" />
           <NavigationProperty Name="DM_DOI_TUONG" Relationship="ERP_DATABASEModel.FK__NGAN_HANG__MA_DO__5C6CB6D7" FromRole="NH_NTTK" ToRole="DM_DOI_TUONG" />
           <NavigationProperty Name="DM_TK_NGAN_HANG_NOI_BO" Relationship="ERP_DATABASEModel.FK_NGAN_HANG_NTTK_DM_TK_NGAN_HANG_NOI_BO" FromRole="NH_NTTK" ToRole="DM_TK_NGAN_HANG_NOI_BO" />
-          <NavigationProperty Name="NH_CT_NTTK" Relationship="ERP_DATABASEModel.FK__NGAN_HANG__SO_CH__2645B050" FromRole="NH_NTTK" ToRole="NH_CT_NTTK" />
-          <NavigationProperty Name="NH_CT_UNC" Relationship="ERP_DATABASEModel.FK__NGAN_HANG__SO_CH__6166761E" FromRole="NH_NTTK" ToRole="NH_CT_UNC" />
           <NavigationProperty Name="HT_NGUOI_DUNG" Relationship="ERP_DATABASEModel.FK__NGAN_HANG__NGUOI__2CF2ADDF" FromRole="NH_NTTK" ToRole="HT_NGUOI_DUNG" />
           <NavigationProperty Name="HT_NGUOI_DUNG1" Relationship="ERP_DATABASEModel.FK__NGAN_HANG__NHAN___22751F6C" FromRole="NH_NTTK" ToRole="HT_NGUOI_DUNG" />
+          <NavigationProperty Name="NH_CT_NTTK" Relationship="ERP_DATABASEModel.FK__NGAN_HANG__SO_CH__2645B050" FromRole="NH_NTTK" ToRole="NH_CT_NTTK" />
+          <NavigationProperty Name="NH_CT_UNC" Relationship="ERP_DATABASEModel.FK__NGAN_HANG__SO_CH__6166761E" FromRole="NH_NTTK" ToRole="NH_CT_UNC" />
         </EntityType>
         <EntityType Name="NH_UNC">
           <Key>
@@ -5735,9 +5794,9 @@
           <Property Name="TRUC_THUOC" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CCTC_CONG_TY" Relationship="ERP_DATABASEModel.FK__QUY_PHIEU__TRUC___2E3BD7D3" FromRole="QUY_PHIEU_CHI" ToRole="CCTC_CONG_TY" />
           <NavigationProperty Name="DM_DOI_TUONG" Relationship="ERP_DATABASEModel.FK__QUY_PHIEU__MA_DO__3552E9B6" FromRole="QUY_PHIEU_CHI" ToRole="DM_DOI_TUONG" />
-          <NavigationProperty Name="QUY_CT_PHIEU_CHI" Relationship="ERP_DATABASEModel.FK__QUY_CT_PH__SO_CH__70DDC3D8" FromRole="QUY_PHIEU_CHI" ToRole="QUY_CT_PHIEU_CHI" />
           <NavigationProperty Name="HT_NGUOI_DUNG" Relationship="ERP_DATABASEModel.FK__QUY_PHIEU__NGUOI__2FCF1A8A" FromRole="QUY_PHIEU_CHI" ToRole="HT_NGUOI_DUNG" />
           <NavigationProperty Name="HT_NGUOI_DUNG1" Relationship="ERP_DATABASEModel.FK__QUY_PHIEU__NHAN___778AC167" FromRole="QUY_PHIEU_CHI" ToRole="HT_NGUOI_DUNG" />
+          <NavigationProperty Name="QUY_CT_PHIEU_CHI" Relationship="ERP_DATABASEModel.FK__QUY_CT_PH__SO_CH__70DDC3D8" FromRole="QUY_PHIEU_CHI" ToRole="QUY_CT_PHIEU_CHI" />
         </EntityType>
         <EntityType Name="QUY_PHIEU_THU">
           <Key>
@@ -5756,9 +5815,9 @@
           <Property Name="TRUC_THUOC" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CCTC_CONG_TY" Relationship="ERP_DATABASEModel.FK__QUY_PHIEU__TRUC___2F2FFC0C" FromRole="QUY_PHIEU_THU" ToRole="CCTC_CONG_TY" />
           <NavigationProperty Name="DM_DOI_TUONG" Relationship="ERP_DATABASEModel.FK__QUY_PHIEU__MA_DO__3CF40B7E" FromRole="QUY_PHIEU_THU" ToRole="DM_DOI_TUONG" />
-          <NavigationProperty Name="QUY_CT_PHIEU_THU" Relationship="ERP_DATABASEModel.FK__QUY_CT_PH__SO_CH__74AE54BC" FromRole="QUY_PHIEU_THU" ToRole="QUY_CT_PHIEU_THU" />
           <NavigationProperty Name="HT_NGUOI_DUNG" Relationship="ERP_DATABASEModel.FK__QUY_PHIEU__NGUOI__30C33EC3" FromRole="QUY_PHIEU_THU" ToRole="HT_NGUOI_DUNG" />
           <NavigationProperty Name="HT_NGUOI_DUNG1" Relationship="ERP_DATABASEModel.FK__QUY_PHIEU__NHAN___787EE5A0" FromRole="QUY_PHIEU_THU" ToRole="HT_NGUOI_DUNG" />
+          <NavigationProperty Name="QUY_CT_PHIEU_THU" Relationship="ERP_DATABASEModel.FK__QUY_CT_PH__SO_CH__74AE54BC" FromRole="QUY_PHIEU_THU" ToRole="QUY_CT_PHIEU_THU" />
         </EntityType>
         <EntityType Name="XL_DANG_KY_PHE_DUYET">
           <Key>
@@ -6058,6 +6117,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__HT_NGUOI___MA_CO__09A971A2">
+          <End Type="ERP_DATABASEModel.CCTC_CONG_TY" Role="CCTC_CONG_TY" Multiplicity="1" />
+          <End Type="ERP_DATABASEModel.HT_NGUOI_DUNG" Role="HT_NGUOI_DUNG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CCTC_CONG_TY">
+              <PropertyRef Name="MA_CONG_TY" />
+            </Principal>
+            <Dependent Role="HT_NGUOI_DUNG">
+              <PropertyRef Name="MA_CONG_TY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__KHO_DNXH__TRUC_T__7A1D154F">
           <End Type="ERP_DATABASEModel.CCTC_CONG_TY" Role="CCTC_CONG_TY" Multiplicity="1" />
           <End Type="ERP_DATABASEModel.KHO_DNXH" Role="KHO_DNXH" Multiplicity="*" />
@@ -6223,6 +6294,18 @@
             </Principal>
             <Dependent Role="CCTC_NHAN_VIEN">
               <PropertyRef Name="MA_PHONG_BAN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CCTC_NHAN__USERN__5224328E">
+          <End Type="ERP_DATABASEModel.HT_NGUOI_DUNG" Role="HT_NGUOI_DUNG" Multiplicity="1" />
+          <End Type="ERP_DATABASEModel.CCTC_NHAN_VIEN" Role="CCTC_NHAN_VIEN" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="HT_NGUOI_DUNG">
+              <PropertyRef Name="USERNAME" />
+            </Principal>
+            <Dependent Role="CCTC_NHAN_VIEN">
+              <PropertyRef Name="USERNAME" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6478,6 +6561,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CN_NGHIEP_VU_NHAN_VIEN_HT_NGUOI_DUNG">
+          <End Type="ERP_DATABASEModel.HT_NGUOI_DUNG" Role="HT_NGUOI_DUNG" Multiplicity="1" />
+          <End Type="ERP_DATABASEModel.CN_NGHIEP_VU_NHAN_VIEN" Role="CN_NGHIEP_VU_NHAN_VIEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HT_NGUOI_DUNG">
+              <PropertyRef Name="USERNAME" />
+            </Principal>
+            <Dependent Role="CN_NGHIEP_VU_NHAN_VIEN">
+              <PropertyRef Name="USERNAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CN_NHOM_NGUOI_DUNG_NGHIEP_VU_CN_NHOM_NGHIEP_VU">
           <End Type="ERP_DATABASEModel.CN_NHOM_NGHIEP_VU" Role="CN_NHOM_NGHIEP_VU" Multiplicity="1" />
           <End Type="ERP_DATABASEModel.CN_NHOM_NGUOI_DUNG_NGHIEP_VU" Role="CN_NHOM_NGUOI_DUNG_NGHIEP_VU" Multiplicity="*" />
@@ -6487,6 +6582,30 @@
             </Principal>
             <Dependent Role="CN_NHOM_NGUOI_DUNG_NGHIEP_VU">
               <PropertyRef Name="ID_NHOM_NGHIEP_VU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CN_NHOM_N__USERN__34E8D562">
+          <End Type="ERP_DATABASEModel.HT_NGUOI_DUNG" Role="HT_NGUOI_DUNG" Multiplicity="1" />
+          <End Type="ERP_DATABASEModel.CN_NHOM_NGUOI_DUNG_NGHIEP_VU" Role="CN_NHOM_NGUOI_DUNG_NGHIEP_VU" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="HT_NGUOI_DUNG">
+              <PropertyRef Name="USERNAME" />
+            </Principal>
+            <Dependent Role="CN_NHOM_NGUOI_DUNG_NGHIEP_VU">
+              <PropertyRef Name="USERNAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DM_CHUNG___DOI_T__4EC8A2F6">
+          <End Type="ERP_DATABASEModel.DM_DOI_TUONG" Role="DM_DOI_TUONG" Multiplicity="0..1" />
+          <End Type="ERP_DATABASEModel.DM_CHUNG_TU" Role="DM_CHUNG_TU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_DOI_TUONG">
+              <PropertyRef Name="MA_DOI_TUONG" />
+            </Principal>
+            <Dependent Role="DM_CHUNG_TU">
+              <PropertyRef Name="DOI_TUONG" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6678,7 +6797,7 @@
               <PropertyRef Name="MA_KHO" />
             </Principal>
             <Dependent Role="HH_TON_KHO">
-              <PropertyRef Name="MA_KHO" />
+              <PropertyRef Name="MA_KHO_GIU" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7234,6 +7353,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_HH_HANG_DUOC_QUAN_TAM_HT_NGUOI_DUNG">
+          <End Type="ERP_DATABASEModel.HT_NGUOI_DUNG" Role="HT_NGUOI_DUNG" Multiplicity="1" />
+          <End Type="ERP_DATABASEModel.HH_HANG_DUOC_QUAN_TAM" Role="HH_HANG_DUOC_QUAN_TAM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HT_NGUOI_DUNG">
+              <PropertyRef Name="USERNAME" />
+            </Principal>
+            <Dependent Role="HH_HANG_DUOC_QUAN_TAM">
+              <PropertyRef Name="USERNAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__DM_HANG_S__MA_NH__59FA5E80">
           <End Type="ERP_DATABASEModel.HH_NHOM_VTHH" Role="HH_NHOM_VTHH" Multiplicity="0..1" />
           <End Type="ERP_DATABASEModel.HH_NHOM_VTHH" Role="HH_NHOM_VTHH1" Multiplicity="*" />
@@ -7267,6 +7398,114 @@
             </Principal>
             <Dependent Role="HH_TONKHO_HANG">
               <PropertyRef Name="MA_NHOM_HANG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HT_LICH_S__USERN__1A89E4E1">
+          <End Type="ERP_DATABASEModel.HT_NGUOI_DUNG" Role="HT_NGUOI_DUNG" Multiplicity="1" />
+          <End Type="ERP_DATABASEModel.HT_LICH_SU_DANG_NHAP" Role="HT_LICH_SU_DANG_NHAP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HT_NGUOI_DUNG">
+              <PropertyRef Name="USERNAME" />
+            </Principal>
+            <Dependent Role="HT_LICH_SU_DANG_NHAP">
+              <PropertyRef Name="USERNAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NGAN_HANG__NGUOI__2CF2ADDF">
+          <End Type="ERP_DATABASEModel.HT_NGUOI_DUNG" Role="HT_NGUOI_DUNG" Multiplicity="1" />
+          <End Type="ERP_DATABASEModel.NH_NTTK" Role="NH_NTTK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HT_NGUOI_DUNG">
+              <PropertyRef Name="USERNAME" />
+            </Principal>
+            <Dependent Role="NH_NTTK">
+              <PropertyRef Name="NGUOI_LAP_BIEU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NGAN_HANG__NGUOI__5D95E53A">
+          <End Type="ERP_DATABASEModel.HT_NGUOI_DUNG" Role="HT_NGUOI_DUNG" Multiplicity="1" />
+          <End Type="ERP_DATABASEModel.NH_UNC" Role="NH_UNC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HT_NGUOI_DUNG">
+              <PropertyRef Name="USERNAME" />
+            </Principal>
+            <Dependent Role="NH_UNC">
+              <PropertyRef Name="NGUOI_LAP_BIEU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NGAN_HANG__NHAN___22751F6C">
+          <End Type="ERP_DATABASEModel.HT_NGUOI_DUNG" Role="HT_NGUOI_DUNG" Multiplicity="1" />
+          <End Type="ERP_DATABASEModel.NH_NTTK" Role="NH_NTTK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HT_NGUOI_DUNG">
+              <PropertyRef Name="USERNAME" />
+            </Principal>
+            <Dependent Role="NH_NTTK">
+              <PropertyRef Name="NHAN_VIEN_THU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NGAN_HANG__NHAN___5CA1C101">
+          <End Type="ERP_DATABASEModel.HT_NGUOI_DUNG" Role="HT_NGUOI_DUNG" Multiplicity="1" />
+          <End Type="ERP_DATABASEModel.NH_UNC" Role="NH_UNC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HT_NGUOI_DUNG">
+              <PropertyRef Name="USERNAME" />
+            </Principal>
+            <Dependent Role="NH_UNC">
+              <PropertyRef Name="NHAN_VIEN_CHUYEN_KHOAN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__QUY_PHIEU__NGUOI__2FCF1A8A">
+          <End Type="ERP_DATABASEModel.HT_NGUOI_DUNG" Role="HT_NGUOI_DUNG" Multiplicity="1" />
+          <End Type="ERP_DATABASEModel.QUY_PHIEU_CHI" Role="QUY_PHIEU_CHI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HT_NGUOI_DUNG">
+              <PropertyRef Name="USERNAME" />
+            </Principal>
+            <Dependent Role="QUY_PHIEU_CHI">
+              <PropertyRef Name="NGUOI_LAP_BIEU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__QUY_PHIEU__NGUOI__30C33EC3">
+          <End Type="ERP_DATABASEModel.HT_NGUOI_DUNG" Role="HT_NGUOI_DUNG" Multiplicity="1" />
+          <End Type="ERP_DATABASEModel.QUY_PHIEU_THU" Role="QUY_PHIEU_THU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HT_NGUOI_DUNG">
+              <PropertyRef Name="USERNAME" />
+            </Principal>
+            <Dependent Role="QUY_PHIEU_THU">
+              <PropertyRef Name="NGUOI_LAP_BIEU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__QUY_PHIEU__NHAN___778AC167">
+          <End Type="ERP_DATABASEModel.HT_NGUOI_DUNG" Role="HT_NGUOI_DUNG" Multiplicity="0..1" />
+          <End Type="ERP_DATABASEModel.QUY_PHIEU_CHI" Role="QUY_PHIEU_CHI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HT_NGUOI_DUNG">
+              <PropertyRef Name="USERNAME" />
+            </Principal>
+            <Dependent Role="QUY_PHIEU_CHI">
+              <PropertyRef Name="NHAN_VIEN_MUA_HANG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__QUY_PHIEU__NHAN___787EE5A0">
+          <End Type="ERP_DATABASEModel.HT_NGUOI_DUNG" Role="HT_NGUOI_DUNG" Multiplicity="1" />
+          <End Type="ERP_DATABASEModel.QUY_PHIEU_THU" Role="QUY_PHIEU_THU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HT_NGUOI_DUNG">
+              <PropertyRef Name="USERNAME" />
+            </Principal>
+            <Dependent Role="QUY_PHIEU_THU">
+              <PropertyRef Name="NHAN_VIEN_THU" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7330,6 +7569,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__KHO_XUAT___KHACH__4DD47EBD">
+          <End Type="ERP_DATABASEModel.KH" Role="KH" Multiplicity="0..1" />
+          <End Type="ERP_DATABASEModel.KHO_XUAT_KHO" Role="KHO_XUAT_KHO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KH">
+              <PropertyRef Name="MA_KHACH_HANG" />
+            </Principal>
+            <Dependent Role="KHO_XUAT_KHO">
+              <PropertyRef Name="KHACH_HANG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__XULY_PHAN__MA_KH__5B438874">
           <End Type="ERP_DATABASEModel.KH" Role="KH" Multiplicity="1" />
           <End Type="ERP_DATABASEModel.KH_PHAN_LOAI_KHACH" Role="KH_PHAN_LOAI_KHACH" Multiplicity="*" />
@@ -7379,10 +7630,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__KHO_CT_CH__SO_CH__2F9A1060">
-          <End Type="ERP_DATABASEModel.KHO_XUAT_KHO" Role="KHO_XUAT_KHO" Multiplicity="1" />
+          <End Type="ERP_DATABASEModel.KHO_CHUYEN_KHO" Role="KHO_CHUYEN_KHO" Multiplicity="1" />
           <End Type="ERP_DATABASEModel.KHO_CT_CHUYEN_KHO" Role="KHO_CT_CHUYEN_KHO" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="KHO_XUAT_KHO">
+            <Principal Role="KHO_CHUYEN_KHO">
               <PropertyRef Name="SO_CHUNG_TU" />
             </Principal>
             <Dependent Role="KHO_CT_CHUYEN_KHO">
@@ -7591,215 +7842,6 @@
             </Principal>
             <Dependent Role="QUY_CT_PHIEU_THU">
               <PropertyRef Name="SO_CHUNG_TU" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="HT_NGUOI_DUNG">
-          <Key>
-            <PropertyRef Name="USERNAME" />
-          </Key>
-          <Property Name="USERNAME" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="PASSWORD" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
-          <Property Name="HO_VA_TEN" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="SDT" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="EMAIL" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
-          <Property Name="AVATAR" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
-          <Property Name="IS_ADMIN" Type="Boolean" />
-          <Property Name="ALLOWED" Type="Boolean" Nullable="false" />
-          <Property Name="MA_CONG_TY" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="MA_XAC_NHAN" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="CCTC_CONG_TY" Relationship="ERP_DATABASEModel.FK__HT_NGUOI___MA_CO__09A971A2" FromRole="HT_NGUOI_DUNG" ToRole="CCTC_CONG_TY" />
-          <NavigationProperty Name="CCTC_NHAN_VIEN" Relationship="ERP_DATABASEModel.FK__CCTC_NHAN__USERN__5224328E" FromRole="HT_NGUOI_DUNG" ToRole="CCTC_NHAN_VIEN" />
-          <NavigationProperty Name="CN_NGHIEP_VU_NHAN_VIEN" Relationship="ERP_DATABASEModel.FK_CN_NGHIEP_VU_NHAN_VIEN_HT_NGUOI_DUNG" FromRole="HT_NGUOI_DUNG" ToRole="CN_NGHIEP_VU_NHAN_VIEN" />
-          <NavigationProperty Name="CN_NHOM_NGUOI_DUNG_NGHIEP_VU" Relationship="ERP_DATABASEModel.FK__CN_NHOM_N__USERN__34E8D562" FromRole="HT_NGUOI_DUNG" ToRole="CN_NHOM_NGUOI_DUNG_NGHIEP_VU" />
-          <NavigationProperty Name="HH_HANG_DUOC_QUAN_TAM" Relationship="ERP_DATABASEModel.FK_HH_HANG_DUOC_QUAN_TAM_HT_NGUOI_DUNG" FromRole="HT_NGUOI_DUNG" ToRole="HH_HANG_DUOC_QUAN_TAM" />
-          <NavigationProperty Name="HT_LICH_SU_DANG_NHAP" Relationship="ERP_DATABASEModel.FK__HT_LICH_S__USERN__1A89E4E1" FromRole="HT_NGUOI_DUNG" ToRole="HT_LICH_SU_DANG_NHAP" />
-          <NavigationProperty Name="NH_NTTK" Relationship="ERP_DATABASEModel.FK__NGAN_HANG__NGUOI__2CF2ADDF" FromRole="HT_NGUOI_DUNG" ToRole="NH_NTTK" />
-          <NavigationProperty Name="NH_UNC" Relationship="ERP_DATABASEModel.FK__NGAN_HANG__NGUOI__5D95E53A" FromRole="HT_NGUOI_DUNG" ToRole="NH_UNC" />
-          <NavigationProperty Name="NH_NTTK1" Relationship="ERP_DATABASEModel.FK__NGAN_HANG__NHAN___22751F6C" FromRole="HT_NGUOI_DUNG" ToRole="NH_NTTK" />
-          <NavigationProperty Name="NH_UNC1" Relationship="ERP_DATABASEModel.FK__NGAN_HANG__NHAN___5CA1C101" FromRole="HT_NGUOI_DUNG" ToRole="NH_UNC" />
-          <NavigationProperty Name="QUY_PHIEU_CHI" Relationship="ERP_DATABASEModel.FK__QUY_PHIEU__NGUOI__2FCF1A8A" FromRole="HT_NGUOI_DUNG" ToRole="QUY_PHIEU_CHI" />
-          <NavigationProperty Name="QUY_PHIEU_THU" Relationship="ERP_DATABASEModel.FK__QUY_PHIEU__NGUOI__30C33EC3" FromRole="HT_NGUOI_DUNG" ToRole="QUY_PHIEU_THU" />
-          <NavigationProperty Name="QUY_PHIEU_CHI1" Relationship="ERP_DATABASEModel.FK__QUY_PHIEU__NHAN___778AC167" FromRole="HT_NGUOI_DUNG" ToRole="QUY_PHIEU_CHI" />
-          <NavigationProperty Name="QUY_PHIEU_THU1" Relationship="ERP_DATABASEModel.FK__QUY_PHIEU__NHAN___787EE5A0" FromRole="HT_NGUOI_DUNG" ToRole="QUY_PHIEU_THU" />
-        </EntityType>
-        <Association Name="FK__HT_NGUOI___MA_CO__09A971A2">
-          <End Type="ERP_DATABASEModel.CCTC_CONG_TY" Role="CCTC_CONG_TY" Multiplicity="1" />
-          <End Type="ERP_DATABASEModel.HT_NGUOI_DUNG" Role="HT_NGUOI_DUNG" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CCTC_CONG_TY">
-              <PropertyRef Name="MA_CONG_TY" />
-            </Principal>
-            <Dependent Role="HT_NGUOI_DUNG">
-              <PropertyRef Name="MA_CONG_TY" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__CCTC_NHAN__USERN__5224328E">
-          <End Type="ERP_DATABASEModel.HT_NGUOI_DUNG" Role="HT_NGUOI_DUNG" Multiplicity="1" />
-          <End Type="ERP_DATABASEModel.CCTC_NHAN_VIEN" Role="CCTC_NHAN_VIEN" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="HT_NGUOI_DUNG">
-              <PropertyRef Name="USERNAME" />
-            </Principal>
-            <Dependent Role="CCTC_NHAN_VIEN">
-              <PropertyRef Name="USERNAME" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CN_NGHIEP_VU_NHAN_VIEN_HT_NGUOI_DUNG">
-          <End Type="ERP_DATABASEModel.HT_NGUOI_DUNG" Role="HT_NGUOI_DUNG" Multiplicity="1" />
-          <End Type="ERP_DATABASEModel.CN_NGHIEP_VU_NHAN_VIEN" Role="CN_NGHIEP_VU_NHAN_VIEN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="HT_NGUOI_DUNG">
-              <PropertyRef Name="USERNAME" />
-            </Principal>
-            <Dependent Role="CN_NGHIEP_VU_NHAN_VIEN">
-              <PropertyRef Name="USERNAME" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__CN_NHOM_N__USERN__34E8D562">
-          <End Type="ERP_DATABASEModel.HT_NGUOI_DUNG" Role="HT_NGUOI_DUNG" Multiplicity="1" />
-          <End Type="ERP_DATABASEModel.CN_NHOM_NGUOI_DUNG_NGHIEP_VU" Role="CN_NHOM_NGUOI_DUNG_NGHIEP_VU" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="HT_NGUOI_DUNG">
-              <PropertyRef Name="USERNAME" />
-            </Principal>
-            <Dependent Role="CN_NHOM_NGUOI_DUNG_NGHIEP_VU">
-              <PropertyRef Name="USERNAME" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_HH_HANG_DUOC_QUAN_TAM_HT_NGUOI_DUNG">
-          <End Type="ERP_DATABASEModel.HT_NGUOI_DUNG" Role="HT_NGUOI_DUNG" Multiplicity="1" />
-          <End Type="ERP_DATABASEModel.HH_HANG_DUOC_QUAN_TAM" Role="HH_HANG_DUOC_QUAN_TAM" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="HT_NGUOI_DUNG">
-              <PropertyRef Name="USERNAME" />
-            </Principal>
-            <Dependent Role="HH_HANG_DUOC_QUAN_TAM">
-              <PropertyRef Name="USERNAME" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__HT_LICH_S__USERN__1A89E4E1">
-          <End Type="ERP_DATABASEModel.HT_NGUOI_DUNG" Role="HT_NGUOI_DUNG" Multiplicity="1" />
-          <End Type="ERP_DATABASEModel.HT_LICH_SU_DANG_NHAP" Role="HT_LICH_SU_DANG_NHAP" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="HT_NGUOI_DUNG">
-              <PropertyRef Name="USERNAME" />
-            </Principal>
-            <Dependent Role="HT_LICH_SU_DANG_NHAP">
-              <PropertyRef Name="USERNAME" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__NGAN_HANG__NGUOI__2CF2ADDF">
-          <End Type="ERP_DATABASEModel.HT_NGUOI_DUNG" Role="HT_NGUOI_DUNG" Multiplicity="1" />
-          <End Type="ERP_DATABASEModel.NH_NTTK" Role="NH_NTTK" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="HT_NGUOI_DUNG">
-              <PropertyRef Name="USERNAME" />
-            </Principal>
-            <Dependent Role="NH_NTTK">
-              <PropertyRef Name="NGUOI_LAP_BIEU" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__NGAN_HANG__NGUOI__5D95E53A">
-          <End Type="ERP_DATABASEModel.HT_NGUOI_DUNG" Role="HT_NGUOI_DUNG" Multiplicity="1" />
-          <End Type="ERP_DATABASEModel.NH_UNC" Role="NH_UNC" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="HT_NGUOI_DUNG">
-              <PropertyRef Name="USERNAME" />
-            </Principal>
-            <Dependent Role="NH_UNC">
-              <PropertyRef Name="NGUOI_LAP_BIEU" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__NGAN_HANG__NHAN___22751F6C">
-          <End Type="ERP_DATABASEModel.HT_NGUOI_DUNG" Role="HT_NGUOI_DUNG" Multiplicity="1" />
-          <End Type="ERP_DATABASEModel.NH_NTTK" Role="NH_NTTK" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="HT_NGUOI_DUNG">
-              <PropertyRef Name="USERNAME" />
-            </Principal>
-            <Dependent Role="NH_NTTK">
-              <PropertyRef Name="NHAN_VIEN_THU" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__NGAN_HANG__NHAN___5CA1C101">
-          <End Type="ERP_DATABASEModel.HT_NGUOI_DUNG" Role="HT_NGUOI_DUNG" Multiplicity="1" />
-          <End Type="ERP_DATABASEModel.NH_UNC" Role="NH_UNC" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="HT_NGUOI_DUNG">
-              <PropertyRef Name="USERNAME" />
-            </Principal>
-            <Dependent Role="NH_UNC">
-              <PropertyRef Name="NHAN_VIEN_CHUYEN_KHOAN" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__QUY_PHIEU__NGUOI__2FCF1A8A">
-          <End Type="ERP_DATABASEModel.HT_NGUOI_DUNG" Role="HT_NGUOI_DUNG" Multiplicity="1" />
-          <End Type="ERP_DATABASEModel.QUY_PHIEU_CHI" Role="QUY_PHIEU_CHI" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="HT_NGUOI_DUNG">
-              <PropertyRef Name="USERNAME" />
-            </Principal>
-            <Dependent Role="QUY_PHIEU_CHI">
-              <PropertyRef Name="NGUOI_LAP_BIEU" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__QUY_PHIEU__NGUOI__30C33EC3">
-          <End Type="ERP_DATABASEModel.HT_NGUOI_DUNG" Role="HT_NGUOI_DUNG" Multiplicity="1" />
-          <End Type="ERP_DATABASEModel.QUY_PHIEU_THU" Role="QUY_PHIEU_THU" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="HT_NGUOI_DUNG">
-              <PropertyRef Name="USERNAME" />
-            </Principal>
-            <Dependent Role="QUY_PHIEU_THU">
-              <PropertyRef Name="NGUOI_LAP_BIEU" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__QUY_PHIEU__NHAN___778AC167">
-          <End Type="ERP_DATABASEModel.HT_NGUOI_DUNG" Role="HT_NGUOI_DUNG" Multiplicity="0..1" />
-          <End Type="ERP_DATABASEModel.QUY_PHIEU_CHI" Role="QUY_PHIEU_CHI" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="HT_NGUOI_DUNG">
-              <PropertyRef Name="USERNAME" />
-            </Principal>
-            <Dependent Role="QUY_PHIEU_CHI">
-              <PropertyRef Name="NHAN_VIEN_MUA_HANG" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__QUY_PHIEU__NHAN___787EE5A0">
-          <End Type="ERP_DATABASEModel.HT_NGUOI_DUNG" Role="HT_NGUOI_DUNG" Multiplicity="1" />
-          <End Type="ERP_DATABASEModel.QUY_PHIEU_THU" Role="QUY_PHIEU_THU" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="HT_NGUOI_DUNG">
-              <PropertyRef Name="USERNAME" />
-            </Principal>
-            <Dependent Role="QUY_PHIEU_THU">
-              <PropertyRef Name="NHAN_VIEN_THU" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__KHO_XUAT___KHACH__4DD47EBD">
-          <End Type="ERP_DATABASEModel.KH" Role="KH" Multiplicity="0..1" />
-          <End Type="ERP_DATABASEModel.KHO_XUAT_KHO" Role="KHO_XUAT_KHO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="KH">
-              <PropertyRef Name="MA_KHACH_HANG" />
-            </Principal>
-            <Dependent Role="KHO_XUAT_KHO">
-              <PropertyRef Name="KHACH_HANG" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -8058,6 +8100,8 @@
           <EntitySetMapping Name="DM_CHUNG_TU">
             <EntityTypeMapping TypeName="ERP_DATABASEModel.DM_CHUNG_TU">
               <MappingFragment StoreEntitySet="DM_CHUNG_TU">
+                <ScalarProperty Name="DOI_TUONG" ColumnName="DOI_TUONG" />
+                <ScalarProperty Name="NGAY_CHUNG_TU" ColumnName="NGAY_CHUNG_TU" />
                 <ScalarProperty Name="MA_CONG_TY" ColumnName="MA_CONG_TY" />
                 <ScalarProperty Name="MA_LOAI_CHUNG_TU" ColumnName="MA_LOAI_CHUNG_TU" />
                 <ScalarProperty Name="TEN_CHUNG_TU" ColumnName="TEN_CHUNG_TU" />
@@ -8170,6 +8214,7 @@
                 <ScalarProperty Name="QUY_CACH_DONG_GOI" ColumnName="QUY_CACH_DONG_GOI" />
                 <ScalarProperty Name="THONG_SO_KY_THUAT" ColumnName="THONG_SO_KY_THUAT" />
                 <ScalarProperty Name="BAO_HANH" ColumnName="BAO_HANH" />
+                <ScalarProperty Name="GIA_LIST" ColumnName="GIA_LIST" />
                 <ScalarProperty Name="XUAT_XU" ColumnName="XUAT_XU" />
                 <ScalarProperty Name="KHOI_LUONG" ColumnName="KHOI_LUONG" />
                 <ScalarProperty Name="DON_VI_TINH" ColumnName="DON_VI_TINH" />
@@ -8201,8 +8246,8 @@
           <EntitySetMapping Name="HH_TON_KHO">
             <EntityTypeMapping TypeName="ERP_DATABASEModel.HH_TON_KHO">
               <MappingFragment StoreEntitySet="HH_TON_KHO">
-                <ScalarProperty Name="SL_TON" ColumnName="SL_TON" />
-                <ScalarProperty Name="MA_KHO" ColumnName="MA_KHO" />
+                <ScalarProperty Name="SL" ColumnName="SL" />
+                <ScalarProperty Name="MA_KHO_GIU" ColumnName="MA_KHO_GIU" />
                 <ScalarProperty Name="MA_HANG" ColumnName="MA_HANG" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8223,6 +8268,22 @@
                 <ScalarProperty Name="THOI_GIAN_DANG_NHAP" ColumnName="THOI_GIAN_DANG_NHAP" />
                 <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HT_NGUOI_DUNG">
+            <EntityTypeMapping TypeName="ERP_DATABASEModel.HT_NGUOI_DUNG">
+              <MappingFragment StoreEntitySet="HT_NGUOI_DUNG">
+                <ScalarProperty Name="MA_XAC_NHAN" ColumnName="MA_XAC_NHAN" />
+                <ScalarProperty Name="MA_CONG_TY" ColumnName="MA_CONG_TY" />
+                <ScalarProperty Name="ALLOWED" ColumnName="ALLOWED" />
+                <ScalarProperty Name="IS_ADMIN" ColumnName="IS_ADMIN" />
+                <ScalarProperty Name="AVATAR" ColumnName="AVATAR" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="HO_VA_TEN" ColumnName="HO_VA_TEN" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -8859,22 +8920,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="HT_NGUOI_DUNG">
-            <EntityTypeMapping TypeName="ERP_DATABASEModel.HT_NGUOI_DUNG">
-              <MappingFragment StoreEntitySet="HT_NGUOI_DUNG">
-                <ScalarProperty Name="MA_XAC_NHAN" ColumnName="MA_XAC_NHAN" />
-                <ScalarProperty Name="MA_CONG_TY" ColumnName="MA_CONG_TY" />
-                <ScalarProperty Name="ALLOWED" ColumnName="ALLOWED" />
-                <ScalarProperty Name="IS_ADMIN" ColumnName="IS_ADMIN" />
-                <ScalarProperty Name="AVATAR" ColumnName="AVATAR" />
-                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
-                <ScalarProperty Name="SDT" ColumnName="SDT" />
-                <ScalarProperty Name="HO_VA_TEN" ColumnName="HO_VA_TEN" />
-                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
-                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="PROD_HANGHOA" FunctionName="ERP_DATABASEModel.Store.PROD_HANGHOA" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
