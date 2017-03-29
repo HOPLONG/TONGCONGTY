@@ -4,9 +4,10 @@
 }
 
 <link href="~/Content/self-writing/css/UserDetails.css" rel="stylesheet" />
+<script src="http://malsup.github.com/jquery.form.js"></script>
 
 <div ng-app="myApp" ng-controller="userdetailCtrl" class="container">
-    <input type="hidden" value="@Session["USERNAME"]" id="username"/>
+    <input type="hidden" value="@Session["USERNAME"]" id="username" />
     <input type="hidden" value="@Session["PASSWORD"]" id="sessionpw" />
     <input type="hidden" value="@Session["HO_VA_TEN"]" id="hovaten" />
     <input type="hidden" id="vh_iAct_1" class="isActive" name="isActive" value="@Session["ALLOWED"]" />
@@ -20,6 +21,7 @@
                 <div class="row" ng-repeat="nv in list_details">
                     <div class="col-md-4">
                         <img ng-src="~/Content/Images/Avatar/{{nv.AVATAR}}" name="aboutme" style="width: 100%" height="300" border="0">
+                        <button class="btn btn-default" data-dismiss="modal" type="button" data-toggle="modal" data-target="#edit_image" ng-click="transfer(nv)">Sửa ảnh cá nhân</button>
                     </div>
                     <div class="col-md-8">
                         <h1 style="color: #097be0;font-weight: bold">{{nv.HO_VA_TEN}}</h1>
@@ -48,14 +50,14 @@
                     <div class="col-md-12">
                         <h1 style="color: #097be0">Thành tích công tác</h1>
                         <p class="col-md-12 {{nv.USERNAME}}-1" ng-bind-html="nv.THANH_TICH_CONG_TAC | unsafe" style="word-break: break-word"></p>
-                    </div>              
-                </div>  
+                    </div>
+                </div>
             </div>
             <div id="doimatkhau" class="tab-pane fade">
                 <div class="container">
-                    <input type="password" placeholder="Mật khẩu cũ" ng-model="oldpw" class="col-md-4 col-md-offset-3 pw"/>
+                    <input type="password" placeholder="Mật khẩu cũ" ng-model="oldpw" class="col-md-4 col-md-offset-3 pw" />
                     <br />
-                    <input type="password" placeholder="Mật khẩu mới" ng-model="newpw" class="col-md-4 col-md-offset-3 pw"/>
+                    <input type="password" placeholder="Mật khẩu mới" ng-model="newpw" class="col-md-4 col-md-offset-3 pw" />
                     <br />
                     <button type="button" ng-click="changepw()" class="btn col-md-4 col-md-offset-3 pw" data-dismiss="modal" data-toggle="modal" data-target="#changepw">Đổi mật khẩu</button>
                 </div>
@@ -73,5 +75,54 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="edit_image" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                    <div class="modal-body">
+                        <form action="/UserDetails/Index" ng-controller="imgCtrl" method="post">
+                            @Html.AntiForgeryToken()
+                            <input type='file' name="files" id="imgInp" />
+                            <img id="blah" src="#" height="250" width="400" />
+                            <input type="submit" value="Upload File/Image" ng-click="edit(item.USERNAME)" style="margin-top: 30px;" />
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="exit" name="exit" class="btn btn-danger" data-dismiss="modal">Exit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    <script>
+    (function () {
+
+        var bar = $('.progress-bar');
+        var percent = $('.progress-bar');
+        var status = $('#status');
+
+        $('form').ajaxForm({
+            beforeSend: function () {
+                status.empty();
+                var percentVal = '0%';
+                bar.width(percentVal)
+                percent.html(percentVal);
+            },
+            uploadProgress: function (event, position, total, percentComplete) {
+                var percentVal = percentComplete + '%';
+                bar.width(percentVal)
+                percent.html(percentVal);
+            },
+            success: function () {
+                var percentVal = '100%';
+                bar.width(percentVal)
+                percent.html(percentVal);
+            },
+            complete: function (xhr) {
+                status.html(xhr.responseText);
+            }
+        });
+
+    })();
+    </script>
 </div>

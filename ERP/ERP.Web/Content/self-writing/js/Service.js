@@ -59,7 +59,7 @@ app.service('NhomvthhService', function ($http) {
     this.delete = function (hangsp, data_delete) {
         return $http.delete("/api/Api_NhomVTHHHL/" + hangsp, data_delete);
     }
-    
+
 });
 
 
@@ -182,11 +182,11 @@ app.service('menuService', function ($http) {
         });
     };
 
-    this.save_menu = function (maphongban,username,mamenu,data_save) {
+    this.save_menu = function (maphongban, username, mamenu, data_save) {
         return $http.put('/api/Api_MENU_USER/' + maphongban + '/' + username + '/' + mamenu, data_save);
     }
 
-    this.get_menucha = function (username,menucha) {
+    this.get_menucha = function (username, menucha) {
         return $http.get('/api/Api_ListMenu/' + username + '/' + menucha).then(function (response) {
             return response.data;
         });
@@ -206,7 +206,7 @@ app.service('userdetailService', function ($http) {
         });
     };
 
-    this.save_pw = function (username,oldpw, data_save) {
+    this.save_pw = function (username, oldpw, data_save) {
         return $http.put('/api/DoiMatKhau/' + username + '/' + oldpw, data_save);
     };
 
@@ -214,6 +214,10 @@ app.service('userdetailService', function ($http) {
         return $http.get("/api/Api_NguoidungHL").then(function (response) {
             return response.data;
         });
+    };
+
+    this.edit_image = function (username, data_add) {
+        return $http.put("/api/Api_SuaAnhCaNhan/" + username, data_add);
     };
 });
 
@@ -244,7 +248,7 @@ app.service('addmenuService', function ($http) {
         });
     };
 
-    this.save_menu = function (mamenu,datasave) {
+    this.save_menu = function (mamenu, datasave) {
         return $http.put('/api/Api_Menu/' + mamenu, datasave);
     };
 
@@ -263,7 +267,7 @@ app.service('tonghopnvService', function ($http) {
 
 app.service('dsnghiepvuService', function ($http) {
     this.get_dsnghiepvu = function (id_menu) {
-        return $http.get('/api/Api_Chitietnghiepvu/' + id_menu  ).then(function (response) {
+        return $http.get('/api/Api_Chitietnghiepvu/' + id_menu).then(function (response) {
             return response.data;
         });
     }
@@ -295,7 +299,7 @@ app.service('chitietbaivietService', function ($http) {
     };
 });
 
-app.service('phanquyenService', function ($http) { 
+app.service('phanquyenService', function ($http) {
     this.get_dsphanquyen = function () {
         return $http.get('/api/Api_PhanQuyenMenu').then(function (response) {
             return response.data;
@@ -314,8 +318,8 @@ app.service('phanquyenService', function ($http) {
         });
     }
 
-    this.save_trangthai = function (username, mamenu,data_save) {
-        return $http.put('/api/Api_MENU_USER/' + username + '/' + mamenu,data_save);
+    this.save_trangthai = function (username, mamenu, data_save) {
+        return $http.put('/api/Api_MENU_USER/' + username + '/' + mamenu, data_save);
     }
 
     this.add_trangthai = function (data_addnew) {
@@ -368,7 +372,7 @@ app.service('nhomnghiepvuService', function ($http) {
         });
     };
 
-    this.insert = function (nhomnghiepvu,username) {
+    this.insert = function (nhomnghiepvu, username) {
         return $http.post('/api/NghiepVuDetails/' + nhomnghiepvu + '/' + username);
     };
 });
@@ -386,7 +390,7 @@ app.service('chitietnghiepvuService', function ($http) {
             return response.data;
         });
     };
-    this.delete_chitietnhomnghiepvu = function (nhomnghiepvu,mamota) {
+    this.delete_chitietnhomnghiepvu = function (nhomnghiepvu, mamota) {
         return $http.delete('/api/Api_ChiTietNhomNghiepVu/' + nhomnghiepvu + '/' + mamota);
     }
 
@@ -739,3 +743,4 @@ app.service('productdetailsService', function ($http) {
         });
     };
 });
+
