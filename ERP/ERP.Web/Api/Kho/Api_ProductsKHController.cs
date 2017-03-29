@@ -29,6 +29,7 @@ namespace ERP.Web.Api.Kho
                 DON_VI_TINH = x.DON_VI_TINH,
                 KHOI_LUONG = x.KHOI_LUONG,
                 XUAT_XU = x.XUAT_XU,
+                GIA_LIST = x.GIA_LIST,
                 BAO_HANH = x.BAO_HANH,
                 THONG_SO_KY_THUAT = x.THONG_SO_KY_THUAT,
                 QUY_CACH_DONG_GOI = x.QUY_CACH_DONG_GOI,

@@ -29,7 +29,7 @@ app.service('hanghoaService', function ($http) {
         return $http.delete("/api/Api_HanghoaHL/" + mahang, data_delete);
     }
     this.get_hangtonkho = function (id) {
-        return $http.get("/api/Api_TonkhoHL/" + id).then(function (response) {
+        return $http.get("/api/Api_Checktonkho/" + id).then(function (response) {
             return response.data;
         });
     };
@@ -729,5 +729,13 @@ app.service('purphutrachService', function ($http) {
     };
     this.delete_purphutrach = function (id, data_delete) {
         return $http.delete('/api/Api_PurPhuTrach/' + id, data_delete);
+    };
+});
+
+app.service('productdetailsService', function ($http) {
+    this.get_productdetails = function (mahang) {
+        return $http.get('/api/Api_ProductsKH/' + mahang).then(function (response) {
+            return response.data;
+        });
     };
 });

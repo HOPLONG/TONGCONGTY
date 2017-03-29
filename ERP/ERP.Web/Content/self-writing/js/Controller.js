@@ -42,6 +42,7 @@ app.controller('hanghoaCtrl', function (hanghoaService, $scope) {
             KHOI_LUONG: $scope.khoiluong,
             XUAT_XU: $scope.xuatxu,
             THONG_SO_KY_THUAT: thongso,
+            GIA_LIST : $scope.gialist,
             QUY_CACH_DONG_GOI: donggoi,
             BAO_HANH : $scope.baohanh,
             DON_VI_TINH: $scope.donvitinh,
@@ -79,6 +80,7 @@ app.controller('hanghoaCtrl', function (hanghoaService, $scope) {
             KHOI_LUONG: $scope.item.KHOI_LUONG,
             XUAT_XU: $scope.item.XUAT_XU,
             THONG_SO_KY_THUAT: thongso,
+            GIA_LIST : $scope.item.GIA_LIST,
             QUY_CACH_DONG_GOI: donggoi,
             BAO_HANH: $scope.item.BAO_HANH,
             DON_VI_TINH: $scope.item.DON_VI_TINH,
@@ -1899,6 +1901,23 @@ app.controller('DonhangdukienCtrl', function (DonhangdukienService, $scope) {
     };
 
 });
+
+app.controller('productdetailsCtrl', function (productdetailsService, $scope) {
+    $scope.load_productdetails = function () {
+        var url = document.location.href;
+        //this removes the anchor at the end, if there is one
+        url = url.substring(0, (url.indexOf("#") == -1) ? url.length : url.indexOf("#"));
+        //this removes the query after the file name, if there is one
+        url = url.substring(0, (url.indexOf("?") == -1) ? url.length : url.indexOf("?"));
+        //this removes everything before the last slash in the path
+        url = url.substring(url.lastIndexOf("/") + 1, url.length);
+        productdetailsService.get_productdetails(url).then(function (a) {
+            $scope.list_productdetails = a;
+        });
+    };
+    $scope.load_productdetails();
+});
+
 
 
 
