@@ -23,7 +23,7 @@ app.controller('hanghoaCtrl', function (hanghoaService, $scope) {
     }
     $scope.loadQuanTam();
     $scope.loadHangHoa();
-    
+
     $scope.manhomhang = "AUTONICS";
 
     $scope.add = function () {
@@ -42,9 +42,9 @@ app.controller('hanghoaCtrl', function (hanghoaService, $scope) {
             KHOI_LUONG: $scope.khoiluong,
             XUAT_XU: $scope.xuatxu,
             THONG_SO_KY_THUAT: thongso,
-            GIA_LIST : $scope.gialist,
+            GIA_LIST: $scope.gialist,
             QUY_CACH_DONG_GOI: donggoi,
-            BAO_HANH : $scope.baohanh,
+            BAO_HANH: $scope.baohanh,
             DON_VI_TINH: $scope.donvitinh,
             HINH_ANH: name_without_ext,
             GHI_CHU: $scope.ghichu,
@@ -80,7 +80,7 @@ app.controller('hanghoaCtrl', function (hanghoaService, $scope) {
             KHOI_LUONG: $scope.item.KHOI_LUONG,
             XUAT_XU: $scope.item.XUAT_XU,
             THONG_SO_KY_THUAT: thongso,
-            GIA_LIST : $scope.item.GIA_LIST,
+            GIA_LIST: $scope.item.GIA_LIST,
             QUY_CACH_DONG_GOI: donggoi,
             BAO_HANH: $scope.item.BAO_HANH,
             DON_VI_TINH: $scope.item.DON_VI_TINH,
@@ -116,7 +116,7 @@ app.controller('hanghoaCtrl', function (hanghoaService, $scope) {
         });
         return total;
     };
-    
+
 });
 
 app.controller('NhomvthhCtrl', function (NhomvthhService, $scope) {
@@ -132,7 +132,7 @@ app.controller('NhomvthhCtrl', function (NhomvthhService, $scope) {
             CHUNG_LOAI_HANG: $scope.chungloaihang,
             MA_NHOM_HANG_CHA: $scope.manhomhangcha,
             GHI_CHU: $scope.ghichu
-            
+
         }
         NhomvthhService.add(data_add).then(function (response) {
             $scope.loadHangSP();
@@ -153,7 +153,7 @@ app.controller('NhomvthhCtrl', function (NhomvthhService, $scope) {
             CHUNG_LOAI_HANG: $scope.item.CHUNG_LOAI_HANG,
             MA_NHOM_HANG_CHA: $scope.item.MA_NHOM_HANG_CHA,
             GHI_CHU: $scope.item.GHI_CHU
-          
+
         }
         NhomvthhService.save(hangsp, data_update).then(function (response) {
             $scope.loadHangHoa();
@@ -236,7 +236,7 @@ app.controller('userCtrl', function (userService, $scope) {
 
     $scope.loadUser();
 
-    
+
 
     $scope.add = function () {
         $("textarea[name=thanhtich]").val(CKEDITOR.instances.thanhtich.getData());
@@ -249,7 +249,7 @@ app.controller('userCtrl', function (userService, $scope) {
             HO_VA_TEN: $scope.hovaten,
             SDT: $scope.sdt,
             EMAIL: $scope.email,
-            AVATAR : name_without_ext,
+            AVATAR: name_without_ext,
             IS_ADMIN: $scope.admin,
             ALLOWED: $scope.allowed,
             MA_CONG_TY: "HOPLONG",
@@ -261,7 +261,7 @@ app.controller('userCtrl', function (userService, $scope) {
                 GIOI_TINH: $scope.gioitinh,
                 NGAY_SINH: $scope.ngaysinh,
                 QUE_QUAN: $scope.quequan,
-                THANH_TICH_CONG_TAC : thanhtich,
+                THANH_TICH_CONG_TAC: thanhtich,
                 TRINH_DO_HOC_VAN: $scope.trinhdohocvan,
                 MA_PHONG_BAN: $scope.maphongban
             }
@@ -296,7 +296,7 @@ app.controller('userCtrl', function (userService, $scope) {
             PASSWORD: $scope.nv.PASSWORD,
             HO_VA_TEN: $scope.nv.HO_VA_TEN,
             SDT: $scope.nv.SDT,
-            AVATAR : name_without_ext,
+            AVATAR: name_without_ext,
             EMAIL: $scope.nv.EMAIL,
             IS_ADMIN: $scope.nv.IS_ADMIN,
             ALLOWED: $scope.nv.ALLOWED,
@@ -428,7 +428,7 @@ app.controller('taikhoanCtrl', function (taikhoanService, $scope) {
 
     $scope.delete = function (sotk) {
         var data_delete = {
-            SO_TK : sotk
+            SO_TK: sotk
         }
 
         taikhoanService.delete(sotk).then(function (response) {
@@ -452,7 +452,7 @@ app.controller('danhmucCtrl', function (danhmucService, $scope) {
     $scope.transfer('04');
     $scope.loadDanhMuc();
     $scope.checked_fruits = [];
-    
+
     $scope.save = function () {
         var a = $('#imgInp').val();
         var name_without_ext = (a.split('\\').pop().split('/').pop().split())[0];
@@ -474,7 +474,7 @@ app.controller('danhmucCtrl', function (danhmucService, $scope) {
             }
             danhmucService.add_postcategories(postcate).then(function (response) {
                 $scope.loadDanhMuc();
-                
+
             });
         });
     };
@@ -514,7 +514,7 @@ app.controller('imgCtrl', function ($scope) {
     });
 });
 
-app.controller('menuCtrl', function (menuService,$scope) {
+app.controller('menuCtrl', function (menuService, $scope) {
     $scope.load_menu = function () {
         var username = $('#username').val();
         menuService.get_menu(username).then(function (a) {
@@ -525,7 +525,7 @@ app.controller('menuCtrl', function (menuService,$scope) {
 
     $scope.edit = function (menucha) {
         var username = $('#username').val();
-        menuService.get_menucha(username,menucha).then(function (a) {
+        menuService.get_menucha(username, menucha).then(function (a) {
             $scope.danhsachmenucha = a;
         });
     };
@@ -557,7 +557,7 @@ app.controller('menuCtrl', function (menuService,$scope) {
         }
     };
 
-    $scope.click = function (abc,item) {
+    $scope.click = function (abc, item) {
         var maphongban = $('#maphongban').val();
         var username = $('#username').val();
         $scope.item = item;
@@ -566,15 +566,15 @@ app.controller('menuCtrl', function (menuService,$scope) {
             MA_PHONG_BAN: maphongban,
             USERNAME: username,
             TRANG_THAI: a,
-            MA_MENU : abc
+            MA_MENU: abc
         }
-        menuService.save_menu(maphongban,username,abc,data_save).then(function (response) {
+        menuService.save_menu(maphongban, username, abc, data_save).then(function (response) {
             $scope.load_menu();
         });
     }
 });
 
-app.controller('userdetailCtrl', function (userdetailService,$scope) {
+app.controller('userdetailCtrl', function (userdetailService, $scope) {
     $scope.load_userdetails = function () {
         var username = $('#username').val();
         userdetailService.get_details(username).then(function (a) {
@@ -582,7 +582,7 @@ app.controller('userdetailCtrl', function (userdetailService,$scope) {
         });
     };
     $scope.load_nguoidungdetails = function (id) {
-        
+
         userdetailService.get_details(id).then(function (a) {
             $scope.list_details = a;
         });
@@ -594,7 +594,20 @@ app.controller('userdetailCtrl', function (userdetailService,$scope) {
         });
     };
 
+    $scope.transfer = function (item) {
+        $scope.item = item;
+    };
 
+    $scope.edit = function (username) {
+        var a = $('#imgInp').val();
+        var name_without_ext = (a.split('\\').pop().split('/').pop().split())[0];
+        var data_save = {
+            AVATAR: name_without_ext
+        }
+        userdetailService.edit_image(username, data_save).then(function (response) {
+            $scope.load_userdetails();
+        });
+    };
 
     $scope.load_userdetails();
 
@@ -616,8 +629,8 @@ app.controller('userdetailCtrl', function (userdetailService,$scope) {
         });
 
     };
-    
-    
+
+
 });
 
 app.controller('bangchamcongCtrl', function (bangchamcongService, $scope) {
@@ -640,7 +653,7 @@ app.controller('bangluongCtrl', function (bangluongService, $scope) {
     $scope.load_bangluong();
 });
 
-app.controller('addmenuCtrl', function (addmenuService,menuService ,$scope) {
+app.controller('addmenuCtrl', function (addmenuService, menuService, $scope) {
     $scope.load_menu = function () {
         addmenuService.get_menu().then(function (a) {
             $scope.dsmenu = a;
@@ -653,7 +666,7 @@ app.controller('addmenuCtrl', function (addmenuService,menuService ,$scope) {
             MA_MENU: $scope.ma_menu,
             TEN_MENU: $scope.ten_menu,
             LINK: $scope.link_menu,
-            MENU_CHA : $scope.menu_cha
+            MENU_CHA: $scope.menu_cha
         }
         addmenuService.add_menu(data_add).then(function (response) {
             $scope.load_menu();
@@ -684,24 +697,24 @@ app.controller('addmenuCtrl', function (addmenuService,menuService ,$scope) {
             MA_MENU: mamenu,
             TEN_MENU: $scope.newmodel.TEN_MENU,
             LINK: $scope.newmodel.LINK,
-            MENU_CHA : $scope.newmodel.MENU_CHA
+            MENU_CHA: $scope.newmodel.MENU_CHA
         }
-        addmenuService.save_menu(mamenu,data_save).then(function (response) {
+        addmenuService.save_menu(mamenu, data_save).then(function (response) {
             $scope.load_menu();
         });
     };
 
     $scope.delete = function (mamenu) {
         var data_delete = {
-            MA_MENU : mamenu
+            MA_MENU: mamenu
         }
-        addmenuService.delete_menu(mamenu,data_delete).then(function (response) {
+        addmenuService.delete_menu(mamenu, data_delete).then(function (response) {
             $scope.load_menu();
         });
     };
 });
 
-app.controller('tonghopnvCtrl', function (tonghopnvService,$scope) {
+app.controller('tonghopnvCtrl', function (tonghopnvService, $scope) {
     $scope.load_tonghop = function () {
         tonghopnvService.get_tonghop().then(function (a) {
             $scope.listtonghop = a;
@@ -714,17 +727,17 @@ app.controller('tonghopnvCtrl', function (tonghopnvService,$scope) {
 app.controller('dsnghiepvuCtrl', function (dsnghiepvuService, $scope) {
     $scope.load_dsnghiepvu = function (id_menu) {
 
-            //this gets the full url
-            var url = document.location.href;
-            //this removes the anchor at the end, if there is one
-            url = url.substring(0, (url.indexOf("#") == -1) ? url.length : url.indexOf("#"));
-            //this removes the query after the file name, if there is one
-            url = url.substring(0, (url.indexOf("?") == -1) ? url.length : url.indexOf("?"));
-            //this removes everything before the last slash in the path
-            url = url.substring(url.lastIndexOf("/") + 1, url.length);
-            //return
-            console.log(url);
-        
+        //this gets the full url
+        var url = document.location.href;
+        //this removes the anchor at the end, if there is one
+        url = url.substring(0, (url.indexOf("#") == -1) ? url.length : url.indexOf("#"));
+        //this removes the query after the file name, if there is one
+        url = url.substring(0, (url.indexOf("?") == -1) ? url.length : url.indexOf("?"));
+        //this removes everything before the last slash in the path
+        url = url.substring(url.lastIndexOf("/") + 1, url.length);
+        //return
+        console.log(url);
+
         var pathArray = window.location.pathname.split('/');
         dsnghiepvuService.get_dsnghiepvu(url).then(function (a) {
             $scope.dsnghiepvu = a;
@@ -738,7 +751,7 @@ app.controller('dsnghiepvuCtrl', function (dsnghiepvuService, $scope) {
     }
 
     $scope.save = function (id) {
-        
+
         var data_update = {
             MO_TA: $scope.item.MO_TA
 
@@ -775,7 +788,7 @@ app.controller('danhsachnghiepvuCtrl', function (danhsachnghiepvuService, $scope
     }
 });
 
-app.controller('chitietbaivietCtrl', function (chitietbaivietService,$scope) {
+app.controller('chitietbaivietCtrl', function (chitietbaivietService, $scope) {
     $scope.checkid = function (item) {
         var nguoidangbai = item;
         console.log(nguoidangbai);
@@ -785,45 +798,45 @@ app.controller('chitietbaivietCtrl', function (chitietbaivietService,$scope) {
         } else {
             return "notshow";
         }
-     }
-     $scope.checkid();
+    }
+    $scope.checkid();
 
-     $scope.load_chitietbaiviet = function () {
+    $scope.load_chitietbaiviet = function () {
 
-         //this gets the full url
-         var url = document.location.href;
-         //this removes the anchor at the end, if there is one
-         url = url.substring(0, (url.indexOf("#") == -1) ? url.length : url.indexOf("#"));
-         //this removes the query after the file name, if there is one
-         url = url.substring(0, (url.indexOf("?") == -1) ? url.length : url.indexOf("?"));
-         //this removes everything before the last slash in the path
-         url = url.substring(url.lastIndexOf("/") + 1, url.length);
-         //return
-         var pathArray = window.location.pathname.split('/');
-         chitietbaivietService.get_chitietbaiviet(url).then(function (a) {
-             $scope.listchitiet = a;
-         });
-     };
-     $scope.load_chitietbaiviet();
+        //this gets the full url
+        var url = document.location.href;
+        //this removes the anchor at the end, if there is one
+        url = url.substring(0, (url.indexOf("#") == -1) ? url.length : url.indexOf("#"));
+        //this removes the query after the file name, if there is one
+        url = url.substring(0, (url.indexOf("?") == -1) ? url.length : url.indexOf("?"));
+        //this removes everything before the last slash in the path
+        url = url.substring(url.lastIndexOf("/") + 1, url.length);
+        //return
+        var pathArray = window.location.pathname.split('/');
+        chitietbaivietService.get_chitietbaiviet(url).then(function (a) {
+            $scope.listchitiet = a;
+        });
+    };
+    $scope.load_chitietbaiviet();
 
-     $scope.edit = function (item) {
-         $scope.item = item;
-         var noidungvalue = $('.' + item.MA_BAI_VIET + '-1').html();
-         CKEDITOR.instances.editnoidung.setData(noidungvalue);
-     }
+    $scope.edit = function (item) {
+        $scope.item = item;
+        var noidungvalue = $('.' + item.MA_BAI_VIET + '-1').html();
+        CKEDITOR.instances.editnoidung.setData(noidungvalue);
+    }
 
-     $scope.save = function (mabaiviet) {
-         $("textarea[name=editnoidung]").val(CKEDITOR.instances.editnoidung.getData());
-         var editnoidung = $("[name=editnoidung]").val();
-         var data_save = {
-             MA_BAI_VIET: mabaiviet,
-             NOI_DUNG_BAI_VIET: editnoidung,
-             TIEU_DE_BAI_VIET: $scope.item.TIEU_DE_BAI_VIET,
-         }
-         chitietbaivietService.save(mabaiviet, data_save).then(function (response) {
-             $scope.load_chitietbaiviet();
-         });
-     }
+    $scope.save = function (mabaiviet) {
+        $("textarea[name=editnoidung]").val(CKEDITOR.instances.editnoidung.getData());
+        var editnoidung = $("[name=editnoidung]").val();
+        var data_save = {
+            MA_BAI_VIET: mabaiviet,
+            NOI_DUNG_BAI_VIET: editnoidung,
+            TIEU_DE_BAI_VIET: $scope.item.TIEU_DE_BAI_VIET,
+        }
+        chitietbaivietService.save(mabaiviet, data_save).then(function (response) {
+            $scope.load_chitietbaiviet();
+        });
+    }
 });
 
 
@@ -877,7 +890,7 @@ app.controller('phanquyenmenuCtrl', function (phanquyenService, $scope) {
                     var data_addnew = {
                         TRANG_THAI: 1,
                         MA_MENU: tenmenu,
-                        USERNAME : url,
+                        USERNAME: url,
                     }
                     phanquyenService.add_trangthai(data_addnew).then(function (response) {
                         $scope.load_menu();
@@ -891,7 +904,7 @@ app.controller('phanquyenmenuCtrl', function (phanquyenService, $scope) {
         });
     };
 
-    $scope.click = function (trangthai,mamenu) {
+    $scope.click = function (trangthai, mamenu) {
         var url = document.location.href;
         //this removes the anchor at the end, if there is one
         url = url.substring(0, (url.indexOf("#") == -1) ? url.length : url.indexOf("#"));
@@ -899,7 +912,7 @@ app.controller('phanquyenmenuCtrl', function (phanquyenService, $scope) {
         url = url.substring(0, (url.indexOf("?") == -1) ? url.length : url.indexOf("?"));
         //this removes everything before the last slash in the path
         url = url.substring(url.lastIndexOf("/") + 1, url.length);
-        
+
         var pathArray = window.location.pathname.split('/');
         var data_save = {
             USERNAME: url,
@@ -956,7 +969,7 @@ app.controller('nhomnghiepvuCtrl', function (nhomnghiepvuService, $scope) {
         var data_add = {
             TEN_NHOM: $scope.tennhom,
             DIEN_GIAI: $scope.diengiai,
-            TRUC_THUOC : "HOPLONG"
+            TRUC_THUOC: "HOPLONG"
         }
         nhomnghiepvuService.add_nhomnghiepvu(data_add).then(function (response) {
             $scope.load_nhomnghiepvu();
@@ -987,7 +1000,7 @@ app.controller('nhomnghiepvuCtrl', function (nhomnghiepvuService, $scope) {
         $('#myDetails').modal('toggle');
         var tennhom = tennhom;
         nhomnghiepvuService.get_details(tennhom).then(function (z) {
-            $scope.list_hovaten = z;           
+            $scope.list_hovaten = z;
         });
         nhomnghiepvuService.get_mota(tennhom).then(function (h) {
             $scope.list_mota = h;
@@ -1014,7 +1027,7 @@ app.controller('nhomnghiepvuCtrl', function (nhomnghiepvuService, $scope) {
                 }
             });
         };
-    };   
+    };
 });
 
 
@@ -1046,7 +1059,7 @@ app.controller('chitietnghiepvuCtrl', function (chitietnghiepvuService, $scope) 
                     return ("hienthi");
                 };
                 $scope.delete = function () {
-                    chitietnghiepvuService.delete_chitietnhomnghiepvu(url,mamota).then(function (response) {
+                    chitietnghiepvuService.delete_chitietnhomnghiepvu(url, mamota).then(function (response) {
                         reload();
                     });
                 };
@@ -1061,8 +1074,8 @@ app.controller('chitietnghiepvuCtrl', function (chitietnghiepvuService, $scope) 
                     }
                     chitietnghiepvuService.add_chitietnhomnghiepvu(data_add);
                     //chitietnghiepvuService.add_chitietnhomnghiepvu(data_add).then(function (response) {
-                        //reload();
-                   // });
+                    //reload();
+                    // });
                 };
             }
         });
@@ -1179,7 +1192,7 @@ app.controller('congtyCtrl', function (congtyService, $scope) {
 
     $scope.delete = function (macongty) {
         var data_delete = {
-            MA_CONG_TY : macongty
+            MA_CONG_TY: macongty
         }
         congtyService.delete_congty(macongty, data_delete).then(function (response) {
             $scope.load_congty();
@@ -1200,22 +1213,22 @@ app.controller('mohinhcongtyCtrl', function (mohinhcongtyService, $scope) {
         $scope.item = item;
     };
 
-    $scope.add = function(){
+    $scope.add = function () {
         var data_add = {
             MA_MO_HINH: $scope.ma_mo_hinh,
             TEN_MO_HINH: $scope.ten_mo_hinh,
-            GHI_CHU : $scope.ghi_chu
+            GHI_CHU: $scope.ghi_chu
         }
-        mohinhcongtyService.add_mohinhcongty(data_add).then(function(response){
+        mohinhcongtyService.add_mohinhcongty(data_add).then(function (response) {
             $scope.load_mohinhcongty();
         });
     };
 
-    $scope.save = function (mamohinh) { 
+    $scope.save = function (mamohinh) {
         var data_save = {
             MA_MO_HINH: mamohinh,
-            TEN_MO_HINH : $scope.item.TEN_MO_HINH,
-            GHI_CHU : $scope.item.GHI_CHU
+            TEN_MO_HINH: $scope.item.TEN_MO_HINH,
+            GHI_CHU: $scope.item.GHI_CHU
         }
         mohinhcongtyService.save_mohinhcongty(mamohinh, data_save).then(function (response) {
             $scope.load_mohinhcongty();
@@ -1224,7 +1237,7 @@ app.controller('mohinhcongtyCtrl', function (mohinhcongtyService, $scope) {
 
     $scope.delete = function (mamohinh) {
         var data_delete = {
-            MA_MO_HINH : mamohinh
+            MA_MO_HINH: mamohinh
         }
         mohinhcongtyService.delete_mohinhcongty(mamohinh, data_delete).then(function (response) {
             $scope.load_mohinhcongty();
@@ -1278,8 +1291,8 @@ app.controller('dichvuCtrl', function (dichvuService, $scope) {
 
 
 app.controller('hangduocquantamCtrl', function (hangduocquantamService, $scope) {
-    $scope.load_hangduocquantam = function () { 
-        hangduocquantamService.get_hangduocquantam().then(function(a){
+    $scope.load_hangduocquantam = function () {
+        hangduocquantamService.get_hangduocquantam().then(function (a) {
             $scope.list_hangduocquantam = a;
         });
     };
@@ -1709,7 +1722,7 @@ app.controller('thamchieuchungtuCtrl', function (thamchieuchungtuService, $scope
     };
 });
 
-app.controller('salephutrachCtrl', function (salephutrachService,$scope) {
+app.controller('salephutrachCtrl', function (salephutrachService, $scope) {
     $scope.load_salephutrach = function () {
         salephutrachService.get_salephutrach().then(function (a) {
             $scope.listsalephutrach = a;
@@ -1743,7 +1756,7 @@ app.controller('salephutrachCtrl', function (salephutrachService,$scope) {
             SALES_PHU_TRACH: $scope.sales_phu_trach,
             NGAY_BAT_DAU_PHU_TRACH: $scope.ngay_bat_dau_phu_trach,
             NGAY_KET_THUC_PHU_TRACH: $scope.ngay_ket_thuc_phu_trach,
-            TRANG_THAI : $scope.trangthai,
+            TRANG_THAI: $scope.trangthai,
         }
         salephutrachService.add_salephutrach(data_add).then(function (response) {
             $scope.load_salephutrach();
