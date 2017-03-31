@@ -42,6 +42,21 @@
                                                 <input type="text" placeholder="Mã hàng" class="form-control input-md" ng-model="mahang">
                                             </div>                                           
                                         </div>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <input type="text" placeholder="Mã chuẩn" class="form-control input-md" ng-model="machuan">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <input type="text" placeholder="Mã nhập hàng" class="form-control input-md" ng-model="manhaphang">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <input type="text" placeholder="Mã chuyển đổi" class="form-control input-md" ng-model="machuyendoi">
+                                            </div>
+                                        </div>
                                         <!-- Text input-->
                                         <div class="form-group">
                                             <div class="col-md-12">
@@ -73,6 +88,11 @@
                                         <div class="form-group">
                                             <div class="col-md-12">
                                                 <input type="text" placeholder="Bảo hành" class="form-control input-md" ng-model="baohanh">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <input type="text" placeholder="Giá nhập" class="form-control input-md" ng-model="gianhap">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -197,7 +217,18 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 container_right">
-                                    <div class="col-md-12 content_right">                                        
+                                    <div class="col-md-12 content_right"> 
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" style="padding-top: 0px !important" for="name">Discontinue </label>
+                                            <div class="col-md-9">
+                                                <input type="checkbox" ng-model="discontinue">
+                                            </div>
+                                        </div>    
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <textarea id="ghichu" name="ghichu" placeholder="Thông số" class="form-control input-md" ng-model="thongso"></textarea>
+                                            </div>
+                                        </div>                                                                            
                                         <div class="form-group" >
                                             <label class="col-md-2 control-label ckeditor" for="name">Đóng gói: </label>
                                             <div class="col-md-10 ckeditor">
@@ -207,7 +238,7 @@
                                         <div class="form-group">
                                             <label class="col-md-2 control-label ckeditor" for="name"> Thông số kỹ thuật: </label>
                                             <div class="col-md-10 ckeditor">
-                                                <textarea id="thongso" name="thongso" placeholder="Specification" class="form-control input-md" ng-model="thongso"></textarea>
+                                                <textarea id="thongso" name="thongso" placeholder="Specification" class="form-control input-md" ng-model="thongsokythuat"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -255,6 +286,24 @@
                                                 <input type="text" placeholder="Product Code" class="form-control input-md" ng-model="item.MA_HANG">
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="name">Mã chuẩn: </label>
+                                            <div class="col-md-9">
+                                                <input type="text" placeholder="Product Code" class="form-control input-md" ng-model="item.MA_CHUAN">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="name">Mã nhập hàng: </label>
+                                            <div class="col-md-9">
+                                                <input type="text" placeholder="Product Code" class="form-control input-md" ng-model="item.MA_NHAP_HANG">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="name">Mã chuyển đổi: </label>
+                                            <div class="col-md-9">
+                                                <input type="text" placeholder="Product Code" class="form-control input-md" ng-model="item.MA_CHUYEN_DOI">
+                                            </div>
+                                        </div>
                                         <!-- Text input-->
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="name">Tên hàng:</label>
@@ -290,6 +339,12 @@
                                             <label class="col-md-3 control-label" for="name">Bảo hành(tháng): </label>
                                             <div class="col-md-9">
                                                 <input type="text" placeholder="Warranty" class="form-control input-md" ng-model="item.BAO_HANH">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="name">Giá nhập: </label>
+                                            <div class="col-md-9">
+                                                <input type="text" placeholder="Giá list" class="form-control input-md" ng-model="item.GIA_NHAP">
                                             </div>
                                         </div>
                                         <!-- Text input-->
@@ -419,8 +474,19 @@
                                             </ul>
                                         </div>
                                     </div>
-                                </div>
+                                </div>                              
                                 <div class="col-md-6 container_right">
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" style="padding-top: 0px !important" for="name">Discontinue </label>
+                                        <div class="col-md-9">
+                                            <input type="checkbox" ng-model="item.DISCONTINUE">
+                                        </div>
+                                    </div> 
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <textarea id="ghichu" name="ghichu" placeholder="Thông số" class="form-control input-md" ng-model="item.THONG_SO"></textarea>
+                                        </div>
+                                    </div>                                   
                                     <div class="form-group">
                                         <label class="col-md-2 control-label ckeditor" for="name">Đóng gói: </label>
                                         <div class="col-md-10 ckeditor">
@@ -428,13 +494,12 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-2 control-label ckeditor" for="name">Thông số: </label>
+                                        <label class="col-md-2 control-label ckeditor" for="name">Thông số kĩ thuật: </label>
                                         <div class="col-md-10 ckeditor">
                                             <textarea id="editthongso" name="editthongso" placeholder="Details" class="form-control input-md" ng-model="item.THONG_SO_KY_THUAT"></textarea>
                                         </div>
-                                    </div>
-                                </div>
-                                
+                                    </div>                                  
+                                </div>                              
                                 <script>
                                     CKEDITOR.replace('editdonggoi', {
                                         height: 150
@@ -499,7 +564,7 @@
                         <div class="col-md-9">
                             <div style="margin-bottom: 5%;" class="col-md-12">
                                 <h1>{{item.TEN_HANG | uppercase}}</h1>
-                                <div class="col-md-3 detail">Mã hàng: {{item.MA_HANG}}</div>
+                                <div class="col-md-3 detail">Mã hàng: {{item.MA_HANG}} {{(item.THONG_SO)}}</div>
                                 <div class="col-md-2 detail">Hãng: {{item.MA_NHOM_HANG}}</div>
                                 <div class="col-md-2 detail">Xuất xứ: {{item.XUAT_XU}}</div>
                             </div>
@@ -516,20 +581,28 @@
                                             <div class="col-md-6">
                                                 <table class="table noborder">
                                                     <tr>
-                                                        <td>Unit</td>
-                                                        <td>{{item.DON_VI_TINH}}</td>
+                                                        <td>Mã chuẩn</td>
+                                                        <td>{{item.MA_CHUAN}}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Khối lượng:</td>
-                                                        <td></td>
+                                                        <td>Mã nhập hàng:</td>
+                                                        <td>{{item.MA_NHAP_HANG}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Mã chuyển đổi:</td>
+                                                        <td>{{item.MA_CHUYEN_DOI}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Giá bán:</td>
                                                         <td>{{item.GIA_LIST}}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Properties</td>
-                                                        <td></td>
+                                                        <td>Giá nhập</td>
+                                                        <td>{{item.GIA_NHAP}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Đơn vị tính</td>
+                                                        <td>{{item.DON_VI_TINH}}</td>
                                                     </tr>
                                                 </table>
                                             </div>
@@ -541,16 +614,20 @@
                                                     </tr>
                                                     <tr>
                                                         <td>Sale Account</td>
-                                                        <td></td>
+                                                        <td>{{item.TK_DOANH_THU}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>COGS Account</td>
-                                                        <td></td>
+                                                        <td>{{item.TK_HACH_TOAN_KHO}}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Note</td>
-                                                        <td></td>
+                                                        <td>TK chi phí</td>
+                                                        <td>{{item.TK_CHI_PHI}}</td>
                                                     </tr>
+                                                    <tr>
+                                                        <td>Ghi chú</td>
+                                                        <td>{{item.GHI_CHU}}</td>
+                                                    </tr>                                            
                                                 </table>
                                             </div>
                                         </div>
@@ -570,7 +647,7 @@
                                     </div>
 
                                     <div id="thongsokythuat" class="tab-pane fade" style="box-shadow: 3px 3px 3px #ddd">
-                                        <div ng-bind-html="item.THONG_SO_KY_THUAT | unsafe"></div>
+                                        <div ng-bind-html="item.THONG_SO_KY_THUAT | unsafe"></div>                                       
                                     </div>
                                 </div>
                             </div>
@@ -1795,7 +1872,7 @@
 
         
 
-    </div>   
+     
     <script>
     (function () {
 
@@ -1828,6 +1905,7 @@
 
     })();
     </script>
+
 </div>
 
 <script src="~/Content/download/angularjs/angular-ui-router.js"></script>

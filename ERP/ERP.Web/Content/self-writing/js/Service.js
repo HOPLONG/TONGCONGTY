@@ -744,3 +744,130 @@ app.service('productdetailsService', function ($http) {
     };
 });
 
+
+// Khach hang
+app.service('khachhangService', function ($http) {
+    this.get_khachhang = function () {
+        return $http.get('/api/Api_KH').then(function (response) {
+            return response.data;
+        });
+    };
+    this.get_phanloaikhach = function () {
+        return $http.get('/api/Api_LoaiKH').then(function (response) {
+            return response.data;
+        });
+    };
+    this.get_lienhekh = function (makh) {
+        return $http.get('/api/Api_LienHeKhachHang/' + makh).then(function (response) {
+            return response.data;
+        });
+    };
+    this.get_nhanvienkd = function () {
+        return $http.get('/api/Api_NhanvienKD').then(function (response) {
+            return response.data;
+        });
+    };
+
+    this.get_taikhoankh = function (makh) {
+        return $http.get('/api/Api_TaiKhoanKH/' + makh).then(function (response) {
+            return response.data;
+        });
+    };
+
+    this.get_loaitk = function () {
+        return $http.get('/api/Api_LoaiTaiKhoan').then(function (response) {
+            return response.data;
+        });
+    };
+
+    this.add_phanloaikh = function (phanloaikh_add) {
+        return $http.post('/api/Api_PhanLoaiKH', phanloaikh_add);
+    };
+
+    this.save_khachhang = function (id, kh_save) {
+        return $http.put('/api/Api_KH/' + id, kh_save);
+    };
+    this.save_phanloaikh = function (id, phanloai_save) {
+        return $http.put('/api/Api_PhanLoaiKH/' + id, phanloai_save);
+    };
+
+    this.save_lienhe = function (idlienhe, data_save) {
+        return $http.put('/api/Api_LienHeKhachHang/' + idlienhe, data_save);
+    };
+
+    this.add_lienhe = function (data_add) {
+        return $http.post('/api/Api_LienHeKhachHang', data_add);
+    };
+
+    this.add_taikhoan = function (data_add) {
+        return $http.post('/api/Api_TaiKhoanKH', data_add);
+    };
+});
+//end khach hang
+
+// Nha cung cap
+app.service('nhacungcapService', function ($http) {
+    this.get_nhacungcap = function () {
+        return $http.get('/api/Api_NhaCungCap').then(function (response) {
+            return response.data;
+        });
+    };
+    this.get_phanloaincc = function () {
+        return $http.get('/api/Api_LoaiNCC').then(function (response) {
+            return response.data;
+        });
+    };
+    this.get_lienhenhacungcap = function (mancc) {
+        return $http.get('/api/Api_LienHeNhaCungCap/' + mancc).then(function (response) {
+            return response.data;
+        });
+    };
+    this.get_nhanvienmua = function () {
+        return $http.get('/api/Api_NhanvienMua').then(function (response) {
+            return response.data;
+        });
+    };
+    this.get_loaihangcungcap = function (mancc) {
+        return $http.get('/api/Api_GetLoaiHangCungCap/' + mancc).then(function (response) {
+            return response.data;
+        });
+    };
+    this.get_taikhoanncc = function (mancc) {
+        return $http.get('/api/Api_TaiKhoanNCC/' + mancc).then(function (response) {
+            return response.data;
+        });
+    };
+
+    this.get_loaitk = function () {
+        return $http.get('/api/Api_LoaiTaiKhoan').then(function (response) {
+            return response.data;
+        });
+    };
+
+    this.get_nhomvthh = function () {
+        return $http.get('/api/Api_NhomVTHHHL').then(function (response) {
+            return response.data;
+        });
+    };
+
+    this.add_phanloaikh = function (phanloaikh_add) {
+        return $http.post('/api/Api_PhanLoaiKH', phanloaikh_add);
+    };
+
+    this.save_nhacungcap = function (mancc, kh_save) {
+        return $http.put('/api/Api_NhaCungCap/' + mancc, kh_save);
+    };
+
+    this.save_lienhencc = function (idlienhe, data_save) {
+        return $http.put('/api/Api_LienHeNhaCungCap/' + idlienhe, data_save);
+    };
+
+    this.add_lienhencc = function (data_add) {
+        return $http.post('/api/Api_LienHeNhaCungCap', data_add);
+    };
+
+    this.add_taikhoan = function (data_add) {
+        return $http.post('/api/Api_TaiKhoanNCC', data_add);
+    };
+});
+// end nha cung cap

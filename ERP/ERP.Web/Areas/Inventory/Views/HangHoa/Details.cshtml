@@ -15,15 +15,16 @@
     <div ng-repeat="item in list_productdetails" class="content">
         <div class="col-md-12">
             <div class="col-md-4">
-                <img ng-src="~/Content/Images/HangHoa/{{item.HINH_ANH}}" style="width: 90%;height: 250px;" />
+                <img ng-src="~/Content/Images/HangHoa/{{item.HINH_ANH}}" style="width: 90%;height: 285px;" />
             </div>
             <div class="col-md-8 top-content">
                 <h2 style="padding-left: 10px;color: deepskyblue;margin-bottom: 25px;">{{item.MA_HANG}} ({{item.TEN_HANG}})</h2>
+                <p>Mã chuẩn : {{item.MA_CHUAN}}</p>
+                <p>Thông số : {{item.THONG_SO}}</p>
                 <p>Giá bán : <span style="color: red;">{{item.GIA_LIST}}</span></p>
                 <p>Bảo hành : <b>{{item.BAO_HANH}} tháng</b></p>
                 <p>Xuất xứ : {{item.XUAT_XU}}</p>
                 <p>Khối lượng :{{item.KHOI_LUONG}}</p>
-                <p>Hỗ trợ kĩ thuật :</p>
             </div>
         </div>
         <div class="col-md-12" style="margin-top: 10px;margin-left: 15px;">

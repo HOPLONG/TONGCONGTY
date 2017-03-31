@@ -51,12 +51,12 @@ namespace ERP.Web.Areas.Settings.Controllers
                                 var noOfRow = workSheet.Dimension.End.Row;
                                 for (int rowIterator = 2; rowIterator <= noOfRow; rowIterator++)
                                 {
-                                    HH_TONKHO_HANG HH = new HH_TONKHO_HANG();
+                                    TONKHO_HANG HH = new TONKHO_HANG();
                                     HH.MA_HANG = workSheet.Cells[rowIterator, 1].Value.ToString();
                                     HH.MA_NHOM_HANG = workSheet.Cells[rowIterator, 2].Value.ToString();
-                                    HH.SL_TON = Convert.ToInt32(workSheet.Cells[rowIterator, 3].Value.ToString());
+                                    HH.SL_HANG = Convert.ToInt32(workSheet.Cells[rowIterator, 3].Value.ToString());
 
-                                    db.HH_TONKHO_HANG.Add(HH);
+                                    db.TONKHO_HANG.Add(HH);
 
                                     db.SaveChanges();
                                     so_dong_thanh_cong++;
