@@ -19,15 +19,15 @@ namespace ERP.Web.Areas.Settings.Controllers
             int so_dong_thanh_cong;
             int dong;
             ERP_DATABASEEntities db = new ERP_DATABASEEntities();
-            // GET: HopLong/ImportExcel
+        // GET: HopLong/ImportExcel
+        public ActionResult Index()
+        {
+            return View();
+        }
 
-        
 
-            #region "Import Tồn kho hãng"
-            public ActionResult Import_TonKhoHang()
-            {
-                return View();
-            }
+        #region "Import Tồn kho hãng"
+
             [HttpPost]
             public ActionResult Import_TonKhoHang(HttpPostedFileBase file)
             {
@@ -51,12 +51,12 @@ namespace ERP.Web.Areas.Settings.Controllers
                                 var noOfRow = workSheet.Dimension.End.Row;
                                 for (int rowIterator = 2; rowIterator <= noOfRow; rowIterator++)
                                 {
-                                    HH_TONKHO_HANG HH = new HH_TONKHO_HANG();
-                                    HH.MA_HANG = workSheet.Cells[rowIterator, 1].Value.ToString();
-                                    HH.MA_NHOM_HANG = workSheet.Cells[rowIterator, 2].Value.ToString();
-                                    HH.SL_TON = Convert.ToInt32(workSheet.Cells[rowIterator, 3].Value.ToString());
+                                    TONKHO_HANG HH = new TONKHO_HANG();
+                                    HH.MA_HANG = workSheet.Cells[rowIterator, 2].Value.ToString();
+                                    HH.MA_NHOM_HANG = workSheet.Cells[rowIterator, 3].Value.ToString();
+                                    HH.SL_HANG = Convert.ToInt32(workSheet.Cells[rowIterator, 4].Value.ToString());
 
-                                    db.HH_TONKHO_HANG.Add(HH);
+                                    db.TONKHO_HANG.Add(HH);
 
                                     db.SaveChanges();
                                     so_dong_thanh_cong++;
@@ -78,16 +78,13 @@ namespace ERP.Web.Areas.Settings.Controllers
                     ViewBag.Message = "Đã import thành công " + so_dong_thanh_cong + " dòng";
                 }
 
-                return View("Import_Hanghoa");
+                return View("Index");
             }
 
             #endregion
 
             #region "Import Phòng Ban"
-            public ActionResult Import_PhongBan()
-            {
-                return View();
-            }
+          
             [HttpPost]
             public ActionResult Import_PhongBan(FormCollection formCollection)
             {
@@ -139,15 +136,12 @@ namespace ERP.Web.Areas.Settings.Controllers
                 {
                     ViewBag.Message = "Đã import thành công " + so_dong_thanh_cong + " dòng";
                 }
-                return View("Import_Hanghoa");
+                return View("Index");
             }
             #endregion
 
             #region "Import nhan vien"
-            public ActionResult Import_Nhanvien()
-            {
-                return View();
-            }
+            
             [HttpPost]
             public ActionResult Import_Nhanvien(HttpPostedFileBase file)
             {
@@ -227,7 +221,7 @@ namespace ERP.Web.Areas.Settings.Controllers
                     ViewBag.Message = "Đã import thành công " + so_dong_thanh_cong + " dòng";
                 }
 
-                return View("Import_Hanghoa");
+                return View("Index");
             }
 
             #endregion
@@ -235,10 +229,7 @@ namespace ERP.Web.Areas.Settings.Controllers
            
 
             #region "Import công ty"
-            public ActionResult Import_Congty()
-            {
-                return View();
-            }
+            
             [HttpPost]
             public ActionResult Import_Congty(HttpPostedFileBase file)
             {
@@ -309,7 +300,7 @@ namespace ERP.Web.Areas.Settings.Controllers
                     ViewBag.Message = "Đã import thành công " + so_dong_thanh_cong + " dòng";
                 }
 
-                return View("Import_Hanghoa");
+                return View("Index");
             }
 
             #endregion
@@ -317,10 +308,7 @@ namespace ERP.Web.Areas.Settings.Controllers
             
 
             #region "Import hệ thống tài khoản"
-            public ActionResult Import_HTtaikhoan()
-            {
-                return View();
-            }
+            
             [HttpPost]
             public ActionResult Import_HTtaikhoan(HttpPostedFileBase file)
             {
@@ -348,8 +336,11 @@ namespace ERP.Web.Areas.Settings.Controllers
                                     taikhoan.SO_TK = workSheet.Cells[rowIterator, 1].Value.ToString();
                                     taikhoan.TEN_TK = workSheet.Cells[rowIterator, 2].Value.ToString();
                                     taikhoan.TINH_CHAT = workSheet.Cells[rowIterator, 3].Value.ToString();
+                                if (workSheet.Cells[rowIterator, 4].Value != null)
                                     taikhoan.TEN_TA = workSheet.Cells[rowIterator, 4].Value.ToString();
+                                    if(workSheet.Cells[rowIterator, 5].Value != null)
                                     taikhoan.TK_CAP_CHA = workSheet.Cells[rowIterator, 5].Value.ToString();
+                                if (workSheet.Cells[rowIterator, 6].Value != null)
                                     taikhoan.DIEN_GIAI = workSheet.Cells[rowIterator, 6].Value.ToString();
 
                                     db.DM_TAI_KHOAN_HACH_TOAN.Add(taikhoan);
@@ -374,7 +365,7 @@ namespace ERP.Web.Areas.Settings.Controllers
                     ViewBag.Message = "Đã import thành công " + so_dong_thanh_cong + " dòng";
                 }
 
-                return View("Import_Hanghoa");
+                return View("Index");
             }
 
             #endregion

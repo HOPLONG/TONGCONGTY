@@ -14,21 +14,23 @@ namespace ERP.Web.Models.Database
     
     public partial class KHO_GIU_HANG
     {
-        public int ID { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public KHO_GIU_HANG()
+        {
+            this.KHO_CT_GIU_HANG = new HashSet<KHO_CT_GIU_HANG>();
+        }
+    
+        public string MA_GIU_KHO { get; set; }
         public string SALES_GIU { get; set; }
-        public string KHACH_HANG { get; set; }
-        public string MA_HANG { get; set; }
+        public string MA_KHACH_HANG { get; set; }
         public System.DateTime NGAY_GIU { get; set; }
-        public Nullable<System.DateTime> NGAY_XUAT { get; set; }
-        public int SL_GIU { get; set; }
-        public string LOAI_GIU { get; set; }
-        public bool DA_XUAT { get; set; }
-        public bool CHUA_XUAT { get; set; }
         public bool HUY_DON_GIU { get; set; }
-        public string GHI_CHU { get; set; }
+        public bool DON_DANG_XUAT { get; set; }
+        public bool DON_DA_HOAN_THANH { get; set; }
     
         public virtual CCTC_NHAN_VIEN CCTC_NHAN_VIEN { get; set; }
-        public virtual HH HH { get; set; }
         public virtual KH KH { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<KHO_CT_GIU_HANG> KHO_CT_GIU_HANG { get; set; }
     }
 }

@@ -13,21 +13,21 @@ namespace ERP.Web.Api.Kho
     {
         private ERP_DATABASEEntities db = new ERP_DATABASEEntities();
         // GET: api/Checktonkho
-        public List<tonkhohanghoa> Get()
-        {
-            var query = db.Database.SqlQuery<tonkhohanghoa>("PROD_HANGHOA");
-            var result = query.ToList().Select(x => new tonkhohanghoa()
-            {
-                MA_HANG = x.MA_HANG,
-                IVHL01 = x.IVHL01,
-                IVHOPLONG = x.IVHOPLONG,
-                IVTADN = x.IVTADN,
-                IVTAHCM = x.IVTAHCM,
-                IVTAHP = x.IVTAHP
-            }).ToList();
+        //public List<tonkhohanghoa> Get()
+        //{
+        //    //var query = db.Database.SqlQuery<tonkhohanghoa>("PROD_HANGHOA");
+        //    //var result = query.ToList().Select(x => new tonkhohanghoa()
+        //    //{
+        //    //    MA_HANG = x.MA_HANG,
+        //    //    IVHL01 = x.IVHL01,
+        //    //    IVHOPLONG = x.IVHOPLONG,
+        //    //    IVTADN = x.IVTADN,
+        //    //    IVTAHCM = x.IVTAHCM,
+        //    //    IVTAHP = x.IVTAHP
+        //    //}).ToList();
             
-            return result;
-        }
+        //    return result;
+        //}
     
 
     }

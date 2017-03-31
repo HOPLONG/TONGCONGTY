@@ -12,13 +12,12 @@ namespace ERP.Web.Models.Database
     using System;
     using System.Collections.Generic;
     
-    public partial class HH_TONKHO_HANG
+    public partial class TONKHO_KYGUI_HL
     {
         public string MA_HANG { get; set; }
-        public string MA_NHOM_HANG { get; set; }
-        public int SL_TON { get; set; }
+        public int SL_KYGUI_DEN { get; set; }
+        public int SL_KYGUI_DI { get; set; }
     
         public virtual HH HH { get; set; }
-        public virtual HH_NHOM_VTHH HH_NHOM_VTHH { get; set; }
     }
 }

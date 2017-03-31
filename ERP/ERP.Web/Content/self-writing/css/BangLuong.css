@@ -21,7 +21,7 @@
     overflow-x: auto;
 }
 .maintable .table{
-    border: 1px solid black;
+    border: 1px solid white;
 }
 .maintable .table thead tr{
     background:#0099FF ; 
@@ -35,7 +35,7 @@
 .maintable .table thead tr th{
     text-align: center;
     white-space: nowrap;
-    border: 1px solid black;
+    border: 1px solid white;
     border-collapse: collapse;
 }
 .maintable .table tbody td{

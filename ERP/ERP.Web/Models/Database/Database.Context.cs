@@ -57,8 +57,6 @@ namespace ERP.Web.Models.Database
         public virtual DbSet<HH> HHs { get; set; }
         public virtual DbSet<HH_HANG_DUOC_QUAN_TAM> HH_HANG_DUOC_QUAN_TAM { get; set; }
         public virtual DbSet<HH_NHOM_VTHH> HH_NHOM_VTHH { get; set; }
-        public virtual DbSet<HH_TON_KHO> HH_TON_KHO { get; set; }
-        public virtual DbSet<HH_TONKHO_HANG> HH_TONKHO_HANG { get; set; }
         public virtual DbSet<HT_LICH_SU_DANG_NHAP> HT_LICH_SU_DANG_NHAP { get; set; }
         public virtual DbSet<HT_NGUOI_DUNG> HT_NGUOI_DUNG { get; set; }
         public virtual DbSet<KH> KHs { get; set; }
@@ -71,6 +69,7 @@ namespace ERP.Web.Models.Database
         public virtual DbSet<KHO_CHUYEN_KHO> KHO_CHUYEN_KHO { get; set; }
         public virtual DbSet<KHO_CT_CHUYEN_KHO> KHO_CT_CHUYEN_KHO { get; set; }
         public virtual DbSet<KHO_CT_DNXH> KHO_CT_DNXH { get; set; }
+        public virtual DbSet<KHO_CT_GIU_HANG> KHO_CT_GIU_HANG { get; set; }
         public virtual DbSet<KHO_CT_NHAP_KHO> KHO_CT_NHAP_KHO { get; set; }
         public virtual DbSet<KHO_CT_XUAT_KHO> KHO_CT_XUAT_KHO { get; set; }
         public virtual DbSet<KHO_DNXH> KHO_DNXH { get; set; }
@@ -99,12 +98,50 @@ namespace ERP.Web.Models.Database
         public virtual DbSet<QUY_CT_PHIEU_THU> QUY_CT_PHIEU_THU { get; set; }
         public virtual DbSet<QUY_PHIEU_CHI> QUY_PHIEU_CHI { get; set; }
         public virtual DbSet<QUY_PHIEU_THU> QUY_PHIEU_THU { get; set; }
+        public virtual DbSet<TONKHO_GIU_HL> TONKHO_GIU_HL { get; set; }
+        public virtual DbSet<TONKHO_GIU_TADN> TONKHO_GIU_TADN { get; set; }
+        public virtual DbSet<TONKHO_GIU_TAHCM> TONKHO_GIU_TAHCM { get; set; }
+        public virtual DbSet<TONKHO_GIU_TAHP> TONKHO_GIU_TAHP { get; set; }
+        public virtual DbSet<TONKHO_HANG> TONKHO_HANG { get; set; }
+        public virtual DbSet<TONKHO_HOPLONG> TONKHO_HOPLONG { get; set; }
+        public virtual DbSet<TONKHO_KYGUI_HL> TONKHO_KYGUI_HL { get; set; }
+        public virtual DbSet<TONKHO_KYGUI_TADN> TONKHO_KYGUI_TADN { get; set; }
+        public virtual DbSet<TONKHO_KYGUI_TAHCM> TONKHO_KYGUI_TAHCM { get; set; }
+        public virtual DbSet<TONKHO_KYGUI_TAHP> TONKHO_KYGUI_TAHP { get; set; }
+        public virtual DbSet<TONKHO_TADN> TONKHO_TADN { get; set; }
+        public virtual DbSet<TONKHO_TAHCM> TONKHO_TAHCM { get; set; }
+        public virtual DbSet<TONKHO_TAHP> TONKHO_TAHP { get; set; }
         public virtual DbSet<XL_DANG_KY_PHE_DUYET> XL_DANG_KY_PHE_DUYET { get; set; }
         public virtual DbSet<XL_THAM_CHIEU_CHUNG_TU> XL_THAM_CHIEU_CHUNG_TU { get; set; }
     
-        public virtual int PROD_HANGHOA()
+        public virtual ObjectResult<PROD_HANGHOA_Result> PROD_HANGHOA()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PROD_HANGHOA");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PROD_HANGHOA_Result>("PROD_HANGHOA");
+        }
+    
+        public virtual ObjectResult<DS_TONKHO_HOPLONG_Result> DS_TONKHO_HOPLONG()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DS_TONKHO_HOPLONG_Result>("DS_TONKHO_HOPLONG");
+        }
+    
+        public virtual ObjectResult<DS_TONKHO_TADN_Result> DS_TONKHO_TADN()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DS_TONKHO_TADN_Result>("DS_TONKHO_TADN");
+        }
+    
+        public virtual ObjectResult<DS_TONKHO_TAHCM_Result> DS_TONKHO_TAHCM()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DS_TONKHO_TAHCM_Result>("DS_TONKHO_TAHCM");
+        }
+    
+        public virtual ObjectResult<DS_TONKHO_TAHP_Result> DS_TONKHO_TAHP()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DS_TONKHO_TAHP_Result>("DS_TONKHO_TAHP");
+        }
+    
+        public virtual ObjectResult<DS_HANG_HOA_Result> DS_HANG_HOA()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DS_HANG_HOA_Result>("DS_HANG_HOA");
         }
     }
 }

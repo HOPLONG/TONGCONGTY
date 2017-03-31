@@ -49,30 +49,51 @@ namespace ERP.Web.Areas.Inventory.Controllers
                                 HH hh = new HH();
                                 hh.MA_HANG = workSheet.Cells[rowIterator, 2].Value.ToString();
                                 if (workSheet.Cells[rowIterator, 3].Value != null)
-                                    hh.TEN_HANG = workSheet.Cells[rowIterator, 3].Value.ToString();
-                                hh.MA_NHOM_HANG = workSheet.Cells[rowIterator, 4].Value.ToString();
+                                    hh.MA_CHUAN = workSheet.Cells[rowIterator, 3].Value.ToString();
+                                if (workSheet.Cells[rowIterator, 4].Value != null)
+                                    hh.THONG_SO = workSheet.Cells[rowIterator, 4].Value.ToString();
                                 if (workSheet.Cells[rowIterator, 5].Value != null)
-                                    hh.DON_VI_TINH = workSheet.Cells[rowIterator, 5].Value.ToString();
+                                    hh.MA_NHAP_HANG = workSheet.Cells[rowIterator, 5].Value.ToString();
                                 if (workSheet.Cells[rowIterator, 6].Value != null)
-                                    hh.KHOI_LUONG = Convert.ToInt32(workSheet.Cells[rowIterator, 6].Value);
+                                    hh.TEN_HANG = workSheet.Cells[rowIterator, 6].Value.ToString();
+                               
                                 if (workSheet.Cells[rowIterator, 7].Value != null)
-                                    hh.XUAT_XU = workSheet.Cells[rowIterator, 7].Value.ToString();
+                                    hh.MA_NHOM_HANG = workSheet.Cells[rowIterator, 7].Value.ToString();
                                 if (workSheet.Cells[rowIterator, 8].Value != null)
-                                    hh.BAO_HANH = Convert.ToInt32(workSheet.Cells[rowIterator, 8].Value);
+                                    hh.DON_VI_TINH = workSheet.Cells[rowIterator, 8].Value.ToString();
                                 if (workSheet.Cells[rowIterator, 9].Value != null)
-                                    hh.THONG_SO_KY_THUAT = workSheet.Cells[rowIterator, 9].Value.ToString();
+                                    hh.KHOI_LUONG = Convert.ToInt32(workSheet.Cells[rowIterator, 9].Value);
                                 if (workSheet.Cells[rowIterator, 10].Value != null)
-                                    hh.QUY_CACH_DONG_GOI = workSheet.Cells[rowIterator, 10].Value.ToString();
+                                    hh.XUAT_XU = workSheet.Cells[rowIterator, 10].Value.ToString();
                                 if (workSheet.Cells[rowIterator, 11].Value != null)
-                                    hh.HINH_ANH = workSheet.Cells[rowIterator, 11].Value.ToString();
+                                    hh.GIA_NHAP = Convert.ToDecimal(workSheet.Cells[rowIterator, 11].Value.ToString());
                                 if (workSheet.Cells[rowIterator, 12].Value != null)
-                                    hh.GHI_CHU = workSheet.Cells[rowIterator, 12].Value.ToString();
+                                    hh.GIA_LIST = Convert.ToDecimal(workSheet.Cells[rowIterator, 12].Value.ToString());
                                 if (workSheet.Cells[rowIterator, 13].Value != null)
-                                    hh.TK_HACH_TOAN_KHO = workSheet.Cells[rowIterator, 13].Value.ToString();
+                                    hh.BAO_HANH = Convert.ToInt32(workSheet.Cells[rowIterator, 13].Value.ToString());
+                               
                                 if (workSheet.Cells[rowIterator, 14].Value != null)
-                                    hh.TK_DOANH_THU = workSheet.Cells[rowIterator, 14].Value.ToString();
+                                    hh.THONG_SO_KY_THUAT = workSheet.Cells[rowIterator, 14].Value.ToString();
                                 if (workSheet.Cells[rowIterator, 15].Value != null)
-                                    hh.TK_CHI_PHI = workSheet.Cells[rowIterator, 15].Value.ToString();
+                                    hh.QUY_CACH_DONG_GOI = workSheet.Cells[rowIterator, 15].Value.ToString();
+                                
+                                if (workSheet.Cells[rowIterator, 16].Value != null)
+                                    hh.DISCONTINUE = Convert.ToBoolean(workSheet.Cells[rowIterator, 16].Value);
+                                if (workSheet.Cells[rowIterator, 17].Value != null)
+                                    hh.MA_CHUYEN_DOI = workSheet.Cells[rowIterator, 17].Value.ToString();
+
+                                if (workSheet.Cells[rowIterator, 18].Value != null)
+                                    hh.HINH_ANH = workSheet.Cells[rowIterator, 18].Value.ToString();
+                                if (workSheet.Cells[rowIterator, 19].Value != null)
+                                    hh.GHI_CHU = workSheet.Cells[rowIterator, 19].Value.ToString();
+
+
+                                if (workSheet.Cells[rowIterator, 20].Value != null)
+                                    hh.TK_HACH_TOAN_KHO = workSheet.Cells[rowIterator, 20].Value.ToString();
+                                if (workSheet.Cells[rowIterator, 21].Value != null)
+                                    hh.TK_DOANH_THU = workSheet.Cells[rowIterator, 21].Value.ToString();
+                                if (workSheet.Cells[rowIterator, 22].Value != null)
+                                    hh.TK_CHI_PHI = workSheet.Cells[rowIterator, 22].Value.ToString();
 
                                 db.HHs.Add(hh);
 
@@ -126,12 +147,11 @@ namespace ERP.Web.Areas.Inventory.Controllers
                             var noOfRow = workSheet.Dimension.End.Row;
                             for (int rowIterator = 2; rowIterator <= noOfRow; rowIterator++)
                             {
-                                HH_TON_KHO tonkho = new HH_TON_KHO();
-                                tonkho.MA_HANG = workSheet.Cells[rowIterator, 1].Value.ToString();
-                                tonkho.MA_KHO_GIU = workSheet.Cells[rowIterator, 2].Value.ToString();
-                                tonkho.SL = Convert.ToInt32(workSheet.Cells[rowIterator, 3].Value.ToString());
+                                TONKHO_HOPLONG tonkho = new TONKHO_HOPLONG();
+                                tonkho.MA_HANG = workSheet.Cells[rowIterator, 2].Value.ToString();
+                                tonkho.SL_HOPLONG = Convert.ToInt32(workSheet.Cells[rowIterator, 3].Value.ToString());
 
-                                db.HH_TON_KHO.Add(tonkho);
+                                db.TONKHO_HOPLONG.Add(tonkho);
 
                                 db.SaveChanges();
                                 so_dong_thanh_cong++;
@@ -183,10 +203,9 @@ namespace ERP.Web.Areas.Inventory.Controllers
                             var noOfRow = workSheet.Dimension.End.Row;
                             for (int rowIterator = 2; rowIterator <= noOfRow; rowIterator++)
                             {
-                                var mahang = workSheet.Cells[rowIterator, 1].Value.ToString();
-                                var makho = workSheet.Cells[rowIterator, 2].Value.ToString();
-                                var tonkho = db.HH_TON_KHO.Where(x => x.MA_HANG == mahang && x.MA_KHO_GIU == makho).FirstOrDefault();
-                                tonkho.SL = Convert.ToInt32(workSheet.Cells[rowIterator, 3].Value.ToString());
+                                var mahang = workSheet.Cells[rowIterator, 2].Value.ToString();
+                                var tonkho = db.TONKHO_HOPLONG.Where(x => x.MA_HANG == mahang).FirstOrDefault();
+                                tonkho.SL_HOPLONG = Convert.ToInt32(workSheet.Cells[rowIterator, 3].Value.ToString());
                                 //db.DM_HANG_TON_KHO.Add(tonkho);
 
                                 db.SaveChanges();

@@ -131,9 +131,6 @@ namespace ERP.Web.Controllers
             var user = db.HT_NGUOI_DUNG.SingleOrDefault(x => x.USERNAME == username && x.PASSWORD == password && x.ALLOWED == true);
             if (user != null)
             {
-
-
-                
                 Session["USERNAME"] = user.USERNAME;
                 Session["PASSWORD"] = user.PASSWORD;
                 Session["MA_PHONG_BAN"] = user.CCTC_NHAN_VIEN.MA_PHONG_BAN;
