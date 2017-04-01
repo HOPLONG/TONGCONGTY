@@ -19,26 +19,30 @@ namespace ERP.Web.Models.Database
         {
             this.BH_CT_BAO_GIA = new HashSet<BH_CT_BAO_GIA>();
             this.BH_DE_NGHI_GIU_HANG = new HashSet<BH_DE_NGHI_GIU_HANG>();
-            this.HH_TON_KHO = new HashSet<HH_TON_KHO>();
-            this.HH_TONKHO_HANG = new HashSet<HH_TONKHO_HANG>();
             this.HH_HANG_DUOC_QUAN_TAM = new HashSet<HH_HANG_DUOC_QUAN_TAM>();
             this.KHO_CT_CHUYEN_KHO = new HashSet<KHO_CT_CHUYEN_KHO>();
             this.KHO_CT_DNXH = new HashSet<KHO_CT_DNXH>();
+            this.KHO_CT_GIU_HANG = new HashSet<KHO_CT_GIU_HANG>();
             this.KHO_CT_NHAP_KHO = new HashSet<KHO_CT_NHAP_KHO>();
             this.KHO_CT_XUAT_KHO = new HashSet<KHO_CT_XUAT_KHO>();
-            this.KHO_GIU_HANG = new HashSet<KHO_GIU_HANG>();
         }
     
         public string MA_HANG { get; set; }
+        public string MA_CHUAN { get; set; }
+        public string THONG_SO { get; set; }
+        public string MA_NHAP_HANG { get; set; }
         public string TEN_HANG { get; set; }
         public string MA_NHOM_HANG { get; set; }
         public string DON_VI_TINH { get; set; }
         public Nullable<int> KHOI_LUONG { get; set; }
         public string XUAT_XU { get; set; }
+        public Nullable<decimal> GIA_NHAP { get; set; }
         public Nullable<decimal> GIA_LIST { get; set; }
         public Nullable<int> BAO_HANH { get; set; }
         public string THONG_SO_KY_THUAT { get; set; }
         public string QUY_CACH_DONG_GOI { get; set; }
+        public Nullable<bool> DISCONTINUE { get; set; }
+        public string MA_CHUYEN_DOI { get; set; }
         public string HINH_ANH { get; set; }
         public string GHI_CHU { get; set; }
         public string TK_HACH_TOAN_KHO { get; set; }
@@ -54,20 +58,29 @@ namespace ERP.Web.Models.Database
         public virtual DM_TAI_KHOAN_HACH_TOAN DM_TAI_KHOAN_HACH_TOAN2 { get; set; }
         public virtual HH_NHOM_VTHH HH_NHOM_VTHH { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HH_TON_KHO> HH_TON_KHO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HH_TONKHO_HANG> HH_TONKHO_HANG { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HH_HANG_DUOC_QUAN_TAM> HH_HANG_DUOC_QUAN_TAM { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KHO_CT_CHUYEN_KHO> KHO_CT_CHUYEN_KHO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KHO_CT_DNXH> KHO_CT_DNXH { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<KHO_CT_GIU_HANG> KHO_CT_GIU_HANG { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KHO_CT_NHAP_KHO> KHO_CT_NHAP_KHO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KHO_CT_XUAT_KHO> KHO_CT_XUAT_KHO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<KHO_GIU_HANG> KHO_GIU_HANG { get; set; }
+        public virtual TONKHO_GIU_HL TONKHO_GIU_HL { get; set; }
+        public virtual TONKHO_GIU_TAHCM TONKHO_GIU_TAHCM { get; set; }
+        public virtual TONKHO_GIU_TADN TONKHO_GIU_TADN { get; set; }
+        public virtual TONKHO_GIU_TAHP TONKHO_GIU_TAHP { get; set; }
+        public virtual TONKHO_HANG TONKHO_HANG { get; set; }
+        public virtual TONKHO_HOPLONG TONKHO_HOPLONG { get; set; }
+        public virtual TONKHO_KYGUI_HL TONKHO_KYGUI_HL { get; set; }
+        public virtual TONKHO_KYGUI_TAHCM TONKHO_KYGUI_TAHCM { get; set; }
+        public virtual TONKHO_KYGUI_TADN TONKHO_KYGUI_TADN { get; set; }
+        public virtual TONKHO_KYGUI_TAHP TONKHO_KYGUI_TAHP { get; set; }
+        public virtual TONKHO_TAHCM TONKHO_TAHCM { get; set; }
+        public virtual TONKHO_TADN TONKHO_TADN { get; set; }
+        public virtual TONKHO_TAHP TONKHO_TAHP { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace ERP.Web.Models.Database
             this.HHs = new HashSet<HH>();
             this.HH_NHOM_VTHH1 = new HashSet<HH_NHOM_VTHH>();
             this.NCC_LOAI_HANG_CUNG_CAP = new HashSet<NCC_LOAI_HANG_CUNG_CAP>();
-            this.HH_TONKHO_HANG = new HashSet<HH_TONKHO_HANG>();
+            this.TONKHO_HANG = new HashSet<TONKHO_HANG>();
         }
     
         public string MA_NHOM_HANG_CHI_TIET { get; set; }
@@ -36,6 +36,6 @@ namespace ERP.Web.Models.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NCC_LOAI_HANG_CUNG_CAP> NCC_LOAI_HANG_CUNG_CAP { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HH_TONKHO_HANG> HH_TONKHO_HANG { get; set; }
+        public virtual ICollection<TONKHO_HANG> TONKHO_HANG { get; set; }
     }
 }

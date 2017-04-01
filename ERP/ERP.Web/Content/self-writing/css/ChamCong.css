@@ -60,12 +60,12 @@ th{
     color: black;
 }
 .table-bordered>tbody>tr>th{
-    border: 1px solid black;
+    border: 1px solid white;
     background:  #4285F4;
     color: white;
 }
 .table-bordered>tbody>tr>td{
-    border: 1px solid black;
+    border: 1px solid #ddd;
 }
 .fa{
     font-size: 25px;

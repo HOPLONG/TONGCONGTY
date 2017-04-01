@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using ERP.Web.Models.Database;
+using ERP.Web.Models.NewModels;
 
 namespace ERP.Web.Areas.HopLong.Api.Kho
 {
@@ -17,34 +18,35 @@ namespace ERP.Web.Areas.HopLong.Api.Kho
         private ERP_DATABASEEntities db = new ERP_DATABASEEntities();
 
         // GET: api/Api_HanghoaHL
-        public List<HH> GetAllHH()
+        public List<DS_HANG_HOA_Result> GetAllHH()
         {
-            var vData = db.HHs;
-            var result = vData.ToList().Select(x => new HH()
-            {
-                MA_HANG = x.MA_HANG,
-                TEN_HANG = x.TEN_HANG,
-                MA_NHOM_HANG = x.MA_NHOM_HANG,
-                GIA_NHAP = x.GIA_NHAP,
-                THONG_SO = x.THONG_SO,
-                MA_CHUAN = x.MA_CHUAN,
-                MA_NHAP_HANG = x.MA_NHAP_HANG,
-                DISCONTINUE = x.DISCONTINUE,
-                MA_CHUYEN_DOI = x.MA_CHUYEN_DOI,
-                GIA_LIST = x.GIA_LIST,
-                DON_VI_TINH = x.DON_VI_TINH,
-                KHOI_LUONG = x.KHOI_LUONG,
-                XUAT_XU = x.XUAT_XU,
-                BAO_HANH = x.BAO_HANH,
-                THONG_SO_KY_THUAT = x.THONG_SO_KY_THUAT,
-                QUY_CACH_DONG_GOI = x.QUY_CACH_DONG_GOI,
-                HINH_ANH = x.HINH_ANH,
-                GHI_CHU = x.GHI_CHU,
-                TK_HACH_TOAN_KHO = x.TK_HACH_TOAN_KHO,
-                TK_DOANH_THU = x.TK_DOANH_THU,
-                TK_CHI_PHI = x.TK_CHI_PHI
-            }).ToList();
-            return result;
+
+            var d = db.DS_HANG_HOA();
+            // var query = db.Database.SqlQuery<Ds_Hang_Hoa>("DS_HANG_HOA").ToList();
+            //var vData = db.HHs;
+            //var result = vData.ToList().Select(x => new HH()
+            //{
+            //    MA_HANG = x.MA_HANG,
+            //    MA_CHUAN = x.MA_CHUAN,
+            //    THONG_SO = x.THONG_SO,
+            //    TEN_HANG = x.TEN_HANG,
+            //    MA_NHOM_HANG = x.MA_NHOM_HANG,
+            //    GIA_LIST = x.GIA_LIST,
+            //    DON_VI_TINH = x.DON_VI_TINH,
+            //    KHOI_LUONG = x.KHOI_LUONG,
+            //    XUAT_XU = x.XUAT_XU,
+            //    BAO_HANH = x.BAO_HANH,
+            //    THONG_SO_KY_THUAT = x.THONG_SO_KY_THUAT,
+            //    QUY_CACH_DONG_GOI = x.QUY_CACH_DONG_GOI,
+            //    HINH_ANH = x.HINH_ANH,
+            //    GHI_CHU = x.GHI_CHU,
+            //    TK_HACH_TOAN_KHO = x.TK_HACH_TOAN_KHO,
+            //    TK_DOANH_THU = x.TK_DOANH_THU,
+            //    TK_CHI_PHI = x.TK_CHI_PHI
+            //}).ToList();
+            return d.ToList();
+           // return result;
+
         }
 
        
