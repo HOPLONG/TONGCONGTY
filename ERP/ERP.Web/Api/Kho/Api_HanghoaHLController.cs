@@ -20,6 +20,7 @@ namespace ERP.Web.Areas.HopLong.Api.Kho
         // GET: api/Api_HanghoaHL
         public List<DS_HANG_HOA_Result> GetAllHH()
         {
+
             var d = db.DS_HANG_HOA();
             // var query = db.Database.SqlQuery<Ds_Hang_Hoa>("DS_HANG_HOA").ToList();
             //var vData = db.HHs;
@@ -45,6 +46,7 @@ namespace ERP.Web.Areas.HopLong.Api.Kho
             //}).ToList();
             return d.ToList();
            // return result;
+
         }
 
        

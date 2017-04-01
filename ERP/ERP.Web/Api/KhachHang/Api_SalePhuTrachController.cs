@@ -98,6 +98,8 @@ namespace ERP.Web.Api.HeThong
                 return BadRequest(ModelState);
             }
 
+
+
             KH_SALES_PHU_TRACH nv = new KH_SALES_PHU_TRACH();
             nv.ID_LIEN_HE = sale.ID_LIEN_HE;
             nv.SALES_PHU_TRACH = sale.SALES_PHU_TRACH;

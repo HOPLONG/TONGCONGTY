@@ -9,7 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using ERP.Web.Models.Database;
-
+using ERP.Web.Models.NewModels;
 namespace ERP.Web.Api.HeThong
 {
     public class Api_KHController : ApiController
@@ -17,12 +17,18 @@ namespace ERP.Web.Api.HeThong
         private ERP_DATABASEEntities db = new ERP_DATABASEEntities();
 
         // GET: api/Api_KH
-        public List<KH> GetKH()
+        public List<KhachHanghl> GetKH()
         {
-            var vData = db.KHs;
-            var result = vData.ToList().Select(x => new KH()
+            var vData = (from t1 in db.KHs
+                         join t2 in db.KH_PHAN_LOAI_KHACH on t1.MA_KHACH_HANG equals t2.MA_KHACH_HANG
+                         join t3 in db.KH_LOAI on t2.MA_LOAI_KHACH equals t3.MA_LOAI_KHACH
+                         select new { t1.MA_KHACH_HANG,t1.TEN_CONG_TY,t1.VAN_PHONG_GIAO_DICH,t1.DIA_CHI_XUAT_HOA_DON,t1.TINH,t1.QUOC_GIA,t1.MST,t1.HOTLINE,t1.EMAIL,t1.FAX,t1.LOGO,t1.WEBSITE
+                         ,t1.DIEU_KHOAN_THANH_TOAN,t1.SO_NGAY_DUOC_NO,t1.SO_NO_TOI_DA,t1.GHI_CHU,t1.TRUC_THUOC,t3.TEN_LOAI_KHACH,t2.MA_LOAI_KHACH,t2.ID});
+            var result = vData.ToList().Select(x => new KhachHanghl()
             {
                 MA_KHACH_HANG = x.MA_KHACH_HANG,
+                ID = x.ID,
+                MA_LOAI_KHACH = x.MA_LOAI_KHACH,
                 TEN_CONG_TY = x.TEN_CONG_TY,
                 VAN_PHONG_GIAO_DICH = x.VAN_PHONG_GIAO_DICH,
                 DIA_CHI_XUAT_HOA_DON = x.DIA_CHI_XUAT_HOA_DON,
@@ -38,7 +44,8 @@ namespace ERP.Web.Api.HeThong
                 SO_NGAY_DUOC_NO = x.SO_NGAY_DUOC_NO,
                 SO_NO_TOI_DA = x.SO_NO_TOI_DA,
                 GHI_CHU = x.GHI_CHU,
-                TRUC_THUOC = x.TRUC_THUOC
+                TRUC_THUOC = x.TRUC_THUOC,
+                TEN_LOAI_KHACH = x.TEN_LOAI_KHACH
             }).ToList();
             return result;
         }

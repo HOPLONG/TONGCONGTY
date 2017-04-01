@@ -147,11 +147,13 @@ namespace ERP.Web.Areas.Inventory.Controllers
                             var noOfRow = workSheet.Dimension.End.Row;
                             for (int rowIterator = 2; rowIterator <= noOfRow; rowIterator++)
                             {
+
                                 TONKHO_HOPLONG tonkho = new TONKHO_HOPLONG();
                                 tonkho.MA_HANG = workSheet.Cells[rowIterator, 2].Value.ToString();
                                 tonkho.SL_HOPLONG = Convert.ToInt32(workSheet.Cells[rowIterator, 3].Value.ToString());
 
                                 db.TONKHO_HOPLONG.Add(tonkho);
+
 
                                 db.SaveChanges();
                                 so_dong_thanh_cong++;
@@ -203,9 +205,11 @@ namespace ERP.Web.Areas.Inventory.Controllers
                             var noOfRow = workSheet.Dimension.End.Row;
                             for (int rowIterator = 2; rowIterator <= noOfRow; rowIterator++)
                             {
+
                                 var mahang = workSheet.Cells[rowIterator, 2].Value.ToString();
                                 var tonkho = db.TONKHO_HOPLONG.Where(x => x.MA_HANG == mahang).FirstOrDefault();
                                 tonkho.SL_HOPLONG = Convert.ToInt32(workSheet.Cells[rowIterator, 3].Value.ToString());
+
                                 //db.DM_HANG_TON_KHO.Add(tonkho);
 
                                 db.SaveChanges();

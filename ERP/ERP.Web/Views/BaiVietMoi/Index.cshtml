@@ -26,7 +26,7 @@
     <div class="col-md-3 ckeditor">
         <div class="listdanhmuc">
             <div class="detail_danhmuc" ng-repeat="danhmuc in danhsachdanhmuc">
-                <input type='checkbox' value="{{danhmuc.MA_DANH_MUC}}" check-list='checked_fruits' class="{{danhmuc.MA_DANH_MUC}}" ng-click="test(danhmuc)" /><span>{{danhmuc.TEN_DANH_MUC}}</span><br />
+                <input type='checkbox' value="{{danhmuc.MA_DANH_MUC}}" check-list='checked_fruits' class="{{danhmuc.MA_DANH_MUC}}" /><span>{{danhmuc.TEN_DANH_MUC}}</span><br />
             </div>
         </div>
         <form action="/BaiVietMoi/Index" ng-controller="imgCtrl" method="post">

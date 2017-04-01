@@ -1,0 +1,618 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<script src="~/Content/download/jquery.blockUI/jquery.blockUI.js"></script>
+<script src="~/Content/download/angular-messages.min.js"></script>
+<script src="~/Content/self-writing/js/BusinessServices/datepicker.js"></script>
+<script src="~/Content/self-writing/js/Controllers/NganhangCtrl/PhieuChiNganHang/ctrTraCacKhoanVay.js"></script>
+<div class="container" ng-app="myApp" ng-controller="ctrTraCacKhoanVay">
+    <br>
+    <br>
+    <br>
+    <div class="alert alert-info alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Ngân hàng</strong>
+    </div>
+    <div class="table-kt">
+        <div class="table-head bg-blue borderRadius3 clearfix">
+            <h1 style="color:black;" class="table-head-title margin0 font16 borderRadius3 bg-white pull-left bold">Ủy nhiệm chi</h1>
+        </div>
+        <div class="border padding10 borderTopNone">
+            <div class="row">
+                <div class="col-md-8">
+                    <form class="form-kt">
+                        <fieldset>
+                            <legend class="bold">Thông tin chung</legend>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div>Tài khoản chi</div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" ng-model="info.so_tai_khoan" ng-value="info.so_tai_khoan">
+                                                    <div class="input-group-btn">
+                                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-click="getTaiKhoanNganHang()">
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-center borderRadius0 padding0">
+                                                            <div class="table-responsive">
+                                                                <table class="table table-striped table-condensed table-hover" st-table="listTknhCollection" st-safe-src="listTknh">
+                                                                    <thead class="bg-blue text-white">
+                                                                        <tr>
+                                                                            <th>Số tài khoản</th>
+                                                                            <th>Tên ngân hàng</th>
+                                                                            <th>Chi nhánh</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody ng-repeat="tknh in listTknhCollection">
+                                                                        <tr style="cursor:pointer" ng-click="selectTaiKhoanNganHang(tknh)">
+                                                                            <td>{{tknh.SO_TAI_KHOAN}}</td>
+                                                                            <td>{{tknh.TEN_NGAN_HANG}}</td>
+                                                                            <td>{{tknh.CHI_NHANH}}</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" ng-model="info.ten_ngan_hang">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div>Nội dung TT</div>
+                                            </div>
+                                            <div class="col-md-8">
+
+                                                <select ng-model="info.noi_dung_thanh_toan" class="btn-group bootstrap-select form-control ClassSlect"
+                                                        ng-options="option as option for option in listNoiDungTT" ng-change="onChangeNoiDungThanhToan()"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input ng-model="info.dien_giai_noi_dung_thanh_toan" type="text" class="form-control" placeholder="{{info.noi_dung_thanh_toan}}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div>Đối tượng</div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" ng-model="info.ma_doi_tuong" ng-value="info.ma_doi_tuong">
+                                                    <div class="input-group-btn">
+                                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-click="getDoiTuong()">
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-center borderRadius0 padding0">
+                                                            <div class="table-responsive">
+                                                                <table class="table table-striped table-hover" st-table="listDoiTuongCollection" st-safe-src="listDoiTuong">
+                                                                    <thead class="bg-blue text-white">
+                                                                        <tr>
+                                                                            <th>Mã đối tượng</th>
+                                                                            <th>Tên đối tượng</th>
+                                                                            <th>Địa chỉ</th>
+                                                                            <th>Mã số thuế</th>
+                                                                            <th>Điện thoại</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody ng-repeat="doi_tuong in listDoiTuongCollection">
+                                                                        <tr style="cursor:pointer" ng-click="selectDoiTuong(doi_tuong)">
+                                                                            <td>{{doi_tuong.MA_DOI_TUONG}}</td>
+                                                                            <td>{{doi_tuong.TEN_DOI_TUONG}}</td>
+                                                                            <td>{{doi_tuong.DIA_CHI}}</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" ng-model="info.ten_doi_tuong">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div>Địa chỉ</div>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control" ng-model="info.dia_chi">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div>TK nhận</div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" ng-model="info.ncc_so_tai_khoan" ng-value="info.ncc_so_tai_khoan">
+                                                    <div class="input-group-btn">
+                                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-click="getNccTaiKhoanNganHang()">
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-center borderRadius0 padding0">
+                                                            <div class="table-responsive">
+                                                                <table class="table table-striped table-hover" st-table="listNccTknhCollection" st-safe-src="listNccTknh">
+                                                                    <thead class="bg-blue text-white">
+                                                                        <tr>
+                                                                            <th>Số tài khoản</th>
+                                                                            <th>Tên ngân hàng</th>
+                                                                            <th>Chi nhánh</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody ng-repeat="ncc_tknh in listNccTknhCollection">
+                                                                        <tr style="cursor:pointer" ng-click="selectNccTaiKhoanNganHang(ncc_tknh)">
+                                                                            <td>{{ncc_tknh.SO_TAI_KHOAN}}</td>
+                                                                            <td>{{ncc_tknh.TEN_NGAN_HANG}}</td>
+                                                                            <td>{{ncc_tknh.CHI_NHANH}}</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" ng-model="info.ncc_ten_ngan_hang">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div>Nhân viên</div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" ng-model="info.nhan_vien_thu.HO_VA_TEN">
+                                                    <div class="input-group-btn">
+                                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-center borderRadius0 padding0">
+                                                            <div class="table-responsive" style="max-height: 280px">
+                                                                <table class="table table-striped table-hover" st-table="staffsCollection" st-safe-src="listStaff">
+                                                                    <thead class="bg-blue text-white">
+                                                                        <tr>
+                                                                            <th>Mã nhân viên</th>
+                                                                            <th>Tên nhân viên</th>
+                                                                            <th>Phòng ban</th>
+                                                                            <th>Điện thoại di động</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr ng-repeat="staff in staffsCollection" style="cursor:pointer" ng-click="selectNhanVienThu(staff)">
+                                                                            <td>{{staff.USERNAME}}</td>
+                                                                            <td>{{staff.HO_VA_TEN}}</td>
+                                                                            <td>{{staff.TEN_PHONG_BAN}}</td>
+                                                                            <td>{{staff.SDT}}</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div>
+                                                    <span class="marginR15">Tham chiếu</span>
+                                                    <a href="">
+                                                        <img src="~/Content/Images/Nganhang/plus.png" alt=""
+                                                             ng-click="startThamChieuChungTu()">
+                                                    </a>  
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div>Người lập biểu</div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" ng-model="info.nguoi_lap_bieu.HO_VA_TEN">
+                                                    <div class="input-group-btn">
+                                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-center borderRadius0 padding0">
+                                                            <div class="table-responsive" style="max-height: 280px">
+                                                                <table class="table table-striped table-hover" st-table="staffsCollection" st-safe-src="listStaff">
+                                                                    <thead class="bg-blue text-white">
+                                                                        <tr>
+                                                                            <th>Mã nhân viên</th>
+                                                                            <th>Tên nhân viên</th>
+                                                                            <th>Phòng ban</th>
+                                                                            <th>Điện thoại di động</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr ng-repeat="staff in staffsCollection" style="cursor:pointer" ng-click="selectNguoiLapBieu(staff)">
+                                                                            <td>{{staff.USERNAME}}</td>
+                                                                            <td>{{staff.HO_VA_TEN}}</td>
+                                                                            <td>{{staff.TEN_PHONG_BAN}}</td>
+                                                                            <td>{{staff.SDT}}</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="col-md-4">
+                    <form class="form-kt">
+                        <fieldset>
+                            <legend class="bold">Chứng từ</legend>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div>Ngày hạch toán</div>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input type="text" datepicker class="form-control datetimepickerKT" ng-model="info.ngay_hach_toan">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div>Ngày chứng từ</div>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input type="text" datepicker class="form-control datetimepickerKT" ng-model="info.ngay_chung_tu">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div>Số chứng từ</div>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-7 col-md-offset-5">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="text-right">
+                                <form class="form-inline">
+                                    <div class="form-group">
+                                        <label class="marginR15">Loại tiền</label>
+                                        <select name="" class="form-control" ng-model="listHachToan[itemHachToanSelect].don_vi">
+                                            <option value="USD">USD</option>
+                                            <option value="VND">VND</option>
+                                            <option value="EURO">EURO</option>
+                                        </select>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="text-right">
+                                <form class="form-inline" name="form">
+                                    <div class="form-group" ng-show="listHachToan[itemHachToanSelect].don_vi != 'VND'">
+                                        <label class="marginR15">Tỷ giá</label>
+                                        <input name="tyGia" float required type="text" class="form-control" ng-model="listHachToan[itemHachToanSelect].ty_gia">
+                                        <div ng-if="$submitted" ng-messages="form.tyGia.$error" style="color:maroon" role="alert">
+                                            <div ng-message="required">Nhập tỷ giá.</div>
+                                            <div ng-message="float">Tỉ giá phải là số.</div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="marginTA50">
+                <div class="clearfix">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs nav-tabs-custom" role="tablist">
+                        <li role="presentation" ng-click="activeTab('Hạch toán')" class="active"><a href="#" aria-controls="home" role="tab" data-toggle="tab">Hạch toán</a></li>
+                        <li role="presentation" ng-show="!ui.hideTabThue" ng-click="activeTab('Thuế')"><a href="#" aria-controls="profile" role="tab" data-toggle="tab">Thuế</a></li>
+                    </ul>
+                </div>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" ng-class="{active: !ui.activeTabThue}" class="tab-pane padding10 border borderTopNone" id="home">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover table-bordered" st-table="listHachToanCollection" st-safe-src="listHachToan">
+                                <thead class="bg-blue text-white">
+                                    <tr>
+                                        <th>Diễn giải</th>
+                                        <th>TK nợ</th>
+                                        <th>TK có</th>
+                                        <th>Số tiền</th>
+                                        <th ng-show="listHachToan[itemHachToanSelect].don_vi != 'VND'">Quy đổi</th>
+                                        <th>Đơn vị</th>
+                                        <th>Mã đối tượng</th>
+                                        <th>Tên đối tượng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><a href="" ng-click="addHachToan()">Bấm vào đây để thêm mới</a></td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td ng-show="listHachToan[itemHachToanSelect].don_vi != 'VND'">&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                    <tr ng-repeat="itemHachToan in listHachToanCollection" ng-click="onSelectItemHachToan($index)">
+                                        <td><input type="text" class="form-control" style="max-width: 170px;" ng-model="listHachToan[$index].dien_giai" ng-disabled="itemHachToanSelect != $index"></td>
+                                        <td>
+                                            <div class="input-group maxWidth150">
+                                                <input type="text" class="form-control" ng-model="listHachToan[$index].tk_no" ng-disabled="itemHachToanSelect != $index">
+                                                <div class="input-group-btn">
+                                                    <button type="button" class="btn btn-default dropdown-toggle height_hachtoan" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-disabled="itemHachToanSelect != $index">
+                                                        <span class="caret"></span>
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-center borderRadius0 padding0">
+                                                        <div class="table-responsive" style="max-height:200px">
+                                                            <table class="table table-striped table-hover " st-pagination-scroll st-table="tknoCollections" st-safe-src="listDmTaiKhoanHachToan">
+                                                                <thead class="bg-blue text-white">
+                                                                    <tr>
+                                                                        <th>Số tài khoản</th>
+                                                                        <th>Tên Tài khoản</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr ng-repeat="tk_no in tknoCollections" ng-click="selectTkNo(tk_no)" style="cursor:pointer">
+                                                                        <td>{{tk_no.SO_TK}}</td>
+                                                                        <td>{{tk_no.TEN_TK}}</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="input-group maxWidth150">
+                                                <input type="text" class="form-control" ng-model="listHachToan[$index].tk_co" ng-disabled="itemHachToanSelect != $index">
+                                                <div class="input-group-btn">
+                                                    <button type="button" class="btn btn-default dropdown-toggle height_hachtoan" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-disabled="itemHachToanSelect != $index">
+                                                        <span class="caret"></span>
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-center borderRadius0 padding0">
+                                                        <div class="table-responsive" style="max-height:200px">
+                                                            <table class="table table-striped table-hover " st-pagination-scroll st-table="tkcoCollections" st-safe-src="listDmTaiKhoanHachToan">
+                                                                <thead class="bg-blue text-white">
+                                                                    <tr>
+                                                                        <th>Số tài khoản</th>
+                                                                        <th>Tên Tài khoản</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr ng-repeat="tk_co in tkcoCollections" ng-click="selectTkCo(tk_co)" style="cursor:pointer">
+                                                                        <td>{{tk_co.SO_TK}}</td>
+                                                                        <td>{{tk_co.TEN_TK}}</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><input type="text" class="form-control maxWidth120" ng-model="itemHachToan.so_tien" ng-disabled="itemHachToanSelect != $index"> </td>
+                                        <td ng-show="listHachToan[itemHachToanSelect].don_vi != 'VND'">{{itemHachToan.so_tien *( itemHachToan.ty_gia || 1)}}</td>
+                                        <td>{{itemHachToan.don_vi}}</td>
+                                        <td> {{info.ma_doi_tuong}}</td>
+                                        <td>{{info.ten_doi_tuong}}</td>
+                                    </tr>
+                                    <tr ng-repeat="item in arrayBlank">
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td ng-show="listHachToan[itemHachToanSelect].don_vi != 'VND'">&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div role="tabpanel" ng-show="!ui.hideTabThue" ng-class="{active: ui.activeTabThue}" class="tab-pane padding10 border borderTopNone" id="profile">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover table-bordered" st-table="listThueCollection" st-safe-src="listThue">
+                                <thead class="bg-blue text-white">
+                                    <tr>
+                                        <th>Diễn giải thuế</th>
+                                        <th>TK thuế GTGT</th>
+                                        <th>Tiền thuế GTGT</th>
+                                        <th>% thuế GTGT</th>
+                                        <th>Giá trị HHDV chưa thuế</th>
+                                        <th>Ngày hóa đơn</th>
+                                        <th>Số hóa đơn</th>
+                                        <th>Mẫu số HĐ</th>
+                                        <th>Ký hiệu HĐ</th>
+                                        <th>Mã NCC</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><a href="" ng-click="addHachToan()">Bấm vào đây để thêm mới</a></td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                    <tr ng-repeat="itemThue in listThueCollection" ng-click="onSelectItemHachToan($index)">
+                                        <td><input type="text" class="form-control" style="max-width: 170px;" ng-model="itemThue.dien_giai" ng-disabled="itemHachToanSelect != $index"></td>
+                                        <td>
+                                            <div class="input-group maxWidth150">
+                                                <input type="text" class="form-control" ng-model="itemThue.tk_thue" ng-disabled="itemHachToanSelect != $index">
+                                                <div class="input-group-btn">
+                                                    <button type="button" class="btn btn-default dropdown-toggle height_hachtoan" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-disabled="itemHachToanSelect != $index">
+                                                        <span class="caret"></span>
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-center borderRadius0 padding0">
+                                                        <div class="table-responsive" style="max-height:200px">
+                                                            <table class="table table-striped table-hover " st-pagination-scroll st-table="tkThueCollections" st-safe-src="listDmTaiKhoanHachToan">
+                                                                <thead class="bg-blue text-white">
+                                                                    <tr>
+                                                                        <th>Số tài khoản</th>
+                                                                        <th>Tên Tài khoản</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr ng-repeat="tk_thue in tkThueCollections" ng-click="selectTkThue(tk_thue)" style="cursor:pointer">
+                                                                        <td>{{tk_thue.SO_TK}}</td>
+                                                                        <td>{{tk_thue.TEN_TK}}</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><input type="text" class="form-control maxWidth120" ng-model="itemThue.tien_thue" ng-disabled="itemHachToanSelect != $index"> </td>
+                                        <td><input type="text" class="form-control maxWidth120" ng-model="itemThue.phan_tram_thue" ng-disabled="itemHachToanSelect != $index"> </td>
+                                        <td><input type="text" class="form-control maxWidth120" ng-model="itemThue.gia_tri_chua_thue" ng-disabled="itemHachToanSelect != $index"> </td>
+                                        <td><div style="position: relative"><input type="text" class="form-control datetimepickerKT" datepicker ng-model="itemThue.ngay_hoa_don" ng-disabled="itemHachToanSelect != $index"></div> </td>
+                                        <td><input type="text" class="form-control maxWidth120" ng-model="itemThue.so_hoa_don" ng-disabled="itemHachToanSelect != $index"> </td>
+                                        <td><input type="text" class="form-control maxWidth120" ng-model="itemThue.mau_so_hd" ng-disabled="itemHachToanSelect != $index"> </td>
+                                        <td><input type="text" class="form-control maxWidth120" ng-model="itemThue.ky_hieu_hd" ng-disabled="itemHachToanSelect != $index"> </td>
+
+                                        <td>
+                                            <div class="input-group maxWidth150">
+                                                <input type="text" class="form-control" style="min-width: 86px;" ng-model="itemThue.ma_ncc" ng-disabled="itemHachToanSelect != $index">
+                                                <div class="input-group-btn">
+                                                    <button type="button" class="btn btn-default dropdown-toggle height_hachtoan" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-disabled="itemHachToanSelect != $index">
+                                                        <span class="caret"></span>
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-center borderRadius0 padding0" style="left: -311px;">
+                                                        <div class="table-responsive" style="max-height:200px">
+                                                            <table class="table table-striped table-hover " st-pagination-scroll st-table="nccCollections" st-safe-src="listNCC">
+                                                                <thead class="bg-blue text-white">
+                                                                    <tr>
+                                                                        <th>Mã Nhà Cung Cấp</th>
+                                                                        <th>Tên Nhà Cung Cấp</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr ng-repeat="nhacungcap in nccCollections" ng-click="selectNcc(nhacungcap)" style="cursor:pointer">
+                                                                        <td>{{nhacungcap.MA_NHA_CUNG_CAP}}</td>
+                                                                        <td>{{nhacungcap.TEN_NHA_CUNG_CAP}}</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr ng-repeat="item in arrayBlank">
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="text-center">
+                    <button class="btn btn-primary" ng-click="save()"><span class="glyphicon glyphicon-floppy-disk"></span> Lưu</button>
+                    <button class="btn btn-danger" ng-click="cancel()"><span class="glyphicon glyphicon-ban-circle"></span> Bỏ qua</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<style>
+    .bg-blue {
+        background-color: #5BC0DE !important;
+    }
+</style>
+
+@Html.Partial("~/Areas/Accounting/Views/Shared/ThamChieuChungTu.cshtml")

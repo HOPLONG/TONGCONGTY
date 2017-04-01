@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using ERP.Web.Models.Database;
+using System.Threading.Tasks;
 
 namespace ERP.Web.Api.HeThong
 {
@@ -45,6 +46,9 @@ namespace ERP.Web.Api.HeThong
 
             return Ok(dM_DINH_KHOAN_TU_DONG);
         }
+
+
+      
 
         // PUT: api/Api_Dinhkhoantudong/5
         [ResponseType(typeof(void))]

@@ -42,6 +42,21 @@
                                                 <input type="text" placeholder="Mã hàng" class="form-control input-md" ng-model="mahang">
                                             </div>                                           
                                         </div>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <input type="text" placeholder="Mã chuẩn" class="form-control input-md" ng-model="machuan">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <input type="text" placeholder="Mã nhập hàng" class="form-control input-md" ng-model="manhaphang">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <input type="text" placeholder="Mã chuyển đổi" class="form-control input-md" ng-model="machuyendoi">
+                                            </div>
+                                        </div>
                                         <!-- Text input-->
                                         <div class="form-group">
                                             <div class="col-md-12">
@@ -73,6 +88,16 @@
                                         <div class="form-group">
                                             <div class="col-md-12">
                                                 <input type="text" placeholder="Bảo hành" class="form-control input-md" ng-model="baohanh">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <input type="text" placeholder="Giá nhập" class="form-control input-md" ng-model="gianhap">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <input type="text" placeholder="Giá list" class="form-control input-md" ng-model="gialist">
                                             </div>
                                         </div>
                                         <!-- Text input-->
@@ -155,8 +180,11 @@
                                             <li style="width:500px;height:50px;" callouts--left">Thời gian bảo hành của hàng hóa đó </li>
                                         </ul>
                                     </div>
-
-
+                                    <div class="form-group">
+                                        <ul class="callouts">
+                                            <li style="width:500px;height:50px;" callouts--left">Giá bán của hàng hóa đó </li>
+                                        </ul>
+                                    </div>
                                     <div class="form-group">
                                         <ul class="callouts">
                                             <li style="width:500px;height:50px;" callouts--left">Xuất xứ của hàng hóa đó </li>
@@ -189,7 +217,18 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 container_right">
-                                    <div class="col-md-12 content_right">                                        
+                                    <div class="col-md-12 content_right"> 
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" style="padding-top: 0px !important" for="name">Discontinue </label>
+                                            <div class="col-md-9">
+                                                <input type="checkbox" ng-model="discontinue">
+                                            </div>
+                                        </div>    
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <textarea id="ghichu" name="ghichu" placeholder="Thông số" class="form-control input-md" ng-model="thongso"></textarea>
+                                            </div>
+                                        </div>                                                                            
                                         <div class="form-group" >
                                             <label class="col-md-2 control-label ckeditor" for="name">Đóng gói: </label>
                                             <div class="col-md-10 ckeditor">
@@ -199,7 +238,7 @@
                                         <div class="form-group">
                                             <label class="col-md-2 control-label ckeditor" for="name"> Thông số kỹ thuật: </label>
                                             <div class="col-md-10 ckeditor">
-                                                <textarea id="thongso" name="thongso" placeholder="Specification" class="form-control input-md" ng-model="thongso"></textarea>
+                                                <textarea id="thongso" name="thongso" placeholder="Specification" class="form-control input-md" ng-model="thongsokythuat"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -247,6 +286,24 @@
                                                 <input type="text" placeholder="Product Code" class="form-control input-md" ng-model="item.MA_HANG">
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="name">Mã chuẩn: </label>
+                                            <div class="col-md-9">
+                                                <input type="text" placeholder="Product Code" class="form-control input-md" ng-model="item.MA_CHUAN">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="name">Mã nhập hàng: </label>
+                                            <div class="col-md-9">
+                                                <input type="text" placeholder="Product Code" class="form-control input-md" ng-model="item.MA_NHAP_HANG">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="name">Mã chuyển đổi: </label>
+                                            <div class="col-md-9">
+                                                <input type="text" placeholder="Product Code" class="form-control input-md" ng-model="item.MA_CHUYEN_DOI">
+                                            </div>
+                                        </div>
                                         <!-- Text input-->
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="name">Tên hàng:</label>
@@ -282,6 +339,19 @@
                                             <label class="col-md-3 control-label" for="name">Bảo hành(tháng): </label>
                                             <div class="col-md-9">
                                                 <input type="text" placeholder="Warranty" class="form-control input-md" ng-model="item.BAO_HANH">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="name">Giá nhập: </label>
+                                            <div class="col-md-9">
+                                                <input type="text" placeholder="Giá list" class="form-control input-md" ng-model="item.GIA_NHAP">
+                                            </div>
+                                        </div>
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="name">Giá list: </label>
+                                            <div class="col-md-9">
+                                                <input type="text" placeholder="Giá list" class="form-control input-md" ng-model="item.GIA_LIST">
                                             </div>
                                         </div>
                                         <!-- Text input-->
@@ -368,8 +438,11 @@
                                                 <li style="width:500px;height:50px;" callouts--left">Thời gian bảo hành của hàng hóa đó </li>
                                             </ul>
                                         </div>
-
-
+                                        <div class="form-group">
+                                            <ul class="callouts">
+                                                <li style="width:500px;height:50px;" callouts--left">Giá bán của hàng hóa đó </li>
+                                            </ul>
+                                        </div>
                                         <div class="form-group">
                                             <ul class="callouts">
                                                 <li style="width:500px;height:50px;" callouts--left">Xuất xứ của hàng hóa đó </li>
@@ -401,8 +474,19 @@
                                             </ul>
                                         </div>
                                     </div>
-                                </div>
+                                </div>                              
                                 <div class="col-md-6 container_right">
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" style="padding-top: 0px !important" for="name">Discontinue </label>
+                                        <div class="col-md-9">
+                                            <input type="checkbox" ng-model="item.DISCONTINUE">
+                                        </div>
+                                    </div> 
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <textarea id="ghichu" name="ghichu" placeholder="Thông số" class="form-control input-md" ng-model="item.THONG_SO"></textarea>
+                                        </div>
+                                    </div>                                   
                                     <div class="form-group">
                                         <label class="col-md-2 control-label ckeditor" for="name">Đóng gói: </label>
                                         <div class="col-md-10 ckeditor">
@@ -410,13 +494,12 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-2 control-label ckeditor" for="name">Thông số: </label>
+                                        <label class="col-md-2 control-label ckeditor" for="name">Thông số kĩ thuật: </label>
                                         <div class="col-md-10 ckeditor">
                                             <textarea id="editthongso" name="editthongso" placeholder="Details" class="form-control input-md" ng-model="item.THONG_SO_KY_THUAT"></textarea>
                                         </div>
-                                    </div>
-                                </div>
-                                
+                                    </div>                                  
+                                </div>                              
                                 <script>
                                     CKEDITOR.replace('editdonggoi', {
                                         height: 150
@@ -481,7 +564,7 @@
                         <div class="col-md-9">
                             <div style="margin-bottom: 5%;" class="col-md-12">
                                 <h1>{{item.TEN_HANG | uppercase}}</h1>
-                                <div class="col-md-3 detail">Mã hàng: {{item.MA_HANG}}</div>
+                                <div class="col-md-3 detail">Mã hàng: {{item.MA_HANG}} {{(item.THONG_SO)}}</div>
                                 <div class="col-md-2 detail">Hãng: {{item.MA_NHOM_HANG}}</div>
                                 <div class="col-md-2 detail">Xuất xứ: {{item.XUAT_XU}}</div>
                             </div>
@@ -498,20 +581,28 @@
                                             <div class="col-md-6">
                                                 <table class="table noborder">
                                                     <tr>
-                                                        <td>Unit</td>
-                                                        <td>{{item.DON_VI_TINH}}</td>
+                                                        <td>Mã chuẩn</td>
+                                                        <td>{{item.MA_CHUAN}}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Khối lượng:</td>
-                                                        <td></td>
+                                                        <td>Mã nhập hàng:</td>
+                                                        <td>{{item.MA_NHAP_HANG}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Mã chuyển đổi:</td>
+                                                        <td>{{item.MA_CHUYEN_DOI}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Giá bán:</td>
-                                                        <td></td>
+                                                        <td>{{item.GIA_LIST}}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Properties</td>
-                                                        <td></td>
+                                                        <td>Giá nhập</td>
+                                                        <td>{{item.GIA_NHAP}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Đơn vị tính</td>
+                                                        <td>{{item.DON_VI_TINH}}</td>
                                                     </tr>
                                                 </table>
                                             </div>
@@ -523,16 +614,20 @@
                                                     </tr>
                                                     <tr>
                                                         <td>Sale Account</td>
-                                                        <td></td>
+                                                        <td>{{item.TK_DOANH_THU}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>COGS Account</td>
-                                                        <td></td>
+                                                        <td>{{item.TK_HACH_TOAN_KHO}}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Note</td>
-                                                        <td></td>
+                                                        <td>TK chi phí</td>
+                                                        <td>{{item.TK_CHI_PHI}}</td>
                                                     </tr>
+                                                    <tr>
+                                                        <td>Ghi chú</td>
+                                                        <td>{{item.GHI_CHU}}</td>
+                                                    </tr>                                            
                                                 </table>
                                             </div>
                                         </div>
@@ -552,7 +647,7 @@
                                     </div>
 
                                     <div id="thongsokythuat" class="tab-pane fade" style="box-shadow: 3px 3px 3px #ddd">
-                                        <div ng-bind-html="item.THONG_SO_KY_THUAT | unsafe"></div>
+                                        <div ng-bind-html="item.THONG_SO_KY_THUAT | unsafe"></div>                                       
                                     </div>
                                 </div>
                             </div>
@@ -568,90 +663,90 @@
         <input type="hidden" ng-model="userquantam" id="userquantam" value="@Session["USERNAME"]" />
         <div class="col-md-12" style="margin-top: -2.4%">
             <ul class="nav nav-tabs list_tab">
-                <li class="active"><a data-toggle="tab" href="#AUTONICS"><img src="~/Content/Images/HangHoa/AUTONICS.png" height="20" /></a></li>
+                <li class="active"><a data-toggle="tab" href="#AUTONICS"><img src="~/Content/Images/HangHoa/AUTONICS.png" height="30" /></a></li>
                 <li>
                     <a data-toggle="tab" href="#SCHNEIDER">
-                        <img src="~/Content/Images/HangHoa/SCHNEIDER.png" height="20" />
+                        <img src="~/Content/Images/HangHoa/SCHNEIDER.png" height="30" />
                     </a>
                 </li>
                 <li>
                     <a data-toggle="tab" href="#OMRON">
-                        <img src="~/Content/Images/HangHoa/OMRON.png" height="20" />
+                        <img src="~/Content/Images/HangHoa/OMRON.png" height="30" />
                     </a>
                 </li>
                 <li>
                     <a data-toggle="tab" href="#IDEC">
-                        <img src="~/Content/Images/HangHoa/IDEC.png" height="20" />
+                        <img src="~/Content/Images/HangHoa/IDEC.png" height="30" />
                     </a>
                 </li>
                 <li>
                     <a data-toggle="tab" href="#MITSUBISHI">
-                        <img src="~/Content/Images/HangHoa/MITSUBISHI.png" height="20" />
+                        <img src="~/Content/Images/HangHoa/MITSUBISHI.png" height="30" />
                     </a>
                 </li>
                 <li>
                     <a data-toggle="tab" href="#LS">
-                        <img src="~/Content/Images/HangHoa/LS.png" height="20" />
+                        <img src="~/Content/Images/HangHoa/LS.png" height="30" />
                     </a>
                 </li>
                 <li>
                     <a data-toggle="tab" href="#FUJI">
-                        <img src="~/Content/Images/HangHoa/FUJI.png" height="20" />
+                        <img src="~/Content/Images/HangHoa/FUJI.png" height="30" />
                     </a>
                 </li>
                 <li>
                     <a data-toggle="tab" href="#CKD">
-                        CKD
+                        <img src="~/Content/Images/HangHoa/CKD.png" height="30" />
                     </a>
                 </li>
                 <li>
                     <a data-toggle="tab" href="#DECA">
-                        DECA
+                        <img src="~/Content/Images/HangHoa/DECA.png" height="30" />
                     </a>
                 </li>
                 <li>
                     <a data-toggle="tab" href="#HANYOUNG">
-                        HANYOUNG
+                        <img src="~/Content/Images/HangHoa/HANYOUNG.png" height="30" />
                     </a>
                 </li>
                 <li>
                     <a data-toggle="tab" href="#HITACHI">
-                        HITACHI
+                        <img src="~/Content/Images/HangHoa/HITACHI.png" height="30" />
                     </a>
                 </li>
                 <li>
                     <a data-toggle="tab" href="#MAX">
-                        MAX
+                        <img src="~/Content/Images/HangHoa/MAX.png" height="30" />
                     </a>
                 </li>
                 <li>
                     <a data-toggle="tab" href="#PROFACE">
-                        PROFACE
+                        <img src="~/Content/Images/HangHoa/PROFACE.png" height="30" />
                     </a>
                 </li>
                 <li>
                     <a data-toggle="tab" href="#RITTAL">
-                        RITTAL
+                        <img src="~/Content/Images/HangHoa/RITTAL.png" height="30" />
                     </a>
                 </li>
                 <li>
                     <a data-toggle="tab" href="#SIEMENS">
-                        SIEMENS
+                        <img src="~/Content/Images/HangHoa/SIEMENS.png" height="30" />
                     </a>
                 </li>
                 <li>
                     <a data-toggle="tab" href="#SMC">
-                        SMC
+                        <img src="~/Content/Images/HangHoa/SMC.png" height="30" />
                     </a>
                 </li>
                 <li>
                     <a data-toggle="tab" href="#TEND">
-                        TEND
+                        <img src="~/Content/Images/HangHoa/TEND.png" height="30" />
                     </a>
                 </li>
                 <li>
                     <a data-toggle="tab" href="#TOSHIBA">
-                        TOSHIBA
+                        <img src="~/Content/Images/HangHoa/TOSHIBA.png" height="30" />
                     </a>
                 </li>
             </ul>
@@ -702,14 +797,13 @@
                                 </td>
                             </tr>
                             <!--Detail row-->
-                            <tr ng-if="item.expanded" dir-paginate-end="">
-                                <td></td>
+                            <tr dir-paginate-end="">
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
                                 <td colspan="9" style="border: none !important">
-                                    <dir-pagination-controls pagination-id="autonics" max-size="1" style="float:left;"
+                                    <dir-pagination-controls pagination-id="autonics" max-size="12" style="float:left;"
                                                              direction-links="true"
                                                              boundary-links="true">
                                     </dir-pagination-controls>
@@ -717,6 +811,7 @@
                             </tr>
                         </tfoot>
                     </table>
+                    
                 </div>
                 <!----------------------------------------END AUTONICS------------------------------------------------------>
 
@@ -763,13 +858,12 @@
                                 </td>
                             </tr>
                             <tr dir-paginate-end="">
-                                <td></td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
                                 <td colspan="9" style="border: none !important">
-                                    <dir-pagination-controls pagination-id="ls" max-size="1" style="float:left;"
+                                    <dir-pagination-controls pagination-id="ls" max-size="12" style="float:left;"
                                                              direction-links="true"
                                                              boundary-links="true">
                                     </dir-pagination-controls>
@@ -824,13 +918,12 @@
                                 </td>
                             </tr>
                             <tr dir-paginate-end="">
-                                <td></td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
                                 <td colspan="9" style="border: none !important">
-                                    <dir-pagination-controls pagination-id="omron" max-size="1" style="float:left;"
+                                    <dir-pagination-controls pagination-id="omron" max-size="12" style="float:left;"
                                                              direction-links="true"
                                                              boundary-links="true">
                                     </dir-pagination-controls>
@@ -885,13 +978,12 @@
                                 </td>
                             </tr>
                             <tr dir-paginate-end="">
-                                <td></td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
                                 <td colspan="9" style="border: none !important">
-                                    <dir-pagination-controls pagination-id="idec" max-size="1" style="float:left;"
+                                    <dir-pagination-controls pagination-id="idec" max-size="12" style="float:left;"
                                                              direction-links="true"
                                                              boundary-links="true">
                                     </dir-pagination-controls>
@@ -947,13 +1039,12 @@
                                 </td>
                             </tr>
                             <tr dir-paginate-end="">
-                                <td></td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
                                 <td colspan="9" style="border: none !important">
-                                    <dir-pagination-controls pagination-id="fuji" max-size="1" style="float:left;"
+                                    <dir-pagination-controls pagination-id="fuji" max-size="12" style="float:left;"
                                                              direction-links="true"
                                                              boundary-links="true">
                                     </dir-pagination-controls>
@@ -1008,13 +1099,12 @@
                                 </td>
                             </tr>
                             <tr dir-paginate-end="">
-                                <td></td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
                                 <td colspan="9" style="border: none !important">
-                                    <dir-pagination-controls pagination-id="schneider" max-size="1" style="float:left;"
+                                    <dir-pagination-controls pagination-id="schneider" max-size="12" style="float:left;"
                                                              direction-links="true"
                                                              boundary-links="true">
                                     </dir-pagination-controls>
@@ -1068,13 +1158,12 @@
                                 </td>
                             </tr>
                             <tr dir-paginate-end="">
-                                <td></td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
                                 <td colspan="9" style="border: none !important">
-                                    <dir-pagination-controls pagination-id="mitsubishi" max-size="1" style="float:left;"
+                                    <dir-pagination-controls pagination-id="mitsubishi" max-size="12" style="float:left;"
                                                              direction-links="true"
                                                              boundary-links="true">
                                     </dir-pagination-controls>
@@ -1129,13 +1218,12 @@
                                 </td>
                             </tr>
                             <tr dir-paginate-end="">
-                                <td></td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
                                 <td colspan="9" style="border: none !important">
-                                    <dir-pagination-controls pagination-id="ckd" max-size="1" style="float:left;"
+                                    <dir-pagination-controls pagination-id="ckd" max-size="12" style="float:left;"
                                                              direction-links="true"
                                                              boundary-links="true">
                                     </dir-pagination-controls>
@@ -1190,13 +1278,12 @@
                                 </td>
                             </tr>
                             <tr dir-paginate-end="">
-                                <td></td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
                                 <td colspan="9" style="border: none !important">
-                                    <dir-pagination-controls pagination-id="max" max-size="1" style="float:left;"
+                                    <dir-pagination-controls pagination-id="max" max-size="12" style="float:left;"
                                                              direction-links="true"
                                                              boundary-links="true">
                                     </dir-pagination-controls>
@@ -1251,13 +1338,12 @@
                                 </td>
                             </tr>
                             <tr dir-paginate-end="">
-                                <td></td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
                                 <td colspan="9" style="border: none !important">
-                                    <dir-pagination-controls pagination-id="proface" max-size="1" style="float:left;"
+                                    <dir-pagination-controls pagination-id="proface" max-size="12" style="float:left;"
                                                              direction-links="true"
                                                              boundary-links="true">
                                     </dir-pagination-controls>
@@ -1311,13 +1397,12 @@
                                 </td>
                             </tr>
                             <tr dir-paginate-end="">
-                                <td></td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
                                 <td colspan="9" style="border: none !important">
-                                    <dir-pagination-controls pagination-id="deca" max-size="1" style="float:left;"
+                                    <dir-pagination-controls pagination-id="deca" max-size="12" style="float:left;"
                                                              direction-links="true"
                                                              boundary-links="true">
                                     </dir-pagination-controls>
@@ -1372,13 +1457,12 @@
                                 </td>
                             </tr>
                             <tr dir-paginate-end="">
-                                <td></td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
                                 <td colspan="9" style="border: none !important">
-                                    <dir-pagination-controls pagination-id="hanyoung" max-size="1" style="float:left;"
+                                    <dir-pagination-controls pagination-id="hanyoung" max-size="12" style="float:left;"
                                                              direction-links="true"
                                                              boundary-links="true">
                                     </dir-pagination-controls>
@@ -1433,13 +1517,12 @@
                                 </td>
                             </tr>
                             <tr dir-paginate-end="">
-                                <td></td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
                                 <td colspan="9" style="border: none !important">
-                                    <dir-pagination-controls pagination-id="hitachi" max-size="1" style="float:left;"
+                                    <dir-pagination-controls pagination-id="hitachi" max-size="12" style="float:left;"
                                                              direction-links="true"
                                                              boundary-links="true">
                                     </dir-pagination-controls>
@@ -1494,13 +1577,12 @@
                                 </td>
                             </tr>
                             <tr dir-paginate-end="">
-                                <td></td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
                                 <td colspan="9" style="border: none !important">
-                                    <dir-pagination-controls pagination-id="rittal" max-size="1" style="float:left;"
+                                    <dir-pagination-controls pagination-id="rittal" max-size="12" style="float:left;"
                                                              direction-links="true"
                                                              boundary-links="true">
                                     </dir-pagination-controls>
@@ -1555,13 +1637,12 @@
                                 </td>
                             </tr>
                             <tr dir-paginate-end="">
-                                <td></td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
                                 <td colspan="9" style="border: none !important">
-                                    <dir-pagination-controls pagination-id="siemens" max-size="1" style="float:left;"
+                                    <dir-pagination-controls pagination-id="siemens" max-size="12" style="float:left;"
                                                              direction-links="true"
                                                              boundary-links="true">
                                     </dir-pagination-controls>
@@ -1616,13 +1697,12 @@
                                 </td>
                             </tr>
                             <tr dir-paginate-end="">
-                                <td></td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
                                 <td colspan="9" style="border: none !important">
-                                    <dir-pagination-controls pagination-id="smc" max-size="1" style="float:left;"
+                                    <dir-pagination-controls pagination-id="smc" max-size="12" style="float:left;"
                                                              direction-links="true"
                                                              boundary-links="true">
                                     </dir-pagination-controls>
@@ -1677,13 +1757,12 @@
                                 </td>
                             </tr>
                             <tr dir-paginate-end="">
-                                <td></td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
                                 <td colspan="9" style="border: none !important">
-                                    <dir-pagination-controls pagination-id="tend" max-size="1" style="float:left;"
+                                    <dir-pagination-controls pagination-id="tend" max-size="12" style="float:left;"
                                                              direction-links="true"
                                                              boundary-links="true">
                                     </dir-pagination-controls>
@@ -1738,13 +1817,12 @@
                                 </td>
                             </tr>
                             <tr dir-paginate-end="">
-                                <td></td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
                                 <td colspan="9" style="border: none !important">
-                                    <dir-pagination-controls pagination-id="toshiba" max-size="1" style="float:left;"
+                                    <dir-pagination-controls pagination-id="toshiba" max-size="12" style="float:left;"
                                                              direction-links="true"
                                                              boundary-links="true">
                                     </dir-pagination-controls>
@@ -1864,7 +1942,7 @@
 
         
 
-    </div>   
+     
     <script>
     (function () {
 
@@ -1897,6 +1975,7 @@
 
     })();
     </script>
+
 </div>
 
 <script src="~/Content/download/angularjs/angular-ui-router.js"></script>

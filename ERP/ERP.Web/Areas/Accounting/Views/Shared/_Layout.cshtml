@@ -1,4 +1,4 @@
-﻿@{
+﻿@*@{
     ViewBag.Title = "layout";
     if (Session["USERNAME"] == null)
     {
@@ -6,7 +6,7 @@
     }
 
 
-}
+}*@
 
 <!DOCTYPE html>
 <html>
@@ -18,8 +18,14 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
-    <link href="~/Content/download/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/download/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/download/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
     <link href="~/Content/self-writing/css/nav_hoplong_multilevel.css" rel="stylesheet" />
+    <link href="~/Content/download/bootstrap/css/layout_all.css" rel="stylesheet" />
+    <link href="~/Content/self-writing/css/Layout-CSS.css" rel="stylesheet" />
+    <link href="~/Content/self-writing/css/LayoutHL.css" rel="stylesheet" />
+    <link href="~/Content/self-writing/css/Nganhang/common.css" rel="stylesheet" />
+    <link href="~/Content/self-writing/css/Nganhang/style.css" rel="stylesheet" />
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <!-- Ionicons -->
@@ -29,25 +35,29 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
 
-    <link href="~/Content/download/bootstrap/css/layout_all.css" rel="stylesheet" />
-    <link href="~/Content/self-writing/css/Layout-CSS.css" rel="stylesheet" />
-    <link href="~/Content/self-writing/css/LayoutHL.css" rel="stylesheet" />
-    <script src="~/Content/download/plugins/ckeditor/ckeditor.js"></script>
-    <script src="~/Content/download/plugins/ckfinder/ckfinder.js"></script>
-    <script src="~/Content/download/plugins/jQuery/jquery-2.2.3.min.js"></script>
-    <script src="~/Content/download/angularjs/angular.min.js"></script>
+    <script src="~/Content/download/jquery/dist/jquery.min.js"></script>
+    <script src="~/Content/download/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/Content/download/moment/min/moment.min.js"></script>
+    <script src="~/Content/download/bootstrap-datetimepicker.js"></script>
+    <script src="~/Content/download/angular/angular.min.js"></script>
+    <script src="~/Content/download/angular-ui/build/angular-ui.min.js"></script>
+    <script src="~/Content/download/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="~/Content/download/angular-route/angular-route.min.js"></script>
+    <script src="~/Content/download/angular-smart-table/dist/smart-table.min.js"></script>
+    <script src="~/Content/download/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+
+    <script src="~/Content/download/angular-animate/angular-animate.js"></script>
+
     <script src="~/Content/self-writing/js/app.js"></script>
+
     <script src="~/Content/self-writing/js/Service.js"></script>
     <script src="~/Content/self-writing/js/Controller.js"></script>
     <script src="~/Content/download/angularjs/dirPagination.js"></script>
-    <script>
-        $(function () {
-            CKEDITOR.config.extraPlugins = 'justify';
-            CKEDITOR.config.extraPlugins = 'filebrowser';
-        });
-    </script>
+    <script src="~/Content/self-writing/js/BusinessServices/AjaxServices.js"></script>
+    <script src="~/Content/self-writing/js/BusinessServices/DataServices.js"></script>
+    
 </head>
-<body class="hold-transition skin-blue sidebar-mini" ng-app="myApp" ng-controller="menuCtrl">
+<body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper" style="padding-bottom: 50px;">
         <header class="main-header">
             <!-- Logo -->
@@ -70,11 +80,7 @@
                 <div class="navbar-custom-menu pull-left">
                     <input type="hidden" value="@Session["MA_PHONG_BAN"]" id="maphongban" />
                     <input type="hidden" value="@Session["USERNAME"]" id="username" />
-                    <ul class="nav navbar-nav" ng-repeat="menu in danhsachmenu" ng-class="get(menu.USERNAME)">
-                        <li ng-class="check(menu.TRANG_THAI)">
-                            <a href="{{menu.LINK}}" class="dropdown-toggle" ng-mouseup="edit(menu.MA_MENU)">{{menu.TEN_MENU}}</a>
-                        </li>
-                    </ul>
+                    
                 </div><!-- /end menu bar -->
 
 
@@ -142,7 +148,8 @@
                         </a>
                         <ul class="treeview-menu">
 
-                            <li style="font-weight: bold"><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i> Danh sách chứng từ thu chi</a></li>
+                            <li style="font-weight: bold"><a href="/Accounting/PhieuThuTienMat/DanhSach"><i class="fa fa-angle-double-right"></i> Danh sách chứng từ thu</a></li>
+                            <li style="font-weight: bold"><a href="/Accounting/PhieuChiTienMat/DanhSach"><i class="fa fa-angle-double-right"></i> Danh sách chứng từ chi</a></li>
                             
                             <li class="treeview">
                                 <a href="#">
@@ -152,8 +159,8 @@
                                 </a>
                                 <ul  class="treeview-menu">
                                     <li><a href="#"><i class="fa fa-angle-double-right"></i> Thu tiền khách hàng</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Rút tiền gửi về nộp quỹ</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Thu khác</a></li>
+                                    <li><a href="/Accounting/PhieuThuTienMat/RutTien"><i class="fa fa-angle-double-right"></i> Rút tiền gửi về nộp quỹ</a></li>
+                                    <li><a href="/Accounting/PhieuThuTienMat/ThuKhac"><i class="fa fa-angle-double-right"></i> Thu khác</a></li>
                                 </ul>
                             
                             </li>
@@ -165,9 +172,9 @@
                                 </a>
                                 <ul  class="treeview-menu">
                                     <li><a href="#"><i class="fa fa-angle-double-right"></i> Trả tiền nhà cung cấp</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Tạm ứng nhân viên</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Gửi tiền ngân hàng</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Chi khác</a></li>
+                                    <li><a href="/Accounting/PhieuChiTienMat/TamUng"><i class="fa fa-angle-double-right"></i> Tạm ứng nhân viên</a></li>
+                                    <li><a href="/Accounting/PhieuChiTienMat/GuiTien"><i class="fa fa-angle-double-right"></i> Gửi tiền ngân hàng</a></li>
+                                    <li><a href="/Accounting/PhieuChiTienMat/ChiKhac"><i class="fa fa-angle-double-right"></i> Chi khác</a></li>
                                 </ul>
 
                             </li>
@@ -181,7 +188,8 @@
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li style="font-weight: bold"><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i> Danh sách chứng từ thu chi</a></li>
+                            <li style="font-weight: bold"><a href="/Accounting/Phieuthunganhang/DanhSachPhieuThu"><i class="fa fa-angle-double-right"></i> Danh sách chứng từ thu</a></li>
+                            <li style="font-weight: bold"><a href="/Accounting/Phieuchinganhang/DanhSach"><i class="fa fa-angle-double-right"></i> Danh sách chứng từ chi</a></li>
 
                             <li class="treeview">
                                 <a href="#">
@@ -190,9 +198,9 @@
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </a>
                                 <ul class="treeview-menu">
-                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Thu tiền khách hàng</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Thu vay nợ</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Thu khác</a></li>
+                                    <li><a href="/Accounting/Phieuthunganhang/ThuLai"><i class="fa fa-angle-double-right"></i> Thu lãi</a></li>
+                                    <li><a href="/Accounting/Phieuthunganhang/VayNo"><i class="fa fa-angle-double-right"></i> Thu vay nợ</a></li>
+                                    <li><a href="/Accounting/Phieuthunganhang/ThuKhac"><i class="fa fa-angle-double-right"></i> Thu khác</a></li>
                                 </ul>
 
                             </li>
@@ -204,9 +212,9 @@
                                 </a>
                                 <ul class="treeview-menu">
                                     <li><a href="#"><i class="fa fa-angle-double-right"></i> Trả tiền nhà cung cấp</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Tạm ứng nhân viên</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Trả các khoản vay</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Chi khác</a></li>
+                                    <li><a href="/Accounting/Phieuchinganhang/TamUngNhanVien"><i class="fa fa-angle-double-right"></i> Tạm ứng nhân viên</a></li>
+                                    <li><a href="/Accounting/Phieuchinganhang/TraCacKhoanVay"><i class="fa fa-angle-double-right"></i> Trả các khoản vay</a></li>
+                                    <li><a href="/Accounting/Phieuchinganhang/ChiKhac"><i class="fa fa-angle-double-right"></i> Chi khác</a></li>
                                 </ul>
 
                             </li>
@@ -296,27 +304,30 @@
         </div>
         <strong>Bản quyền &copy; thuộc về <a href="https://hoplongtech.com">hoplongtech.com</a>.</strong>
     </footer>
-    <!-- jQuery 2.2.3 -->
-    <script src="~/Content/download/plugins/jQuery/jquery-2.2.3.min.js"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+ 
     <script src="~/Content/download/dist/js/app.min.js"></script>
-    <script src="~/Content/download/bootstrap/js/bootstrap.min.js"></script>
     <script src="~/Content/download/plugins/fastclick/fastclick.js"></script>
-
     <script src="~/Content/self-writing/js/nav_hoplong_multilevel.js"></script>
-
+    <script src="~/Content/download/plugins/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/download/plugins/ckfinder/ckfinder.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ngMask/3.1.1/ngMask.min.js"></script>
-
+    <script>
+        $(function () {
+            CKEDITOR.config.extraPlugins = 'justify';
+            CKEDITOR.config.extraPlugins = 'filebrowser';
+        });
+    </script>
     <style>
         body input {
             border: 1px solid #00BFFF !important;
-            border-radius: 5px !important;
         }
 
         body select {
             border: 1px solid #00BFFF !important;
-            border-radius: 5px !important;
+        }
+
+        body button {
+            border: 1px solid #00BFFF !important;
         }
 
         body textarea {
@@ -324,11 +335,7 @@
             border-radius: 5px !important;
         }
 
-        body button {
-            background: #00BFFF !important;
-            color: white !important;
-            border: none !important;
-        }
+
 
         body {
             font-family: 'Times New Roman';
@@ -342,14 +349,8 @@
             display: none !important;
         }
     </style>
-    <script>
-        window.setInterval(function () {
-            $.get("/Home/Alive", function (data) {
-                //alert("still alive")
-            }, 180000);
-        });
 
-    </script>
+
 
 </body>
 </html>

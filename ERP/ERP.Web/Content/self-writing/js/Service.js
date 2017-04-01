@@ -29,7 +29,7 @@ app.service('hanghoaService', function ($http) {
         return $http.delete("/api/Api_HanghoaHL/" + mahang, data_delete);
     }
     this.get_hangtonkho = function (id) {
-        return $http.get("/api/Api_TonkhoHL/" + id).then(function (response) {
+        return $http.get("/api/Api_Checktonkho/" + id).then(function (response) {
             return response.data;
         });
     };
@@ -59,7 +59,7 @@ app.service('NhomvthhService', function ($http) {
     this.delete = function (hangsp, data_delete) {
         return $http.delete("/api/Api_NhomVTHHHL/" + hangsp, data_delete);
     }
-    
+
 });
 
 
@@ -182,11 +182,11 @@ app.service('menuService', function ($http) {
         });
     };
 
-    this.save_menu = function (maphongban,username,mamenu,data_save) {
+    this.save_menu = function (maphongban, username, mamenu, data_save) {
         return $http.put('/api/Api_MENU_USER/' + maphongban + '/' + username + '/' + mamenu, data_save);
     }
 
-    this.get_menucha = function (username,menucha) {
+    this.get_menucha = function (username, menucha) {
         return $http.get('/api/Api_ListMenu/' + username + '/' + menucha).then(function (response) {
             return response.data;
         });
@@ -206,7 +206,7 @@ app.service('userdetailService', function ($http) {
         });
     };
 
-    this.save_pw = function (username,oldpw, data_save) {
+    this.save_pw = function (username, oldpw, data_save) {
         return $http.put('/api/DoiMatKhau/' + username + '/' + oldpw, data_save);
     };
 
@@ -214,6 +214,10 @@ app.service('userdetailService', function ($http) {
         return $http.get("/api/Api_NguoidungHL").then(function (response) {
             return response.data;
         });
+    };
+
+    this.edit_image = function (username, data_add) {
+        return $http.put("/api/Api_SuaAnhCaNhan/" + username, data_add);
     };
 });
 
@@ -244,7 +248,7 @@ app.service('addmenuService', function ($http) {
         });
     };
 
-    this.save_menu = function (mamenu,datasave) {
+    this.save_menu = function (mamenu, datasave) {
         return $http.put('/api/Api_Menu/' + mamenu, datasave);
     };
 
@@ -263,7 +267,7 @@ app.service('tonghopnvService', function ($http) {
 
 app.service('dsnghiepvuService', function ($http) {
     this.get_dsnghiepvu = function (id_menu) {
-        return $http.get('/api/Api_Chitietnghiepvu/' + id_menu  ).then(function (response) {
+        return $http.get('/api/Api_Chitietnghiepvu/' + id_menu).then(function (response) {
             return response.data;
         });
     }
@@ -295,7 +299,7 @@ app.service('chitietbaivietService', function ($http) {
     };
 });
 
-app.service('phanquyenService', function ($http) { 
+app.service('phanquyenService', function ($http) {
     this.get_dsphanquyen = function () {
         return $http.get('/api/Api_PhanQuyenMenu').then(function (response) {
             return response.data;
@@ -314,8 +318,8 @@ app.service('phanquyenService', function ($http) {
         });
     }
 
-    this.save_trangthai = function (username, mamenu,data_save) {
-        return $http.put('/api/Api_MENU_USER/' + username + '/' + mamenu,data_save);
+    this.save_trangthai = function (username, mamenu, data_save) {
+        return $http.put('/api/Api_MENU_USER/' + username + '/' + mamenu, data_save);
     }
 
     this.add_trangthai = function (data_addnew) {
@@ -368,7 +372,7 @@ app.service('nhomnghiepvuService', function ($http) {
         });
     };
 
-    this.insert = function (nhomnghiepvu,username) {
+    this.insert = function (nhomnghiepvu, username) {
         return $http.post('/api/NghiepVuDetails/' + nhomnghiepvu + '/' + username);
     };
 });
@@ -386,7 +390,7 @@ app.service('chitietnghiepvuService', function ($http) {
             return response.data;
         });
     };
-    this.delete_chitietnhomnghiepvu = function (nhomnghiepvu,mamota) {
+    this.delete_chitietnhomnghiepvu = function (nhomnghiepvu, mamota) {
         return $http.delete('/api/Api_ChiTietNhomNghiepVu/' + nhomnghiepvu + '/' + mamota);
     }
 
@@ -731,3 +735,139 @@ app.service('purphutrachService', function ($http) {
         return $http.delete('/api/Api_PurPhuTrach/' + id, data_delete);
     };
 });
+
+app.service('productdetailsService', function ($http) {
+    this.get_productdetails = function (mahang) {
+        return $http.get('/api/Api_ProductsKH/' + mahang).then(function (response) {
+            return response.data;
+        });
+    };
+});
+
+
+// Khach hang
+app.service('khachhangService', function ($http) {
+    this.get_khachhang = function () {
+        return $http.get('/api/Api_KH').then(function (response) {
+            return response.data;
+        });
+    };
+    this.get_phanloaikhach = function () {
+        return $http.get('/api/Api_LoaiKH').then(function (response) {
+            return response.data;
+        });
+    };
+    this.get_lienhekh = function (makh) {
+        return $http.get('/api/Api_LienHeKhachHang/' + makh).then(function (response) {
+            return response.data;
+        });
+    };
+    this.get_nhanvienkd = function () {
+        return $http.get('/api/Api_NhanvienKD').then(function (response) {
+            return response.data;
+        });
+    };
+
+    this.get_taikhoankh = function (makh) {
+        return $http.get('/api/Api_TaiKhoanKH/' + makh).then(function (response) {
+            return response.data;
+        });
+    };
+
+    this.get_loaitk = function () {
+        return $http.get('/api/Api_LoaiTaiKhoan').then(function (response) {
+            return response.data;
+        });
+    };
+
+    this.add_phanloaikh = function (phanloaikh_add) {
+        return $http.post('/api/Api_PhanLoaiKH', phanloaikh_add);
+    };
+
+    this.save_khachhang = function (id, kh_save) {
+        return $http.put('/api/Api_KH/' + id, kh_save);
+    };
+    this.save_phanloaikh = function (id, phanloai_save) {
+        return $http.put('/api/Api_PhanLoaiKH/' + id, phanloai_save);
+    };
+
+    this.save_lienhe = function (idlienhe, data_save) {
+        return $http.put('/api/Api_LienHeKhachHang/' + idlienhe, data_save);
+    };
+
+    this.add_lienhe = function (data_add) {
+        return $http.post('/api/Api_LienHeKhachHang', data_add);
+    };
+
+    this.add_taikhoan = function (data_add) {
+        return $http.post('/api/Api_TaiKhoanKH', data_add);
+    };
+});
+//end khach hang
+
+// Nha cung cap
+app.service('nhacungcapService', function ($http) {
+    this.get_nhacungcap = function () {
+        return $http.get('/api/Api_NhaCungCap').then(function (response) {
+            return response.data;
+        });
+    };
+    this.get_phanloaincc = function () {
+        return $http.get('/api/Api_LoaiNCC').then(function (response) {
+            return response.data;
+        });
+    };
+    this.get_lienhenhacungcap = function (mancc) {
+        return $http.get('/api/Api_LienHeNhaCungCap/' + mancc).then(function (response) {
+            return response.data;
+        });
+    };
+    this.get_nhanvienmua = function () {
+        return $http.get('/api/Api_NhanvienMua').then(function (response) {
+            return response.data;
+        });
+    };
+    this.get_loaihangcungcap = function (mancc) {
+        return $http.get('/api/Api_GetLoaiHangCungCap/' + mancc).then(function (response) {
+            return response.data;
+        });
+    };
+    this.get_taikhoanncc = function (mancc) {
+        return $http.get('/api/Api_TaiKhoanNCC/' + mancc).then(function (response) {
+            return response.data;
+        });
+    };
+
+    this.get_loaitk = function () {
+        return $http.get('/api/Api_LoaiTaiKhoan').then(function (response) {
+            return response.data;
+        });
+    };
+
+    this.get_nhomvthh = function () {
+        return $http.get('/api/Api_NhomVTHHHL').then(function (response) {
+            return response.data;
+        });
+    };
+
+    this.add_phanloaikh = function (phanloaikh_add) {
+        return $http.post('/api/Api_PhanLoaiKH', phanloaikh_add);
+    };
+
+    this.save_nhacungcap = function (mancc, kh_save) {
+        return $http.put('/api/Api_NhaCungCap/' + mancc, kh_save);
+    };
+
+    this.save_lienhencc = function (idlienhe, data_save) {
+        return $http.put('/api/Api_LienHeNhaCungCap/' + idlienhe, data_save);
+    };
+
+    this.add_lienhencc = function (data_add) {
+        return $http.post('/api/Api_LienHeNhaCungCap', data_add);
+    };
+
+    this.add_taikhoan = function (data_add) {
+        return $http.post('/api/Api_TaiKhoanNCC', data_add);
+    };
+});
+// end nha cung cap
