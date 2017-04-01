@@ -16,10 +16,10 @@ namespace ERP.Web.Api.HeThong
     {
         private ERP_DATABASEEntities db = new ERP_DATABASEEntities();
 
-        // GET: api/Api_ChungTu
+        // GET: api/Api_ChungTu/MA_cONG_TY
         public List<DM_CHUNG_TU> GetDM_CHUNG_TU()
         {
-            var vData = db.DM_CHUNG_TU;
+            var vData = db.DM_CHUNG_TU.Where(x => x.MA_CONG_TY == "HOPLONG");
             var result = vData.ToList().Select(x => new DM_CHUNG_TU()
             {
                 MA_CHUNG_TU = x.MA_CHUNG_TU,

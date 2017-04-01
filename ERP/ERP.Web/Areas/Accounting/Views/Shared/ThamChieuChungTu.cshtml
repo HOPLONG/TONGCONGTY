@@ -1,0 +1,148 @@
+﻿<script src="~/Content/self-writing/js/Controllers/NganhangCtrl/ctrThamChieuChungTu.js"></script>
+<script type="text/ng-template" id="ThamChieuChungTu.html">
+    <div class="modal-body">
+        <div class="table-kt">
+            <div class="table-head bg-blue borderRadius3 clearfix">
+                <h1 class="table-head-title margin0 font16 text-white">Chọn chứng từ tham chiếu</h1>
+            </div>
+            <div class="border padding10 borderTopNone">
+                <br>
+                <div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <form class="form-horizontal">
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-3 control-label">Tìm theo</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control" ng-model="loaichungtu" ng-change="changeTypeThamChieu($event)">
+                                            <option value="LoaiChungTu">Loại chứng từ</option>
+                                            <option value="SoChungTu">Số chứng từ</option>
+                                            <option value="SohoaDon">Số hóa đơn</option>
+                                            <option value="DoiTuong">Đối tượng</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-5">
+                            <form class="form-horizontal" ng-show="showchungtu">
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-3 control-label">Giá trị</label>
+                                    <div class="col-sm-9">
+                                        <select ng-model="valueselected_LoaiChungTu_CTTC" class="btn-group bootstrap-select form-control ClassSlect"
+                                                ng-options="option as option.name for option in valueLoaiChungTu" ng-change='optionGameValue()'>
+                                            <!-- <option ng-repeat="option in data.listgame" value="{{option.id}}">{{option.name}}</option> -->
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="input-group" ng-show="!showchungtu">
+                                <div class="row">
+                                    <label for="inputEmail3" class="col-sm-2 control-label">Giá trị</label>
+                                    <input type="text" ng-model="valueselected_CTTC.ma_doi_tuong" class="form-control col-sm-10" style="width:80%">
+                                </div>
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="caret"></span>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-center borderRadius0 padding0" style="left: -289px;">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-condensed table-hover" st-table="dtCollectionThamChieu" st-safe-src="valueLoaiChungTu">
+                                                <thead class="bg-blue text-white">
+                                                    <tr>
+                                                        <th>Mã đối tượng</th>
+                                                        <th>Tên đối tượng</th>
+                                                        <th>Địa chỉ</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr style="cursor:pointer" ng-click="showSlected(dt)" ng-repeat="dt in dtCollectionThamChieu">
+                                                        <td>{{dt.MA_DOI_TUONG}}</td>
+                                                        <td>{{dt.TEN_DOI_TUONG}}</td>
+                                                        <td>{{dt.DIA_CHI}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <form class="form-horizontal" style="display: none">
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-3 control-label">Từ ngày</label>
+                                <div class="col-sm-9">
+                                    <div class='input-group date datetimepickerKT'>
+                                        <input type='text' class="form-control" />
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-5">
+                        <form class="form-horizontal" style="display: none">
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-3 control-label">Đến ngày</label>
+                                <div class="col-sm-9">
+                                    <div class='input-group date datetimepickerKT'>
+                                        <input type='text' class="form-control" />
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="text-right">
+                            <button class="btn btn-primary" ng-click="getData()">Lấy dữ liệu</button>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="text-center">
+
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover table-bordered" st-table="dtCollectionFinded" st-safe-src="dataFinded">
+                        <thead class="bg-blue text-white">
+                            <tr>
+                                @*<th>Ngày hạch toán</th>
+                                    <th>Ngày chứng từ</th>
+                                    <th>Số chứng từ</th>
+                                    <th>Diễn giải</th>*@
+                                <th>Số chứng từ</th>
+                                <th>Tên chứng từ</th>
+                                <th>Mã công ty</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="valuefind in dtCollectionFinded">
+                                <td>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" ng-checked="valuefind.selected" ng-click="changeChecked(valuefind)"> {{valuefind.ma_chung_tu}}
+                                    </label>
+                                </td>
+                                <td>{{valuefind.TEN_CHUNG_TU}}</td>
+                                <td>{{valuefind.MA_CONG_TY}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br>
+                <div class="text-center">
+                    <button class="btn btn-primary" ng-click="ok()"><span class="glyphicon glyphicon-floppy-disk"></span> Đồng ý</button>
+                    <button class="btn btn-danger" ng-click="cancel()"><span class="glyphicon glyphicon-ban-circle"></span> Bỏ qua</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

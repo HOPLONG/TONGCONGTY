@@ -1,0 +1,99 @@
+﻿<script src="~/Content/download/jquery.blockUI/jquery.blockUI.js"></script>
+<script src="~/Content/self-writing/js/Controllers/NganhangCtrl/PhieuChiNganHang/ctrlDanhSach.js"></script>
+<script src="~/Content/self-writing/js/BusinessServices/date_directive.js"></script>
+
+<div class="container" id="container">
+    <div ng-controller="ctrlDanhSach">
+        <div class="phieuthu padding10 borderRadius3 border">
+            <div class="head clearfix paddingTB10">
+                <div class="pull-left marginR45">
+                    <h1 class="margin0 font20 bold text-blue marginT5">PHIẾU THU</h1>
+                </div>
+                <div class="pull-left marginR30">
+                    <div class="pull-left marginR15 marginT5">TK ngân hàng</div>
+                    <div class="pull-left width200">
+                        <div class="input-group">
+                            <input type="text" class="form-control" ng-model="so_tai_khoan" ng-value="so_tai_khoan">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-click="getTaiKhoanNganHang()">
+                                    <span class="caret"></span>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-center borderRadius0 padding0">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-condensed table-hover" st-table="listTknhCollection" st-safe-src="listTknh">
+                                            <thead class="bg-blue text-white">
+                                                <tr>
+                                                    <th>Số tài khoản</th>
+                                                    <th>Tên ngân hàng</th>
+                                                    <th>Chi nhánh</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody ng-repeat="tknh in listTknhCollection">
+                                                <tr style="cursor:pointer" ng-click="selectTaiKhoanNganHang(tknh)">
+                                                    <td>{{tknh.so_tai_khoan}}</td>
+                                                    <td>{{tknh.ten_ngan_hang}}</td>
+                                                    <td>{{tknh.chi_nhanh}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pull-left marginR30">
+                    <div class="pull-left marginR15 marginT5">Từ ngày</div>
+                    <div class="pull-left width100 relative">
+                        <input type="text" datepicker ng-model="from_day" class="form-control datetimepickerKT">
+                    </div>
+                </div>
+                <div class="pull-left marginR30">
+                    <div class="pull-left marginR15 marginT5">Đến ngày</div>
+                    <div class="pull-left width100 relative">
+                        <input type="text" datepicker ng-model="to_day" class="form-control datetimepickerKT">
+                    </div>
+                </div>
+                <div class="pull-left">
+                    <button class="btn btn-primary" ng-click="getDanhSachPhieuChiNganHang()">Lấy dữ liệu</button>
+                </div>
+            </div>
+            <br>
+            <div class="table-responsive">
+                <table class="table table-striped table-hover table-bordered" st-table="listPhieuChiCollection" st-pipe="getDanhSachPhieuChiNganHang">
+                    <thead class="bg-blue text-white">
+                        <tr>
+                            <th>Ngày hạch toán</th>
+                            <th>Ngày chứng từ</th>
+                            <th>Số chứng từ</th>
+                            <th>Diễn giải</th>
+                            <th>Tổng tiền</th>
+                            <th>Đối tượng</th>
+                            <th>Lý do chi</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-repeat="phieu_thu in listPhieuChiCollection">
+                        <tr>
+                            <td>{{phieu_thu.ngay_hach_toan}}</td>
+                            <td>{{phieu_thu.ngay_chung_tu}}</td>
+                            <td>{{phieu_thu.so_chung_tu}}</td>
+                            <td>{{phieu_thu.dien_giai_ly_do_thu}}</td>
+                            <td>{{phieu_thu.tong_tien}}</td>
+                            <td>{{phieu_thu.ma_doi_tuong}}</td>
+                            <td></td>
+
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="7" class="text-center">
+                                <div st-pagination="" st-items-by-page="itemsByPage"></div>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
