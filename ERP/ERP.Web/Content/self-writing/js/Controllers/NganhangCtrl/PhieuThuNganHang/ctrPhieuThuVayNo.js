@@ -43,7 +43,8 @@
             HO_VA_TEN: '',
             ma_phong_ban:'',
             nguoi_lap_bieu: '',
-            ho_va_ten_lap_bieu:'',
+            ho_va_ten_lap_bieu: '',
+            ho_va_ten: '',
             ngay_hach_toan: '',
             ngay_chung_tu: '',
             tong_tien:0
@@ -77,9 +78,11 @@
         //save value TK ngân hàng
         $scope.arrayBanks = [];
 
-        //save nhân viên
+        //mang nhân viên
+        $scope.arrayNVFinded = [];
         $scope.arrayStaffs = [];
         $scope.staffThu = '';
+        $scope.showtable_ho_va_ten = false;
 
         //phần tham chiếu chứng từ:
         $scope.usingchoise_CTTC = true;
@@ -130,6 +133,9 @@
             .then(function (response) {
                 if (response.data) {
                     $scope.arrayStaffs = response.data;
+                    $scope.arrayNVFinded = $scope.arrayStaffs.map(function (item) {
+                        return item;
+                    });
                 }
             }, function (error) {
                 console.log(error);
@@ -170,14 +176,32 @@
             }
             $scope.showtable_ma_doi_tuong = false;
         }
-
+        /**
+       *loc dữ liệu khi input nhân viên thay đổi
+       */
+        $scope.onNhanVienFind = function () {
+            if (!$scope.HO_VA_TEN) {
+                $scope.arrayNVFinded = $scope.arrayStaffs.map(function (item) {
+                    return item;
+                });
+            }
+            $scope.arrayNVFinded = $scope.arrayStaffs.filter(function (item) {
+                if (item.HO_VA_TEN.toLowerCase().indexOf($scope.arrayTongHop.ho_va_ten.toLowerCase()) >= 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+        }
+      
         /**
             *Show tên nhân viên
         */
         $scope.showInfoStaff = function (p_staff) {
             $scope.arrayTongHop.nhan_vien_thu = p_staff.USERNAME;
-            $scope.arrayTongHop.HO_VA_TEN = p_staff.HO_VA_TEN;
+            $scope.arrayTongHop.ho_va_ten = p_staff.HO_VA_TEN;
             $scope.arrayTongHop.ma_phong_ban = p_staff.MA_PHONG_BAN;
+            $scope.showtable_ho_va_ten = false;
         }
 
 
@@ -297,6 +321,10 @@
             console.log('Modal dismissed: ' + reason);
         }
 
+        
+            
+        
+
         $scope.onSave = function () {
                 if (!$scope.arrayTongHop.ma_doi_tuong) {
                     alert('Thiếu thông tin Mã Đối Tượng');
@@ -313,10 +341,7 @@
                     return;
                 }
 
-                if (!$scope.arrayTongHop.nguoi_lap_bieu) {
-                    alert('Thiếu thông tin Người Lập Biểu');
-                    return;
-                }
+                
                 
                 //if (!$scope.arrayTongHop[i].so_ct_tham_chieu) {
                 //    alert('Thiếu thông tin Số Chứng Từ Tham Chiếu của hàng ' + (i + 1));
@@ -375,7 +400,8 @@
                     tongtien += $scope.arraydiengiai[i].quy_doi;
                 }
                 $scope.arrayTongHop.tong_tien = tongtien;
-
+                
+                var a = $('#sdfsdfsd').val();
                 $scope.NH_NTTK = {
                     NGAY_HACH_TOAN: $scope.arrayTongHop.ngay_hach_toan.format('YYYY-MM-DD'),
                     NGAY_CHUNG_TU: $scope.arrayTongHop.ngay_chung_tu.format('YYYY-MM-DD'),
@@ -385,7 +411,7 @@
                     DIEN_GIAI_LY_DO_THU: $scope.arrayTongHop.dien_giai_ly_do_thu,
                     NHAN_VIEN_THU: $scope.arrayTongHop.nhan_vien_thu,
                     TONG_TIEN: $scope.arrayTongHop.tong_tien,
-                    NGUOI_LAP_BIEU: $scope.arrayTongHop.nguoi_lap_bieu,
+                    NGUOI_LAP_BIEU: a,
                     TRUC_THUOC: $scope.arrayTongHop.ma_cong_ty
                 };
 
