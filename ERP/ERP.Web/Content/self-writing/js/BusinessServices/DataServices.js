@@ -34,7 +34,7 @@
         }
 
         function getDanhSachPhieuThuNganHang(data, successFunction, errorFunction, ui) {
-            ajaxService.AjaxGetWithData(data, "/api/Api_NH_NTTK/list", successFunction, errorFunction, ui);
+            ajaxService.AjaxGetWithData(data, "/api/Api_NH_NTTK/", successFunction, errorFunction, ui);
         }
 
         function getDanhSachPhieuChiNganHang(data, successFunction, errorFunction, ui) {

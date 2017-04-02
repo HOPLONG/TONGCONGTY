@@ -53,7 +53,7 @@
 
             function success (response) {
                 var data = response.data;
-                $scope.listPhieuThuCollection = data;
+                $scope.listPhieuThuCollection = data.data;
                 pagination.numberOfPages = data.max_page;//set the number of pages so the pagination can update
                 pagination.start = data.current_page - 1;//set the current page so the pagination can update
             }

@@ -20,11 +20,59 @@ namespace ERP.Web.Api.NganHang
     {
         private ERP_DATABASEEntities db = new ERP_DATABASEEntities();
         //GET: api/Api_NH_NTTK
+        [HttpGet]
+        //public List<NH_NTTK> GetNH_NTTK()
+        //{
+        //    var vData = db.NH_NTTK;
+        //    var result = vData.ToList().Select(x => new NH_NTTK()
+        //    {
+        //        SO_CHUNG_TU = x.SO_CHUNG_TU,
+        //        NGAY_HACH_TOAN = x.NGAY_HACH_TOAN,
+        //        NGAY_CHUNG_TU = x.NGAY_CHUNG_TU,
+        //        MA_DOI_TUONG = x.MA_DOI_TUONG,
+        //        NOP_VAO_TAI_KHOAN = x.NOP_VAO_TAI_KHOAN,
+        //        LY_DO_THU = x.LY_DO_THU,
+        //        DIEN_GIAI_LY_DO_THU = x.DIEN_GIAI_LY_DO_THU,
+        //        NHAN_VIEN_THU = x.NHAN_VIEN_THU,
+        //        TONG_TIEN = x.TONG_TIEN,
+        //        NGUOI_LAP_BIEU = x.NGUOI_LAP_BIEU,
+        //        TRUC_THUOC = x.TRUC_THUOC
 
-        public List<NH_NTTK> GetNH_NTTK()
+        //    }).ToList();
+        //    return result;
+        //}
+
+        public ExpandoObject GetNH_NTTKLIST(DateTime? from_day = null, DateTime? to_day = null, string so_tai_khoan = null, int current_page = 1, int page_size = 10)
         {
-            var vData = db.NH_NTTK;
-            var result = vData.ToList().Select(x => new NH_NTTK()
+            //return _context.NH_NTTK;
+            IEnumerable<NH_NTTK> value = db.NH_NTTK;
+            //  var vData = db.NH_NTTK;
+            if (so_tai_khoan != null)
+            {
+                value = value.Where(c => c.NOP_VAO_TAI_KHOAN == so_tai_khoan);
+            }
+
+            if (to_day != null)
+            {
+                value = value.Where(c => c.NGAY_CHUNG_TU <= to_day);
+            }
+
+            if (from_day != null)
+            {
+                value = value.Where(c => c.NGAY_CHUNG_TU >= from_day);
+            }
+
+            int count = value.Count();
+            value = value.Skip(page_size * (current_page - 1)).Take(page_size);
+            int max_page = (count + page_size - 1) / page_size;
+
+            if (max_page < current_page)
+            {
+                current_page = max_page;
+            }
+
+            // List<NH_NTTK> Listtest = value.ToList();
+            var result = value.ToList().Select(x => new NH_NTTK()
             {
                 SO_CHUNG_TU = x.SO_CHUNG_TU,
                 NGAY_HACH_TOAN = x.NGAY_HACH_TOAN,
@@ -39,42 +87,12 @@ namespace ERP.Web.Api.NganHang
                 TRUC_THUOC = x.TRUC_THUOC
 
             }).ToList();
-            return result;
-        }
-        [HttpGet]
-        public ExpandoObject GetNH_NTTK(string so_tai_khoan, DateTime from_day, DateTime to_day, int current_page = 1, int page_size = 10)
-        {
-            //return _context.NH_NTTK;
-            IEnumerable<NH_NTTK> value = db.NH_NTTK;
-            if (so_tai_khoan != null)
-            {
-                value = value.Where(c => c.NOP_VAO_TAI_KHOAN == so_tai_khoan);
-            }
-
-            if (to_day.Ticks != 0)
-            {
-                value = value.Where(c => c.NGAY_CHUNG_TU <= to_day);
-            }
-
-            if (from_day.Ticks != 0)
-            {
-                value = value.Where(c => c.NGAY_CHUNG_TU >= from_day);
-            }
-
-            int count = value.Count();
-            value = value.Skip(page_size * (current_page - 1)).Take(page_size);
-            int max_page = (count + page_size - 1) / page_size;
-
-            if (max_page < current_page)
-            {
-                current_page = max_page;
-            }
 
             dynamic res_data = new ExpandoObject();
             res_data.current_page = current_page;
             res_data.page_size = page_size;
             res_data.max_page = max_page;
-            res_data = value;
+            res_data.data = result;
             return res_data;
         }
 
